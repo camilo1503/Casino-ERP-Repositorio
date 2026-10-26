@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="46" skipped="0" failures="0" errors="0" time="0.359" timestamp="2026-10-26T03:04:39">
+<testcase name="deberiaRetirarSegunStock(String, int, int, int, String)[3]" classname="co.pitboss.erp.inventario.InventarioFichasServiceTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.inventario.InventarioFichasServiceTest]/[test-template:deberiaRetirarSegunStock(java.lang.String, int, int, int, java.lang.String)]/[test-template-invocation:#3]
+display-name: FICHA-25K: stock 2, retiro 5 -> 2 (Stock insuficiente)
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaAprobarSobreElSaldo()" classname="co.pitboss.erp.rellenos.RellenoServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.rellenos.RellenoServiceTest]/[method:noDeberiaAprobarSobreElSaldo()]
+display-name: No debe aprobar un relleno que excede el saldo
+]]></system-out>
+</testcase>
+<testcase name="deberiaRetirarSegunStock(String, int, int, int, String)[2]" classname="co.pitboss.erp.inventario.InventarioFichasServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.inventario.InventarioFichasServiceTest]/[test-template:deberiaRetirarSegunStock(java.lang.String, int, int, int, java.lang.String)]/[test-template-invocation:#2]
+display-name: FICHA-10K: stock 5, retiro 5 -> 0 (Retiro exitoso)
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaAceptarDenominacionInexistente()" classname="co.pitboss.erp.caja.CompraFichasServiceTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.caja.CompraFichasServiceTest]/[method:noDeberiaAceptarDenominacionInexistente()]
+display-name: Debe rechazar una denominación que no existe
+]]></system-out>
+</testcase>
+<testcase name="deberiaRetirarSegunStock(String, int, int, int, String)[1]" classname="co.pitboss.erp.inventario.InventarioFichasServiceTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.inventario.InventarioFichasServiceTest]/[test-template:deberiaRetirarSegunStock(java.lang.String, int, int, int, java.lang.String)]/[test-template-invocation:#1]
+display-name: FICHA-5K: stock 10, retiro 3 -> 7 (Retiro exitoso)
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaRetirarMesaAbierta()" classname="co.pitboss.erp.mesas.MesaServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.mesas.MesaServiceTest]/[method:noDeberiaRetirarMesaAbierta()]
+display-name: No debe retirar una mesa abierta
+]]></system-out>
+</testcase>
+<testcase name="deberiaRegistrarEntrada(String, int, int, int)[3]" classname="co.pitboss.erp.inventario.InventarioFichasServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.inventario.InventarioFichasServiceTest]/[test-template:deberiaRegistrarEntrada(java.lang.String, int, int, int)]/[test-template-invocation:#3]
+display-name: FICHA-25K: 50 + 10 = 60
+]]></system-out>
+</testcase>
+<testcase name="deberiaRegistrarEntrada(String, int, int, int)[2]" classname="co.pitboss.erp.inventario.InventarioFichasServiceTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.inventario.InventarioFichasServiceTest]/[test-template:deberiaRegistrarEntrada(java.lang.String, int, int, int)]/[test-template-invocation:#2]
+display-name: FICHA-10K: 0 + 20 = 20
+]]></system-out>
+</testcase>
+<testcase name="deberiaDesactivarConMotivo()" classname="co.pitboss.erp.perfiles.JugadorServiceTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.perfiles.JugadorServiceTest]/[method:deberiaDesactivarConMotivo()]
+display-name: Debe desactivar con motivo sin borrar el registro
+]]></system-out>
+</testcase>
+<testcase name="deberiaValidarRegistro()" classname="co.pitboss.erp.inventario.InventarioFichasServiceTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.inventario.InventarioFichasServiceTest]/[method:deberiaValidarRegistro()]
+display-name: Debe rechazar stock inicial negativo, categoría vacía y código duplicado
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaDesactivarSinMotivo()" classname="co.pitboss.erp.perfiles.JugadorServiceTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.perfiles.JugadorServiceTest]/[method:noDeberiaDesactivarSinMotivo()]
+display-name: Debe exigir motivo para desactivar
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaAceptarLimitesInvertidos()" classname="co.pitboss.erp.mesas.MesaServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.mesas.MesaServiceTest]/[method:noDeberiaAceptarLimitesInvertidos()]
+display-name: Debe exigir apuesta mínima menor que la máxima
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaRegistrarMenorDeEdad()" classname="co.pitboss.erp.perfiles.JugadorServiceTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.perfiles.JugadorServiceTest]/[method:noDeberiaRegistrarMenorDeEdad()]
+display-name: Debe rechazar a un menor de 18 años
+]]></system-out>
+</testcase>
+<testcase name="deberiaRegistrarEntrada(String, int, int, int)[1]" classname="co.pitboss.erp.inventario.InventarioFichasServiceTest" time="0.005">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.inventario.InventarioFichasServiceTest]/[test-template:deberiaRegistrarEntrada(java.lang.String, int, int, int)]/[test-template-invocation:#1]
+display-name: FICHA-5K: 10 + 5 = 15
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaCrearJugadorConDocumentoDuplicado()" classname="co.pitboss.erp.perfiles.JugadorServiceTest" time="0.019">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.perfiles.JugadorServiceTest]/[method:noDeberiaCrearJugadorConDocumentoDuplicado()]
+display-name: Debe rechazar documento duplicado
+]]></system-out>
+</testcase>
+<testcase name="soloUnaOfertaPorDia()" classname="co.pitboss.erp.retencion.RetencionServiceTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.retencion.RetencionServiceTest]/[method:soloUnaOfertaPorDia()]
+display-name: Debe permitir solo una oferta por jugador al día
+]]></system-out>
+</testcase>
+<testcase name="deberiaSugerirOfertaPorNivel(int, String)[3]" classname="co.pitboss.erp.retencion.RetencionServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.retencion.RetencionServiceTest]/[test-template:deberiaSugerirOfertaPorNivel(int, java.lang.String)]/[test-template-invocation:#3]
+display-name: 8450 puntos -> FICHAS_BONO
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaReaprobar()" classname="co.pitboss.erp.rellenos.RellenoServiceTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.rellenos.RellenoServiceTest]/[method:noDeberiaReaprobar()]
+display-name: No debe re-aprobar un relleno aprobado
+]]></system-out>
+</testcase>
+<testcase name="deberiaAprobarDentroDelSaldo()" classname="co.pitboss.erp.rellenos.RellenoServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.rellenos.RellenoServiceTest]/[method:deberiaAprobarDentroDelSaldo()]
+display-name: Debe aprobar dentro del saldo y descontar la bóveda
+]]></system-out>
+</testcase>
+<testcase name="deberiaSugerirOfertaPorNivel(int, String)[4]" classname="co.pitboss.erp.retencion.RetencionServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.retencion.RetencionServiceTest]/[test-template:deberiaSugerirOfertaPorNivel(int, java.lang.String)]/[test-template-invocation:#4]
+display-name: 15200 puntos -> BONO_RECLAMABLE
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaAceptarCorreosInvalidos(String)[4]" classname="co.pitboss.erp.perfiles.JugadorServiceTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.perfiles.JugadorServiceTest]/[test-template:noDeberiaAceptarCorreosInvalidos(java.lang.String)]/[test-template-invocation:#4]
+display-name: [4] usuario@
+]]></system-out>
+</testcase>
+<testcase name="deberiaClasificarPorUmbral(long, String)[2]" classname="co.pitboss.erp.caja.CompraFichasServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.caja.CompraFichasServiceTest]/[test-template:deberiaClasificarPorUmbral(long, java.lang.String)]/[test-template-invocation:#2]
+display-name: compra de 4999999 queda APROBADA
+]]></system-out>
+</testcase>
+<testcase name="deberiaSugerirOfertaPorNivel(int, String)[1]" classname="co.pitboss.erp.retencion.RetencionServiceTest" time="0.004">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.retencion.RetencionServiceTest]/[test-template:deberiaSugerirOfertaPorNivel(int, java.lang.String)]/[test-template-invocation:#1]
+display-name: 900 puntos -> DESCUENTO_FICHAS
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaAceptarCorreosInvalidos(String)[1]" classname="co.pitboss.erp.perfiles.JugadorServiceTest" time="0.03">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.perfiles.JugadorServiceTest]/[test-template:noDeberiaAceptarCorreosInvalidos(java.lang.String)]/[test-template-invocation:#1]
+display-name: [1] 
+]]></system-out>
+</testcase>
+<testcase name="deberiaRegistrarYRechazarDuplicado()" classname="co.pitboss.erp.mesas.MesaServiceTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.mesas.MesaServiceTest]/[method:deberiaRegistrarYRechazarDuplicado()]
+display-name: Debe registrar una mesa nueva en estado CERRADA y rechazar el número duplicado
+]]></system-out>
+</testcase>
+<testcase name="deberiaClasificarPorUmbral(long, String)[1]" classname="co.pitboss.erp.caja.CompraFichasServiceTest" time="0.007">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.caja.CompraFichasServiceTest]/[test-template:deberiaClasificarPorUmbral(long, java.lang.String)]/[test-template-invocation:#1]
+display-name: compra de 100000 queda APROBADA
+]]></system-out>
+</testcase>
+<testcase name="deberiaSugerirOfertaPorNivel(int, String)[2]" classname="co.pitboss.erp.retencion.RetencionServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.retencion.RetencionServiceTest]/[test-template:deberiaSugerirOfertaPorNivel(int, java.lang.String)]/[test-template-invocation:#2]
+display-name: 3200 puntos -> DESCUENTO_FICHAS
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaAceptarCorreosInvalidos(String)[2]" classname="co.pitboss.erp.perfiles.JugadorServiceTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.perfiles.JugadorServiceTest]/[test-template:noDeberiaAceptarCorreosInvalidos(java.lang.String)]/[test-template-invocation:#2]
+display-name: [2]  
+]]></system-out>
+</testcase>
+<testcase name="deberiaClasificarPorUmbral(long, String)[4]" classname="co.pitboss.erp.caja.CompraFichasServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.caja.CompraFichasServiceTest]/[test-template:deberiaClasificarPorUmbral(long, java.lang.String)]/[test-template-invocation:#4]
+display-name: compra de 8750000 queda EN_REVISION
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaAceptarCorreosInvalidos(String)[3]" classname="co.pitboss.erp.perfiles.JugadorServiceTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.perfiles.JugadorServiceTest]/[test-template:noDeberiaAceptarCorreosInvalidos(java.lang.String)]/[test-template-invocation:#3]
+display-name: [3] sin-arroba.com
+]]></system-out>
+</testcase>
+<testcase name="deberiaClasificarPorUmbral(long, String)[3]" classname="co.pitboss.erp.caja.CompraFichasServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.caja.CompraFichasServiceTest]/[test-template:deberiaClasificarPorUmbral(long, java.lang.String)]/[test-template-invocation:#3]
+display-name: compra de 5000000 queda EN_REVISION
+]]></system-out>
+</testcase>
+<testcase name="deberiaAplicarDescuentoConTope(long, long)[3]" classname="co.pitboss.erp.retencion.RetencionServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.retencion.RetencionServiceTest]/[test-template:deberiaAplicarDescuentoConTope(long, long)]/[test-template-invocation:#3]
+display-name: compra de 1000000 -> descuento 200000
+]]></system-out>
+</testcase>
+<testcase name="deberiaAplicarDescuentoConTope(long, long)[2]" classname="co.pitboss.erp.retencion.RetencionServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.retencion.RetencionServiceTest]/[test-template:deberiaAplicarDescuentoConTope(long, long)]/[test-template-invocation:#2]
+display-name: compra de 2500000 -> descuento 200000
+]]></system-out>
+</testcase>
+<testcase name="deberiaAplicarDescuentoConTope(long, long)[1]" classname="co.pitboss.erp.retencion.RetencionServiceTest" time="0.003">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.retencion.RetencionServiceTest]/[test-template:deberiaAplicarDescuentoConTope(long, long)]/[test-template-invocation:#1]
+display-name: compra de 500000 -> descuento 100000
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaRegistrarMontoCero()" classname="co.pitboss.erp.caja.CompraFichasServiceTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.caja.CompraFichasServiceTest]/[method:noDeberiaRegistrarMontoCero()]
+display-name: Debe rechazar una compra con monto cero
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaOfrecerConSesionCorta()" classname="co.pitboss.erp.retencion.RetencionServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.retencion.RetencionServiceTest]/[method:noDeberiaOfrecerConSesionCorta()]
+display-name: No debe ofrecer retención con menos de 30 minutos de sesión
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaAplicarDescuentoConMontoInvalido(long)[2]" classname="co.pitboss.erp.retencion.RetencionServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.retencion.RetencionServiceTest]/[test-template:noDeberiaAplicarDescuentoConMontoInvalido(long)]/[test-template-invocation:#2]
+display-name: compra de -1000 -> Monto inválido
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaAplicarDescuentoConMontoInvalido(long)[1]" classname="co.pitboss.erp.retencion.RetencionServiceTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.retencion.RetencionServiceTest]/[test-template:noDeberiaAplicarDescuentoConMontoInvalido(long)]/[test-template-invocation:#1]
+display-name: compra de 0 -> Monto inválido
+]]></system-out>
+</testcase>
+<testcase name="deberiaCalcularTotal(long, int, String)[2]" classname="co.pitboss.erp.caja.CompraFichasServiceTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.caja.CompraFichasServiceTest]/[test-template:deberiaCalcularTotal(long, int, java.lang.String)]/[test-template-invocation:#2]
+display-name: 100000 x 3 = 300000
+]]></system-out>
+</testcase>
+<testcase name="deberiaCalcularTotal(long, int, String)[3]" classname="co.pitboss.erp.caja.CompraFichasServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.caja.CompraFichasServiceTest]/[test-template:deberiaCalcularTotal(long, int, java.lang.String)]/[test-template-invocation:#3]
+display-name: 5000 x 20 = 100000
+]]></system-out>
+</testcase>
+<testcase name="noDeberiaOfrecerAJugadorAutoexcluido()" classname="co.pitboss.erp.retencion.RetencionServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.retencion.RetencionServiceTest]/[method:noDeberiaOfrecerAJugadorAutoexcluido()]
+display-name: No debe ofrecer retención a un jugador autoexcluido
+]]></system-out>
+</testcase>
+<testcase name="deberiaRetirarMesaCerrada()" classname="co.pitboss.erp.mesas.MesaServiceTest" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.mesas.MesaServiceTest]/[method:deberiaRetirarMesaCerrada()]
+display-name: Debe retirar una mesa cerrada
+]]></system-out>
+</testcase>
+<testcase name="deberiaCalcularTotal(long, int, String)[1]" classname="co.pitboss.erp.caja.CompraFichasServiceTest" time="0.013">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.caja.CompraFichasServiceTest]/[test-template:deberiaCalcularTotal(long, int, java.lang.String)]/[test-template-invocation:#1]
+display-name: 25000 x 4 = 100000
+]]></system-out>
+</testcase>
+<testcase name="deberiaCrearJugadorConDocumentoValido()" classname="co.pitboss.erp.perfiles.JugadorServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.perfiles.JugadorServiceTest]/[method:deberiaCrearJugadorConDocumentoValido()]
+display-name: Debe crear un jugador con documento válido en estado ACTIVO
+]]></system-out>
+</testcase>
+<testcase name="deberiaCalcularTotal(long, int, String)[4]" classname="co.pitboss.erp.caja.CompraFichasServiceTest" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.caja.CompraFichasServiceTest]/[test-template:deberiaCalcularTotal(long, int, java.lang.String)]/[test-template-invocation:#4]
+display-name: 25000 x 0 = ERROR
+]]></system-out>
+</testcase>
+<testcase name="deberiaCalcularTotal(long, int, String)[5]" classname="co.pitboss.erp.caja.CompraFichasServiceTest" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:co.pitboss.erp.caja.CompraFichasServiceTest]/[test-template:deberiaCalcularTotal(long, int, java.lang.String)]/[test-template-invocation:#5]
+display-name: 50000 x -1 = ERROR
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>

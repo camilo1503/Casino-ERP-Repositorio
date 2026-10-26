@@ -1,0 +1,96 @@
+PASS __tests__/mesaService.test.js
+  MesaService - registro de mesas (Ejercicio 3)
+    ✓ debería registrar una mesa válida y llamar a save una sola vez (8 ms)
+    ✓ debería rechazar una mesa con número duplicado sin guardar nada (19 ms)
+    ✓ debería rechazar datos inválidos: "El número de mesa debe tener el formato M-00" (5 ms)
+    ✓ debería rechazar datos inválidos: "El juego es obligatorio" (3 ms)
+    ✓ debería rechazar datos inválidos: "La apuesta mínima debe ser mayor que cero" (2 ms)
+    ✓ debería rechazar datos inválidos: "La apuesta mínima debe ser menor que la máxima" (1 ms)
+  MesaService - actualizar y retirar (Taller 1)
+    ✓ debería retirar una mesa cerrada y dejarla en estado RETIRADA (2 ms)
+    ✓ no debería retirar una mesa abierta (2 ms)
+    ✓ no debería retirar una mesa sin motivo (1 ms)
+    ✓ debería actualizar los límites de una mesa existente (1 ms)
+    ✓ no debería actualizar una mesa retirada (1 ms)
+    ✓ debería informar cuando la mesa no existe (1 ms)
+
+PASS __tests__/retencionService.test.js
+  RetencionService - descuento del 20 % con tope (Taller 2)
+    ✓ compra de 500000 pesos -> "Descuento de $100.000" y se guarda una vez (2 ms)
+    ✓ compra de 2500000 pesos -> "Descuento de $200.000" y se guarda una vez (1 ms)
+    ✓ compra de 0 pesos -> "Monto inválido" y no llama a save (9 ms)
+    ✓ compra de -1000 pesos -> "Monto inválido" y no llama a save (1 ms)
+  RetencionService - reglas de juego responsable
+    ✓ con 900 puntos sugiere DESCUENTO_FICHAS (1 ms)
+    ✓ con 3200 puntos sugiere DESCUENTO_FICHAS
+    ✓ con 8450 puntos sugiere FICHAS_BONO (1 ms)
+    ✓ con 15200 puntos sugiere BONO_RECLAMABLE
+    ✓ el bono reclamable vence a los 30 días (1 ms)
+    ✓ bloquea la oferta (estado AUTOEXCLUIDO, 95 min, 0 ofertas hoy) (1 ms)
+    ✓ bloquea la oferta (estado INACTIVO, 95 min, 0 ofertas hoy)
+    ✓ bloquea la oferta (estado ACTIVO, 22 min, 0 ofertas hoy)
+    ✓ bloquea la oferta (estado ACTIVO, 95 min, 1 ofertas hoy)
+    ✓ rechaza una señal sin perfil de jugador (1 ms)
+
+PASS __tests__/inventarioFichasService.test.js
+  InventarioFichasService
+    ✓ registra una ficha válida y llama a save una sola vez (1 ms)
+    ✓ rechaza un código de ficha duplicado (7 ms)
+    ✓ rechaza datos inválidos: "El stock inicial no puede ser negativo" (1 ms)
+    ✓ rechaza datos inválidos: "La categoría es obligatoria" (1 ms)
+    ✓ rechaza datos inválidos: "El código de ficha no es válido"
+    ✓ retiro de FICHA-5K: stock 10, retiro 3 -> final 7 (1 ms)
+    ✓ retiro de FICHA-10K: stock 5, retiro 5 -> final 0 (1 ms)
+    ✓ lanza StockInsuficienteError y no cambia el stock (1 ms)
+    ✓ registra una entrada y su movimiento
+    ✓ rechaza cantidades no positivas (1 ms)
+
+PASS __tests__/jugadorService.test.js
+  JugadorService - registro y borrado lógico
+    ✓ deberiaCrearJugadorConCorreoValido: el repositorio recibe el jugador en estado ACTIVO (3 ms)
+    ✓ debería rechazar un documento duplicado (10 ms)
+    ✓ debería rechazar a un menor de edad
+    ✓ debería rechazar el correo inválido "" (1 ms)
+    ✓ debería rechazar el correo inválido " "
+    ✓ debería rechazar el correo inválido "sin-arroba.com" (1 ms)
+    ✓ debería rechazar el correo inválido "usuario@"
+    ✓ debería calcular la edad cumplida a la fecha
+    ✓ no debería permitir cambiar el documento al actualizar (1 ms)
+    ✓ debería desactivar con motivo y conservar el registro (borrado lógico)
+    ✓ debería exigir motivo para autoexcluir
+
+PASS __tests__/rellenoService.test.js
+  RellenoService - aprobación
+    ✓ debería aprobar un relleno dentro del saldo de la bóveda y descontarlo (2 ms)
+    ✓ debería rechazar un relleno que excede el saldo de la bóveda (5 ms)
+    ✓ no debería aprobar un relleno ya aprobado (1 ms)
+    ✓ no debería aprobar un relleno rechazado ni uno inexistente
+
+PASS __tests__/compraFichasService.test.js
+  CompraFichasService
+    ✓ 25000 x 4 = 100000 (1 ms)
+    ✓ 100000 x 3 = 300000 (1 ms)
+    ✓ 5000 x 20 = 100000
+    ✓ rechaza la cantidad 0 (5 ms)
+    ✓ rechaza la cantidad -2 (1 ms)
+    ✓ rechaza la cantidad 1.5 (1 ms)
+    ✓ rechaza una denominación que no existe
+    ✓ rechaza una compra con monto cero y no la guarda (1 ms)
+    ✓ una compra de 100000 queda APROBADA (1 ms)
+    ✓ una compra de 4999999 queda APROBADA
+    ✓ una compra de 5000000 queda EN_REVISION
+    ✓ una compra de 8750000 queda EN_REVISION (1 ms)
+
+
+=============================== Coverage summary ===============================
+Statements   : 94.56% ( 174/184 )
+Branches     : 88.18% ( 112/127 )
+Functions    : 97.22% ( 35/36 )
+Lines        : 97.91% ( 141/144 )
+================================================================================
+Test Suites: 6 passed, 6 total
+Tests:       63 passed, 63 total
+Snapshots:   0 total
+Time:        1.047 s
+Ran all test suites.
+Test results written to: ../evidencias/jest-results.json

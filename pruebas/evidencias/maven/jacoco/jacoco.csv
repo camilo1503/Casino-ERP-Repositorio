@@ -1,0 +1,24 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.perfiles,Jugador,7,52,0,0,2,17,2,11,2,11
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.perfiles,InMemoryJugadorRepository,0,29,0,0,0,5,0,4,0,4
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.perfiles,JugadorService,41,130,7,15,5,26,10,11,3,7
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.retencion,OfertaRetencion,0,27,0,0,0,1,0,1,0,1
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.retencion,InMemoryOfertaRepository,6,69,2,2,0,8,3,7,1,7
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.retencion,RetencionService,5,152,1,21,0,29,1,16,0,5
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.comun,ReglaNegocioException,0,4,0,0,0,2,0,1,0,1
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.comun,Dinero,0,16,0,0,0,1,0,1,0,1
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.caja,CompraFichasService,0,90,0,10,0,12,0,10,0,5
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.caja,InMemoryCompraRepository,0,19,0,0,0,4,0,3,0,3
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.caja,Compra,0,15,0,0,0,1,0,1,0,1
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.mesas,MesaAbiertaException,0,4,0,0,0,2,0,1,0,1
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.mesas,Mesa,3,48,0,0,1,15,1,9,1,9
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.mesas,MesaService,30,128,7,13,1,26,8,10,1,7
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.mesas,InMemoryMesaRepository,0,29,0,0,0,5,0,4,0,4
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.inventario,Movimiento,0,15,0,0,0,1,0,1,0,1
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.inventario,Ficha,0,31,0,0,0,11,0,6,0,6
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.inventario,StockInsuficienteException,0,4,0,0,0,2,0,1,0,1
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.inventario,InventarioFichasService,25,136,6,14,0,24,7,10,1,6
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.inventario,InMemoryFichaRepository,0,44,0,0,0,8,0,6,0,6
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.rellenos,InMemoryRellenoRepository,0,31,0,0,0,6,0,5,0,5
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.rellenos,Relleno,6,32,0,0,2,11,2,6,2,6
+PitBoss ERP - Pruebas JUnit 5 y Cucumber-JVM,co.pitboss.erp.rellenos,RellenoService,10,61,1,5,0,12,2,4,1,2

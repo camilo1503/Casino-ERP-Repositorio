@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="3b471f01-50c7-46da-91da-cbfb72d322ec" name="camil@CAMILO_RUIZ 2026-10-25 22:24:46" runUser="CAMILO_RUIZ\camil" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-25T22:24:46.1809136-05:00" queuing="2026-10-25T22:24:46.1809143-05:00" start="2026-10-25T22:24:40.7960461-05:00" finish="2026-10-25T22:24:46.1926951-05:00" />
+  <TestSettings name="default" id="06b13647-0fab-4d99-8afa-747ecb09967d">
+    <Deployment runDeploymentRoot="camil_CAMILO_RUIZ_2026-10-25_22_24_46" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="89c5fe26-b827-45c7-9df1-e7cbb596a5b0" testId="1dffa128-eff8-00c4-cded-ee3d84765827" testName="RetiroDentroDelStockDisponible" computerName="CAMILO_RUIZ" duration="00:00:00.0376310" startTime="2026-10-25T22:24:45.9818823-05:00" endTime="2026-10-25T22:24:46.0195135-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="89c5fe26-b827-45c7-9df1-e7cbb596a5b0">
+      <Output>
+        <StdOut>Dado que existe la ficha "FICHA-5K" con stock 10&#xD;
+-&gt; done: RetiroFichasStepDefinitions.DadoQueExisteLaFicha("FICHA-5K", 10) (0,0s)&#xD;
+Cuando intento retirar 3 fichas de "FICHA-5K"&#xD;
+-&gt; done: RetiroFichasStepDefinitions.CuandoIntentoRetirar(3, "FICHA-5K") (0,0s)&#xD;
+Entonces el stock de "FICHA-5K" es 7&#xD;
+-&gt; done: RetiroFichasStepDefinitions.EntoncesElStockEs("FICHA-5K", 7) (0,0s)&#xD;
+Y no se lanza ninguna excepción&#xD;
+-&gt; done: RetiroFichasStepDefinitions.EntoncesNoSeLanzaExcepcion() (0,0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d9a71264-0a38-4bf9-81d1-3e6f61181f57" testId="0d611128-2055-f752-5df9-c6c6adb6b85e" testName="RetirarMasFichasDeLasDisponibles" computerName="CAMILO_RUIZ" duration="00:00:00.7105010" startTime="2026-10-25T22:24:45.2690967-05:00" endTime="2026-10-25T22:24:45.9794816-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d9a71264-0a38-4bf9-81d1-3e6f61181f57">
+      <Output>
+        <StdOut>Dado que existe la ficha "FICHA-25K" con stock 2&#xD;
+-&gt; done: RetiroFichasStepDefinitions.DadoQueExisteLaFicha("FICHA-25K", 2) (0,0s)&#xD;
+Cuando intento retirar 5 fichas de "FICHA-25K"&#xD;
+-&gt; done: RetiroFichasStepDefinitions.CuandoIntentoRetirar(5, "FICHA-25K") (0,0s)&#xD;
+Entonces se lanza InsufficientStockException con el mensaje "Stock insuficiente"&#xD;
+-&gt; done: RetiroFichasStepDefinitions.EntoncesSeLanzaInsufficientStockException("Stock insuficiente") (0,3s)&#xD;
+Y el stock de "FICHA-25K" es 2&#xD;
+-&gt; done: RetiroFichasStepDefinitions.EntoncesElStockEs("FICHA-25K", 2) (0,0s)</StdOut>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="RetiroDentroDelStockDisponible" storage="c:\users\camil\source\pitboss-pruebas\dotnet\pitboss.specs\bin\debug\net8.0\pitboss.specs.dll" id="1dffa128-eff8-00c4-cded-ee3d84765827">
+      <Execution id="89c5fe26-b827-45c7-9df1-e7cbb596a5b0" />
+      <TestMethod codeBase="C:\Users\camil\source\pitboss-pruebas\dotnet\PitBoss.Specs\bin\Debug\net8.0\PitBoss.Specs.dll" adapterTypeName="executor://nunit3testexecutor/" className="PitBoss.Specs.Features.RetiroDeFichasDeLaBovedaFeature" name="RetiroDentroDelStockDisponible" />
+    </UnitTest>
+    <UnitTest name="RetirarMasFichasDeLasDisponibles" storage="c:\users\camil\source\pitboss-pruebas\dotnet\pitboss.specs\bin\debug\net8.0\pitboss.specs.dll" id="0d611128-2055-f752-5df9-c6c6adb6b85e">
+      <Execution id="d9a71264-0a38-4bf9-81d1-3e6f61181f57" />
+      <TestMethod codeBase="C:\Users\camil\source\pitboss-pruebas\dotnet\PitBoss.Specs\bin\Debug\net8.0\PitBoss.Specs.dll" adapterTypeName="executor://nunit3testexecutor/" className="PitBoss.Specs.Features.RetiroDeFichasDeLaBovedaFeature" name="RetirarMasFichasDeLasDisponibles" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1dffa128-eff8-00c4-cded-ee3d84765827" executionId="89c5fe26-b827-45c7-9df1-e7cbb596a5b0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0d611128-2055-f752-5df9-c6c6adb6b85e" executionId="d9a71264-0a38-4bf9-81d1-3e6f61181f57" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Resultados sin formato de lista" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="Todos los resultados cargados" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.6.0.0: Test execution started&#xD;
+Running all tests in C:\Users\camil\source\pitboss-pruebas\dotnet\PitBoss.Specs\bin\Debug\net8.0\PitBoss.Specs.dll&#xD;
+   NUnit3TestExecutor discovered 2 of 2 NUnit test cases using Current Discovery mode, Non-Explicit run&#xD;
+Dado que existe la ficha "FICHA-25K" con stock 2&#xD;
+-&gt; done: RetiroFichasStepDefinitions.DadoQueExisteLaFicha("FICHA-25K", 2) (0,0s)&#xD;
+Cuando intento retirar 5 fichas de "FICHA-25K"&#xD;
+-&gt; done: RetiroFichasStepDefinitions.CuandoIntentoRetirar(5, "FICHA-25K") (0,0s)&#xD;
+Entonces se lanza InsufficientStockException con el mensaje "Stock insuficiente"&#xD;
+-&gt; done: RetiroFichasStepDefinitions.EntoncesSeLanzaInsufficientStockException("Stock insuficiente") (0,3s)&#xD;
+Y el stock de "FICHA-25K" es 2&#xD;
+-&gt; done: RetiroFichasStepDefinitions.EntoncesElStockEs("FICHA-25K", 2) (0,0s)&#xD;
+&#xD;
+Dado que existe la ficha "FICHA-5K" con stock 10&#xD;
+-&gt; done: RetiroFichasStepDefinitions.DadoQueExisteLaFicha("FICHA-5K", 10) (0,0s)&#xD;
+Cuando intento retirar 3 fichas de "FICHA-5K"&#xD;
+-&gt; done: RetiroFichasStepDefinitions.CuandoIntentoRetirar(3, "FICHA-5K") (0,0s)&#xD;
+Entonces el stock de "FICHA-5K" es 7&#xD;
+-&gt; done: RetiroFichasStepDefinitions.EntoncesElStockEs("FICHA-5K", 7) (0,0s)&#xD;
+Y no se lanza ninguna excepción&#xD;
+-&gt; done: RetiroFichasStepDefinitions.EntoncesNoSeLanzaExcepcion() (0,0s)&#xD;
+&#xD;
+NUnit Adapter 4.6.0.0: Test execution complete&#xD;
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

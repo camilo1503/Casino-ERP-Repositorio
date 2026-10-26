@@ -1,0 +1,2633 @@
+[
+  {
+    "description": "  Como jefe de piso\n  Quiero registrar, consultar, actualizar y retirar mesas de juego\n  Para mantener actualizado el catálogo del piso",
+    "elements": [
+      {
+        "description": "",
+        "id": "catálogo-de-mesas-de-juego;registrar-una-mesa-válida",
+        "keyword": "Escenario",
+        "line": 12,
+        "name": "Registrar una mesa válida",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Daniela Vargas\" con rol \"Jefe de piso\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1313397
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 13,
+            "name": "que no existe una mesa con número \"M-19\"",
+            "match": {
+              "location": "steps/mesas.steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 510838
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 14,
+            "name": "registro la mesa \"M-19\" de \"Blackjack\" con apuesta mínima 25000 y máxima 500000",
+            "match": {
+              "location": "steps/mesas.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 505703
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 15,
+            "name": "la mesa \"M-19\" queda en estado \"CERRADA\"",
+            "match": {
+              "location": "steps/mesas.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 300918
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 16,
+            "name": "el sistema muestra el mensaje \"Mesa registrada exitosamente\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 129292
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "catálogo-de-mesas-de-juego;rechazar-mesa-con-número-duplicado",
+        "keyword": "Escenario",
+        "line": 18,
+        "name": "Rechazar mesa con número duplicado",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Daniela Vargas\" con rol \"Jefe de piso\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 225142
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 19,
+            "name": "que existe la mesa \"M-01\" en estado \"ABIERTA\"",
+            "match": {
+              "location": "steps/mesas.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 356506
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 20,
+            "name": "registro la mesa \"M-01\" de \"Ruleta\" con apuesta mínima 10000 y máxima 200000",
+            "match": {
+              "location": "steps/mesas.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 391272
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 21,
+            "name": "el sistema muestra el mensaje \"El número de mesa ya está registrado\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 164536
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "catálogo-de-mesas-de-juego;rechazar-límites-de-apuesta-inválidos",
+        "keyword": "Escenario",
+        "line": 23,
+        "name": "Rechazar límites de apuesta inválidos",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Daniela Vargas\" con rol \"Jefe de piso\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 116866
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 24,
+            "name": "registro la mesa \"M-20\" de \"Póker\" con apuesta mínima 500000 y máxima 100000",
+            "match": {
+              "location": "steps/mesas.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 338966
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 25,
+            "name": "el sistema muestra el mensaje \"La apuesta mínima debe ser menor que la máxima\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 82169
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "catálogo-de-mesas-de-juego;actualizar-los-límites-de-una-mesa",
+        "keyword": "Escenario",
+        "line": 27,
+        "name": "Actualizar los límites de una mesa",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Daniela Vargas\" con rol \"Jefe de piso\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 72407
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 28,
+            "name": "que existe la mesa \"M-05\" en estado \"CERRADA\"",
+            "match": {
+              "location": "steps/mesas.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 168783
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 29,
+            "name": "actualizo los límites de la mesa \"M-05\" a mínima 50000 y máxima 1000000",
+            "match": {
+              "location": "steps/mesas.steps.js:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 307324
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 30,
+            "name": "el sistema muestra el mensaje \"Mesa actualizada\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 331737
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "catálogo-de-mesas-de-juego;retirar-una-mesa-que-no-está-abierta",
+        "keyword": "Escenario",
+        "line": 33,
+        "name": "Retirar una mesa que no está abierta",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Daniela Vargas\" con rol \"Jefe de piso\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 85982
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 34,
+            "name": "que existe la mesa \"M-13\" en estado \"CERRADA\"",
+            "match": {
+              "location": "steps/mesas.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 448623
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 35,
+            "name": "solicito retirar la mesa \"M-13\" por el motivo \"Paño dañado sin reparación\"",
+            "match": {
+              "location": "steps/mesas.steps.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 363041
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 36,
+            "name": "la mesa \"M-13\" queda en estado \"RETIRADA\"",
+            "match": {
+              "location": "steps/mesas.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 201089
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 37,
+            "name": "el sistema confirma \"Mesa retirada del catálogo\"",
+            "match": {
+              "location": "steps/comunes.steps.js:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 68483
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "catálogo-de-mesas-de-juego;no-retirar-una-mesa-abierta",
+        "keyword": "Escenario",
+        "line": 39,
+        "name": "No retirar una mesa abierta",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Daniela Vargas\" con rol \"Jefe de piso\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 67860
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 40,
+            "name": "que existe la mesa \"M-01\" en estado \"ABIERTA\"",
+            "match": {
+              "location": "steps/mesas.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 112297
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 41,
+            "name": "solicito retirar la mesa \"M-01\" por el motivo \"Cambio de distribución\"",
+            "match": {
+              "location": "steps/mesas.steps.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 210906
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 42,
+            "name": "el sistema muestra el mensaje \"No se puede retirar una mesa abierta\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 63828
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 43,
+            "name": "la mesa \"M-01\" queda en estado \"ABIERTA\"",
+            "match": {
+              "location": "steps/mesas.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 114870
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "catálogo-de-mesas-de-juego",
+    "line": 4,
+    "keyword": "Característica",
+    "name": "Catálogo de mesas de juego",
+    "tags": [],
+    "uri": "../features/catalogo_mesas.feature"
+  },
+  {
+    "description": "  Como cajero\n  Quiero registrar las compras de fichas de los jugadores\n  Para que el efectivo y las fichas entregadas queden cuadrados",
+    "elements": [
+      {
+        "description": "",
+        "id": "compra-de-fichas-en-caja;registrar-una-compra-de-fichas-válida",
+        "keyword": "Escenario",
+        "line": 12,
+        "name": "Registrar una compra de fichas válida",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Laura Gómez\" con rol \"Cajero\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 82660
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 13,
+            "name": "registro una compra de fichas por 100000 pesos para el jugador \"1020456789\"",
+            "match": {
+              "location": "steps/caja.steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 424825
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 14,
+            "name": "la compra queda en estado \"APROBADA\"",
+            "match": {
+              "location": "steps/caja.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 85848
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 15,
+            "name": "el sistema muestra el mensaje \"Compra registrada\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 89307
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "compra-de-fichas-en-caja;enviar-a-revisión-una-compra-sobre-el-umbral-legal",
+        "keyword": "Escenario",
+        "line": 17,
+        "name": "Enviar a revisión una compra sobre el umbral legal",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Laura Gómez\" con rol \"Cajero\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 80298
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 18,
+            "name": "registro una compra de fichas por 8750000 pesos para el jugador \"79456112\"",
+            "match": {
+              "location": "steps/caja.steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 138743
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 19,
+            "name": "la compra queda en estado \"EN_REVISION\"",
+            "match": {
+              "location": "steps/caja.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 132759
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 20,
+            "name": "el sistema muestra el mensaje \"Compra enviada a revisión de cumplimiento\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 112732
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "compra-de-fichas-en-caja;rechazar-compra-con-monto-cero",
+        "keyword": "Escenario",
+        "line": 23,
+        "name": "Rechazar compra con monto cero",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Laura Gómez\" con rol \"Cajero\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 126155
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 24,
+            "name": "registro una compra de fichas por 0 pesos para el jugador \"1020456789\"",
+            "match": {
+              "location": "steps/caja.steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 175557
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 25,
+            "name": "el sistema muestra el mensaje \"El monto debe ser mayor que cero\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 57830
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 26,
+            "name": "no se registra ninguna compra",
+            "match": {
+              "location": "steps/caja.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 72980
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "compra-de-fichas-en-caja",
+    "line": 4,
+    "keyword": "Característica",
+    "name": "Compra de fichas en caja",
+    "tags": [],
+    "uri": "../features/compra_fichas.feature"
+  },
+  {
+    "description": "  Como cajero de bóveda\n  Quiero registrar las fichas y sus movimientos\n  Para conocer el stock real por denominación",
+    "elements": [
+      {
+        "description": "",
+        "id": "inventario-de-fichas-de-la-bóveda;registrar-una-denominación-de-ficha",
+        "keyword": "Escenario",
+        "line": 12,
+        "name": "Registrar una denominación de ficha",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Laura Gómez\" con rol \"Cajero\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 146622
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 13,
+            "name": "que no existe una ficha con código \"FICHA-50K\"",
+            "match": {
+              "location": "steps/inventario.steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 175679
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 14,
+            "name": "registro la ficha \"FICHA-50K\" de 50000 pesos, categoría \"Naranja\" y stock inicial 2600",
+            "match": {
+              "location": "steps/inventario.steps.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 526858
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 15,
+            "name": "el stock final es 2600",
+            "match": {
+              "location": "steps/inventario.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 209930
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 16,
+            "name": "el sistema muestra el mensaje \"Ficha registrada\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 63291
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "inventario-de-fichas-de-la-bóveda;rechazar-stock-inicial-negativo",
+        "keyword": "Escenario",
+        "line": 18,
+        "name": "Rechazar stock inicial negativo",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Laura Gómez\" con rol \"Cajero\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 67727
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 19,
+            "name": "registro la ficha \"FICHA-1M\" de 1000000 pesos, categoría \"Morado\" y stock inicial -5",
+            "match": {
+              "location": "steps/inventario.steps.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 301990
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 20,
+            "name": "el sistema muestra el mensaje \"El stock inicial no puede ser negativo\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 56910
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "inventario-de-fichas-de-la-bóveda;rechazar-ficha-sin-categoría",
+        "keyword": "Escenario",
+        "line": 22,
+        "name": "Rechazar ficha sin categoría",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Laura Gómez\" con rol \"Cajero\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 165123
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 23,
+            "name": "registro la ficha \"FICHA-2K\" de 2000 pesos, categoría \"\" y stock inicial 100",
+            "match": {
+              "location": "steps/inventario.steps.js:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 243877
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 24,
+            "name": "el sistema muestra el mensaje \"La categoría es obligatoria\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 60832
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "inventario-de-fichas-de-la-bóveda;entrada-de-fichas-a-la-bóveda",
+        "keyword": "Esquema del escenario",
+        "line": 34,
+        "name": "Entrada de fichas a la bóveda",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Laura Gómez\" con rol \"Cajero\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 57544
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 27,
+            "name": "que la ficha \"FICHA-5K\" tiene stock 10",
+            "match": {
+              "location": "steps/inventario.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 298748
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 28,
+            "name": "se registra una entrada de 5 fichas",
+            "match": {
+              "location": "steps/inventario.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 271000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 29,
+            "name": "el stock final es 15",
+            "match": {
+              "location": "steps/inventario.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 89421
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 30,
+            "name": "el movimiento queda registrado en el historial",
+            "match": {
+              "location": "steps/inventario.steps.js:31"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 75026
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "inventario-de-fichas-de-la-bóveda;entrada-de-fichas-a-la-bóveda",
+        "keyword": "Esquema del escenario",
+        "line": 35,
+        "name": "Entrada de fichas a la bóveda",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Laura Gómez\" con rol \"Cajero\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 70845
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 27,
+            "name": "que la ficha \"FICHA-10K\" tiene stock 0",
+            "match": {
+              "location": "steps/inventario.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4132068
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 28,
+            "name": "se registra una entrada de 20 fichas",
+            "match": {
+              "location": "steps/inventario.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 204638
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 29,
+            "name": "el stock final es 20",
+            "match": {
+              "location": "steps/inventario.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 234084
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 30,
+            "name": "el movimiento queda registrado en el historial",
+            "match": {
+              "location": "steps/inventario.steps.js:31"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 51948
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "inventario-de-fichas-de-la-bóveda;entrada-de-fichas-a-la-bóveda",
+        "keyword": "Esquema del escenario",
+        "line": 36,
+        "name": "Entrada de fichas a la bóveda",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Laura Gómez\" con rol \"Cajero\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 63756
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 27,
+            "name": "que la ficha \"FICHA-25K\" tiene stock 50",
+            "match": {
+              "location": "steps/inventario.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 154482
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 28,
+            "name": "se registra una entrada de 10 fichas",
+            "match": {
+              "location": "steps/inventario.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 125873
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 29,
+            "name": "el stock final es 60",
+            "match": {
+              "location": "steps/inventario.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 119598
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 30,
+            "name": "el movimiento queda registrado en el historial",
+            "match": {
+              "location": "steps/inventario.steps.js:31"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 39987
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "inventario-de-fichas-de-la-bóveda;retiro-de-fichas-de-la-bóveda",
+        "keyword": "Esquema del escenario",
+        "line": 46,
+        "name": "Retiro de fichas de la bóveda",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Laura Gómez\" con rol \"Cajero\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 60385
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 39,
+            "name": "que la ficha \"FICHA-5K\" tiene stock 10",
+            "match": {
+              "location": "steps/inventario.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 102618
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 40,
+            "name": "se retiran 3 fichas",
+            "match": {
+              "location": "steps/inventario.steps.js:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 361716
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 41,
+            "name": "el stock final es 7",
+            "match": {
+              "location": "steps/inventario.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 113107
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 42,
+            "name": "el sistema responde \"Retiro exitoso\"",
+            "match": {
+              "location": "steps/comunes.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 87619
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "inventario-de-fichas-de-la-bóveda;retiro-de-fichas-de-la-bóveda",
+        "keyword": "Esquema del escenario",
+        "line": 47,
+        "name": "Retiro de fichas de la bóveda",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Laura Gómez\" con rol \"Cajero\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 59167
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 39,
+            "name": "que la ficha \"FICHA-10K\" tiene stock 5",
+            "match": {
+              "location": "steps/inventario.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 103926
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 40,
+            "name": "se retiran 5 fichas",
+            "match": {
+              "location": "steps/inventario.steps.js:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 248537
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 41,
+            "name": "el stock final es 0",
+            "match": {
+              "location": "steps/inventario.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 96235
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 42,
+            "name": "el sistema responde \"Retiro exitoso\"",
+            "match": {
+              "location": "steps/comunes.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 91954
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "inventario-de-fichas-de-la-bóveda;retiro-de-fichas-de-la-bóveda",
+        "keyword": "Esquema del escenario",
+        "line": 48,
+        "name": "Retiro de fichas de la bóveda",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Laura Gómez\" con rol \"Cajero\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 75762
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 39,
+            "name": "que la ficha \"FICHA-25K\" tiene stock 2",
+            "match": {
+              "location": "steps/inventario.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 182576
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 40,
+            "name": "se retiran 5 fichas",
+            "match": {
+              "location": "steps/inventario.steps.js:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 200354
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 41,
+            "name": "el stock final es 2",
+            "match": {
+              "location": "steps/inventario.steps.js:27"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 94879
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 42,
+            "name": "el sistema responde \"Stock insuficiente\"",
+            "match": {
+              "location": "steps/comunes.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 164721
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "inventario-de-fichas-de-la-bóveda",
+    "line": 4,
+    "keyword": "Característica",
+    "name": "Inventario de fichas de la bóveda",
+    "tags": [],
+    "uri": "../features/inventario_fichas.feature"
+  },
+  {
+    "description": "  Como anfitrión de jugadores\n  Quiero registrar, consultar, actualizar y desactivar perfiles de jugador\n  Para atender a cada jugador según su nivel de lealtad",
+    "elements": [
+      {
+        "description": "",
+        "id": "gestión-de-perfiles-de-jugador;registrar-un-jugador-válido",
+        "keyword": "Escenario",
+        "line": 12,
+        "name": "Registrar un jugador válido",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Sebastián Prada\" con rol \"Anfitrión de jugadores\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 64346
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 13,
+            "name": "que no existe un jugador con documento \"1020456789\"",
+            "match": {
+              "location": "steps/perfiles.steps.js:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 144290
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 14,
+            "name": "registro al jugador con documento \"1020456789\", nombre \"María Fernanda López\", correo \"maria.lopez@correo.com\" y fecha de nacimiento \"1990-05-14\"",
+            "match": {
+              "location": "steps/perfiles.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 671996
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 15,
+            "name": "el jugador se crea con estado \"ACTIVO\"",
+            "match": {
+              "location": "steps/perfiles.steps.js:25"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 82862
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 16,
+            "name": "el sistema muestra el mensaje \"Jugador registrado exitosamente\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 51663
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "gestión-de-perfiles-de-jugador;rechazar-jugador-con-documento-duplicado",
+        "keyword": "Escenario",
+        "line": 18,
+        "name": "Rechazar jugador con documento duplicado",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Sebastián Prada\" con rol \"Anfitrión de jugadores\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 50720
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 19,
+            "name": "que ya existe un jugador con documento \"1020456789\"",
+            "match": {
+              "location": "steps/perfiles.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 153918
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 20,
+            "name": "registro al jugador con documento \"1020456789\", nombre \"Otra Persona\", correo \"otra@correo.com\" y fecha de nacimiento \"1988-01-10\"",
+            "match": {
+              "location": "steps/perfiles.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 366361
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 21,
+            "name": "el sistema muestra el mensaje \"El documento ya está registrado\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 79372
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 22,
+            "name": "el jugador con documento \"1020456789\" conserva el nombre \"María Fernanda López\"",
+            "match": {
+              "location": "steps/perfiles.steps.js:33"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 182402
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "gestión-de-perfiles-de-jugador;rechazar-jugador-menor-de-edad",
+        "keyword": "Escenario",
+        "line": 24,
+        "name": "Rechazar jugador menor de edad",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Sebastián Prada\" con rol \"Anfitrión de jugadores\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 58921
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 25,
+            "name": "registro al jugador con documento \"1099000111\", nombre \"Pedro Gil\", correo \"pedro.gil@correo.com\" y fecha de nacimiento \"2010-03-01\"",
+            "match": {
+              "location": "steps/perfiles.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 172635
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 26,
+            "name": "el sistema muestra el mensaje \"El jugador debe ser mayor de 18 años\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 44939
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "gestión-de-perfiles-de-jugador;validar-formatos-de-correo",
+        "keyword": "Esquema del escenario",
+        "line": 34,
+        "name": "Validar formatos de correo",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Sebastián Prada\" con rol \"Anfitrión de jugadores\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 62916
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 29,
+            "name": "registro un jugador con correo \"maria.lopez@correo.com\"",
+            "match": {
+              "location": "steps/perfiles.steps.js:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 255326
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 30,
+            "name": "el sistema responde \"Correo válido\"",
+            "match": {
+              "location": "steps/comunes.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 56037
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "gestión-de-perfiles-de-jugador;validar-formatos-de-correo",
+        "keyword": "Esquema del escenario",
+        "line": 35,
+        "name": "Validar formatos de correo",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Sebastián Prada\" con rol \"Anfitrión de jugadores\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 44762
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 29,
+            "name": "registro un jugador con correo \"sin-arroba.com\"",
+            "match": {
+              "location": "steps/perfiles.steps.js:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 127595
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 30,
+            "name": "el sistema responde \"Formato de correo inválido\"",
+            "match": {
+              "location": "steps/comunes.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 40558
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "gestión-de-perfiles-de-jugador;validar-formatos-de-correo",
+        "keyword": "Esquema del escenario",
+        "line": 36,
+        "name": "Validar formatos de correo",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Sebastián Prada\" con rol \"Anfitrión de jugadores\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 54397
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 29,
+            "name": "registro un jugador con correo \"usuario@\"",
+            "match": {
+              "location": "steps/perfiles.steps.js:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 166898
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 30,
+            "name": "el sistema responde \"Formato de correo inválido\"",
+            "match": {
+              "location": "steps/comunes.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 46391
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "gestión-de-perfiles-de-jugador;desactivar-un-jugador-con-motivo-(borrado-lógico)",
+        "keyword": "Escenario",
+        "line": 38,
+        "name": "Desactivar un jugador con motivo (borrado lógico)",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Sebastián Prada\" con rol \"Anfitrión de jugadores\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 51285
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 39,
+            "name": "que ya existe un jugador con documento \"1020456789\"",
+            "match": {
+              "location": "steps/perfiles.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 81891
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 40,
+            "name": "desactivo al jugador con documento \"1020456789\" por el motivo \"Solicitud del titular\"",
+            "match": {
+              "location": "steps/perfiles.steps.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 268190
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 41,
+            "name": "el jugador con documento \"1020456789\" queda en estado \"INACTIVO\"",
+            "match": {
+              "location": "steps/perfiles.steps.js:29"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 204785
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 42,
+            "name": "el sistema muestra el mensaje \"Jugador desactivado\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 45880
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "gestión-de-perfiles-de-jugador;no-desactivar-un-jugador-sin-motivo",
+        "keyword": "Escenario",
+        "line": 44,
+        "name": "No desactivar un jugador sin motivo",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Sebastián Prada\" con rol \"Anfitrión de jugadores\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 75586
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 45,
+            "name": "que ya existe un jugador con documento \"1020456789\"",
+            "match": {
+              "location": "steps/perfiles.steps.js:9"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 89971
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 46,
+            "name": "desactivo al jugador con documento \"1020456789\" por el motivo \"\"",
+            "match": {
+              "location": "steps/perfiles.steps.js:21"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 114823
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 47,
+            "name": "el sistema muestra el mensaje \"El motivo es obligatorio\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 51032
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 48,
+            "name": "el jugador con documento \"1020456789\" queda en estado \"ACTIVO\"",
+            "match": {
+              "location": "steps/perfiles.steps.js:29"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 85900
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "gestión-de-perfiles-de-jugador",
+    "line": 4,
+    "keyword": "Característica",
+    "name": "Gestión de perfiles de jugador",
+    "tags": [],
+    "uri": "../features/perfiles_jugador.feature"
+  },
+  {
+    "description": "  Como jefe de piso\n  Quiero aprobar los rellenos de fichas que piden las mesas\n  Para que ninguna mesa se quede sin fichas y la bóveda no se descuadre",
+    "elements": [
+      {
+        "description": "",
+        "id": "aprobación-de-rellenos-de-fichas;aprobar-relleno-dentro-del-saldo-de-la-bóveda",
+        "keyword": "Escenario",
+        "line": 12,
+        "name": "Aprobar relleno dentro del saldo de la bóveda",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Daniela Vargas\" con rol \"Jefe de piso\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 54871
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 13,
+            "name": "que la bóveda tiene un saldo disponible de 10000000 pesos",
+            "match": {
+              "location": "steps/rellenos.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 121832
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 14,
+            "name": "existe un relleno \"RF-100\" para la mesa \"M-04\" por 5000000 pesos en estado \"PENDIENTE\"",
+            "match": {
+              "location": "steps/rellenos.steps.js:8"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 235892
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 15,
+            "name": "el jefe de piso aprueba el relleno \"RF-100\"",
+            "match": {
+              "location": "steps/rellenos.steps.js:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 386781
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 16,
+            "name": "el relleno \"RF-100\" queda en estado \"APROBADO\"",
+            "match": {
+              "location": "steps/rellenos.steps.js:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 221960
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 17,
+            "name": "el saldo de la bóveda queda en 5000000 pesos",
+            "match": {
+              "location": "steps/rellenos.steps.js:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 167537
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "aprobación-de-rellenos-de-fichas;rechazar-relleno-que-excede-el-saldo-de-la-bóveda",
+        "keyword": "Escenario",
+        "line": 19,
+        "name": "Rechazar relleno que excede el saldo de la bóveda",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Daniela Vargas\" con rol \"Jefe de piso\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 65742
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 20,
+            "name": "que la bóveda tiene un saldo disponible de 3000000 pesos",
+            "match": {
+              "location": "steps/rellenos.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 65676
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 21,
+            "name": "existe un relleno \"RF-101\" para la mesa \"M-12\" por 5000000 pesos en estado \"PENDIENTE\"",
+            "match": {
+              "location": "steps/rellenos.steps.js:8"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 119911
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 22,
+            "name": "el jefe de piso aprueba el relleno \"RF-101\"",
+            "match": {
+              "location": "steps/rellenos.steps.js:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 115954
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 23,
+            "name": "el sistema muestra el mensaje \"Saldo insuficiente en la bóveda\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 40138
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 24,
+            "name": "el saldo de la bóveda queda en 3000000 pesos",
+            "match": {
+              "location": "steps/rellenos.steps.js:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 80399
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "aprobación-de-rellenos-de-fichas;no-volver-a-aprobar-un-relleno-aprobado",
+        "keyword": "Escenario",
+        "line": 26,
+        "name": "No volver a aprobar un relleno aprobado",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Daniela Vargas\" con rol \"Jefe de piso\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 52144
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 27,
+            "name": "que la bóveda tiene un saldo disponible de 10000000 pesos",
+            "match": {
+              "location": "steps/rellenos.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 110506
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 28,
+            "name": "existe un relleno \"RF-102\" para la mesa \"M-04\" por 2000000 pesos en estado \"APROBADO\"",
+            "match": {
+              "location": "steps/rellenos.steps.js:8"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 121312
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 29,
+            "name": "el jefe de piso aprueba el relleno \"RF-102\"",
+            "match": {
+              "location": "steps/rellenos.steps.js:12"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 129908
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 30,
+            "name": "el sistema muestra el mensaje \"El relleno ya está aprobado\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5521970
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 31,
+            "name": "el saldo de la bóveda queda en 10000000 pesos",
+            "match": {
+              "location": "steps/rellenos.steps.js:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 144786
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "aprobación-de-rellenos-de-fichas",
+    "line": 4,
+    "keyword": "Característica",
+    "name": "Aprobación de rellenos de fichas",
+    "tags": [],
+    "uri": "../features/rellenos.feature"
+  },
+  {
+    "description": "  Como crupier o cajero\n  Quiero que el sistema proponga una oferta cuando un jugador quiere dejar de jugar\n  Para mantenerlo en el casino sin dejar de lado el juego responsable",
+    "elements": [
+      {
+        "description": "",
+        "id": "ofertas-de-retención-de-jugadores;validar-el-monto-de-la-compra-con-descuento-de-retención",
+        "keyword": "Esquema del escenario",
+        "line": 19,
+        "name": "Validar el monto de la compra con descuento de retención",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Ana Torres\" con rol \"Crupier\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 66718
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 13,
+            "name": "que el jugador \"1020456789\" tiene una sesión activa de 95 minutos",
+            "match": {
+              "location": "steps/retencion.steps.js:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 271658
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 14,
+            "name": "aplico el descuento de retención a una compra de 500000 pesos",
+            "match": {
+              "location": "steps/retencion.steps.js:32"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 569768
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 15,
+            "name": "el sistema responde \"Descuento de $100.000\"",
+            "match": {
+              "location": "steps/comunes.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 81187
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "ofertas-de-retención-de-jugadores;validar-el-monto-de-la-compra-con-descuento-de-retención",
+        "keyword": "Esquema del escenario",
+        "line": 20,
+        "name": "Validar el monto de la compra con descuento de retención",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Ana Torres\" con rol \"Crupier\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 53622
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 13,
+            "name": "que el jugador \"1020456789\" tiene una sesión activa de 95 minutos",
+            "match": {
+              "location": "steps/retencion.steps.js:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 134821
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 14,
+            "name": "aplico el descuento de retención a una compra de 2500000 pesos",
+            "match": {
+              "location": "steps/retencion.steps.js:32"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 107965
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 15,
+            "name": "el sistema responde \"Descuento de $200.000\"",
+            "match": {
+              "location": "steps/comunes.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 46481
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "ofertas-de-retención-de-jugadores;validar-el-monto-de-la-compra-con-descuento-de-retención",
+        "keyword": "Esquema del escenario",
+        "line": 21,
+        "name": "Validar el monto de la compra con descuento de retención",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Ana Torres\" con rol \"Crupier\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 70437
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 13,
+            "name": "que el jugador \"1020456789\" tiene una sesión activa de 95 minutos",
+            "match": {
+              "location": "steps/retencion.steps.js:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 134504
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 14,
+            "name": "aplico el descuento de retención a una compra de 0 pesos",
+            "match": {
+              "location": "steps/retencion.steps.js:32"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 160105
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 15,
+            "name": "el sistema responde \"Monto inválido\"",
+            "match": {
+              "location": "steps/comunes.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 50398
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "ofertas-de-retención-de-jugadores;validar-el-monto-de-la-compra-con-descuento-de-retención",
+        "keyword": "Esquema del escenario",
+        "line": 22,
+        "name": "Validar el monto de la compra con descuento de retención",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Ana Torres\" con rol \"Crupier\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 59422
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 13,
+            "name": "que el jugador \"1020456789\" tiene una sesión activa de 95 minutos",
+            "match": {
+              "location": "steps/retencion.steps.js:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 122392
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 14,
+            "name": "aplico el descuento de retención a una compra de -1000 pesos",
+            "match": {
+              "location": "steps/retencion.steps.js:32"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 135361
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 15,
+            "name": "el sistema responde \"Monto inválido\"",
+            "match": {
+              "location": "steps/comunes.steps.js:13"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 57979
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "ofertas-de-retención-de-jugadores;proponer-la-oferta-sugerida-para-un-jugador-oro",
+        "keyword": "Escenario",
+        "line": 24,
+        "name": "Proponer la oferta sugerida para un jugador Oro",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Ana Torres\" con rol \"Crupier\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 64915
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 25,
+            "name": "que el jugador \"1020456789\" tiene una sesión activa de 95 minutos",
+            "match": {
+              "location": "steps/retencion.steps.js:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 106051
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 26,
+            "name": "el crupier registra la señal \"Quiere retirarse\"",
+            "match": {
+              "location": "steps/retencion.steps.js:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5219658
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 27,
+            "name": "se emite una oferta de tipo \"FICHAS_BONO\"",
+            "match": {
+              "location": "steps/retencion.steps.js:41"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 106425
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 28,
+            "name": "el sistema muestra el mensaje \"Oferta de retención emitida\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 66466
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "ofertas-de-retención-de-jugadores;bloquear-la-oferta-a-un-jugador-autoexcluido",
+        "keyword": "Escenario",
+        "line": 30,
+        "name": "Bloquear la oferta a un jugador autoexcluido",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Ana Torres\" con rol \"Crupier\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 52827
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 31,
+            "name": "que el jugador \"80554219\" está en estado \"AUTOEXCLUIDO\"",
+            "match": {
+              "location": "steps/retencion.steps.js:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 214562
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 32,
+            "name": "tiene una sesión activa de 60 minutos",
+            "match": {
+              "location": "steps/retencion.steps.js:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 91558
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 33,
+            "name": "el crupier registra la señal \"Quiere retirarse\"",
+            "match": {
+              "location": "steps/retencion.steps.js:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 164723
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 34,
+            "name": "el sistema muestra el mensaje \"No se ofrece retención: juego responsable\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 47565
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 35,
+            "name": "no se emite ninguna oferta",
+            "match": {
+              "location": "steps/retencion.steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 267107
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "ofertas-de-retención-de-jugadores;solo-una-oferta-por-jugador-al-día",
+        "keyword": "Escenario",
+        "line": 37,
+        "name": "Solo una oferta por jugador al día",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Ana Torres\" con rol \"Crupier\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 56639
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 38,
+            "name": "que el jugador \"1020456789\" tiene una sesión activa de 95 minutos",
+            "match": {
+              "location": "steps/retencion.steps.js:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 92744
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 39,
+            "name": "ya recibió una oferta de retención hoy",
+            "match": {
+              "location": "steps/retencion.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 120727
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 40,
+            "name": "el crupier registra la señal \"Quiere retirarse\"",
+            "match": {
+              "location": "steps/retencion.steps.js:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 164975
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 41,
+            "name": "el sistema muestra el mensaje \"El jugador ya recibió una oferta hoy\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 113754
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "ofertas-de-retención-de-jugadores;no-ofrecer-retención-con-menos-de-30-minutos-de-sesión",
+        "keyword": "Escenario",
+        "line": 43,
+        "name": "No ofrecer retención con menos de 30 minutos de sesión",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 10,
+            "name": "que el usuario \"Ana Torres\" con rol \"Crupier\" ha iniciado sesión",
+            "match": {
+              "location": "steps/comunes.steps.js:4"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 67135
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Dado ",
+            "line": 44,
+            "name": "que el jugador \"1018334560\" tiene una sesión activa de 22 minutos",
+            "match": {
+              "location": "steps/retencion.steps.js:15"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 135341
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Cuando ",
+            "line": 45,
+            "name": "el crupier registra la señal \"Quiere retirarse\"",
+            "match": {
+              "location": "steps/retencion.steps.js:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 165883
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Entonces ",
+            "line": 46,
+            "name": "el sistema muestra el mensaje \"La sesión debe durar al menos 30 minutos\"",
+            "match": {
+              "location": "steps/comunes.steps.js:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 39756
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Y ",
+            "line": 47,
+            "name": "no se emite ninguna oferta",
+            "match": {
+              "location": "steps/retencion.steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 21506
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "ofertas-de-retención-de-jugadores",
+    "line": 4,
+    "keyword": "Característica",
+    "name": "Ofertas de retención de jugadores",
+    "tags": [],
+    "uri": "../features/retencion.feature"
+  }
+]

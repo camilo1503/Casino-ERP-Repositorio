@@ -1,0 +1,78 @@
+╷
+├─ JUnit Platform Suite ✔
+└─ JUnit Jupiter ✔
+   ├─ Pruebas del servicio de perfiles de jugador ✔
+   │  ├─ Debe rechazar documento duplicado ✔
+   │  ├─ Debe rechazar a un menor de 18 años ✔
+   │  ├─ Debe exigir motivo para desactivar ✔
+   │  ├─ Debe crear un jugador con documento válido en estado ACTIVO ✔
+   │  ├─ Debe desactivar con motivo sin borrar el registro ✔
+   │  └─ Debe rechazar correos inválidos ✔
+   │     ├─ [1]  ✔
+   │     ├─ [2]   ✔
+   │     ├─ [3] sin-arroba.com ✔
+   │     └─ [4] usuario@ ✔
+   ├─ Taller 1 · Catálogo de mesas ✔
+   │  ├─ Debe registrar una mesa nueva en estado CERRADA y rechazar el número duplicado ✔
+   │  ├─ Debe retirar una mesa cerrada ✔
+   │  ├─ Debe exigir apuesta mínima menor que la máxima ✔
+   │  └─ No debe retirar una mesa abierta ✔
+   ├─ Ejercicio 2 · Total de la compra de fichas ✔
+   │  ├─ Debe rechazar una denominación que no existe ✔
+   │  ├─ Debe calcular el total o rechazar cantidades no positivas ✔
+   │  │  ├─ 25000 x 4 = 100000 ✔
+   │  │  ├─ 100000 x 3 = 300000 ✔
+   │  │  ├─ 5000 x 20 = 100000 ✔
+   │  │  ├─ 25000 x 0 = ERROR ✔
+   │  │  └─ 50000 x -1 = ERROR ✔
+   │  ├─ Debe rechazar una compra con monto cero ✔
+   │  └─ Debe enviar a revisión las compras sobre el umbral legal ✔
+   │     ├─ compra de 100000 queda APROBADA ✔
+   │     ├─ compra de 4999999 queda APROBADA ✔
+   │     ├─ compra de 5000000 queda EN_REVISION ✔
+   │     └─ compra de 8750000 queda EN_REVISION ✔
+   ├─ Taller 2 · Ofertas de retención ✔
+   │  ├─ Debe aplicar el 20 % con tope de $200.000 ✔
+   │  │  ├─ compra de 500000 -> descuento 100000 ✔
+   │  │  ├─ compra de 2500000 -> descuento 200000 ✔
+   │  │  └─ compra de 1000000 -> descuento 200000 ✔
+   │  ├─ Debe sugerir la oferta según el nivel de lealtad ✔
+   │  │  ├─ 900 puntos -> DESCUENTO_FICHAS ✔
+   │  │  ├─ 3200 puntos -> DESCUENTO_FICHAS ✔
+   │  │  ├─ 8450 puntos -> FICHAS_BONO ✔
+   │  │  └─ 15200 puntos -> BONO_RECLAMABLE ✔
+   │  ├─ No debe ofrecer retención a un jugador autoexcluido ✔
+   │  ├─ No debe ofrecer retención con menos de 30 minutos de sesión ✔
+   │  ├─ No debe aplicar descuento con monto cero o negativo ✔
+   │  │  ├─ compra de 0 -> Monto inválido ✔
+   │  │  └─ compra de -1000 -> Monto inválido ✔
+   │  └─ Debe permitir solo una oferta por jugador al día ✔
+   ├─ Taller 3 · Aprobación de rellenos ✔
+   │  ├─ No debe re-aprobar un relleno aprobado ✔
+   │  ├─ Debe aprobar dentro del saldo y descontar la bóveda ✔
+   │  └─ No debe aprobar un relleno que excede el saldo ✔
+   └─ Taller 4 · Inventario de fichas ✔
+      ├─ Debe rechazar stock inicial negativo, categoría vacía y código duplicado ✔
+      ├─ Debe registrar entradas y su movimiento ✔
+      │  ├─ FICHA-5K: 10 + 5 = 15 ✔
+      │  ├─ FICHA-10K: 0 + 20 = 20 ✔
+      │  └─ FICHA-25K: 50 + 10 = 60 ✔
+      └─ Debe retirar fichas o rechazar el retiro sin cambiar el stock ✔
+         ├─ FICHA-5K: stock 10, retiro 3 -> 7 (Retiro exitoso) ✔
+         ├─ FICHA-10K: stock 5, retiro 5 -> 0 (Retiro exitoso) ✔
+         └─ FICHA-25K: stock 2, retiro 5 -> 2 (Stock insuficiente) ✔
+
+Test run finished after 470 ms
+[        16 containers found      ]
+[         0 containers skipped    ]
+[        16 containers started    ]
+[         0 containers aborted    ]
+[        16 containers successful ]
+[         0 containers failed     ]
+[        46 tests found           ]
+[         0 tests skipped         ]
+[        46 tests started         ]
+[         0 tests aborted         ]
+[        46 tests successful      ]
+[         0 tests failed          ]
+

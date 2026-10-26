@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="co.pitboss.erp.bdd.RunCucumberTest" time="2.019" tests="37" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="25"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\camil\source\pitboss-pruebas\java\target\test-classes;C:\Users\camil\source\pitboss-pruebas\java\target\classes;C:\Users\camil\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\camil\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\camil\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\camil\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\camil\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\camil\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;C:\Users\camil\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\Users\camil\.m2\repository\io\cucumber\cucumber-java\7.18.0\cucumber-java-7.18.0.jar;C:\Users\camil\.m2\repository\io\cucumber\cucumber-core\7.18.0\cucumber-core-7.18.0.jar;C:\Users\camil\.m2\repository\io\cucumber\cucumber-gherkin\7.18.0\cucumber-gherkin-7.18.0.jar;C:\Users\camil\.m2\repository\io\cucumber\cucumber-gherkin-messages\7.18.0\cucumber-gherkin-messages-7.18.0.jar;C:\Users\camil\.m2\repository\io\cucumber\gherkin\28.0.0\gherkin-28.0.0.jar;C:\Users\camil\.m2\repository\io\cucumber\messages\24.1.0\messages-24.1.0.jar;C:\Users\camil\.m2\repository\io\cucumber\testng-xml-formatter\0.1.0\testng-xml-formatter-0.1.0.jar;C:\Users\camil\.m2\repository\io\cucumber\query\12.2.0\query-12.2.0.jar;C:\Users\camil\.m2\repository\io\cucumber\tag-expressions\6.1.0\tag-expressions-6.1.0.jar;C:\Users\camil\.m2\repository\io\cucumber\cucumber-expressions\17.1.0\cucumber-expressions-17.1.0.jar;C:\Users\camil\.m2\repository\io\cucumber\datatable\7.18.0\datatable-7.18.0.jar;C:\Users\camil\.m2\repository\io\cucumber\cucumber-plugin\7.18.0\cucumber-plugin-7.18.0.jar;C:\Users\camil\.m2\repository\io\cucumber\docstring\7.18.0\docstring-7.18.0.jar;C:\Users\camil\.m2\repository\io\cucumber\html-formatter\21.3.1\html-formatter-21.3.1.jar;C:\Users\camil\.m2\repository\io\cucumber\junit-xml-formatter\0.4.0\junit-xml-formatter-0.4.0.jar;C:\Users\camil\.m2\repository\io\cucumber\ci-environment\10.0.1\ci-environment-10.0.1.jar;C:\Users\camil\.m2\repository\io\cucumber\cucumber-junit-platform-engine\7.18.0\cucumber-junit-platform-engine-7.18.0.jar;C:\Users\camil\.m2\repository\io\cucumber\cucumber-picocontainer\7.18.0\cucumber-picocontainer-7.18.0.jar;C:\Users\camil\.m2\repository\org\picocontainer\picocontainer\2.15\picocontainer-2.15.jar;C:\Users\camil\.m2\repository\org\junit\platform\junit-platform-suite\1.11.0\junit-platform-suite-1.11.0.jar;C:\Users\camil\.m2\repository\org\junit\platform\junit-platform-suite-api\1.11.0\junit-platform-suite-api-1.11.0.jar;C:\Users\camil\.m2\repository\org\junit\platform\junit-platform-suite-engine\1.11.0\junit-platform-suite-engine-1.11.0.jar;C:\Users\camil\.m2\repository\org\junit\platform\junit-platform-suite-commons\1.11.0\junit-platform-suite-commons-1.11.0.jar;C:\Users\camil\.m2\repository\org\junit\platform\junit-platform-launcher\1.11.0\junit-platform-launcher-1.11.0.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="America/Bogota"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="25"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="CO"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-25\bin"/>
+    <property name="sun.java.command" value="C:\Users\camil\AppData\Local\Temp\surefire11241675142803934652\surefirebooter-20261025222413708_3.jar C:\Users\camil\AppData\Local\Temp\surefire11241675142803934652 2026-10-25T22-24-11_575-jvmRun1 surefire-20261025222413708_1tmp surefire_0-20261025222413708_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\camil\source\pitboss-pruebas\java\target\test-classes;C:\Users\camil\source\pitboss-pruebas\java\target\classes;C:\Users\camil\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.11.0\junit-jupiter-api-5.11.0.jar;C:\Users\camil\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\camil\.m2\repository\org\junit\platform\junit-platform-commons\1.11.0\junit-platform-commons-1.11.0.jar;C:\Users\camil\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\camil\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.11.0\junit-jupiter-engine-5.11.0.jar;C:\Users\camil\.m2\repository\org\junit\platform\junit-platform-engine\1.11.0\junit-platform-engine-1.11.0.jar;C:\Users\camil\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.11.0\junit-jupiter-params-5.11.0.jar;C:\Users\camil\.m2\repository\io\cucumber\cucumber-java\7.18.0\cucumber-java-7.18.0.jar;C:\Users\camil\.m2\repository\io\cucumber\cucumber-core\7.18.0\cucumber-core-7.18.0.jar;C:\Users\camil\.m2\repository\io\cucumber\cucumber-gherkin\7.18.0\cucumber-gherkin-7.18.0.jar;C:\Users\camil\.m2\repository\io\cucumber\cucumber-gherkin-messages\7.18.0\cucumber-gherkin-messages-7.18.0.jar;C:\Users\camil\.m2\repository\io\cucumber\gherkin\28.0.0\gherkin-28.0.0.jar;C:\Users\camil\.m2\repository\io\cucumber\messages\24.1.0\messages-24.1.0.jar;C:\Users\camil\.m2\repository\io\cucumber\testng-xml-formatter\0.1.0\testng-xml-formatter-0.1.0.jar;C:\Users\camil\.m2\repository\io\cucumber\query\12.2.0\query-12.2.0.jar;C:\Users\camil\.m2\repository\io\cucumber\tag-expressions\6.1.0\tag-expressions-6.1.0.jar;C:\Users\camil\.m2\repository\io\cucumber\cucumber-expressions\17.1.0\cucumber-expressions-17.1.0.jar;C:\Users\camil\.m2\repository\io\cucumber\datatable\7.18.0\datatable-7.18.0.jar;C:\Users\camil\.m2\repository\io\cucumber\cucumber-plugin\7.18.0\cucumber-plugin-7.18.0.jar;C:\Users\camil\.m2\repository\io\cucumber\docstring\7.18.0\docstring-7.18.0.jar;C:\Users\camil\.m2\repository\io\cucumber\html-formatter\21.3.1\html-formatter-21.3.1.jar;C:\Users\camil\.m2\repository\io\cucumber\junit-xml-formatter\0.4.0\junit-xml-formatter-0.4.0.jar;C:\Users\camil\.m2\repository\io\cucumber\ci-environment\10.0.1\ci-environment-10.0.1.jar;C:\Users\camil\.m2\repository\io\cucumber\cucumber-junit-platform-engine\7.18.0\cucumber-junit-platform-engine-7.18.0.jar;C:\Users\camil\.m2\repository\io\cucumber\cucumber-picocontainer\7.18.0\cucumber-picocontainer-7.18.0.jar;C:\Users\camil\.m2\repository\org\picocontainer\picocontainer\2.15\picocontainer-2.15.jar;C:\Users\camil\.m2\repository\org\junit\platform\junit-platform-suite\1.11.0\junit-platform-suite-1.11.0.jar;C:\Users\camil\.m2\repository\org\junit\platform\junit-platform-suite-api\1.11.0\junit-platform-suite-api-1.11.0.jar;C:\Users\camil\.m2\repository\org\junit\platform\junit-platform-suite-engine\1.11.0\junit-platform-suite-engine-1.11.0.jar;C:\Users\camil\.m2\repository\org\junit\platform\junit-platform-suite-commons\1.11.0\junit-platform-suite-commons-1.11.0.jar;C:\Users\camil\.m2\repository\org\junit\platform\junit-platform-launcher\1.11.0\junit-platform-launcher-1.11.0.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\camil"/>
+    <property name="user.language" value="es"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-09-16"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-25"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\camil\source\pitboss-pruebas\java"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\camil\AppData\Local\Temp\surefire11241675142803934652\surefirebooter-20261025222413708_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="25+37-LTS-3491"/>
+    <property name="user.name" value="camil"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\camil\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\camil\AppData\Local\Temp\"/>
+    <property name="java.version" value="25"/>
+    <property name="user.dir" value="C:\Users\camil\source\pitboss-pruebas\java"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-25\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files\nodejs\;C:\Program Files (x86)\Microchip\MPLAB C32 Suite\bin;C:\Program Files (x86)\Microsoft SQL Server\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\170\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\180\Tools\Binn\;C:\Program Files\Microsoft SQL Server\170\DTS\Binn\;C:\Program Files\Git\cmd;C:\Users\camil\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\camil\AppData\Local\Programs\Python\Python313\;C:\Users\camil\AppData\Local\Programs\Python\Launcher\;C:\Users\camil\.local\bin;C:\Users\camil\AppData\Local\Microsoft\WindowsApps;C:\Users\camil\.dotnet\tools;C:\Users\camil\AppData\Roaming\npm;C:\Users\camil\AppData\Local\Programs\Microsoft VS Code\bin;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="25+37-LTS-3491"/>
+    <property name="stdin.encoding" value="Cp1252"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="69.0"/>
+  </properties>
+  <testcase name="Registrar una mesa válida" classname="Catálogo de mesas de juego" time="0.319">
+    <system-out><![CDATA[
+Escenario: Registrar una mesa válida                                                     &amp#27;[90m# features/catalogo_mesas.feature:12&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Daniela Vargas"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Jefe de piso"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m         &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque no existe una mesa con número &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-19"&amp#27;[0m                                          &amp#27;[90m# co.pitboss.erp.bdd.MesasSteps.noExisteMesa(java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mregistro la mesa &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-19"&amp#27;[0m&amp#27;[32m de &amp#27;[0m&amp#27;[32m&amp#27;[1m"Blackjack"&amp#27;[0m&amp#27;[32m con apuesta mínima &amp#27;[0m&amp#27;[32m&amp#27;[1m25000&amp#27;[0m&amp#27;[32m y máxima &amp#27;[0m&amp#27;[32m&amp#27;[1m500000&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.MesasSteps.registroMesa(java.lang.String,java.lang.String,long,long)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mla mesa &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-19"&amp#27;[0m&amp#27;[32m queda en estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"CERRADA"&amp#27;[0m                                      &amp#27;[90m# co.pitboss.erp.bdd.MesasSteps.mesaQuedaEnEstado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"Mesa registrada exitosamente"&amp#27;[0m                         &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+]]></system-out>
+    <system-err><![CDATA[java.lang.instrument.IllegalClassFormatException: Error while instrumenting javax/lang/model/SourceVersion with JaCoCo 0.8.12.202403310830/dbfb6f2.
+	at org.jacoco.agent.rt.internal_aeaf9ab.CoverageTransformer.transform(CoverageTransformer.java:94)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(ClassFileTransformer.java:257)
+	at java.instrument/sun.instrument.TransformerManager.transform(TransformerManager.java:188)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(InstrumentationImpl.java:594)
+	at java.base/java.lang.ClassLoader.defineClass2(Native Method)
+	at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:1052)
+	at java.base/java.security.SecureClassLoader.defineClass(SecureClassLoader.java:176)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.defineClass(BuiltinClassLoader.java:735)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.findClassInModuleOrNull(BuiltinClassLoader.java:678)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(BuiltinClassLoader.java:604)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(BuiltinClassLoader.java:639)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(BuiltinClassLoader.java:608)
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:578)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:490)
+	at io.cucumber.core.resource.ClasspathSupport.requireValidPackageName(ClasspathSupport.java:41)
+	at io.cucumber.core.resource.ClasspathScanner.scanForClassesInPackage(ClasspathScanner.java:49)
+	at io.cucumber.core.resource.ClasspathScanner.scanForClassesInPackage(ClasspathScanner.java:115)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1716)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:632)
+	at io.cucumber.java.JavaBackend.loadGlue(JavaBackend.java:41)
+	at io.cucumber.core.runner.Runner.<init>(Runner.java:56)
+	at io.cucumber.core.runtime.SingletonRunnerSupplier.createRunner(SingletonRunnerSupplier.java:44)
+	at io.cucumber.core.runtime.SingletonRunnerSupplier.get(SingletonRunnerSupplier.java:35)
+	at io.cucumber.core.runtime.RethrowingThrowableCollector.executeAndThrow(RethrowingThrowableCollector.java:35)
+	at io.cucumber.core.runtime.CucumberExecutionContext.getRunner(CucumberExecutionContext.java:140)
+	at io.cucumber.core.runtime.CucumberExecutionContext.runBeforeAllHooks(CucumberExecutionContext.java:92)
+	at io.cucumber.junit.platform.engine.CucumberEngineExecutionContext.runBeforeAllHooks(CucumberEngineExecutionContext.java:101)
+	at io.cucumber.junit.platform.engine.CucumberEngineDescriptor.ifChildren(CucumberEngineDescriptor.java:63)
+	at io.cucumber.junit.platform.engine.CucumberEngineDescriptor.before(CucumberEngineDescriptor.java:38)
+	at io.cucumber.junit.platform.engine.CucumberEngineDescriptor.before(CucumberEngineDescriptor.java:12)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:148)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:76)
+	at org.junit.platform.suite.engine.SuiteLauncher.execute(SuiteLauncher.java:63)
+	at org.junit.platform.suite.engine.SuiteTestDescriptor.executeTests(SuiteTestDescriptor.java:168)
+	at org.junit.platform.suite.engine.SuiteTestDescriptor.execute(SuiteTestDescriptor.java:137)
+	at org.junit.platform.suite.engine.SuiteTestEngine.lambda$execute$0(SuiteTestEngine.java:73)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1939)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:632)
+	at org.junit.platform.suite.engine.SuiteTestEngine.execute(SuiteTestEngine.java:73)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:198)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:169)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:93)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:58)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:141)
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:57)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:103)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:85)
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:47)
+	at org.apache.maven.surefire.junitplatform.LazyLauncher.execute(LazyLauncher.java:56)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:184)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:148)
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:122)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+Caused by: java.io.IOException: Error while instrumenting javax/lang/model/SourceVersion with JaCoCo 0.8.12.202403310830/dbfb6f2.
+	at org.jacoco.agent.rt.internal_aeaf9ab.core.instr.Instrumenter.instrumentError(Instrumenter.java:161)
+	at org.jacoco.agent.rt.internal_aeaf9ab.core.instr.Instrumenter.instrument(Instrumenter.java:111)
+	at org.jacoco.agent.rt.internal_aeaf9ab.CoverageTransformer.transform(CoverageTransformer.java:92)
+	... 84 more
+Caused by: java.lang.IllegalArgumentException: Unsupported class file major version 69
+	at org.jacoco.agent.rt.internal_aeaf9ab.asm.ClassReader.<init>(ClassReader.java:200)
+	at org.jacoco.agent.rt.internal_aeaf9ab.asm.ClassReader.<init>(ClassReader.java:180)
+	at org.jacoco.agent.rt.internal_aeaf9ab.asm.ClassReader.<init>(ClassReader.java:166)
+	at org.jacoco.agent.rt.internal_aeaf9ab.core.internal.instr.InstrSupport.classReaderFor(InstrSupport.java:280)
+	at org.jacoco.agent.rt.internal_aeaf9ab.core.instr.Instrumenter.instrument(Instrumenter.java:77)
+	at org.jacoco.agent.rt.internal_aeaf9ab.core.instr.Instrumenter.instrument(Instrumenter.java:109)
+	... 85 more
+]]></system-err>
+  </testcase>
+  <testcase name="Rechazar mesa con número duplicado" classname="Catálogo de mesas de juego" time="0.023">
+    <system-out><![CDATA[
+Escenario: Rechazar mesa con número duplicado                                         &amp#27;[90m# features/catalogo_mesas.feature:18&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Daniela Vargas"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Jefe de piso"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m      &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque existe la mesa &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-01"&amp#27;[0m&amp#27;[32m en estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"ABIERTA"&amp#27;[0m                                  &amp#27;[90m# co.pitboss.erp.bdd.MesasSteps.existeMesa(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mregistro la mesa &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-01"&amp#27;[0m&amp#27;[32m de &amp#27;[0m&amp#27;[32m&amp#27;[1m"Ruleta"&amp#27;[0m&amp#27;[32m con apuesta mínima &amp#27;[0m&amp#27;[32m&amp#27;[1m10000&amp#27;[0m&amp#27;[32m y máxima &amp#27;[0m&amp#27;[32m&amp#27;[1m200000&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.MesasSteps.registroMesa(java.lang.String,java.lang.String,long,long)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"El número de mesa ya está registrado"&amp#27;[0m       &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Rechazar límites de apuesta inválidos" classname="Catálogo de mesas de juego" time="0.017">
+    <system-out><![CDATA[
+Escenario: Rechazar límites de apuesta inválidos                                          &amp#27;[90m# features/catalogo_mesas.feature:23&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Daniela Vargas"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Jefe de piso"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m          &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mregistro la mesa &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-20"&amp#27;[0m&amp#27;[32m de &amp#27;[0m&amp#27;[32m&amp#27;[1m"Póker"&amp#27;[0m&amp#27;[32m con apuesta mínima &amp#27;[0m&amp#27;[32m&amp#27;[1m500000&amp#27;[0m&amp#27;[32m y máxima &amp#27;[0m&amp#27;[32m&amp#27;[1m100000&amp#27;[0m     &amp#27;[90m# co.pitboss.erp.bdd.MesasSteps.registroMesa(java.lang.String,java.lang.String,long,long)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"La apuesta mínima debe ser menor que la máxima"&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Actualizar los límites de una mesa" classname="Catálogo de mesas de juego" time="0.022">
+    <system-out><![CDATA[
+Escenario: Actualizar los límites de una mesa                                    &amp#27;[90m# features/catalogo_mesas.feature:27&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Daniela Vargas"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Jefe de piso"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque existe la mesa &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-05"&amp#27;[0m&amp#27;[32m en estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"CERRADA"&amp#27;[0m                             &amp#27;[90m# co.pitboss.erp.bdd.MesasSteps.existeMesa(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mactualizo los límites de la mesa &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-05"&amp#27;[0m&amp#27;[32m a mínima &amp#27;[0m&amp#27;[32m&amp#27;[1m50000&amp#27;[0m&amp#27;[32m y máxima &amp#27;[0m&amp#27;[32m&amp#27;[1m1000000&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.MesasSteps.actualizoLimites(java.lang.String,long,long)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"Mesa actualizada"&amp#27;[0m                      &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Retirar una mesa que no está abierta" classname="Catálogo de mesas de juego" time="0.021">
+    <system-out><![CDATA[
+Escenario: Retirar una mesa que no está abierta                                     &amp#27;[90m# features/catalogo_mesas.feature:33&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Daniela Vargas"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Jefe de piso"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m    &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque existe la mesa &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-13"&amp#27;[0m&amp#27;[32m en estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"CERRADA"&amp#27;[0m                                &amp#27;[90m# co.pitboss.erp.bdd.MesasSteps.existeMesa(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32msolicito retirar la mesa &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-13"&amp#27;[0m&amp#27;[32m por el motivo &amp#27;[0m&amp#27;[32m&amp#27;[1m"Paño dañado sin reparación"&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.MesasSteps.solicitoRetirar(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mla mesa &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-13"&amp#27;[0m&amp#27;[32m queda en estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"RETIRADA"&amp#27;[0m                                &amp#27;[90m# co.pitboss.erp.bdd.MesasSteps.mesaQuedaEnEstado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel sistema confirma &amp#27;[0m&amp#27;[32m&amp#27;[1m"Mesa retirada del catálogo"&amp#27;[0m                                &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaConfirma(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="No retirar una mesa abierta" classname="Catálogo de mesas de juego" time="0.017">
+    <system-out><![CDATA[
+Escenario: No retirar una mesa abierta                                           &amp#27;[90m# features/catalogo_mesas.feature:39&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Daniela Vargas"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Jefe de piso"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque existe la mesa &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-01"&amp#27;[0m&amp#27;[32m en estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"ABIERTA"&amp#27;[0m                             &amp#27;[90m# co.pitboss.erp.bdd.MesasSteps.existeMesa(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32msolicito retirar la mesa &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-01"&amp#27;[0m&amp#27;[32m por el motivo &amp#27;[0m&amp#27;[32m&amp#27;[1m"Cambio de distribución"&amp#27;[0m  &amp#27;[90m# co.pitboss.erp.bdd.MesasSteps.solicitoRetirar(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"No se puede retirar una mesa abierta"&amp#27;[0m  &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mla mesa &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-01"&amp#27;[0m&amp#27;[32m queda en estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"ABIERTA"&amp#27;[0m                                     &amp#27;[90m# co.pitboss.erp.bdd.MesasSteps.mesaQuedaEnEstado(java.lang.String,java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Registrar una compra de fichas válida" classname="Compra de fichas en caja" time="0.027">
+    <system-out><![CDATA[
+Escenario: Registrar una compra de fichas válida                                     &amp#27;[90m# features/compra_fichas.feature:12&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Laura Gómez"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Cajero"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m              &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mregistro una compra de fichas por &amp#27;[0m&amp#27;[32m&amp#27;[1m100000&amp#27;[0m&amp#27;[32m pesos para el jugador &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.CajaSteps.registroCompra(long,java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mla compra queda en estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"APROBADA"&amp#27;[0m                                      &amp#27;[90m# co.pitboss.erp.bdd.CajaSteps.compraQuedaEnEstado(java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"Compra registrada"&amp#27;[0m                                &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Enviar a revisión una compra sobre el umbral legal" classname="Compra de fichas en caja" time="0.015">
+    <system-out><![CDATA[
+Escenario: Enviar a revisión una compra sobre el umbral legal                       &amp#27;[90m# features/compra_fichas.feature:17&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Laura Gómez"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Cajero"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m             &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mregistro una compra de fichas por &amp#27;[0m&amp#27;[32m&amp#27;[1m8750000&amp#27;[0m&amp#27;[32m pesos para el jugador &amp#27;[0m&amp#27;[32m&amp#27;[1m"79456112"&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.CajaSteps.registroCompra(long,java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mla compra queda en estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"EN_REVISION"&amp#27;[0m                                  &amp#27;[90m# co.pitboss.erp.bdd.CajaSteps.compraQuedaEnEstado(java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"Compra enviada a revisión de cumplimiento"&amp#27;[0m       &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Rechazar compra con monto cero" classname="Compra de fichas en caja" time="0.018">
+    <system-out><![CDATA[
+Escenario: Rechazar compra con monto cero                                       &amp#27;[90m# features/compra_fichas.feature:23&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Laura Gómez"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Cajero"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m         &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mregistro una compra de fichas por &amp#27;[0m&amp#27;[32m&amp#27;[1m0&amp#27;[0m&amp#27;[32m pesos para el jugador &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.CajaSteps.registroCompra(long,java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"El monto debe ser mayor que cero"&amp#27;[0m     &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mno se registra ninguna compra&amp#27;[0m                                               &amp#27;[90m# co.pitboss.erp.bdd.CajaSteps.noSeRegistraCompra()&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Registrar una denominación de ficha" classname="Inventario de fichas de la bóveda" time="0.034">
+    <system-out><![CDATA[
+Escenario: Registrar una denominación de ficha                                                  &amp#27;[90m# features/inventario_fichas.feature:12&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Laura Gómez"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Cajero"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m                         &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque no existe una ficha con código &amp#27;[0m&amp#27;[32m&amp#27;[1m"FICHA-50K"&amp#27;[0m                                           &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.noExisteFicha(java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mregistro la ficha &amp#27;[0m&amp#27;[32m&amp#27;[1m"FICHA-50K"&amp#27;[0m&amp#27;[32m de &amp#27;[0m&amp#27;[32m&amp#27;[1m50000&amp#27;[0m&amp#27;[32m pesos, categoría &amp#27;[0m&amp#27;[32m&amp#27;[1m"Naranja"&amp#27;[0m&amp#27;[32m y stock inicial &amp#27;[0m&amp#27;[32m&amp#27;[1m2600&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.registroFicha(java.lang.String,long,java.lang.String,int)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel stock final es &amp#27;[0m&amp#27;[32m&amp#27;[1m2600&amp#27;[0m                                                               &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.stockFinal(int)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"Ficha registrada"&amp#27;[0m                                            &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Rechazar stock inicial negativo" classname="Inventario de fichas de la bóveda" time="0.013">
+    <system-out><![CDATA[
+Escenario: Rechazar stock inicial negativo                                                    &amp#27;[90m# features/inventario_fichas.feature:18&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Laura Gómez"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Cajero"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m                       &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mregistro la ficha &amp#27;[0m&amp#27;[32m&amp#27;[1m"FICHA-1M"&amp#27;[0m&amp#27;[32m de &amp#27;[0m&amp#27;[32m&amp#27;[1m1000000&amp#27;[0m&amp#27;[32m pesos, categoría &amp#27;[0m&amp#27;[32m&amp#27;[1m"Morado"&amp#27;[0m&amp#27;[32m y stock inicial &amp#27;[0m&amp#27;[32m&amp#27;[1m-5&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.registroFicha(java.lang.String,long,java.lang.String,int)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"El stock inicial no puede ser negativo"&amp#27;[0m             &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Rechazar ficha sin categoría" classname="Inventario de fichas de la bóveda" time="0.015">
+    <system-out><![CDATA[
+Escenario: Rechazar ficha sin categoría                                               &amp#27;[90m# features/inventario_fichas.feature:22&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Laura Gómez"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Cajero"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m               &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mregistro la ficha &amp#27;[0m&amp#27;[32m&amp#27;[1m"FICHA-2K"&amp#27;[0m&amp#27;[32m de &amp#27;[0m&amp#27;[32m&amp#27;[1m2000&amp#27;[0m&amp#27;[32m pesos, categoría &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m&amp#27;[32m y stock inicial &amp#27;[0m&amp#27;[32m&amp#27;[1m100&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.registroFicha(java.lang.String,long,java.lang.String,int)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"La categoría es obligatoria"&amp#27;[0m                &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Ejemplos" time="0.021">
+    <system-out><![CDATA[
+Esquema del escenario: Entrada de fichas a la bóveda                    &amp#27;[90m# features/inventario_fichas.feature:34&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Laura Gómez"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Cajero"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque la ficha &amp#27;[0m&amp#27;[32m&amp#27;[1m"FICHA-5K"&amp#27;[0m&amp#27;[32m tiene stock &amp#27;[0m&amp#27;[32m&amp#27;[1m10&amp#27;[0m                           &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.fichaConStock(java.lang.String,int)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mse registra una entrada de &amp#27;[0m&amp#27;[32m&amp#27;[1m5&amp#27;[0m&amp#27;[32m fichas&amp#27;[0m                            &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.entrada(int)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel stock final es &amp#27;[0m&amp#27;[32m&amp#27;[1m15&amp#27;[0m                                         &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.stockFinal(int)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel movimiento queda registrado en el historial&amp#27;[0m                      &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.movimientoRegistrado()&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Ejemplos" time="0.017">
+    <system-out><![CDATA[
+Esquema del escenario: Retiro de fichas de la bóveda                    &amp#27;[90m# features/inventario_fichas.feature:46&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Laura Gómez"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Cajero"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque la ficha &amp#27;[0m&amp#27;[32m&amp#27;[1m"FICHA-5K"&amp#27;[0m&amp#27;[32m tiene stock &amp#27;[0m&amp#27;[32m&amp#27;[1m10&amp#27;[0m                           &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.fichaConStock(java.lang.String,int)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mse retiran &amp#27;[0m&amp#27;[32m&amp#27;[1m3&amp#27;[0m&amp#27;[32m fichas&amp#27;[0m                                            &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.retiro(int)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel stock final es &amp#27;[0m&amp#27;[32m&amp#27;[1m7&amp#27;[0m                                          &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.stockFinal(int)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel sistema responde &amp#27;[0m&amp#27;[32m&amp#27;[1m"Retiro exitoso"&amp#27;[0m                                &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaResponde(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Ejemplos" time="0.01">
+    <system-out><![CDATA[
+Esquema del escenario: Validar formatos de correo                                           &amp#27;[90m# features/perfiles_jugador.feature:34&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Sebastián Prada"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Anfitrión de jugadores"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mregistro un jugador con correo &amp#27;[0m&amp#27;[32m&amp#27;[1m"maria.lopez@correo.com"&amp#27;[0m                            &amp#27;[90m# co.pitboss.erp.bdd.PerfilesSteps.registroJugadorConCorreo(java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema responde &amp#27;[0m&amp#27;[32m&amp#27;[1m"Correo válido"&amp#27;[0m                                              &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaResponde(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.1" classname="Ejemplos" time="0.019">
+    <system-out><![CDATA[
+Esquema del escenario: Validar el monto de la compra con descuento de retención &amp#27;[90m# features/retencion.feature:19&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Ana Torres"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Crupier"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m         &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el jugador &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m&amp#27;[32m tiene una sesión activa de &amp#27;[0m&amp#27;[32m&amp#27;[1m95&amp#27;[0m&amp#27;[32m minutos&amp#27;[0m        &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.sesionActiva(java.lang.String,int)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32maplico el descuento de retención a una compra de &amp#27;[0m&amp#27;[32m&amp#27;[1m500000&amp#27;[0m&amp#27;[32m pesos&amp#27;[0m          &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.aplicoDescuento(long)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema responde &amp#27;[0m&amp#27;[32m&amp#27;[1m"Descuento de $100.000"&amp#27;[0m                          &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaResponde(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.2" classname="Ejemplos" time="0.016">
+    <system-out><![CDATA[
+Esquema del escenario: Entrada de fichas a la bóveda                    &amp#27;[90m# features/inventario_fichas.feature:35&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Laura Gómez"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Cajero"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque la ficha &amp#27;[0m&amp#27;[32m&amp#27;[1m"FICHA-10K"&amp#27;[0m&amp#27;[32m tiene stock &amp#27;[0m&amp#27;[32m&amp#27;[1m0&amp#27;[0m                           &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.fichaConStock(java.lang.String,int)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mse registra una entrada de &amp#27;[0m&amp#27;[32m&amp#27;[1m20&amp#27;[0m&amp#27;[32m fichas&amp#27;[0m                           &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.entrada(int)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel stock final es &amp#27;[0m&amp#27;[32m&amp#27;[1m20&amp#27;[0m                                         &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.stockFinal(int)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel movimiento queda registrado en el historial&amp#27;[0m                      &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.movimientoRegistrado()&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.2" classname="Ejemplos" time="0.014">
+    <system-out><![CDATA[
+Esquema del escenario: Retiro de fichas de la bóveda                    &amp#27;[90m# features/inventario_fichas.feature:47&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Laura Gómez"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Cajero"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque la ficha &amp#27;[0m&amp#27;[32m&amp#27;[1m"FICHA-10K"&amp#27;[0m&amp#27;[32m tiene stock &amp#27;[0m&amp#27;[32m&amp#27;[1m5&amp#27;[0m                           &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.fichaConStock(java.lang.String,int)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mse retiran &amp#27;[0m&amp#27;[32m&amp#27;[1m5&amp#27;[0m&amp#27;[32m fichas&amp#27;[0m                                            &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.retiro(int)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel stock final es &amp#27;[0m&amp#27;[32m&amp#27;[1m0&amp#27;[0m                                          &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.stockFinal(int)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel sistema responde &amp#27;[0m&amp#27;[32m&amp#27;[1m"Retiro exitoso"&amp#27;[0m                                &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaResponde(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.2" classname="Ejemplos" time="0.008">
+    <system-out><![CDATA[
+Esquema del escenario: Validar formatos de correo                                           &amp#27;[90m# features/perfiles_jugador.feature:35&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Sebastián Prada"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Anfitrión de jugadores"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mregistro un jugador con correo &amp#27;[0m&amp#27;[32m&amp#27;[1m"sin-arroba.com"&amp#27;[0m                                    &amp#27;[90m# co.pitboss.erp.bdd.PerfilesSteps.registroJugadorConCorreo(java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema responde &amp#27;[0m&amp#27;[32m&amp#27;[1m"Formato de correo inválido"&amp#27;[0m                                 &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaResponde(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.2" classname="Ejemplos" time="0.007">
+    <system-out><![CDATA[
+Esquema del escenario: Validar el monto de la compra con descuento de retención &amp#27;[90m# features/retencion.feature:20&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Ana Torres"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Crupier"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m         &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el jugador &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m&amp#27;[32m tiene una sesión activa de &amp#27;[0m&amp#27;[32m&amp#27;[1m95&amp#27;[0m&amp#27;[32m minutos&amp#27;[0m        &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.sesionActiva(java.lang.String,int)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32maplico el descuento de retención a una compra de &amp#27;[0m&amp#27;[32m&amp#27;[1m2500000&amp#27;[0m&amp#27;[32m pesos&amp#27;[0m         &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.aplicoDescuento(long)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema responde &amp#27;[0m&amp#27;[32m&amp#27;[1m"Descuento de $200.000"&amp#27;[0m                          &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaResponde(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.3" classname="Ejemplos" time="0.018">
+    <system-out><![CDATA[
+Esquema del escenario: Entrada de fichas a la bóveda                    &amp#27;[90m# features/inventario_fichas.feature:36&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Laura Gómez"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Cajero"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque la ficha &amp#27;[0m&amp#27;[32m&amp#27;[1m"FICHA-25K"&amp#27;[0m&amp#27;[32m tiene stock &amp#27;[0m&amp#27;[32m&amp#27;[1m50&amp#27;[0m                          &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.fichaConStock(java.lang.String,int)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mse registra una entrada de &amp#27;[0m&amp#27;[32m&amp#27;[1m10&amp#27;[0m&amp#27;[32m fichas&amp#27;[0m                           &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.entrada(int)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel stock final es &amp#27;[0m&amp#27;[32m&amp#27;[1m60&amp#27;[0m                                         &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.stockFinal(int)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel movimiento queda registrado en el historial&amp#27;[0m                      &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.movimientoRegistrado()&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.3" classname="Ejemplos" time="0.012">
+    <system-out><![CDATA[
+Esquema del escenario: Retiro de fichas de la bóveda                    &amp#27;[90m# features/inventario_fichas.feature:48&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Laura Gómez"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Cajero"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque la ficha &amp#27;[0m&amp#27;[32m&amp#27;[1m"FICHA-25K"&amp#27;[0m&amp#27;[32m tiene stock &amp#27;[0m&amp#27;[32m&amp#27;[1m2&amp#27;[0m                           &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.fichaConStock(java.lang.String,int)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mse retiran &amp#27;[0m&amp#27;[32m&amp#27;[1m5&amp#27;[0m&amp#27;[32m fichas&amp#27;[0m                                            &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.retiro(int)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel stock final es &amp#27;[0m&amp#27;[32m&amp#27;[1m2&amp#27;[0m                                          &amp#27;[90m# co.pitboss.erp.bdd.InventarioSteps.stockFinal(int)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel sistema responde &amp#27;[0m&amp#27;[32m&amp#27;[1m"Stock insuficiente"&amp#27;[0m                            &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaResponde(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.3" classname="Ejemplos" time="0.011">
+    <system-out><![CDATA[
+Esquema del escenario: Validar formatos de correo                                           &amp#27;[90m# features/perfiles_jugador.feature:36&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Sebastián Prada"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Anfitrión de jugadores"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mregistro un jugador con correo &amp#27;[0m&amp#27;[32m&amp#27;[1m"usuario@"&amp#27;[0m                                          &amp#27;[90m# co.pitboss.erp.bdd.PerfilesSteps.registroJugadorConCorreo(java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema responde &amp#27;[0m&amp#27;[32m&amp#27;[1m"Formato de correo inválido"&amp#27;[0m                                 &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaResponde(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.3" classname="Ejemplos" time="0.006">
+    <system-out><![CDATA[
+Esquema del escenario: Validar el monto de la compra con descuento de retención &amp#27;[90m# features/retencion.feature:21&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Ana Torres"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Crupier"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m         &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el jugador &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m&amp#27;[32m tiene una sesión activa de &amp#27;[0m&amp#27;[32m&amp#27;[1m95&amp#27;[0m&amp#27;[32m minutos&amp#27;[0m        &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.sesionActiva(java.lang.String,int)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32maplico el descuento de retención a una compra de &amp#27;[0m&amp#27;[32m&amp#27;[1m0&amp#27;[0m&amp#27;[32m pesos&amp#27;[0m               &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.aplicoDescuento(long)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema responde &amp#27;[0m&amp#27;[32m&amp#27;[1m"Monto inválido"&amp#27;[0m                                 &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaResponde(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Example #1.4" classname="Ejemplos" time="0.007">
+    <system-out><![CDATA[
+Esquema del escenario: Validar el monto de la compra con descuento de retención &amp#27;[90m# features/retencion.feature:22&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Ana Torres"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Crupier"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m         &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el jugador &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m&amp#27;[32m tiene una sesión activa de &amp#27;[0m&amp#27;[32m&amp#27;[1m95&amp#27;[0m&amp#27;[32m minutos&amp#27;[0m        &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.sesionActiva(java.lang.String,int)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32maplico el descuento de retención a una compra de &amp#27;[0m&amp#27;[32m&amp#27;[1m-1000&amp#27;[0m&amp#27;[32m pesos&amp#27;[0m           &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.aplicoDescuento(long)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema responde &amp#27;[0m&amp#27;[32m&amp#27;[1m"Monto inválido"&amp#27;[0m                                 &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaResponde(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Registrar un jugador válido" classname="Gestión de perfiles de jugador" time="0.032">
+    <system-out><![CDATA[
+Escenario: Registrar un jugador válido                                                                                                                     &amp#27;[90m# features/perfiles_jugador.feature:12&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Sebastián Prada"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Anfitrión de jugadores"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m                                                                &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque no existe un jugador con documento &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m                                                                                                 &amp#27;[90m# co.pitboss.erp.bdd.PerfilesSteps.noExisteJugador(java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mregistro al jugador con documento &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m&amp#27;[32m, nombre &amp#27;[0m&amp#27;[32m&amp#27;[1m"María Fernanda López"&amp#27;[0m&amp#27;[32m, correo &amp#27;[0m&amp#27;[32m&amp#27;[1m"maria.lopez@correo.com"&amp#27;[0m&amp#27;[32m y fecha de nacimiento &amp#27;[0m&amp#27;[32m&amp#27;[1m"1990-05-14"&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.PerfilesSteps.registroJugador(java.lang.String,java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel jugador se crea con estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"ACTIVO"&amp#27;[0m                                                                                                          &amp#27;[90m# co.pitboss.erp.bdd.PerfilesSteps.seCreaConEstado(java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"Jugador registrado exitosamente"&amp#27;[0m                                                                                        &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Rechazar jugador con documento duplicado" classname="Gestión de perfiles de jugador" time="0.016">
+    <system-out><![CDATA[
+Escenario: Rechazar jugador con documento duplicado                                                                                         &amp#27;[90m# features/perfiles_jugador.feature:18&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Sebastián Prada"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Anfitrión de jugadores"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m                                                 &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque ya existe un jugador con documento &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m                                                                                  &amp#27;[90m# co.pitboss.erp.bdd.PerfilesSteps.yaExisteJugador(java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mregistro al jugador con documento &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m&amp#27;[32m, nombre &amp#27;[0m&amp#27;[32m&amp#27;[1m"Otra Persona"&amp#27;[0m&amp#27;[32m, correo &amp#27;[0m&amp#27;[32m&amp#27;[1m"otra@correo.com"&amp#27;[0m&amp#27;[32m y fecha de nacimiento &amp#27;[0m&amp#27;[32m&amp#27;[1m"1988-01-10"&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.PerfilesSteps.registroJugador(java.lang.String,java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"El documento ya está registrado"&amp#27;[0m                                                                  &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel jugador con documento &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m&amp#27;[32m conserva el nombre &amp#27;[0m&amp#27;[32m&amp#27;[1m"María Fernanda López"&amp#27;[0m                                                         &amp#27;[90m# co.pitboss.erp.bdd.PerfilesSteps.conservaNombre(java.lang.String,java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Rechazar jugador menor de edad" classname="Gestión de perfiles de jugador" time="0.012">
+    <system-out><![CDATA[
+Escenario: Rechazar jugador menor de edad                                                                                                     &amp#27;[90m# features/perfiles_jugador.feature:24&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Sebastián Prada"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Anfitrión de jugadores"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m                                                   &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mregistro al jugador con documento &amp#27;[0m&amp#27;[32m&amp#27;[1m"1099000111"&amp#27;[0m&amp#27;[32m, nombre &amp#27;[0m&amp#27;[32m&amp#27;[1m"Pedro Gil"&amp#27;[0m&amp#27;[32m, correo &amp#27;[0m&amp#27;[32m&amp#27;[1m"pedro.gil@correo.com"&amp#27;[0m&amp#27;[32m y fecha de nacimiento &amp#27;[0m&amp#27;[32m&amp#27;[1m"2010-03-01"&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.PerfilesSteps.registroJugador(java.lang.String,java.lang.String,java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"El jugador debe ser mayor de 18 años"&amp#27;[0m                                                               &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Desactivar un jugador con motivo (borrado lógico)" classname="Gestión de perfiles de jugador" time="0.011">
+    <system-out><![CDATA[
+Escenario: Desactivar un jugador con motivo (borrado lógico)                                   &amp#27;[90m# features/perfiles_jugador.feature:38&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Sebastián Prada"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Anfitrión de jugadores"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m    &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque ya existe un jugador con documento &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m                                     &amp#27;[90m# co.pitboss.erp.bdd.PerfilesSteps.yaExisteJugador(java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mdesactivo al jugador con documento &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m&amp#27;[32m por el motivo &amp#27;[0m&amp#27;[32m&amp#27;[1m"Solicitud del titular"&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.PerfilesSteps.desactivo(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel jugador con documento &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m&amp#27;[32m queda en estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"INACTIVO"&amp#27;[0m                    &amp#27;[90m# co.pitboss.erp.bdd.PerfilesSteps.quedaEnEstado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"Jugador desactivado"&amp#27;[0m                                        &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="No desactivar un jugador sin motivo" classname="Gestión de perfiles de jugador" time="0.009">
+    <system-out><![CDATA[
+Escenario: No desactivar un jugador sin motivo                                              &amp#27;[90m# features/perfiles_jugador.feature:44&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Sebastián Prada"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Anfitrión de jugadores"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque ya existe un jugador con documento &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m                                  &amp#27;[90m# co.pitboss.erp.bdd.PerfilesSteps.yaExisteJugador(java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mdesactivo al jugador con documento &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m&amp#27;[32m por el motivo &amp#27;[0m&amp#27;[32m&amp#27;[1m""&amp#27;[0m                   &amp#27;[90m# co.pitboss.erp.bdd.PerfilesSteps.desactivo(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"El motivo es obligatorio"&amp#27;[0m                         &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel jugador con documento &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m&amp#27;[32m queda en estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"ACTIVO"&amp#27;[0m                          &amp#27;[90m# co.pitboss.erp.bdd.PerfilesSteps.quedaEnEstado(java.lang.String,java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Aprobar relleno dentro del saldo de la bóveda" classname="Aprobación de rellenos de fichas" time="0.017">
+    <system-out><![CDATA[
+Escenario: Aprobar relleno dentro del saldo de la bóveda                                   &amp#27;[90m# features/rellenos.feature:12&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Daniela Vargas"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Jefe de piso"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m           &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque la bóveda tiene un saldo disponible de &amp#27;[0m&amp#27;[32m&amp#27;[1m10000000&amp#27;[0m&amp#27;[32m pesos&amp#27;[0m                           &amp#27;[90m# co.pitboss.erp.bdd.RellenosSteps.saldoBoveda(long)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mexiste un relleno &amp#27;[0m&amp#27;[32m&amp#27;[1m"RF-100"&amp#27;[0m&amp#27;[32m para la mesa &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-04"&amp#27;[0m&amp#27;[32m por &amp#27;[0m&amp#27;[32m&amp#27;[1m5000000&amp#27;[0m&amp#27;[32m pesos en estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"PENDIENTE"&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.RellenosSteps.existeRelleno(java.lang.String,java.lang.String,long,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mel jefe de piso aprueba el relleno &amp#27;[0m&amp#27;[32m&amp#27;[1m"RF-100"&amp#27;[0m                                       &amp#27;[90m# co.pitboss.erp.bdd.RellenosSteps.apruebaRelleno(java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel relleno &amp#27;[0m&amp#27;[32m&amp#27;[1m"RF-100"&amp#27;[0m&amp#27;[32m queda en estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"APROBADO"&amp#27;[0m                                  &amp#27;[90m# co.pitboss.erp.bdd.RellenosSteps.rellenoQuedaEnEstado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel saldo de la bóveda queda en &amp#27;[0m&amp#27;[32m&amp#27;[1m5000000&amp#27;[0m&amp#27;[32m pesos&amp#27;[0m                                           &amp#27;[90m# co.pitboss.erp.bdd.RellenosSteps.saldoQueda(long)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Rechazar relleno que excede el saldo de la bóveda" classname="Aprobación de rellenos de fichas" time="0.011">
+    <system-out><![CDATA[
+Escenario: Rechazar relleno que excede el saldo de la bóveda                               &amp#27;[90m# features/rellenos.feature:19&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Daniela Vargas"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Jefe de piso"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m           &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque la bóveda tiene un saldo disponible de &amp#27;[0m&amp#27;[32m&amp#27;[1m3000000&amp#27;[0m&amp#27;[32m pesos&amp#27;[0m                            &amp#27;[90m# co.pitboss.erp.bdd.RellenosSteps.saldoBoveda(long)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mexiste un relleno &amp#27;[0m&amp#27;[32m&amp#27;[1m"RF-101"&amp#27;[0m&amp#27;[32m para la mesa &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-12"&amp#27;[0m&amp#27;[32m por &amp#27;[0m&amp#27;[32m&amp#27;[1m5000000&amp#27;[0m&amp#27;[32m pesos en estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"PENDIENTE"&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.RellenosSteps.existeRelleno(java.lang.String,java.lang.String,long,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mel jefe de piso aprueba el relleno &amp#27;[0m&amp#27;[32m&amp#27;[1m"RF-101"&amp#27;[0m                                       &amp#27;[90m# co.pitboss.erp.bdd.RellenosSteps.apruebaRelleno(java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"Saldo insuficiente en la bóveda"&amp#27;[0m                 &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel saldo de la bóveda queda en &amp#27;[0m&amp#27;[32m&amp#27;[1m3000000&amp#27;[0m&amp#27;[32m pesos&amp#27;[0m                                           &amp#27;[90m# co.pitboss.erp.bdd.RellenosSteps.saldoQueda(long)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="No volver a aprobar un relleno aprobado" classname="Aprobación de rellenos de fichas" time="0.04">
+    <system-out><![CDATA[
+Escenario: No volver a aprobar un relleno aprobado                                        &amp#27;[90m# features/rellenos.feature:26&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Daniela Vargas"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Jefe de piso"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m          &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque la bóveda tiene un saldo disponible de &amp#27;[0m&amp#27;[32m&amp#27;[1m10000000&amp#27;[0m&amp#27;[32m pesos&amp#27;[0m                          &amp#27;[90m# co.pitboss.erp.bdd.RellenosSteps.saldoBoveda(long)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mexiste un relleno &amp#27;[0m&amp#27;[32m&amp#27;[1m"RF-102"&amp#27;[0m&amp#27;[32m para la mesa &amp#27;[0m&amp#27;[32m&amp#27;[1m"M-04"&amp#27;[0m&amp#27;[32m por &amp#27;[0m&amp#27;[32m&amp#27;[1m2000000&amp#27;[0m&amp#27;[32m pesos en estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"APROBADO"&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.RellenosSteps.existeRelleno(java.lang.String,java.lang.String,long,java.lang.String)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mel jefe de piso aprueba el relleno &amp#27;[0m&amp#27;[32m&amp#27;[1m"RF-102"&amp#27;[0m                                      &amp#27;[90m# co.pitboss.erp.bdd.RellenosSteps.apruebaRelleno(java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"El relleno ya está aprobado"&amp#27;[0m                    &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel saldo de la bóveda queda en &amp#27;[0m&amp#27;[32m&amp#27;[1m10000000&amp#27;[0m&amp#27;[32m pesos&amp#27;[0m                                         &amp#27;[90m# co.pitboss.erp.bdd.RellenosSteps.saldoQueda(long)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Proponer la oferta sugerida para un jugador Oro" classname="Ofertas de retención de jugadores" time="0.009">
+    <system-out><![CDATA[
+Escenario: Proponer la oferta sugerida para un jugador Oro               &amp#27;[90m# features/retencion.feature:24&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Ana Torres"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Crupier"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m  &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el jugador &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m&amp#27;[32m tiene una sesión activa de &amp#27;[0m&amp#27;[32m&amp#27;[1m95&amp#27;[0m&amp#27;[32m minutos&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.sesionActiva(java.lang.String,int)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mel crupier registra la señal &amp#27;[0m&amp#27;[32m&amp#27;[1m"Quiere retirarse"&amp#27;[0m                 &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.registraSenal(java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mse emite una oferta de tipo &amp#27;[0m&amp#27;[32m&amp#27;[1m"FICHAS_BONO"&amp#27;[0m                     &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.seEmiteOferta(java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"Oferta de retención emitida"&amp#27;[0m          &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Bloquear la oferta a un jugador autoexcluido" classname="Ofertas de retención de jugadores" time="0.01">
+    <system-out><![CDATA[
+Escenario: Bloquear la oferta a un jugador autoexcluido                              &amp#27;[90m# features/retencion.feature:30&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Ana Torres"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Crupier"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m              &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el jugador &amp#27;[0m&amp#27;[32m&amp#27;[1m"80554219"&amp#27;[0m&amp#27;[32m está en estado &amp#27;[0m&amp#27;[32m&amp#27;[1m"AUTOEXCLUIDO"&amp#27;[0m                       &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.jugadorEnEstado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mtiene una sesión activa de &amp#27;[0m&amp#27;[32m&amp#27;[1m60&amp#27;[0m&amp#27;[32m minutos&amp#27;[0m                                            &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.tieneSesion(int)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mel crupier registra la señal &amp#27;[0m&amp#27;[32m&amp#27;[1m"Quiere retirarse"&amp#27;[0m                             &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.registraSenal(java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"No se ofrece retención: juego responsable"&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mno se emite ninguna oferta&amp#27;[0m                                                       &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.noSeEmiteOferta()&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="Solo una oferta por jugador al día" classname="Ofertas de retención de jugadores" time="0.009">
+    <system-out><![CDATA[
+Escenario: Solo una oferta por jugador al día                                   &amp#27;[90m# features/retencion.feature:37&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Ana Torres"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Crupier"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m         &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el jugador &amp#27;[0m&amp#27;[32m&amp#27;[1m"1020456789"&amp#27;[0m&amp#27;[32m tiene una sesión activa de &amp#27;[0m&amp#27;[32m&amp#27;[1m95&amp#27;[0m&amp#27;[32m minutos&amp#27;[0m        &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.sesionActiva(java.lang.String,int)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mya recibió una oferta de retención hoy&amp#27;[0m                                      &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.yaRecibioOferta()&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mel crupier registra la señal &amp#27;[0m&amp#27;[32m&amp#27;[1m"Quiere retirarse"&amp#27;[0m                        &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.registraSenal(java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"El jugador ya recibió una oferta hoy"&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+]]></system-out>
+  </testcase>
+  <testcase name="No ofrecer retención con menos de 30 minutos de sesión" classname="Ofertas de retención de jugadores" time="0.008">
+    <system-out><![CDATA[
+Escenario: No ofrecer retención con menos de 30 minutos de sesión                   &amp#27;[90m# features/retencion.feature:43&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el usuario &amp#27;[0m&amp#27;[32m&amp#27;[1m"Ana Torres"&amp#27;[0m&amp#27;[32m con rol &amp#27;[0m&amp#27;[32m&amp#27;[1m"Crupier"&amp#27;[0m&amp#27;[32m ha iniciado sesión&amp#27;[0m             &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.usuarioAutenticado(java.lang.String,java.lang.String)&amp#27;[0m
+  &amp#27;[32mDado &amp#27;[0m&amp#27;[32mque el jugador &amp#27;[0m&amp#27;[32m&amp#27;[1m"1018334560"&amp#27;[0m&amp#27;[32m tiene una sesión activa de &amp#27;[0m&amp#27;[32m&amp#27;[1m22&amp#27;[0m&amp#27;[32m minutos&amp#27;[0m            &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.sesionActiva(java.lang.String,int)&amp#27;[0m
+  &amp#27;[32mCuando &amp#27;[0m&amp#27;[32mel crupier registra la señal &amp#27;[0m&amp#27;[32m&amp#27;[1m"Quiere retirarse"&amp#27;[0m                            &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.registraSenal(java.lang.String)&amp#27;[0m
+  &amp#27;[32mEntonces &amp#27;[0m&amp#27;[32mel sistema muestra el mensaje &amp#27;[0m&amp#27;[32m&amp#27;[1m"La sesión debe durar al menos 30 minutos"&amp#27;[0m &amp#27;[90m# co.pitboss.erp.bdd.ComunesSteps.elSistemaMuestraMensaje(java.lang.String)&amp#27;[0m
+  &amp#27;[32mY &amp#27;[0m&amp#27;[32mno se emite ninguna oferta&amp#27;[0m                                                      &amp#27;[90m# co.pitboss.erp.bdd.RetencionSteps.noSeEmiteOferta()&amp#27;[0m
+]]></system-out>
+  </testcase>
+</testsuite>
