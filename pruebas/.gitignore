@@ -1,0 +1,9 @@
+# Dependencias y salidas de compilacion
+js/node_modules/
+js/coverage/
+js/reports/
+java/target/
+dotnet/**/bin/
+dotnet/**/obj/
+dotnet/**/TestResults/
+__pycache__/
