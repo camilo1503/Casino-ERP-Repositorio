@@ -1,0 +1,44 @@
+{
+  "name": "pitboss-erp-pruebas",
+  "version": "1.0.0",
+  "description": "Pruebas Jest y Cucumber-JS de PitBoss ERP (Universidad de Cundinamarca, Ingeniería de Software II)",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:bdd": "cucumber-js",
+    "test:all": "jest --coverage && cucumber-js",
+    "test:bdd:detalle": "cucumber-js -p detalle"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.js",
+      "**/?(*.)+(spec|test).js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/repos/**"
+    ],
+    "coverageReporters": [
+      "text",
+      "text-summary",
+      "json-summary",
+      "html"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "lines": 80,
+        "branches": 80
+      }
+    }
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.3.0",
+    "@cucumber/pretty-formatter": "^1.0.1",
+    "jest": "^29.7.0"
+  }
+}
