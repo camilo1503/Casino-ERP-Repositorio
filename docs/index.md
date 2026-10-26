@@ -40,3 +40,13 @@ Documentation site for the **Casino ERP** project, developed for the Software En
              
               - All team members are added as collaborators on this repository. Please branch from `main`, reference the corresponding Jira issue key in your commits, and open a pull request for review before merging.
               - 
+
+## 6. Testing
+
+The `pruebas/` folder holds the CRUD testing workshop applied to the casino modules (player profiles, table catalog, retention offers, chip fills and vault inventory):
+
+- Gherkin `.feature` files in Spanish shared by Cucumber-JS, Cucumber-JVM and Reqnroll (37 scenarios)
+- Unit tests with Jest (63) and JUnit 5 (46)
+- HTML test report with Font Awesome icons: 185 tests, 0 failures
+
+See [`pruebas/README.md`](../pruebas/README.md) for how to run each tool.
