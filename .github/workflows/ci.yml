@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main, 'feature/**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend:
+    name: Backend .NET (build + pruebas)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restaurar dependencias
+        run: dotnet restore CasinoErp.sln
+
+      - name: Compilar
+        run: dotnet build CasinoErp.sln --no-restore -c Release
+
+      - name: Pruebas unitarias e integración con cobertura
+        run: >
+          dotnet test CasinoErp.sln --no-build -c Release
+          --logger "trx;LogFileName=resultados.trx"
+          --collect:"XPlat Code Coverage"
+          --results-directory ./TestResults
+
+      - name: Publicar resultados
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultados-pruebas
+          path: TestResults
