@@ -1,0 +1,17 @@
+# .NET
+bin/
+obj/
+TestResults/
+*.user
+.vs/
+*.db
+*.db-shm
+*.db-wal
+coverage/
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+
+.DS_Store
