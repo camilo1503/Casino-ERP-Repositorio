@@ -15,3 +15,7 @@ dist/
 .angular/
 
 .DS_Store
+
+# Publicación
+publish/
+publish.zip

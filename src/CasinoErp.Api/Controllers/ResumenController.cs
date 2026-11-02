@@ -34,7 +34,7 @@ public class ResumenController(CasinoErpDbContext db) : ControllerBase
             await db.Jugadores.CountAsync(j => j.Estado == EstadoJugador.Activo),
             await db.Mesas.CountAsync(m => m.Estado == EstadoMesa.Abierta),
             await db.Mesas.CountAsync(m => m.Estado != EstadoMesa.Retirada),
-            (await db.Bovedas.FirstOrDefaultAsync())?.Saldo ?? 0,
+            (await db.Bovedas.FirstOrDefaultAsync(b => b.Id == 1))?.Saldo ?? 0,
             fichas.Sum(f => f.Denominacion * f.Stock),
             await db.Rellenos.CountAsync(r => r.Estado == EstadoRelleno.Pendiente),
             compras.Sum(),

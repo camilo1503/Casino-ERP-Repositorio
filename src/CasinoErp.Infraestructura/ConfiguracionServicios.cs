@@ -24,7 +24,8 @@ public static class ConfiguracionServicios
         services.AddDbContext<CasinoErpDbContext>(opciones =>
         {
             if (proveedor.Equals("SqlServer", StringComparison.OrdinalIgnoreCase))
-                opciones.UseSqlServer(cadena, sql => sql.EnableRetryOnFailure());
+                // Reintentos: Azure SQL (nivel gratuito) se pausa cuando no se usa y tarda unos segundos en reanudar.
+                opciones.UseSqlServer(cadena, sql => sql.EnableRetryOnFailure(10, TimeSpan.FromSeconds(30), null));
             else
                 opciones.UseSqlite(cadena);
         });
@@ -52,7 +53,10 @@ public static class ConfiguracionServicios
     {
         using var scope = proveedor.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<CasinoErpDbContext>();
-        db.Database.EnsureCreated();
-        if (cargarDatosDemo) DatosIniciales.Cargar(db);
+        db.Database.CreateExecutionStrategy().Execute(() =>
+        {
+            db.Database.EnsureCreated();
+            if (cargarDatosDemo) DatosIniciales.Cargar(db);
+        });
     }
 }
