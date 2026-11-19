@@ -13,8 +13,8 @@
 | F4 | Persistencia y API de empleados | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-empleados-api) |
 | F5 | Persistencia y API de nómina | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-nomina-api) |
 | F6 | Front personal.js | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-front) |
-| F7 | Autorización de mis controladores | Pendiente | — |
-| F8 | arc42 bloque Nómina y cierre | Pendiente | — |
+| F7 | Autorización de mis controladores | Bloqueada (espera la I5 de Iván) | — |
+| F8 | arc42 bloque Nómina y cierre | En revisión (falta ensayar la demo) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-arc42-nomina) |
 
 ## Pendientes abiertos
 - F0.3: mover HU-04 y la subtarea F1 a "En curso" en Jira (lo hace Felipe; el agente no tiene acceso a Jira).
@@ -22,14 +22,55 @@
 - ~~Comando de cobertura de AGENT.md §10 sin `coverlet.msbuild`~~ (resuelto: la Fase 0 agregó el paquete).
 - La rama `feature/HU-04-reglas-liquidacion` quedó obsoleta (F2 ya entró por `feature/HU-04-nomina-motor`). No se fusiona; Felipe o Jorge pueden borrarla.
 - Jira: mover CER-22, CER-23 (F2, F3) a "Listo" y CER-24 y CER-25 (F4, F5) a "En revisión".
-- Orden de fusión de mis ramas: F4 (`feature/HU-04-empleados-api`) → F5 (`feature/HU-04-nomina-api`, tomada de F4) → F6 (`feature/HU-04-front`, tomada de F5). Cada una contiene a la anterior.
-- Jira: CER-26 (F6) a "En revisión".
+- Orden de fusión de mis ramas: F4 (`feature/HU-04-empleados-api`) → F5 (`feature/HU-04-nomina-api`) → F6 (`feature/HU-04-front`) → F8 (`feature/HU-04-arc42-nomina`). Cada una contiene a la anterior.
+- Jira: CER-26 (F6) y CER-28 (F8) a "En revisión"; HU-04 (CER-13) a "Listo" cuando se fusionen todas y se haga F7.
+- F8.4: ensayar la demo de 2 minutos (guion en la entrada de F8) y anotar el tiempo real (lo hace Felipe).
 
 ## Bloqueos abiertos
 - ~~F4, F5 y F6 esperan la Fase 0 de Jorge~~ (resuelto: Fase 0 en `develop` desde `8fff1ce`, D-007).
 - F7 espera la I5 de Iván ("seguridad activa"). Aún no está en `develop`.
 
 ## Entradas
+
+## 2026-11-18 20:34 · Tarea F8 · Terminada (en revisión) · Cierre de la sesión
+**Hecho:**
+- Rama `feature/HU-04-arc42-nomina`, encadenada después de F6 para que esta bitácora no tenga conflictos al fusionar.
+- `docs/arc42/05-bloques/nomina.md`: propósito y frontera del bloque (tabla de capas y archivos, endpoints de F4 y F5, dependencias, autorización de F7), diagrama Mermaid `classDiagram`, sección **SOLID en el código** (SRP por clase con su ruta, DIP con los constructores y el registro de `ModuloNomina`, OCP con el ejemplo del aprendiz SENA y la prueba que lo demuestra), diagrama Mermaid `sequenceDiagram` de `POST /api/nomina/calculate` (JWT y `[AutorizarModulo(Modulos.Rrhh)]`, `alt` para nómina aprobada, sin parámetros y errores del motor, `loop` por empleado, `opt` del borrador anterior), tabla de reglas con los casos de prueba de F2 y resumen de pruebas y cobertura.
+- `docs/arc42/09-decisiones/ADR-005-parametros-nomina.md`: contexto (decretos 2026 en disputa judicial), decisión (parámetros por año editables por API, validaciones), consecuencias, simplificación del Art. 114-1 (D-003) y deuda para el Sprint 3.
+**Evidencia:**
+- Los dos diagramas se renderizaron sin errores con Mermaid 10.9.1 en el navegador (página de validación local).
+- `dotnet test CasinoErp.sln` → 244 aprobadas, 0 fallos (sin cambios de código en F8).
+**Decisiones:** el bloque documenta la autorización de F7 como prevista ("desde F7"), porque la I5 de Iván aún no está en `develop`; así la revisión cruzada de Jorge (J7.4) encuentra el control en el bloque.
+**Pendientes:** ensayar la demo (F8.4) y anotar el tiempo; F7 cuando Iván anuncie "seguridad activa"; mover HU-04 en Jira.
+**Bloqueos / necesito de otros:** F7 espera la I5 de Iván.
+**Siguiente paso:** F7 (autorización por módulo en `EmpleadosController` y `NominaController` y las dos pruebas de 403).
+**Commits/PR:** ver el commit `HU-08: arc42 bloque Nomina con diagrama de secuencia y ADR-005`.
+
+### Guion de la demo de la Sprint Review (F8.4, máximo 2 minutos)
+1. Iniciar sesión como **Felipe Cortés** (Coordinador de talento humano).
+2. **Turnos y nómina** → mostrar la tarjeta "Nómina de octubre" → **Calcular nómina**.
+3. En el modal, señalar a **Bruno Lara**: turno noche, recargo **$910.000**, sin auxilio (su IBC supera 2 SMMLV), neto **$3.229.200**.
+4. Señalar a **Ana Torres**: turno tarde, auxilio de transporte **$249.095**, neto **$2.641.095**.
+5. Mostrar el pie: total neto y aportes del empleador (parafiscales).
+6. **Aprobar nómina** → toast "Nómina aprobada. Se pagará el 30/10/2026." → abrir otra vez el modal: etiqueta **Aprobada**, sin botón.
+7. (Si sobra tiempo) Swagger: `POST /api/nomina/calculate` con el mismo mes → 400 "La nómina de 10/2026 ya está aprobada."
+- Antes de la demo: arrancar con `BaseDatos__RecrearAlIniciar=true` para que la nómina de octubre no esté aprobada.
+- **Tiempo del ensayo:** (pendiente: lo anota Felipe después de ensayar).
+
+## 2026-11-18 20:34 · Retrospectiva HU-04 (F8.3)
+**(a) Tiempo real contra lo estimado.** HU-04 se estimó en 8 SP; el plan no traía horas. Trabajo del agente en esta sesión: F0 a F8 entre las 19:00 y las 20:34 (≈ 1 h 35 min), sin contar el tiempo de Felipe en revisión, Jira, PR y la espera del CI (≈ 3 a 5 min por push). Las tareas de dominio (F1–F3) fueron las más rápidas; F4–F6 tomaron más por la prueba manual en el navegador.
+**(b) Casos de borde que no se vieron en el planning:**
+- Ramas que dependen de otras sin fusionar: F2 se hizo sobre F1 y F5/F6/F8 en cadena. Al integrar `develop` con `pull --rebase` después de empujar, se reescribieron commits ya publicados y hubo que crear una rama nueva (`feature/HU-04-nomina-motor`), porque el push forzado está prohibido.
+- Pruebas de integración que comparten base: la nómina de octubre "con 18 filas" dependía del orden de las pruebas de empleados; se resolvió con una clase de pruebas propia.
+- El comando de cobertura de AGENT.md necesitaba `coverlet.msbuild` (lo agregó la Fase 0).
+- Reglas que el plan no fijaba: salario exactamente igual al mínimo (se acepta), un retirado bajo el mínimo no bloquea la nómina, un error del motor no debe borrar el borrador anterior, el mes con dos dígitos en el mensaje (03/2026).
+- En el front, `soloActivos=true` saca a los retirados de `S.staff`; si un usuario o una mesa apunta a un retirado, el mockup lo muestra como "sin asignar".
+- Mientras se calcula la nómina, el modal muestra por un instante el cálculo anterior hasta que llega la respuesta.
+**(c) Propuesta para la estimación del Sprint 3:**
+- Sumar 1 SP a cada historia que dependa de otra rama o de otro integrante (coordinación, rebase y orden de fusión).
+- Regla de Git: integrar `develop` con `pull --rebase` **solo antes del primer push** de una rama; después, usar `git merge origin/develop`.
+- Pedir que el plan diga cómo aislar las pruebas de integración que cuentan registros (una factory por clase).
+- Medir el tiempo real por tarea en la bitácora desde el inicio (hora de inicio y fin en cada entrada).
 
 ## 2026-11-18 20:30 · Tarea F6 · Terminada (en revisión)
 **Hecho:**
