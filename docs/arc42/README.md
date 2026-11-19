@@ -12,7 +12,7 @@ Documentación de arquitectura con la plantilla [arc42](https://arc42.org). Cada
 | 6 | Vista de ejecución | — | — | Pendiente – Sprint 3 |
 | 7 | Vista de despliegue | [`07-vista-despliegue.md`](07-vista-despliegue.md) | Jorge | Sprint 2 (HU-08) |
 | 8 | Conceptos transversales | — | — | Pendiente – Sprint 3 |
-| 9 | Decisiones de arquitectura | [`09-decisiones/`](09-decisiones/) (ADR-001, 003, 004 y 005 ya están) | Jorge (001, 003, 004), Iván (002), Felipe (005) | Sprint 2 (HU-08) |
+| 9 | Decisiones de arquitectura | [`09-decisiones/`](09-decisiones/) (ADR-001 a ADR-005 ya están) | Jorge (001, 003, 004), Iván (002), Felipe (005) | Sprint 2 (HU-08) |
 | 10 | Conceptos de seguridad y roles | `10-conceptos-seguridad.md` | Iván | Sprint 2 (HU-08) |
 | 11 | Riesgos y deuda técnica | — | — | Pendiente – Sprint 3 |
 | 12 | Glosario | — | — | Pendiente – Sprint 3 |

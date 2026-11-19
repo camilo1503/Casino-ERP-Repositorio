@@ -21,6 +21,14 @@ Revisado `05-bloques/nomina.md` y `ADR-005` contra el código y las pruebas de `
 - Las citas legales del ADR-005 (Decretos 1469 y 1470 de 2025 y 0159 de 2026) vienen de D-003 y no se verificaron contra fuentes oficiales.
 - Detalle menor: el encabezado dice `5.x`; conviene numerarlo cuando estén los demás bloques.
 
+### Sección 10 (Iván) frente al bloque Nómina, revisado el 2026-11-18
+
+Con la seguridad de Iván ya en `develop` (`cce0aa1`) y su arc42 (`2932d93`):
+
+- `10-conceptos-seguridad.md` lista `NominaController` → módulo `rrhh` → roles Gerente y Talento humano, y `EmpleadosController` → `competencias`, `rrhh`, `mesas`. El código coincide: `NominaController` lleva `[AutorizarModulo(Modulos.Rrhh)]` y `EmpleadosController` lleva `[AutorizarModulo(Modulos.Competencias, Modulos.Rrhh, Modulos.Mesas)]`.
+- El bloque Nómina (Felipe) dice que solo Gerente y Talento Humano calculan o aprueban la nómina. Es coherente con la sección 10.
+- Detalle para Felipe: `05-bloques/nomina.md` todavía dice que los atributos «se aplican cuando la seguridad (I5) está en develop». Ya están, así que esa frase puede pasar a presente.
+
 ### Pendiente
 
-La coherencia sección 10 ↔ sección 5 se completa cuando `10-conceptos-seguridad.md` (Iván) y los bloques de Camilo e Iván estén en `develop`. Las incoherencias se anotarán como comentarios en el PR de su dueño.
+Falta el bloque de Camilo (`05-bloques/inventario-compras.md`, PR #8 todavía abierto) para comparar el control de `InventarioController` (`[AutorizarModulo(Modulos.Inventario, Modulos.Caja)]`, ya en el código) con su bloque. Las incoherencias se anotarán como comentarios en el PR de su dueño.
