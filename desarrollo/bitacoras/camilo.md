@@ -9,22 +9,52 @@
 | C0 | Arranque | Hecha | — |
 | C1 | Umbral y alertas (dominio, C8) | En revisión | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8) |
 | C2 | Persistencia y API de alertas | En revisión | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8) |
-| C3 | Proveedores (dominio) | Pendiente | — |
-| C4 | Órdenes de compra (dominio) | Pendiente | — |
-| C5 | Persistencia y API de compras | Pendiente | — |
-| C6 | Front inventario.js y compras.js | Pendiente | — |
-| C7 | Autorización | En curso (alertas cubiertas en #8; faltan Proveedores y Compras, C3–C5) | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8) |
-| C8 | arc42 bloque Inventario/Compras y cierre | Pendiente | — |
+| C3 | Proveedores (dominio) | En revisión | PR_PROV |
+| C4 | Órdenes de compra (dominio) | En revisión | PR_PROV |
+| C5 | Persistencia y API de compras | En revisión | PR_PROV |
+| C6 | Front inventario.js y compras.js | En revisión | PR_FRONT |
+| C7 | Autorización | En revisión (alertas en #8; proveedores y compras con C5) | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8), PR_PROV |
+| C8 | arc42 bloque Inventario/Compras y cierre | En revisión | PR_DOCS |
 
 ## Pendientes abiertos
-- Mover en Jira HU-05 (CER-14) y las subtareas C0, C1 y C2 (CER-29, 30, 31) a "En curso" / "Listo" (C0.3). Lo hace Camilo a mano en Jira.
+- Mover en Jira HU-05 (CER-14), la historia de Proveedores (CER-15) y las subtareas CER-29 a CER-37. Lo hace Camilo a mano en Jira.
+- Ensayar en persona la parte de la demo (pasos 1 a 3 de C6.2) y anotar el tiempo (C8.3).
 
 ## Bloqueos abiertos
 - (ninguno) La seguridad de Iván (#4 a #10) ya está en `develop` desde `cce0aa1`; C7 queda desbloqueada.
 
 ## Entradas
 
-## 2026-11-19 04:40 · PR #8 corregido y secretos de GitHub · Terminada
+## 2026-11-18 23:55 · Retrospectiva HU-05 (C8.2)
+**(a) Tiempo real contra lo estimado.** HU-05 (5 SP) y Proveedores (3 SP) se estimaron en 8 SP; el plan no traía horas. Trabajo registrado en esta bitácora: C0–C2 de 22:20 a 22:50 del 18-11 (≈ 30 min), integración con la seguridad de Iván ≈ 30 min y C3–C8 de 23:00 a 23:55 (≈ 1 h). Total ≈ 2 h, sin contar la revisión del integrador ni la espera del CI (≈ 1 min por push).
+**(b) Qué salió bien.** El contrato C8 y la interfaz `IObservadorStockCritico` permitieron hacer la alerta (C1) sin tocar Compras, y enganchar el generador de órdenes en C4 sin cambiar el inventario. Con TDD, cada tarea de dominio pasó en verde al primer intento de implementación; la cobertura del dominio quedó en 97,64 %.
+**(c) Qué mejorar.**
+- Las pruebas de integración que cambian datos de la demo (retirar de `FICHA-500K`) necesitan su propia base desde el principio; aquí se resolvió con clases anidadas con su propia `CasinoErpFactory`.
+- Al llegar la seguridad activa, las pruebas creadas con `CreateClient()` fallaron con 401: conviene escribirlas desde el inicio con `ClienteComoAsync` aunque la I5 todavía no esté (o con un cliente que se cambie en un solo lugar).
+- El borrador de transacción del mockup trae fichas precargadas ($2.500.000 en otras denominaciones): en la demo hay que vaciarlas antes de sumar las 25 fichas de $500.000, o el total sale en $15.000.000 en vez de $12.500.000.
+**(d) Impedimentos.** C7 esperó la seguridad de Iván (resuelto al fusionarse `cce0aa1`). El PR #8 quedó retenido una vuelta por las pruebas sin sesión. Sin acceso de las herramientas a Jira: las tarjetas las mueve Camilo a mano.
+
+## 2026-11-18 23:55 · Tareas C3 a C8 · Terminadas (en revisión)
+**Hecho:**
+- **C3** (`d448724`): `Dominio/Compras/Proveedor.cs` y `ProveedorService.cs`; `ProveedorServiceTests` (17 pruebas) y `Dobles/ComprasEnMemoria.cs`.
+- **C4** (`79a1e21`): `OrdenCompra.cs`, `GeneradorOrdenesCompra.cs` (observador) y `OrdenCompraService.cs`; `OrdenesCompraTests` (22 pruebas, incluido el flujo completo retiro → alerta → orden → recepción con el inventario real).
+- **C5 + C7** (`6c23f12`): `ComprasConfiguracion.cs`, `ComprasRepositorios.cs`, `SemillaCompras.cs` (orden 30), registro en `ModuloCompras.cs`, `ProveedoresController` con `[AutorizarModulo(Modulos.Proveedores)]` y `ComprasController` con `[AutorizarModulo(Modulos.Proveedores, Modulos.Inventario)]`. `InventarioComprasApiTests` pasa a 15 pruebas (CRUD de proveedores, NIT inválido, orden inexistente 404, orden manual, OC-0001 desde la alerta, envío y recepción con stock 560, cajero 403 en proveedores, crupier 403, sin sesión 401).
+- **C6** (`dce201a`): `inventario.js` (umbral por denominación, carga `alertasStock` 61 con toast, `alerts()`, `V.inventario` con el umbral de cada denominación y "Pedir al proveedor" como orden en borrador) y `compras.js` (módulo **Proveedores y compras** en el grupo Caja y bóveda para Gerente y Jefe de piso, vista con KPI, tablas de órdenes y proveedores, modales `supplier`, `orderSend` y `orderNew` y sus acciones).
+- **C8**: `docs/arc42/05-bloques/inventario-compras.md` (frontera, endpoints, autorización, `classDiagram`, sección "Patrón observador y DIP", `sequenceDiagram` de la demo, reglas y pruebas).
+**Evidencia:**
+- `dotnet build` → 0 advertencias. `dotnet test CasinoErp.sln` → 310 unitarias + 72 de integración aprobadas, 0 fallos. Cobertura de líneas de `CasinoErp.Dominio` → 97,64 %.
+- **C6.2 en el navegador** (API local con `BaseDatos__RecrearAlIniciar=true`, Edge con Playwright), 15 de 15 verificaciones: (1) Laura Gómez compra 25 fichas de $500.000 para María Fernanda López, total $12.500.000 → toast `Stock crítico: FICHA-500K quedó en 395 unidades (mínimo 400). Se creó un borrador de orden de compra.` y alerta "Bóveda · fichas de $500.000 … umbral 400" en Inventario; (2) la alerta aparece en el panel de inicio del gerente; (3) Daniel Ruiz ve `OC-0001 · FICHA-500K · 165 · Fichas Andinas S.A.S. · Alerta de stock · Borrador`, la envía y la recibe → toast `Orden recibida: el stock de la bóveda se actualizó.`, stock 560 y la alerta desaparece; (4) registra `902000111-3`, el duplicado muestra `Ya existe un proveedor con ese NIT.` y lo desactiva; (5) "Pedir al proveedor" crea una orden manual en borrador sin cambiar el stock; (6) Laura no ve "Proveedores y compras" y Ana Torres no ve Inventario.
+**Decisiones (solo mi módulo):**
+- `alerts()`: las alertas de la bóveda se insertan junto a las demás alertas "bad" (antes de las "warn") y no al final, porque el panel de inicio solo muestra las cuatro primeras; al final no se veían (paso 2 de C6.2).
+- `ProveedorService.ConsultarAsync` también recorta el NIT (el plan lo pide al registrar), para que un NIT con espacios encuentre al proveedor.
+- C6 va encadenada sobre C5 y C8 sobre C6 (como las ramas de Iván), porque C4 necesita el C1 del PR #8, que sigue abierto.
+- C8.3: no hubo ensayo en persona. El recorrido automatizado de los seis pasos de C6.2 tardó 38 s; Camilo debe ensayar los pasos 1 a 3 (máximo 2 minutos).
+**Pendientes:** Jira; ensayo en persona de la demo.
+**Bloqueos / necesito de otros:** fusión en orden: PR #8 → proveedores → front → arc42 (integrador).
+**Siguiente paso:** ninguna tarea del plan pendiente; atender comentarios de los PR.
+**Commits/PR:** `d448724`, `79a1e21`, `6c23f12`, `dce201a` y el commit de C8; PR_PROV, PR_FRONT, PR_DOCS.
+
+## 2026-11-18 23:40 · PR #8 corregido y secretos de GitHub · Terminada
 **Hecho:**
 - Respuesta al comentario de Jorge en el PR #8: `git merge origin/develop` otra vez (entraron F7, I5.9 y las evidencias); las pruebas de `InventarioComprasApiTests` ya usaban `ClienteComoAsync` desde `56272e0`; se agrega `Un_crupier_no_ve_alertas_de_inventario` (C7.3: `ana.torres` recibe 403 en `GET /api/inventario/alertas` y en `PUT .../minimo`).
 - El PR #8 no crea controladores nuevos, así que no hay `[AutorizarModulo]` que poner: `InventarioController` ya lo tiene desde la I5 de Iván. `ProveedoresController` y `ComprasController` lo llevarán al nacer en C5.
