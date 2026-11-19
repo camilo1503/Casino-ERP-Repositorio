@@ -1,5 +1,7 @@
 using CasinoErp.Dominio.Caja;
 using Microsoft.AspNetCore.Mvc;
+using CasinoErp.Api.Seguridad;
+using CasinoErp.Dominio.Seguridad;
 
 namespace CasinoErp.Api.Controllers;
 
@@ -8,6 +10,7 @@ public record CumplimientoRequest(string Estado);
 
 [ApiController]
 [Route("api/caja")]
+[AutorizarModulo(Modulos.Caja, Modulos.Cumplimiento)]
 public class CajaController(CajaService servicio) : ControllerBase
 {
     [HttpGet("transacciones")]

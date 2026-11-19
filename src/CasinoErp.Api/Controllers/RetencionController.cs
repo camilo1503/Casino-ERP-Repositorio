@@ -1,6 +1,8 @@
 using CasinoErp.Dominio.Comun;
 using CasinoErp.Dominio.Retencion;
 using Microsoft.AspNetCore.Mvc;
+using CasinoErp.Api.Seguridad;
+using CasinoErp.Dominio.Seguridad;
 
 namespace CasinoErp.Api.Controllers;
 
@@ -9,6 +11,7 @@ public record DescuentoRequest(long Monto);
 
 [ApiController]
 [Route("api/retencion")]
+[AutorizarModulo(Modulos.Retencion, Modulos.Caja, Modulos.MiMesa)]
 public class RetencionController(RetencionService servicio) : ControllerBase
 {
     [HttpGet("ofertas")]

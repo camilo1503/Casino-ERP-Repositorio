@@ -17,6 +17,8 @@ public class CasinoErpFactory : WebApplicationFactory<Program>
         builder.UseSetting("BaseDatos:CargarDatosDemo", "true");
         builder.UseSetting("BaseDatos:RecrearAlIniciar", "false");
         builder.UseSetting("ConnectionStrings:CasinoErp", $"Data Source={_archivo};Pooling=False");
+        builder.UseSetting("Jwt:Clave", "clave-de-pruebas-de-integracion-40-carac");
+        builder.UseSetting("Seguridad:CodigoTotpDemo", Autenticacion.CodigoDemo);
     }
 
     protected override void Dispose(bool disposing)

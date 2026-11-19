@@ -1,5 +1,7 @@
 using CasinoErp.Dominio.Jugadores;
 using Microsoft.AspNetCore.Mvc;
+using CasinoErp.Api.Seguridad;
+using CasinoErp.Dominio.Seguridad;
 
 namespace CasinoErp.Api.Controllers;
 
@@ -10,6 +12,7 @@ public record MotivoRequest(string? Motivo);
 
 [ApiController]
 [Route("api/jugadores")]
+[AutorizarModulo(Modulos.Perfiles, Modulos.Retencion, Modulos.Caja)]
 public class JugadoresController(JugadorService servicio) : ControllerBase
 {
     [HttpGet]
