@@ -8,8 +8,8 @@
 |---|---|---|---|
 | F0 | Arranque | Hecha (falta mover Jira) | — |
 | F1 | Dominio de empleados (contrato C4) | Hecha (fusionada en `develop`, `f083b68`) | Fusión del integrador (D-009) |
-| F2 | Parámetros y reglas de liquidación | Hecha (PR junto con F3) | [rama](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-reglas-liquidacion) |
-| F3 | PayrollEngine y NominaService | Pendiente | — |
+| F2 | Parámetros y reglas de liquidación | En revisión (PR F2 + F3) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-reglas-liquidacion) |
+| F3 | PayrollEngine y NominaService | En revisión (PR F2 + F3) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-reglas-liquidacion) |
 | F4 | Persistencia y API de empleados | Pendiente | — |
 | F5 | Persistencia y API de nómina | Pendiente | — |
 | F6 | Front personal.js | Pendiente | — |
@@ -26,6 +26,26 @@
 - F7 espera la I5 de Iván ("seguridad activa"). Aún no está en `develop`.
 
 ## Entradas
+
+## 2026-11-18 20:02 · Tarea F3 · Terminada (PR F2 + F3 pendiente)
+**Hecho:**
+- `src/CasinoErp.Dominio/Nominas/PayrollEngine.cs`: cálculo puro; valida el mes, toma solo activos, rechaza salarios laborales bajo el mínimo (la prestación de servicios no tiene esa restricción), elige la regla con `Aplica` y lanza `InvalidOperationException` si falta una; devuelve el borrador ordenado por nombre, sin fechas.
+- `src/CasinoErp.Dominio/Nominas/NominaService.cs`: `CalcularAsync` (no recalcula meses aprobados, exige parámetros del año, reemplaza el borrador anterior), `AprobarAsync`, `ConsultarAsync`, `ListarAsync`, `ConsultarParametrosAsync` y `GuardarParametrosAsync` (tasas en [0, 1], salario mínimo > 0, auxilio ≥ 0, año ≥ 2020).
+- `tests/CasinoErp.PruebasUnitarias/Dobles/NominaEnMemoria.cs` (`ParametrosEnMemoria`, `NominasEnMemoria`), `PayrollEngineTests.cs` (14 pruebas) y `NominaServiceTests.cs` (18 pruebas): las del plan más casos de borde (lista vacía, salario igual al mínimo, término fijo bajo el mínimo, retirado bajo el mínimo, mes con dos dígitos en el mensaje, error del motor que no borra el borrador anterior, tasas negativas, auxilio negativo, año inválido, consultas inexistentes) y una prueba de OCP con una regla nueva inyectada.
+- TDD: primero las pruebas (no compilaban: `PayrollEngine` y `NominaService` no existían).
+**Evidencia:**
+- `dotnet test tests/CasinoErp.PruebasUnitarias --filter "PayrollEngineTests|NominaServiceTests"` → 32 aprobadas, 0 fallos.
+- `dotnet test CasinoErp.sln` → 228 aprobadas (210 unitarias + 18 de integración), 0 fallos. `dotnet build` → 0 advertencias.
+- Cobertura oficial (AGENT.md §10): `CasinoErp.Dominio` 97,35 % de líneas, 90,66 % de ramas. `PayrollEngine.cs`, `NominaService.cs`, `ReglaContratoLaboral.cs`: 100 % de líneas y de ramas.
+**Decisiones:**
+- El motor valida el salario mínimo de todos los activos antes de liquidar (el primero que incumpla da el mensaje) y ordena por nombre con `StringComparer.CurrentCulture`.
+- `CalcularAsync` ejecuta el motor antes de borrar el borrador anterior: si el cálculo falla, el borrador previo se conserva (hay prueba).
+- `GuardarParametrosAsync` valida en el orden del plan: tasas, salario mínimo, auxilio y año.
+- Git: al hacer `pull --rebase origin develop` (llegó `321814b` de Jorge) se reescribieron los 3 commits de F2 ya empujados, con el mismo contenido (`git range-diff` sin diferencias). Se empujó con `--force-with-lease` solo sobre mi rama `feature/HU-04-reglas-liquidacion`; nunca sobre `develop` ni `main`.
+**Pendientes:** abrir el PR F2 + F3 hacia `develop` (Felipe, con la descripción que preparó el agente); mover CER-22 y CER-23 en Jira.
+**Bloqueos / necesito de otros:** ninguno para F4 (la Fase 0 ya está en `develop`).
+**Siguiente paso:** F4, persistencia y API de empleados, en `feature/HU-04-empleados-api` tomada de `develop`.
+**Commits/PR:** ver el commit `HU-04: PayrollEngine (calculo puro, SRP/DIP) y NominaService`.
 
 ## 2026-11-18 19:56 · Fin de sesión · F1 fusionada, F2 terminada
 **Hecho:** al hacer `pull --rebase` de F2 llegaron a `develop` la fusión de F1 (`f083b68`), la Fase 0 (`8fff1ce`, D-007) y las decisiones D-008 (ajustes de C1, C2 y C5) y D-009 (el integrador fusiona los PR). Se leyeron las tres decisiones.
