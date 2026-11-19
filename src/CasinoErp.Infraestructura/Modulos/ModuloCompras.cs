@@ -1,3 +1,6 @@
+using CasinoErp.Dominio.Inventario;
+using CasinoErp.Infraestructura.Repositorios;
+using CasinoErp.Infraestructura.Semillas;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CasinoErp.Infraestructura.Modulos;
@@ -8,5 +11,11 @@ namespace CasinoErp.Infraestructura.Modulos;
 /// </summary>
 public static class ModuloCompras
 {
-    public static IServiceCollection AgregarCompras(this IServiceCollection services) => services;
+    public static IServiceCollection AgregarCompras(this IServiceCollection services)
+    {
+        // HU-05: alertas del inventario
+        services.AddScoped<IAlertaStockRepositorio, AlertaStockRepositorio>();
+        services.AddScoped<ISemilla, SemillaUmbralesInventario>();
+        return services;
+    }
 }

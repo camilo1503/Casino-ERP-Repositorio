@@ -5,6 +5,7 @@ namespace CasinoErp.Api.Controllers;
 
 public record RegistrarFichaRequest(string Codigo, long Denominacion, string Categoria, int StockInicial);
 public record CantidadRequest(int Cantidad);
+public record StockMinimoRequest(int StockMinimo);
 
 [ApiController]
 [Route("api/inventario")]
@@ -33,4 +34,12 @@ public class InventarioController(InventarioFichasService servicio) : Controller
 
     [HttpGet("movimientos")]
     public Task<IReadOnlyList<MovimientoInventario>> Movimientos([FromQuery] string? codigo) => servicio.ListarMovimientosAsync(codigo);
+
+    // HU-05: umbral mínimo y alertas de stock crítico
+    [HttpPut("fichas/{codigo}/minimo")]
+    public async Task<Respuesta<Ficha>> ActualizarMinimo(string codigo, StockMinimoRequest r) =>
+        new(InventarioFichasService.MensajeMinimo, await servicio.ActualizarStockMinimoAsync(codigo, r.StockMinimo));
+
+    [HttpGet("alertas")]
+    public Task<IReadOnlyList<AlertaStock>> Alertas([FromQuery] bool soloAbiertas = true) => servicio.ListarAlertasAsync(soloAbiertas);
 }
