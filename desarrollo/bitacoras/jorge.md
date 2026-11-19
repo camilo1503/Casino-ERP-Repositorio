@@ -19,8 +19,10 @@
 
 ## Pendientes abiertos
 - Avisar al equipo por el chat del grupo que la Fase 0 está en `develop` (D-007).
-- PR #3 (`feature/CER-6-despliegue-azure` → `main`, de Flashtwiice): no se fusiona porque `main` solo recibe el cierre del sprint y su contenido ya está en `develop` desde la Fase 0. Pendiente que Jorge decida si cerrarlo.
 - Confirmar con el equipo quién es el usuario de GitHub `Flashtwiice`: firmó los commits de F1 de Felipe y también el despliegue manual de Azure (`b9f4410`). Si es Felipe, él tiene la suscripción que necesita J2.
+
+## Notas para J5.2
+- PR #3 (`feature/CER-6-despliegue-azure` → `main`): **Jorge decidió dejarlo abierto** hasta el cierre del sprint (J9). No se fusiona ni se cierra en las revisiones de PR; su contenido ya está en `develop`.
 
 ## Bloqueos abiertos
 - (ninguno)
