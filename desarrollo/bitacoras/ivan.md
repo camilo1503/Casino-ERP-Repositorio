@@ -6,12 +6,12 @@
 
 | Tarea | Descripción | Estado | PR |
 |---|---|---|---|
-| I0 | Arranque | Hecha | [#4](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/4) |
+| I0 | Arranque | Hecha (`cce0aa1`) | [#4](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/4) |
 | I1 | Roles, módulos y matriz (C5) | Hecha (`cce0aa1`) | [#4](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/4) |
 | I2 | Usuario y autenticación | Hecha (`cce0aa1`) | [#5](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/5) |
 | I3 | UsuarioService (necesita C4) | Hecha (`cce0aa1`) | [#6](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/6) |
 | I4 | Infraestructura y cuentas de demo (C6) | Hecha (`cce0aa1`) | [#7](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/7) |
-| I5 | JWT y autorización (hito Seguridad activa) | Hecha (`cce0aa1`; D-012) | [#9](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/9) |
+| I5 | JWT y autorización (hito Seguridad activa) | Hecha (`cce0aa1`; D-012 en `b357cd4`) | [#9](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/9) |
 | I6 | Front seguridad.js | Hecha (`cce0aa1`) | [#10](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/10) |
 | I7 | arc42 sección 10 | Hecha (`2932d93`) | [#11](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/11) |
 | I8 | Cierre y demo | Hecha (demo grabada a ritmo de presentación: 1:58) | [#14](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/14) |
@@ -31,8 +31,18 @@
 
 ## Entradas
 
+## 2026-11-18 23:50 · Cierre de Plan-Ivan · Terminada
+**Hecho:** las 9 tareas de Plan-Ivan (I0–I8) están hechas. Código y documentación en `develop` (`cce0aa1`, `2932d93`, `b357cd4`); el cierre de la bitácora (retrospectiva y ensayo de la demo) va en el PR #14, actualizado con `develop` (`0e19ef6`) por merge, sin reescribir commits. Jira: CER-38 a CER-46 y HU-06 (CER-16) en Listo.
+**Evidencia:** sobre `develop` (`0e19ef6`) + esta rama: `dotnet test CasinoErp.sln` → 317 aprobadas (260 unitarias + 57 de integración), 0 fallos; cobertura del dominio 97,22 %.
+**Decisiones:** D-012 (seguridad activa). Las locales están en cada entrada.
+**Pendientes:** fuera de Plan-Ivan: Camilo migra `InventarioComprasApiTests` del #8 (D-012); deuda del escáner de secretos en el CI (Sprint 3).
+**Bloqueos / necesito de otros:** que Jorge fusione el #14 para que `develop` muestre este cierre.
+**Siguiente paso:** ninguno en Plan-Ivan.
+**Commits/PR:** https://github.com/camilo1503/Casino-ERP-Repositorio/pull/14
+
 ## 2026-11-18 23:40 · Tarea I8.2 · Ensayo cronometrado de la demo · Terminada
 **Hecho:** a pedido de Iván, que no tenía tiempo de ensayarla, la demo se ejecutó y grabó a ritmo de presentación (escritura y pausas de persona, con rótulos en pantalla), contra la API en Development con la base recreada. Duración: **1:58** (máximo del guion: 2:00). El video (`demo-hu06.mp4`, 1280×760) se le entregó a Iván por el chat; no se sube al repo.
+
 | Tramo | Guion | Medido | Qué se ve |
 |---|---|---|---|
 | 1 | 0:00–0:25 | 0:00–0:07 (login) y explicación hasta 0:25 | ivan.leon entra con contraseña + TOTP 482913 |
