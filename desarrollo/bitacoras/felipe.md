@@ -35,7 +35,7 @@
 
 ## Entradas
 
-## 2026-11-18 23:40 · Tarea F7 · PR listo para abrir
+## 2026-11-18 23:31 · Tarea F7 · PR listo para abrir
 **Hecho:** Jorge fusionó la seguridad de Iván en `develop` (`cce0aa1`, merge normal que incluye los PR #4 a #10) y anotó en su bitácora que el código de F7 queda cubierto por los atributos de la I5. Como no fue *squash*, `feature/HU-04-autorizacion` no necesita rebase: frente a `develop` solo trae el commit de F7 y esta entrada.
 **Evidencia:** `develop` (`d88fc73`) + `4b502cf` combinados en una copia aparte, sin conflictos → `dotnet test CasinoErp.sln -c Release`: 260 unitarias + 57 de integración (54 de `develop` + 3 de F7), 0 fallos.
 **Decisiones:** ninguna.
