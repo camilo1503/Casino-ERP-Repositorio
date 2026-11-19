@@ -15,6 +15,7 @@
 | F6 | Front personal.js | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-front) |
 | F7 | Autorización de mis controladores | Bloqueada (espera la I5 de Iván) | — |
 | F8 | arc42 bloque Nómina y cierre | En revisión (demo ensayada: 2 min) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-arc42-nomina) |
+| F9 | Acceso de Jorge a Azure (D-010, D-011) | Hecha (F9.6 pendiente: secretos de GitHub cuando Jorge los pida) | Sin PR (tarea de portal) |
 
 ## Pendientes abiertos
 - ~~F0.3: mover HU-04 y la subtarea F1 a "En curso" en Jira~~ (resuelto: HU-04 en "En curso" y F0–F3 en "Listo").
@@ -25,11 +26,26 @@
 - ~~Jira: mover las tarjetas de F4–F8~~ (resuelto el 2026-11-18: CER-24, 25, 26 y 28 en "En curso" con un comentario de evidencia cada una; CER-27 en "Por hacer" con el comentario de bloqueo. El tablero no tiene columna "En revisión"; el integrador las pasa a "Listo" al fusionar). Falta: HU-04 (CER-13) a "Listo" cuando se fusionen todas y se haga F7.
 - ~~F8.4: ensayar la demo de 2 minutos~~ (resuelto: 2 minutos).
 
+- F9.5: avisarle a Jorge por el chat del grupo que ya tiene los roles (lo hace Felipe).
+- F9.6: cargar en GitHub los secretos `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `TFSTATE_RG` y `TFSTATE_SA` cuando Jorge entregue los valores (lo hace quien administra el repositorio).
+
 ## Bloqueos abiertos
 - ~~F4, F5 y F6 esperan la Fase 0 de Jorge~~ (resuelto: Fase 0 en `develop` desde `8fff1ce`, D-007).
 - F7 espera la I5 de Iván ("seguridad activa"). Aún no está en `develop`.
 
 ## Entradas
+
+## 2026-11-18 21:20 · Tarea F9 · Terminada (F9.6 pendiente)
+**Hecho:**
+- Leídas la tarea F9 de `Plan-Felipe.md` y la decisión D-010 (Jorge las agregó en `develop`, commit `55568a7`).
+- Antes: Jorge (`jalcidesdiaz@ucundinamarca.edu.co`, objeto `7d128dfa-90ee-4a1b-adb0-bf53f0e8d557`) tenía solo **Contributor sobre la web app** `pitboss-erp-8szxa`; Felipe es **Owner** de la suscripción `12f1bc21-94a3-4b28-9a90-8224d1e5fcc8`.
+- Asignados a Jorge con Azure CLI, sobre la **suscripción completa**: **Contributor** y **Role Based Access Control Administrator con condición** (solo puede asignar o quitar Reader, Contributor y Storage Blob Data Contributor).
+**Evidencia:** `az role assignment list --all --assignee 7d128dfa-90ee-4a1b-adb0-bf53f0e8d557` → Contributor (web app), Contributor (suscripción), Role Based Access Control Administrator (suscripción, con condición).
+**Decisiones:** [D-011](../decisiones/D-011-felipe-roles-azure-con-condicion.md): en vez de User Access Administrator u Owner se usa un administrador de roles con condición, para que Jorge no pueda darse Owner ni dar acceso a terceros. Cubre lo que piden J2.3 y J4.1. Felipe eligió esta opción en el chat.
+**Pendientes:** F9.5, avisarle a Jorge por el chat; F9.6, los secretos de GitHub cuando Jorge los pida.
+**Bloqueos / necesito de otros:** ninguno.
+**Siguiente paso:** F7 cuando Iván anuncie "seguridad activa".
+**Commits/PR:** ver el commit `HU-04: Tarea F9, roles de Azure para Jorge con condicion (D-011)`.
 
 ## 2026-11-18 20:34 · Tarea F8 · Terminada (en revisión) · Cierre de la sesión
 **Hecho:**
