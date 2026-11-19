@@ -35,6 +35,25 @@
 
 ## Entradas
 
+## 2026-11-19 · Tarea J5.2 · Fusión del PR #8 (HU-05 C1–C2), F7 final y cierre de Iván · Terminada
+**Hecho:**
+- Camilo actualizó el PR #8 (merge de `develop`, pruebas de integración con `ClienteComoAsync` y una prueba de autorización del crupier). Con el CI en verde y sin marcas de IA, se **fusionó** → `d51e4e6`.
+- **Fusionada** `feature/HU-04-autorizacion` (Felipe, PR #15): tarjeta de nómina con el estado real tras aprobar (corrige el hallazgo de la prueba manual), su retrospectiva de HU-04 en `docs/sprint-2/retrospectiva.md` y el encabezado numerado de `nomina.md` → `9aaa9f9`.
+- **Fusionada** `feature/HU-06-seguridad-activa` (Iván, PR #14): cierre de Plan-Ivan, retrospectiva y ensayo de la demo en su bitácora → `cc3c5a8`.
+- README raíz y tablero actualizados.
+
+**Evidencia:** después de fusionar los tres, `dotnet test CasinoErp.sln` → 271 unitarias + 62 de integración, 0 fallos; cobertura del dominio con el comando de AGENT.md §10 (PowerShell): 97,36 % de líneas, 90,24 % de ramas y 94,88 % de métodos. `node --check` sin errores en `personal.js`. Revisión de marcas de IA sin coincidencias. Los PR #8, #14 y #15 figuran como fusionados.
+
+**Decisiones:** ninguna.
+
+**Pendientes:** C3 a C8 de Camilo (proveedores, órdenes de compra, front, autorización y arc42); los secretos de GitHub (F9.6, Camilo); J4.3; J7.4 (bloque de Camilo); J6; J9.
+
+**Bloqueos / necesito de otros:** Camilo (C3–C8 y secretos).
+
+**Siguiente paso:** J5.2 cuando Camilo suba C3 en adelante.
+
+**Commits/PR:** `d51e4e6`, `9aaa9f9`, `cc3c5a8`.
+
 ## 2026-11-19 · Tareas J9.1, J9.3 (parcial) y Jira · Prueba manual local, cobertura y tarjetas · Terminada
 **Hecho:**
 - **Cobertura medida** con el comando de AGENT.md §10 sobre `develop` (`8072dcf`): `CasinoErp.Dominio` 97,22 % de líneas, 90,04 % de ramas y 94,64 % de métodos; 260 pruebas unitarias. README actualizado (`ba9c08d`).
