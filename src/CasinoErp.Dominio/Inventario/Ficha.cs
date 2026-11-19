@@ -11,6 +11,11 @@ public class Ficha
     public string Categoria { get; set; } = "";
     public int Stock { get; set; }
 
+    /// <summary>Umbral mínimo de la denominación (el "umbral 1.000" del mockup).</summary>
+    public int StockMinimo { get; set; } = 1000;
+
+    public bool EnNivelCritico => Stock < StockMinimo;
+
     public long ValorTotal => Denominacion * Stock;
 }
 
