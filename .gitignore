@@ -22,3 +22,13 @@ publish.zip
 
 # Cobertura de coverlet.msbuild
 coverage.json
+
+# Terraform (el .terraform.lock.hcl SÍ se sube)
+.terraform/
+*.tfstate
+*.tfstate.*
+backend.hcl
+*.tfplan
+
+# Valores locales de Terraform (pueden llevar ids de la suscripcion)
+*.tfvars
