@@ -13,7 +13,7 @@
 | F4 | Persistencia y API de empleados | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-empleados-api) |
 | F5 | Persistencia y API de nómina | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-nomina-api) |
 | F6 | Front personal.js | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-front) |
-| F7 | Autorización de mis controladores | Bloqueada (espera la I5 de Iván) | — |
+| F7 | Autorización de mis controladores | Terminada (en revisión; el PR se abre cuando entren #9 y #10 de Iván) | Rama `feature/HU-04-autorizacion` |
 | F8 | arc42 bloque Nómina y cierre | En revisión (demo ensayada: 2 min) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-arc42-nomina) |
 | F9 | Acceso de Jorge a Azure (D-010, D-011) | Hecha (F9.6 pendiente: secretos de GitHub cuando Jorge los pida) | Sin PR (tarea de portal) |
 
@@ -23,7 +23,7 @@
 - ~~Comando de cobertura de AGENT.md §10 sin `coverlet.msbuild`~~ (resuelto: la Fase 0 agregó el paquete).
 - La rama `feature/HU-04-reglas-liquidacion` quedó obsoleta (F2 ya entró por `feature/HU-04-nomina-motor`). No se fusiona; Felipe o Jorge pueden borrarla.
 - Orden de fusión de mis ramas: F4 (`feature/HU-04-empleados-api`) → F5 (`feature/HU-04-nomina-api`) → F6 (`feature/HU-04-front`) → F8 (`feature/HU-04-arc42-nomina`). Cada una contiene a la anterior.
-- ~~Jira: mover las tarjetas de F4–F8~~ (resuelto el 2026-11-18: CER-24, 25, 26 y 28 en "En curso" con un comentario de evidencia cada una; CER-27 en "Por hacer" con el comentario de bloqueo. El tablero no tiene columna "En revisión"; el integrador las pasa a "Listo" al fusionar). Falta: HU-04 (CER-13) a "Listo" cuando se fusionen todas y se haga F7.
+- ~~Jira: mover las tarjetas de F4–F8~~ (resuelto el 2026-11-18: CER-24, 25, 26 y 28 en "En curso" con un comentario de evidencia cada una; CER-27 en "Por hacer" con el comentario de bloqueo. El tablero no tiene columna "En revisión"; el integrador las pasa a "Listo" al fusionar). Falta: HU-04 (CER-13) a "Listo" cuando se fusione F7.
 - ~~F8.4: ensayar la demo de 2 minutos~~ (resuelto: 2 minutos).
 
 - F9.5: avisarle a Jorge por el chat del grupo que ya tiene los roles (lo hace Felipe).
@@ -31,9 +31,24 @@
 
 ## Bloqueos abiertos
 - ~~F4, F5 y F6 esperan la Fase 0 de Jorge~~ (resuelto: Fase 0 en `develop` desde `8fff1ce`, D-007).
-- F7 espera la I5 de Iván ("seguridad activa"). Aún no está en `develop`.
+- ~~F7 espera la I5 de Iván~~ (resuelto en código el 2026-11-18: F7 hecha sobre la rama de Iván). Queda: abrir el PR de `feature/HU-04-autorizacion` hacia `develop` cuando Jorge fusione los PR #9 y #10 de Iván.
 
 ## Entradas
+
+## 2026-11-18 23:23 · Tarea F7 · Terminada (en revisión)
+**Hecho:**
+- La I5 de Iván está terminada en su rama (`feature/HU-06-jwt`, PR #9, contenida en `feature/HU-06-front`, PR #10), pero todavía no está en `develop` ni hay aviso formal de "seguridad activa". Para no frenar el cierre de HU-04, la rama `feature/HU-04-autorizacion` sale de `origin/feature/HU-06-front` (sin seguimiento de esa rama, para que el push nunca vaya a la de Iván).
+- F7.2: Iván ya había puesto `[AutorizarModulo(Modulos.Competencias, Modulos.Rrhh, Modulos.Mesas)]` en `EmpleadosController` y `[AutorizarModulo(Modulos.Rrhh)]` en `NominaController` (su bitácora, I5: "2 `using` y 1 atributo cada uno"). Verificado con `git diff`; no se toca de nuevo.
+- F7.3: Iván ya había pasado `PersonalNominaApiTests` y `NominaApiTests` a `ClienteComoAsync("felipe.cortes@pitboss.co")` con `IAsyncLifetime`. Se agregan en `PersonalNominaApiTests`: `Un_cajero_no_puede_calcular_la_nomina` (laura.gomez → `POST /api/nomina/calculate` 403), `El_jefe_de_piso_lista_empleados_pero_no_ve_nomina` (daniela.vargas → `GET /api/empleados` 200 y `GET /api/nomina` 403) y `Sin_sesion_no_se_puede_listar_empleados` (sin token → 401).
+**Evidencia:**
+- `dotnet test CasinoErp.sln -c Release` → 317 aprobadas (260 unitarias + 57 de integración), 0 fallos.
+- Cobertura de `CasinoErp.Dominio`: 97,22 % de líneas (umbral 80 %).
+- F7.4 a mano en `http://localhost:5080` con la base recreada: Laura Gómez (Cajero) entra con la contraseña y el código de demo y solo ve "Caja / POS" e "Inventario de fichas"; no aparece "Turnos y nómina".
+**Decisiones:** basar F7 en la rama de Iván en vez de esperar a `develop` (el plan dice F7.1 `pull --rebase` de `develop`). Cuando Jorge fusione #9 y #10, el PR de esta rama hacia `develop` solo mostrará el commit de F7.
+**Pendientes:** abrir el PR de `feature/HU-04-autorizacion` cuando #9 y #10 estén en `develop` (si Jorge fusiona con *squash*, antes hay que pasar mi commit a una rama nueva desde `develop` con `cherry-pick`); HU-04 (CER-13) a "Listo" cuando se fusione.
+**Bloqueos / necesito de otros:** Jorge fusiona #9 y #10 de Iván.
+**Siguiente paso:** ninguno de código; solo el PR y el cierre en Jira.
+**Commits/PR:** ver el commit `HU-04: Autorizacion por modulo en empleados y nomina`.
 
 ## 2026-11-18 21:20 · Tarea F9 · Terminada (F9.6 pendiente)
 **Hecho:**

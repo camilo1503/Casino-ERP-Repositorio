@@ -116,6 +116,36 @@ public class PersonalNominaApiTests : IClassFixture<CasinoErpFactory>, IAsyncLif
         var activos = await _cliente.GetFromJsonAsync<JsonElement>("/api/empleados?soloActivos=true");
         activos.EnumerateArray().Should().NotContain(e => e.GetProperty("documento").GetString() == "1099888702");
     }
+
+    // Plan-Felipe F7: autorización por módulo (contrato C5). La cajera no tiene Rrhh; el jefe de piso tiene
+    // Mesas y Competencias (ve empleados) pero no Rrhh (no ve nómina).
+
+    [Fact]
+    public async Task Un_cajero_no_puede_calcular_la_nomina()
+    {
+        var cajero = await _factory.ClienteComoAsync("laura.gomez@pitboss.co");
+
+        var respuesta = await cajero.PostAsJsonAsync("/api/nomina/calculate", new { anio = 2026, mes = 10 });
+
+        respuesta.StatusCode.Should().Be(HttpStatusCode.Forbidden);
+    }
+
+    [Fact]
+    public async Task El_jefe_de_piso_lista_empleados_pero_no_ve_nomina()
+    {
+        var jefe = await _factory.ClienteComoAsync("daniela.vargas@pitboss.co");
+
+        (await jefe.GetAsync("/api/empleados")).StatusCode.Should().Be(HttpStatusCode.OK);
+        (await jefe.GetAsync("/api/nomina")).StatusCode.Should().Be(HttpStatusCode.Forbidden);
+    }
+
+    [Fact]
+    public async Task Sin_sesion_no_se_puede_listar_empleados()
+    {
+        var anonimo = _factory.CreateClient();
+
+        (await anonimo.GetAsync("/api/empleados")).StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+    }
 }
 
 /// <summary>
