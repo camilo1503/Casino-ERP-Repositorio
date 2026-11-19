@@ -11,7 +11,7 @@ public class InventarioFichasServiceTests
     private readonly FichasEnMemoria _repo = new();
     private readonly InventarioFichasService _servicio;
 
-    public InventarioFichasServiceTests() => _servicio = new InventarioFichasService(_repo, new RelojFijo());
+    public InventarioFichasServiceTests() => _servicio = new InventarioFichasService(_repo, new AlertasEnMemoria(), [], new RelojFijo());
 
     private void Existe(string codigo, int stock) =>
         _repo.Datos.Add(new Ficha { Codigo = codigo, Denominacion = 5_000, Categoria = "Roja", Stock = stock });
