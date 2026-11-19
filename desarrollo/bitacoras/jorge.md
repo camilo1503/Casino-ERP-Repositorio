@@ -7,7 +7,7 @@
 | Tarea | Descripción | Estado | PR |
 |---|---|---|---|
 | J0 | Fase 0 (bloqueante) | Hecha | `chore/fase-0` → `develop` (8fff1ce) |
-| J1 | Sprint 2 en Jira | Pendiente | — |
+| J1 | Sprint 2 en Jira | En curso | — |
 | J2 | Backend remoto del state | Pendiente | — |
 | J3 | Terraform con import | Pendiente | — |
 | J4 | Workflow terraform plan | Pendiente | — |
@@ -19,7 +19,8 @@
 
 ## Pendientes abiertos
 - Avisar al equipo por el chat del grupo que la Fase 0 está en `develop` (D-007).
-- Confirmar con el equipo quién es el usuario de GitHub `Flashtwiice`: firmó los commits de F1 de Felipe y también el despliegue manual de Azure (`b9f4410`). Si es Felipe, él tiene la suscripción que necesita J2.
+- J1: crear el sprint "Sprint 2" en el tablero CER (necesita que Jorge inicie sesión en Jira en el navegador integrado) y mover allí las 48 incidencias.
+- J2: pedirle a Felipe (usuario de GitHub `Flashtwiice`, dueño de la suscripción de Azure donde está `rg-pitboss-erp`) el rol Contributor + User Access Administrator para Jorge.
 
 ## Notas para J5.2
 - PR #3 (`feature/CER-6-despliegue-azure` → `main`): **Jorge decidió dejarlo abierto** hasta el cierre del sprint (J9). No se fusiona ni se cierra en las revisiones de PR; su contenido ya está en `develop`.
@@ -28,6 +29,30 @@
 - (ninguno)
 
 ## Entradas
+
+## 2026-11-18 · Tarea J1 · Sprint 2 en Jira · En curso
+**Hecho:**
+- Creadas por API en el proyecto CER (etiqueta `sprint-2`):
+  - 4 épicas: CER-9 a CER-12;
+  - 6 historias con puntos y responsable: CER-13 a CER-18;
+  - la tarea de coordinación CER-19;
+  - 37 subtareas, una por tarea de cada plan (CER-20 a CER-56).
+  
+  Tabla completa en `desarrollo/README.md`.
+- Estados: Listo → F0 (CER-20), F1 (CER-21), J0 (CER-47) y CER-8 (movida a la épica CER-12). En curso → CER-13, CER-19, J1 (CER-48) y J5 (CER-52).
+- Confirmado por Jorge: el usuario de GitHub `Flashtwiice` es **Felipe**. Él hizo el despliegue manual de Azure, así que tiene la suscripción que necesita J2.
+
+**Evidencia:** las 48 incidencias se ven en Jira con responsable y puntos.
+
+**Decisiones:** la herramienta de Jira no permite crear sprints → el sprint se crea desde la interfaz del backlog.
+
+**Pendientes:** crear el sprint y mover las incidencias (Jorge debe iniciar sesión en Jira en el navegador integrado).
+
+**Bloqueos / necesito de otros:** inicio de sesión de Jorge en Jira.
+
+**Siguiente paso:** crear el sprint "Sprint 2" con el Sprint Goal, agregar las incidencias e iniciarlo.
+
+**Commits/PR:** —
 
 ## 2026-11-18 · Tarea J5.2 · Revisión de PR y ramas · Terminada
 **Hecho:**

@@ -38,14 +38,17 @@ El mockup de referencia es el front que ya está en el repo: `src/CasinoErp.Api/
 
 **Jira:** https://jorgediazlozano1170709.atlassian.net/jira/software/projects/CER/boards/2/backlog. Las claves CER-NN del Sprint 2 se anotan aquí cuando Jorge las cree (J1).
 
-| HU | Clave Jira |
-|---|---|
-| HU-04 | (pendiente) |
-| HU-05 | (pendiente) |
-| Proveedores | (pendiente) |
-| HU-06 | (pendiente) |
-| HU-07 | (pendiente) |
-| HU-08 | (pendiente) |
+| Elemento | Épica | Historia / tarea | Subtareas (una por tarea del plan) |
+|---|---|---|---|
+| HU-04 · Felipe | CER-9 Talento Humano y Nómina | CER-13 (8 SP) | F0–F8 = CER-20 … CER-28 |
+| HU-05 · Camilo | CER-10 Inventario y Compras | CER-14 (5 SP) | C0, C1, C2, C6, C7, C8 = CER-29, 30, 31, 35, 36, 37 |
+| Proveedores · Camilo | CER-10 | CER-15 (3 SP) | C3, C4, C5 = CER-32, 33, 34 |
+| HU-06 · Iván | CER-11 Seguridad y Control de Acceso | CER-16 (5 SP) | I0–I8 = CER-38 … CER-46 |
+| HU-07 · Jorge | CER-12 Infraestructura y Arquitectura | CER-17 (13 SP) | J2, J3, J4, J6 = CER-49, 50, 51, 53 |
+| HU-08 · Jorge (+ todos) | CER-12 | CER-18 (3 SP) | J7 = CER-54 (F8, C8, I7 en sus historias) |
+| Coordinación · Jorge | CER-12 | CER-19 (tarea) | J0, J1, J5, J8, J9 = CER-47, 48, 52, 55, 56; CER-8 (Python) dentro de CER-12 |
+
+Total del sprint: 37 SP. Al terminar una tarea del plan, mueve su subtarea a **Listo**; mientras trabajas en ella, a **En curso**.
 
 ## Olas de trabajo (qué se puede hacer en paralelo)
 
