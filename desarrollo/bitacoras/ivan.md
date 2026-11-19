@@ -11,19 +11,40 @@
 | I2 | Usuario y autenticación | En revisión | [#5](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/5) (depende de #4) |
 | I3 | UsuarioService (necesita C4) | En revisión | [#6](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/6) (depende de #4 y #5) |
 | I4 | Infraestructura y cuentas de demo (C6) | En revisión | [#7](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/7) (depende de #4–#6) |
-| I5 | JWT y autorización (hito Seguridad activa) | Pendiente | — |
+| I5 | JWT y autorización (hito Seguridad activa) | En revisión (borrador; falta I5.9 tras el merge) | [#9](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/9) (depende de #4–#7) |
 | I6 | Front seguridad.js | Pendiente | — |
 | I7 | arc42 sección 10 | Pendiente | — |
 | I8 | Cierre y demo | Pendiente | — |
 
 ## Pendientes abiertos
 - Que Iván confirme la regla de I3: cambiar a Crupier con un documento vinculado que no existe → "Empleado no encontrado".
-- Fusión en orden de #4 → #5 → #6 → #7 (la hace Jorge).
+- Fusión en orden de #4 → #5 → #6 → #7 (la hace Jorge); #9 (I5) cuando Iván lo marque listo.
+- I5: Iván debe avisar al grupo con un día de anticipación y luego pasar el PR #9 de borrador a listo. Después del merge: D-0NN-ivan-seguridad-activa.md (I5.9).
 
 ## Bloqueos abiertos
 - (ninguno)
 
 ## Entradas
+
+## 2026-11-18 23:50 · Tarea I5 · En curso (PR en borrador; falta I5.9 tras el merge)
+**Hecho:**
+- `Api/Seguridad/` (`OpcionesJwt`, `JwtEmisor` con `ValidarUsuarioVigente`, `AutorizarModuloAttribute` exacto a C5, `UsuarioDto` y records), `AuthController` y `UsuariosController`.
+- Cambios mínimos del plan: paquete JwtBearer 8.0.11, `Program.cs`, `FiltroExcepciones.cs` (401), `appsettings*.json`, `[AutorizarModulo]` en los 9 controladores de `develop` (incluidos `EmpleadosController` y `NominaController` de Felipe: 2 `using` y 1 atributo cada uno), `CasinoErpFactory` (2 settings).
+- `Utilidades/Autenticacion.cs` (C3). Pruebas existentes migradas con `IAsyncLifetime`, sin borrar ninguna: `ApiTests`/`BaseDatosTests` → gerente; `PersonalNominaApiTests`/`NominaApiTests` → felipe.cortes.
+- `SeguridadApiTests`: las 15 pruebas de I5.1 y 3 extra (`Yo_devuelve...`, `Cambiar_contrasena_con_la_actual_errada...`, `Todos_los_controladores_exigen_token`).
+**Evidencia:**
+- TDD: `dotnet test tests/CasinoErp.PruebasIntegracion --filter SeguridadApiTests` → 17 fallos (sin endpoints de auth); tras implementar → verde.
+- Primer intento colgado: el login síncrono (`GetAwaiter().GetResult()`) en los constructores se bloqueaba con el contexto de xUnit; se corrigió con `IAsyncLifetime`. Una prueba de I4 dependía del orden (contaba 13 usuarios); ahora cuenta solo las 11 cuentas de C6.
+- `dotnet build CasinoErp.sln` → 0 advertencias. `dotnet test CasinoErp.sln` → 314 aprobadas (260 + 54), 0 fallos. Cobertura del dominio 97,22 %.
+- I5.7 manual (API en Development, curl en vez de la UI de Swagger): login → token; `GET /api/usuarios` ivan.leon 200, laura.gomez 403, sin token 401; `GET /` 200; código 000000 → "Código incorrecto. Intento 1 de 5."; `swagger.json` con esquema Bearer.
+**Decisiones (solo afectan a mi módulo):**
+- `POST /api/auth/cambiar-contrasena` con la contraseña actual errada → **400**, no 401: el núcleo JS cierra la sesión ante cualquier 401. El dominio sigue lanzando `AutenticacionException`, como dice el plan.
+- Las pruebas que desactivan o cambian contraseñas usan usuarios creados en la propia prueba, no laura.gomez (lo pide la nota de I5.1). El código errado se prueba con daniela.vargas.
+- PR en borrador: el plan exige avisar con un día de anticipación y, según D-009, el integrador fusiona apenas el CI pasa.
+**Pendientes:** aviso al equipo (Iván); I5.9 después del merge; mover CER-43 a Listo.
+**Bloqueos / necesito de otros:** fusión de #4–#7. Camilo deberá anotar `ProveedoresController`/`ComprasController` cuando existan.
+**Siguiente paso:** I6 (`seguridad.js`) en `feature/HU-06-front`, apilada sobre esta rama.
+**Commits/PR:** `2321950` · https://github.com/camilo1503/Casino-ERP-Repositorio/pull/9
 
 ## 2026-11-18 23:15 · Tarea I4 · Terminada (en revisión)
 **Hecho:**
