@@ -8,7 +8,7 @@
 |---|---|---|---|
 | F0 | Arranque | Hecha (falta mover Jira) | — |
 | F1 | Dominio de empleados (contrato C4) | En revisión | (enlace al crear el PR) |
-| F2 | Parámetros y reglas de liquidación | Pendiente | — |
+| F2 | Parámetros y reglas de liquidación | Hecha (PR junto con F3) | — |
 | F3 | PayrollEngine y NominaService | Pendiente | — |
 | F4 | Persistencia y API de empleados | Pendiente | — |
 | F5 | Persistencia y API de nómina | Pendiente | — |
@@ -25,6 +25,23 @@
 - F4, F5 y F6 esperan la Fase 0 de Jorge (D-007). F7 espera la I5 de Iván. Al 2026-11-18 ninguna está en `develop`.
 
 ## Entradas
+
+## 2026-11-18 19:55 · Tarea F2 · Terminada
+**Hecho:**
+- Rama `feature/HU-04-reglas-liquidacion`, tomada de la rama de F1 (F1 aún no está fusionada en `develop`), con `develop` integrado por `pull --rebase`.
+- En `src/CasinoErp.Dominio/Nominas/`: `ParametrosNomina.cs` (con `Decreto2026()` e `IParametrosNominaRepositorio`), `Nomina.cs` (`EstadoNomina`, `LiquidacionEmpleado`, `Nomina` con sus totales e `INominaRepositorio`), `IReglaLiquidacion.cs`, `ReglaContratoLaboral.cs` y `ReglaPrestacionServicios.cs`, con el algoritmo del plan y `MidpointRounding.AwayFromZero`.
+- `tests/CasinoErp.PruebasUnitarias/ReglasLiquidacionTests.cs`: 18 pruebas (las 14 del plan más los parámetros del decreto, el turno de mañana sin recargo, `TotalDeducciones` y los totales de `Nomina`). TDD: primero las pruebas (no compilaban: `Nominas` no existía).
+**Evidencia:**
+- `dotnet test tests/CasinoErp.PruebasUnitarias --filter ReglasLiquidacionTests` → 18 aprobadas, 0 fallos.
+- `dotnet test CasinoErp.sln` → 193 aprobadas (178 unitarias + 15 de integración), 0 fallos. `dotnet build` → 0 advertencias.
+- Cobertura: `CasinoErp.Dominio` 96,5 % de líneas y 89,5 % de ramas. Reglas e `IReglaLiquidacion.cs` al 100 %; en `Nomina.cs` faltan propiedades que se usan en F3 (`CalculadaEn`, `AprobadaEn`, `Id`).
+- Los valores del plan coinciden con el mockup: Bruno Lara (crupier de noche, 2.600.000) → neto 3.229.200; jefe de piso (4.200.000) → neto 3.864.000.
+**Decisiones:**
+- Clase `internal static Liquidacion` en `IReglaLiquidacion.cs` con `R()` (redondeo) y `Para(empleado)` (copia los datos del empleado), para no repetir código en las dos reglas. Es interna al dominio; no cambia ninguna firma del plan.
+**Pendientes:** el PR de F2 se abre junto con F3 (F3.6).
+**Bloqueos / necesito de otros:** ninguno para F3.
+**Siguiente paso:** F3, `PayrollEngine` y `NominaService`.
+**Commits/PR:** ver el commit `HU-04: Parametros de nomina 2026 y reglas de liquidacion por tipo de contrato`.
 
 ## 2026-11-18 19:36 · Tarea F1 · Terminada (PR pendiente)
 **Hecho:**
