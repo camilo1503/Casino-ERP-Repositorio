@@ -48,6 +48,8 @@ El mockup de referencia es el front que ya está en el repo: `src/CasinoErp.Api/
 | HU-08 · Jorge (+ todos) | CER-12 | CER-18 (3 SP) | J7 = CER-54 (F8, C8, I7 en sus historias) |
 | Coordinación · Jorge | CER-12 | CER-19 (tarea) | J0, J1, J5, J8, J9 = CER-47, 48, 52, 55, 56; CER-8 (Python) dentro de CER-12 |
 
+**Sprint activo:** "CER Sprint 2" (id 35), del 18-11-2026 al 02-12-2026, con el Sprint Goal de arriba. Contiene CER-8 y CER-13 a CER-19; las subtareas van dentro de su historia en el tablero (una búsqueda JQL `sprint = 35` solo muestra las 8 incidencias padre). El sprint vacío "CER Sprint 1" (id 1), que Jira creó por defecto, se dejó sin tocar.
+
 Total del sprint: 37 SP. Al terminar una tarea del plan, mueve su subtarea a **Listo**; mientras trabajas en ella, a **En curso**.
 
 ## Olas de trabajo (qué se puede hacer en paralelo)

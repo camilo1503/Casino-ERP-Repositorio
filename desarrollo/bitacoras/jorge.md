@@ -7,7 +7,7 @@
 | Tarea | Descripción | Estado | PR |
 |---|---|---|---|
 | J0 | Fase 0 (bloqueante) | Hecha | `chore/fase-0` → `develop` (8fff1ce) |
-| J1 | Sprint 2 en Jira | En curso | — |
+| J1 | Sprint 2 en Jira | Hecha | sprint 35 activo |
 | J2 | Backend remoto del state | Pendiente | — |
 | J3 | Terraform con import | Pendiente | — |
 | J4 | Workflow terraform plan | Pendiente | — |
@@ -19,7 +19,6 @@
 
 ## Pendientes abiertos
 - Avisar al equipo por el chat del grupo que la Fase 0 está en `develop` (D-007).
-- J1: crear el sprint "Sprint 2" en el tablero CER (necesita que Jorge inicie sesión en Jira en el navegador integrado) y mover allí las 48 incidencias.
 - J2: pedirle a Felipe (usuario de GitHub `Flashtwiice`, dueño de la suscripción de Azure donde está `rg-pitboss-erp`) el rol Contributor + User Access Administrator para Jorge.
 
 ## Notas para J5.2
@@ -29,6 +28,29 @@
 - (ninguno)
 
 ## Entradas
+
+## 2026-11-18 · Tarea J1 · Sprint 2 en Jira · Terminada
+**Hecho:**
+- Con la sesión de Jorge en su navegador (Brave, extensión Claude in Chrome) se creó el sprint **"CER Sprint 2"** (id 35) en el tablero CER: del 18-11-2026 al 02-12-2026, con el Sprint Goal.
+- Se movieron al sprint CER-8 y CER-13 a CER-19, y se **inició** el sprint (estado `active`).
+- El sprint vacío "CER Sprint 1" (id 1), que Jira crea por defecto y que nunca se usó, se dejó sin tocar.
+- CER-48 (J1) pasó a Listo.
+
+**Evidencia:**
+- La API de sprints confirma `state: active` y 8 incidencias (6 historias + 2 tareas).
+- En el tablero se ven las subtareas dentro de cada historia: HU-04 2/9, HU-05 0/6, Proveedores 0/3, coordinación 1/5.
+
+**Decisiones:**
+- Fechas del sprint: dos semanas desde hoy. Si la fecha de la Sprint Review es otra, se ajustan en Jira.
+- No se renombró ni se borró el sprint 1 vacío.
+
+**Pendientes:** ninguno de J1.
+
+**Bloqueos / necesito de otros:** ninguno.
+
+**Siguiente paso:** J2 (backend del state de Terraform), que necesita que Felipe dé acceso a su suscripción de Azure.
+
+**Commits/PR:** —
 
 ## 2026-11-18 · Tarea J1 · Sprint 2 en Jira · En curso
 **Hecho:**
