@@ -1,5 +1,7 @@
 using CasinoErp.Dominio.Inventario;
 using Microsoft.AspNetCore.Mvc;
+using CasinoErp.Api.Seguridad;
+using CasinoErp.Dominio.Seguridad;
 
 namespace CasinoErp.Api.Controllers;
 
@@ -8,6 +10,7 @@ public record CantidadRequest(int Cantidad);
 
 [ApiController]
 [Route("api/inventario")]
+[AutorizarModulo(Modulos.Inventario, Modulos.Caja)]
 public class InventarioController(InventarioFichasService servicio) : ControllerBase
 {
     [HttpGet("fichas")]

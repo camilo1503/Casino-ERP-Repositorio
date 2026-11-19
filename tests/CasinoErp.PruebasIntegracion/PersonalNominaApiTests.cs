@@ -6,11 +6,15 @@ using FluentAssertions;
 namespace CasinoErp.PruebasIntegracion;
 
 /// <summary>HU-04 · API de empleados y nómina contra una base SQLite real con los datos de demostración (Plan-Felipe F4 y F5).</summary>
-public class PersonalNominaApiTests : IClassFixture<CasinoErpFactory>
+public class PersonalNominaApiTests : IClassFixture<CasinoErpFactory>, IAsyncLifetime
 {
-    private readonly HttpClient _cliente;
+    private readonly CasinoErpFactory _factory;
+    private HttpClient _cliente = null!;
 
-    public PersonalNominaApiTests(CasinoErpFactory factory) => _cliente = factory.CreateClient();
+    public PersonalNominaApiTests(CasinoErpFactory factory) => _factory = factory;
+
+    public async Task InitializeAsync() => _cliente = await _factory.ClienteComoAsync("felipe.cortes@pitboss.co");
+    public Task DisposeAsync() => Task.CompletedTask;
 
     [Fact]
     public async Task Lista_los_18_empleados_de_demostracion()
@@ -118,11 +122,15 @@ public class PersonalNominaApiTests : IClassFixture<CasinoErpFactory>
 /// HU-04 · API de nómina (Plan-Felipe F5). Va en su propia clase, con su propia base, para que los empleados
 /// que registran las pruebas de PersonalNominaApiTests no cambien el número de filas de la nómina de octubre.
 /// </summary>
-public class NominaApiTests : IClassFixture<CasinoErpFactory>
+public class NominaApiTests : IClassFixture<CasinoErpFactory>, IAsyncLifetime
 {
-    private readonly HttpClient _cliente;
+    private readonly CasinoErpFactory _factory;
+    private HttpClient _cliente = null!;
 
-    public NominaApiTests(CasinoErpFactory factory) => _cliente = factory.CreateClient();
+    public NominaApiTests(CasinoErpFactory factory) => _factory = factory;
+
+    public async Task InitializeAsync() => _cliente = await _factory.ClienteComoAsync("felipe.cortes@pitboss.co");
+    public Task DisposeAsync() => Task.CompletedTask;
 
     [Fact]
     public async Task Calcula_la_nomina_de_octubre_con_los_empleados_de_demostracion()

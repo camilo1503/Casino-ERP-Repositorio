@@ -5,6 +5,8 @@ using CasinoErp.Dominio.Rellenos;
 using CasinoErp.Infraestructura;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using CasinoErp.Api.Seguridad;
+using CasinoErp.Dominio.Seguridad;
 
 namespace CasinoErp.Api.Controllers;
 
@@ -21,6 +23,7 @@ public record Resumen(
 /// <summary>Indicadores para el tablero principal del ERP.</summary>
 [ApiController]
 [Route("api/resumen")]
+[AutorizarModulo(Modulos.Inicio)]
 public class ResumenController(CasinoErpDbContext db) : ControllerBase
 {
     [HttpGet]

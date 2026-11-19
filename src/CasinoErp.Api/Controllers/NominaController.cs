@@ -1,5 +1,7 @@
 using CasinoErp.Dominio.Nominas;
 using Microsoft.AspNetCore.Mvc;
+using CasinoErp.Api.Seguridad;
+using CasinoErp.Dominio.Seguridad;
 
 namespace CasinoErp.Api.Controllers;
 
@@ -8,6 +10,7 @@ public record CalcularNominaRequest(int Anio, int Mes);
 /// <summary>HU-04 Cálculo de nómina: calcular, consultar, aprobar y administrar los parámetros del año.</summary>
 [ApiController]
 [Route("api/nomina")]
+[AutorizarModulo(Modulos.Rrhh)]
 public class NominaController(NominaService servicio) : ControllerBase
 {
     [HttpPost("calculate")]
