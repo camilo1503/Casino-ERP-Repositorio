@@ -13,18 +13,38 @@
 | I4 | Infraestructura y cuentas de demo (C6) | En revisión | [#7](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/7) (depende de #4–#6) |
 | I5 | JWT y autorización (hito Seguridad activa) | En revisión (borrador; falta I5.9 tras el merge) | [#9](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/9) (depende de #4–#7) |
 | I6 | Front seguridad.js | En revisión (borrador, va con #9) | [#10](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/10) |
-| I7 | arc42 sección 10 | Pendiente | — |
-| I8 | Cierre y demo | Pendiente | — |
+| I7 | arc42 sección 10 | En revisión | [#11](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/11) (independiente) |
+| I8 | Cierre y demo | Pendiente (después del merge de #9 y #10) | — |
 
 ## Pendientes abiertos
 - Que Iván confirme la regla de I3: cambiar a Crupier con un documento vinculado que no existe → "Empleado no encontrado".
 - Fusión en orden de #4 → #5 → #6 → #7 (la hace Jorge); #9 (I5) cuando Iván lo marque listo.
-- I5: Iván debe avisar al grupo con un día de anticipación y luego pasar el PR #9 de borrador a listo. Después del merge: D-0NN-ivan-seguridad-activa.md (I5.9).
+- I5: Iván debe avisar al grupo con un día de anticipación y luego pasar los PR #9 y #10 de borrador a listos (se fusionan juntos). Después del merge: D-0NN-ivan-seguridad-activa.md (I5.9) y CER-43 a Listo.
+- I8: retrospectiva con las horas reales (las sabe Iván), ensayo de la demo de 2 minutos y HU-06 (CER-16) a Listo.
+- Deuda para el Sprint 3: escáner de secretos en el CI (anotado en arc42 §10.4).
 
 ## Bloqueos abiertos
 - (ninguno)
 
 ## Entradas
+
+## 2026-11-19 00:45 · Cierre de la sesión · En curso
+**Hecho en la sesión:** I0 a I7 implementadas con TDD, cada una con su PR hacia `develop`: #4 (I0+I1), #5 (I2), #6 (I3), #7 (I4), #9 (I5, borrador), #10 (I6, borrador) y #11 (I7). Jira: CER-38 a CER-42, CER-44 y CER-45 en Listo; CER-43 (I5) sigue en curso hasta el merge.
+**Evidencia:** en la última rama de la cadena (`feature/HU-06-front`), `dotnet test CasinoErp.sln` → 314 aprobadas (260 + 54), 0 fallos; cobertura del dominio 97,22 %. I6.2 en el navegador: 14/14. Todos los PR tienen el CI en verde al abrirse.
+**Decisiones:** las de cada tarea (entradas de abajo). Ninguna afecta a otros módulos, así que no hubo archivos nuevos en `desarrollo/decisiones/`.
+**Pendientes:** ver *Pendientes abiertos*.
+**Bloqueos / necesito de otros:** Jorge debe fusionar en orden #4 → #5 → #6 → #7 (y #11 cuando quiera); #9 y #10 esperan el aviso de Iván.
+**Siguiente paso:** cuando Jorge fusione #4–#7, hacer `pull --rebase` de #9 y #10; después del aviso, pasarlos a listos; tras el merge, I5.9 e I8.
+**Commits/PR:** #4, #5, #6, #7, #9, #10, #11.
+
+## 2026-11-19 00:40 · Tarea I7 · Terminada (en revisión)
+**Hecho:** `docs/arc42/10-conceptos-seguridad.md` (10.1 a 10.5), `docs/arc42/05-bloques/seguridad.md` (frontera, endpoints, `classDiagram` y dos `sequenceDiagram`) y `docs/arc42/09-decisiones/ADR-002-jwt-totp.md`. Rama `feature/HU-06-arc42-seguridad`, tomada de `develop` (no depende de los PR de código).
+**Evidencia:** `dotnet test CasinoErp.sln` en esa rama → 244 aprobadas, 0 fallos. Los 3 diagramas Mermaid se renderizan sin errores con mermaid-cli 11. La tabla controlador → roles se calculó a partir de la matriz C5.
+**Decisiones:** esta entrada va en `feature/HU-06-front` y no en la rama de la I7, para que la bitácora no tenga conflictos entre ramas paralelas. Se corrigió el borrador: el CI no escanea secretos (solo marcas de IA); queda como deuda del Sprint 3.
+**Pendientes:** que Jorge enlace la sección 10 y ADR-002 en el índice de arc42 si lo ve necesario (su archivo).
+**Bloqueos / necesito de otros:** ninguno.
+**Siguiente paso:** I8 después del merge de #9 y #10.
+**Commits/PR:** `e792ae5` · https://github.com/camilo1503/Casino-ERP-Repositorio/pull/11
 
 ## 2026-11-19 00:20 · Tarea I6 · Terminada (en revisión, borrador)
 **Hecho:** `src/CasinoErp.Api/wwwroot/js/api/seguridad.js` con los 9 puntos del plan: token en sessionStorage (con respaldo en memoria), los tres ganchos del núcleo, `entrar`, `loginView` con correo y datalist, `FORM.login` contra la API, `ACT.logout`, la carga `usuarios` (70), crear/rol/restablecer/desactivar/reactivar con `conectar`, y el modal de cambio de contraseña.
