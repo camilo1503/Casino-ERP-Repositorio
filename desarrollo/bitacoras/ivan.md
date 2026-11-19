@@ -6,23 +6,23 @@
 
 | Tarea | Descripción | Estado | PR |
 |---|---|---|---|
-| I0 | Arranque | Hecha | [#4](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/4) |
+| I0 | Arranque | Hecha (`cce0aa1`) | [#4](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/4) |
 | I1 | Roles, módulos y matriz (C5) | Hecha (`cce0aa1`) | [#4](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/4) |
 | I2 | Usuario y autenticación | Hecha (`cce0aa1`) | [#5](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/5) |
 | I3 | UsuarioService (necesita C4) | Hecha (`cce0aa1`) | [#6](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/6) |
 | I4 | Infraestructura y cuentas de demo (C6) | Hecha (`cce0aa1`) | [#7](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/7) |
-| I5 | JWT y autorización (hito Seguridad activa) | Hecha (`cce0aa1`; D-012) | [#9](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/9) |
+| I5 | JWT y autorización (hito Seguridad activa) | Hecha (`cce0aa1`; D-012 en `b357cd4`) | [#9](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/9) |
 | I6 | Front seguridad.js | Hecha (`cce0aa1`) | [#10](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/10) |
 | I7 | arc42 sección 10 | Hecha (`2932d93`) | [#11](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/11) |
-| I8 | Cierre y demo | En curso (demo ensayada; faltan las horas reales para la retrospectiva) | — |
+| I8 | Cierre y demo | Hecha (demo grabada a ritmo de presentación: 1:58) | [#14](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/14) |
 
 ## Pendientes abiertos
 - ~~Confirmar la regla de I3~~ → confirmada el 2026-11-18 23:04.
 - ~~Avisar al grupo y pasar #9 y #10 a listos~~ → hecho el 2026-11-18 23:04.
 - ~~Merge de #4 → #11~~ → fusionados el 2026-11-18 23:23 (`cce0aa1`, `2932d93`).
 - ~~I5.9: publicar la decisión de seguridad activa~~ → D-012.
-- I8.1: horas reales para la retrospectiva (las sabe Iván) y ensayo de la demo con persona y cronómetro.
-- I8.3: HU-06 (CER-16) y CER-46 a Listo cuando esté la retrospectiva.
+- ~~I8.1 y I8.3: retrospectiva y HU-06 a Listo~~ → hecho el 2026-11-18 23:30, sin las horas personales de Iván (no se registraron).
+- ~~Ensayar la demo con tiempo real~~ → grabada a ritmo de presentación el 2026-11-18 23:40 (1:58). Iván no la ensayó en persona.
 - Seguimiento: Camilo debe migrar `InventarioComprasApiTests` del PR #8 a `ClienteComoAsync` (D-012).
 - Deuda para el Sprint 3: escáner de secretos en el CI (arc42 §10.4).
 
@@ -31,7 +31,71 @@
 
 ## Entradas
 
-## 2026-11-18 23:35 · Tarea I5.9 · Terminada
+## 2026-11-18 23:50 · Cierre de Plan-Ivan · Terminada
+**Hecho:** las 9 tareas de Plan-Ivan (I0–I8) están hechas. Código y documentación en `develop` (`cce0aa1`, `2932d93`, `b357cd4`); el cierre de la bitácora (retrospectiva y ensayo de la demo) va en el PR #14, actualizado con `develop` (`0e19ef6`) por merge, sin reescribir commits. Jira: CER-38 a CER-46 y HU-06 (CER-16) en Listo.
+**Evidencia:** sobre `develop` (`0e19ef6`) + esta rama: `dotnet test CasinoErp.sln` → 317 aprobadas (260 unitarias + 57 de integración), 0 fallos; cobertura del dominio 97,22 %.
+**Decisiones:** D-012 (seguridad activa). Las locales están en cada entrada.
+**Pendientes:** fuera de Plan-Ivan: Camilo migra `InventarioComprasApiTests` del #8 (D-012); deuda del escáner de secretos en el CI (Sprint 3).
+**Bloqueos / necesito de otros:** que Jorge fusione el #14 para que `develop` muestre este cierre.
+**Siguiente paso:** ninguno en Plan-Ivan.
+**Commits/PR:** https://github.com/camilo1503/Casino-ERP-Repositorio/pull/14
+
+## 2026-11-18 23:40 · Tarea I8.2 · Ensayo cronometrado de la demo · Terminada
+**Hecho:** a pedido de Iván, que no tenía tiempo de ensayarla, la demo se ejecutó y grabó a ritmo de presentación (escritura y pausas de persona, con rótulos en pantalla), contra la API en Development con la base recreada. Duración: **1:58** (máximo del guion: 2:00). El video (`demo-hu06.mp4`, 1280×760) se le entregó a Iván por el chat; no se sube al repo.
+
+| Tramo | Guion | Medido | Qué se ve |
+|---|---|---|---|
+| 1 | 0:00–0:25 | 0:00–0:07 (login) y explicación hasta 0:25 | ivan.leon entra con contraseña + TOTP 482913 |
+| 2 | 0:25–0:50 | 0:35 rol cambiado; hasta 0:50 | Matriz de acceso; Cambiar rol de Sebastián → Cajero (toast "Sebastián Prada ahora es cajero."); Iván cierra sesión |
+| 3 | 0:50–1:20 | 0:54 | sebastian.prada entra y solo ve Caja / POS e Inventario de fichas |
+| 4 | 1:20–2:00 | 1:21 Swagger; 1:33 resultado | Authorize con el token de Sebastián → `GET /api/nomina` → **403 Forbidden** |
+**Evidencia:** script de Playwright con grabación de video (fuera del repo); salida: `[0:07] Iván entra`, `[0:35] Rol → Cajero`, `[0:54] Sebastián solo ve: Caja / POS, Inventario de fichas`, `[1:33] GET /api/nomina → 403`, `[1:58] Fin`.
+**Decisiones:** en Swagger se pega el token de la sesión de Sebastián en vez de hacer `POST /api/auth/login` dentro de Swagger, para no pasarse de los 2 minutos. Si se presenta en vivo, puede hacerse igual (copiarlo con F12 → Application → Session Storage → `pitboss.token`) o usar el login de Swagger si sobra tiempo.
+**Pendientes:** ninguno de I8.
+**Bloqueos / necesito de otros:** ninguno.
+**Siguiente paso:** presentar en la Sprint Review (en vivo o con el video).
+**Commits/PR:** https://github.com/camilo1503/Casino-ERP-Repositorio/pull/14
+
+## 2026-11-18 23:30 · Retrospectiva HU-06 (I8.1)
+**Horas reales contra lo estimado:**
+- Estimado: HU-06 = **5 SP**, en 9 tareas (I0–I8).
+- Horas personales de Iván: **no se registraron**. Iván dirigió la ejecución desde el chat y pidió cerrar la retrospectiva con los datos disponibles, sin dar horas.
+- Lo medible: la sesión de trabajo con el agente duró **≈ 1 h 25 min** (22:04, clonación del repo → 23:30). Los commits de código fueron de 22:19 (I1) a 22:58 (I7), y la I5.9 a las 23:26. Hubo 16 commits de HU-06/HU-08 y 9 PR (#4–#7, #9–#11 y #14). La I5 fue la tarea más larga (≈ 15 min entre el commit de I4 y el de I5, más la corrección del bloqueo de las pruebas). La HU quedó dentro del día 1 del sprint, muy por debajo de lo que suponen 5 SP.
+**Impacto de I5 en el equipo:**
+- Desde `cce0aa1`, toda prueba de integración tiene que iniciar sesión y todo controlador nuevo necesita `[AutorizarModulo]`. Se comunicó con un aviso previo al grupo y con D-012.
+- Felipe: sus 2 controladores y sus 2 clases de pruebas se migraron dentro de la I5, así que su F7 queda en solo revisarlo.
+- Camilo: su PR #8 (abierto) tiene 4 pruebas que fallan con 401 al combinarse con la I5. Se detectó antes del merge y se le indicó cómo migrarlas (D-012).
+**Qué salió bien:**
+- TDD estricto en cada tarea (rojo → verde → commit); cobertura del dominio estable en ~97 %.
+- Contratos C5/C6 implementados al pie de la letra; los mensajes, copiados literalmente del plan.
+- Prueba real en el navegador de los 9 escenarios de I6.2 (14/14) y de la demo.
+- Un PR por tarea con el CI en verde; el borrador del #9/#10 respetó el aviso de un día.
+**Qué mejorar:**
+- Los PR quedaron apilados (#4 → #5 → #6 → #7 → #9 → #10) porque nada se fusionaba entre tareas. Conviene que el integrador fusione el PR temprano de I1 antes de seguir, o abrir la cadena desde el principio como una sola historia.
+- Las horas de los encabezados de esta bitácora se escribieron estimadas y quedaron adelantadas; se corrigieron con las horas de los commits. En adelante, tomar la hora del reloj al escribir cada entrada.
+- Registrar las horas personales para la próxima retrospectiva.
+- Falta un escáner de secretos en el CI (deuda del Sprint 3, arc42 §10.4).
+**Impedimentos (y cómo se resolvieron):**
+- El entorno del agente no tenía el SDK de .NET → se instaló el 8.0.428.
+- Sin permiso de escritura al repo al principio → Iván instaló la app de GitHub; no hizo falta ningún token.
+- La identidad de Git del entorno era la del asistente (AGENT.md §4.1 lo prohíbe) → se configuró la de Iván (`Ivanfelipe14`), tomada de sus commits anteriores.
+- Las pruebas de integración se colgaban al iniciar sesión en el constructor (contexto de sincronización de xUnit) → `IAsyncLifetime`.
+- Cruce con el #8 de Camilo → simulado en local y documentado en el #9 y en D-012.
+
+## 2026-11-18 23:30 · Tarea I8 · Terminada
+**Hecho:**
+- I8.1: retrospectiva (entrada de arriba).
+- I8.2: demo ensayada de forma automática (Chrome + Playwright contra la API real): login con 2FA → el admin asigna Cajero a Sebastián → Sebastián solo ve Caja / POS e Inventario de fichas → su token: `GET /api/nomina` 403. La máquina tardó 6 s; con persona, el guion (entrada de las 23:06) está pensado para ≈ 2 min. **No se ensayó con persona ni con cronómetro**: Iván no tuvo tiempo.
+- I8.3: CER-46 (I8) y CER-16 (HU-06) a Listo en Jira.
+**Evidencia:** en `develop` (`d88fc73` al momento de esta entrada, con `cce0aa1` y `2932d93` incluidos): `dotnet test CasinoErp.sln` → 314 aprobadas, 0 fallos; cobertura del dominio 97,22 %.
+**Estado final de HU-06:** I0–I7 fusionadas; I8 cerrada en el PR #14 (D-012 y esta bitácora).
+**Decisiones:** D-012 (seguridad activa). Las locales están en cada entrada.
+**Pendientes:** ensayo humano de la demo; Camilo migra sus pruebas del #8; deuda del escáner de secretos.
+**Bloqueos / necesito de otros:** ninguno para HU-06.
+**Siguiente paso:** ninguno en Plan-Ivan; atender comentarios del integrador sobre el #14 si los hay.
+**Commits/PR:** https://github.com/camilo1503/Casino-ERP-Repositorio/pull/14
+
+## 2026-11-18 23:26 · Tarea I5.9 · Terminada
 **Hecho:** Jorge fusionó #4 a #10 en `cce0aa1` y #11 en `2932d93` (2026-11-18 23:23). Se creó `desarrollo/decisiones/D-012-ivan-seguridad-activa.md` (Aceptada): desde `cce0aa1` toda la API exige token; qué hacer (pull/rebase, recrear la base, `ClienteComoAsync` con `IAsyncLifetime`, `[AutorizarModulo]` en los controladores nuevos, la clave de desarrollo ya está en `appsettings.Development.json`) y las consecuencias para Felipe (sus controladores y pruebas ya quedaron migrados en la I5) y Camilo (migrar las pruebas del #8).
 **Evidencia:** en `develop` (`355c1e9`): `dotnet test CasinoErp.sln` → 314 aprobadas (260 + 54), 0 fallos; cobertura del dominio 97,22 %; CI del merge en verde; `grep -L "AutorizarModulo\|AllowAnonymous"` sobre los controladores no lista nada.
 **Decisiones:** D-012 (afecta a todos).
@@ -40,7 +104,7 @@
 **Siguiente paso:** retrospectiva con las horas de Iván y cierre de HU-06 en Jira.
 **Commits/PR:** ver el PR de esta rama (`feature/HU-06-seguridad-activa`).
 
-## 2026-11-18 23:15 · Tarea I8 · En curso
+## 2026-11-18 23:06 · Tarea I8 · En curso
 **Hecho:**
 - Iván confirmó la regla de I3 (cambiar a Crupier con un documento vinculado inexistente → "Empleado no encontrado") y avisó al grupo de la activación de la seguridad. Los PR #9 y #10 pasaron de borrador a listos y se actualizaron sus descripciones.
 - Se revisó el PR #8 de Camilo (HU-05): al combinarlo en local con #9/#10 no hay conflicto de texto en `InventarioController`, pero sus 4 pruebas de `InventarioComprasApiTests` fallan con 401 porque crean clientes sin token. Quedó anotado en el #9 quién las migra según el orden de los merges.
@@ -58,7 +122,7 @@
 **Siguiente paso:** en cuanto Jorge fusione #9, crear `D-012-ivan-seguridad-activa.md` con el hash del merge.
 **Commits/PR:** —
 
-## 2026-11-19 00:45 · Cierre de la sesión · En curso
+## 2026-11-18 22:58 · Cierre de la sesión · En curso
 **Hecho en la sesión:** I0 a I7 implementadas con TDD, cada una con su PR hacia `develop`: #4 (I0+I1), #5 (I2), #6 (I3), #7 (I4), #9 (I5, borrador), #10 (I6, borrador) y #11 (I7). Jira: CER-38 a CER-42, CER-44 y CER-45 en Listo; CER-43 (I5) sigue en curso hasta el merge.
 **Evidencia:** en la última rama de la cadena (`feature/HU-06-front`), `dotnet test CasinoErp.sln` → 314 aprobadas (260 + 54), 0 fallos; cobertura del dominio 97,22 %. I6.2 en el navegador: 14/14. Todos los PR tienen el CI en verde al abrirse.
 **Decisiones:** las de cada tarea (entradas de abajo). Ninguna afecta a otros módulos, así que no hubo archivos nuevos en `desarrollo/decisiones/`.
@@ -67,7 +131,7 @@
 **Siguiente paso:** cuando Jorge fusione #4–#7, hacer `pull --rebase` de #9 y #10; después del aviso, pasarlos a listos; tras el merge, I5.9 e I8.
 **Commits/PR:** #4, #5, #6, #7, #9, #10, #11.
 
-## 2026-11-19 00:40 · Tarea I7 · Terminada (en revisión)
+## 2026-11-18 22:58 · Tarea I7 · Terminada (en revisión)
 **Hecho:** `docs/arc42/10-conceptos-seguridad.md` (10.1 a 10.5), `docs/arc42/05-bloques/seguridad.md` (frontera, endpoints, `classDiagram` y dos `sequenceDiagram`) y `docs/arc42/09-decisiones/ADR-002-jwt-totp.md`. Rama `feature/HU-06-arc42-seguridad`, tomada de `develop` (no depende de los PR de código).
 **Evidencia:** `dotnet test CasinoErp.sln` en esa rama → 244 aprobadas, 0 fallos. Los 3 diagramas Mermaid se renderizan sin errores con mermaid-cli 11. La tabla controlador → roles se calculó a partir de la matriz C5.
 **Decisiones:** esta entrada va en `feature/HU-06-front` y no en la rama de la I7, para que la bitácora no tenga conflictos entre ramas paralelas. Se corrigió el borrador: el CI no escanea secretos (solo marcas de IA); queda como deuda del Sprint 3.
@@ -76,7 +140,7 @@
 **Siguiente paso:** I8 después del merge de #9 y #10.
 **Commits/PR:** `e792ae5` · https://github.com/camilo1503/Casino-ERP-Repositorio/pull/11
 
-## 2026-11-19 00:20 · Tarea I6 · Terminada (en revisión, borrador)
+## 2026-11-18 22:55 · Tarea I6 · Terminada (en revisión, borrador)
 **Hecho:** `src/CasinoErp.Api/wwwroot/js/api/seguridad.js` con los 9 puntos del plan: token en sessionStorage (con respaldo en memoria), los tres ganchos del núcleo, `entrar`, `loginView` con correo y datalist, `FORM.login` contra la API, `ACT.logout`, la carga `usuarios` (70), crear/rol/restablecer/desactivar/reactivar con `conectar`, y el modal de cambio de contraseña.
 **Evidencia:**
 - `dotnet test CasinoErp.sln` → 314 aprobadas (260 + 54), 0 fallos.
@@ -92,7 +156,7 @@
 **Siguiente paso:** I7 (arc42 sección 10, bloque Seguridad y ADR-002).
 **Commits/PR:** `2c27f41` · https://github.com/camilo1503/Casino-ERP-Repositorio/pull/10
 
-## 2026-11-18 23:50 · Tarea I5 · En curso (PR en borrador; falta I5.9 tras el merge)
+## 2026-11-18 22:51 · Tarea I5 · En curso (PR en borrador; falta I5.9 tras el merge)
 **Hecho:**
 - `Api/Seguridad/` (`OpcionesJwt`, `JwtEmisor` con `ValidarUsuarioVigente`, `AutorizarModuloAttribute` exacto a C5, `UsuarioDto` y records), `AuthController` y `UsuariosController`.
 - Cambios mínimos del plan: paquete JwtBearer 8.0.11, `Program.cs`, `FiltroExcepciones.cs` (401), `appsettings*.json`, `[AutorizarModulo]` en los 9 controladores de `develop` (incluidos `EmpleadosController` y `NominaController` de Felipe: 2 `using` y 1 atributo cada uno), `CasinoErpFactory` (2 settings).
@@ -112,7 +176,7 @@
 **Siguiente paso:** I6 (`seguridad.js`) en `feature/HU-06-front`, apilada sobre esta rama.
 **Commits/PR:** `2321950` · https://github.com/camilo1503/Casino-ERP-Repositorio/pull/9
 
-## 2026-11-18 23:15 · Tarea I4 · Terminada (en revisión)
+## 2026-11-18 22:35 · Tarea I4 · Terminada (en revisión)
 **Hecho:**
 - Paquetes `Microsoft.Extensions.Identity.Core` 8.0.11 y `Otp.NET` 1.4.0 en `CasinoErp.Infraestructura.csproj` (solo esos dos, como dice el plan).
 - `Seguridad/HasherContrasena.cs` (PBKDF2 de Identity) y `Seguridad/VerificadorTotp.cs` (Otp.NET, ventana RFC, código demo solo si `Seguridad:CodigoTotpDemo` está configurado).
@@ -129,7 +193,7 @@
 **Siguiente paso:** I5 (JWT, login y `[AutorizarModulo]` en toda la API) en `feature/HU-06-jwt`.
 **Commits/PR:** `91a0263` · https://github.com/camilo1503/Casino-ERP-Repositorio/pull/7
 
-## 2026-11-18 23:00 · Tarea I3 · Terminada (en revisión)
+## 2026-11-18 22:29 · Tarea I3 · Terminada (en revisión)
 **Hecho:**
 - `src/CasinoErp.Dominio/Seguridad/UsuarioService.cs`: `UsuarioService`, `UsuarioCreado` y `ContrasenaRestablecida`, con las reglas en el orden de la tabla del plan y los mensajes copiados literalmente.
 - `tests/CasinoErp.PruebasUnitarias/UsuarioServiceTests.cs`: las 18 pruebas de I3.1 y 3 más (`Un_administrador_inactivo_no_cuenta_como_otro_administrador`, `Cambiar_a_crupier_exige_un_empleado_crupier`, `Consulta_y_lista_por_id`). Usa `EmpleadosEnMemoria` (C4).
@@ -148,7 +212,7 @@
 **Siguiente paso:** I4 (hash con Identity, TOTP con Otp.NET, configuración EF, repositorio y semilla de las 11 cuentas) en `feature/HU-06-infraestructura`.
 **Commits/PR:** `9061c6b` · https://github.com/camilo1503/Casino-ERP-Repositorio/pull/6
 
-## 2026-11-18 22:45 · Tarea I2 · Terminada (en revisión)
+## 2026-11-18 22:24 · Tarea I2 · Terminada (en revisión)
 **Hecho:**
 - `src/CasinoErp.Dominio/Seguridad/Usuario.cs`: `Usuario`, `IUsuarioRepositorio`, `IHasherContrasena` e `IVerificadorTotp`, con las firmas del plan.
 - `src/CasinoErp.Dominio/Seguridad/ContrasenaTemporal.cs`: `Generar()` y `EsSegura()`.
@@ -168,7 +232,7 @@
 **Siguiente paso:** I3 (`UsuarioService`) en `feature/HU-06-usuarios`. El C4 de Felipe ya está en `develop`.
 **Commits/PR:** `2665919` · https://github.com/camilo1503/Casino-ERP-Repositorio/pull/5
 
-## 2026-11-18 22:30 · Tarea I1 · Terminada (en revisión)
+## 2026-11-18 22:19 · Tarea I1 · Terminada (en revisión)
 **Hecho:**
 - `src/CasinoErp.Dominio/Seguridad/Rol.cs`: `Rol`, `Modulos` y `MatrizAcceso` exactamente como `contratos.md` §C5 (matriz estática con `StringComparer.Ordinal`; `RolesCon` en el orden del enum).
 - `src/CasinoErp.Dominio/Comun/Excepciones.cs`: se agrega solo `AutenticacionException`.
