@@ -9,7 +9,7 @@
 | I0 | Arranque | Hecha | [#4](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/4) |
 | I1 | Roles, módulos y matriz (C5) | En revisión | [#4](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/4) |
 | I2 | Usuario y autenticación | En revisión | [#5](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/5) (depende de #4) |
-| I3 | UsuarioService (necesita C4) | Pendiente | — |
+| I3 | UsuarioService (necesita C4) | En revisión | [#6](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/6) (depende de #4 y #5) |
 | I4 | Infraestructura y cuentas de demo (C6) | Pendiente | — |
 | I5 | JWT y autorización (hito Seguridad activa) | Pendiente | — |
 | I6 | Front seguridad.js | Pendiente | — |
@@ -17,12 +17,32 @@
 | I8 | Cierre y demo | Pendiente | — |
 
 ## Pendientes abiertos
-- (ninguno)
+- Que Iván confirme la regla de I3: cambiar a Crupier con un documento vinculado que no existe → "Empleado no encontrado".
+- Fusión en orden de #4 → #5 → #6 (la hace Jorge).
 
 ## Bloqueos abiertos
 - (ninguno)
 
 ## Entradas
+
+## 2026-11-18 23:00 · Tarea I3 · Terminada (en revisión)
+**Hecho:**
+- `src/CasinoErp.Dominio/Seguridad/UsuarioService.cs`: `UsuarioService`, `UsuarioCreado` y `ContrasenaRestablecida`, con las reglas en el orden de la tabla del plan y los mensajes copiados literalmente.
+- `tests/CasinoErp.PruebasUnitarias/UsuarioServiceTests.cs`: las 18 pruebas de I3.1 y 3 más (`Un_administrador_inactivo_no_cuenta_como_otro_administrador`, `Cambiar_a_crupier_exige_un_empleado_crupier`, `Consulta_y_lista_por_id`). Usa `EmpleadosEnMemoria` (C4).
+**Evidencia:**
+- TDD: `dotnet test tests/CasinoErp.PruebasUnitarias --filter UsuarioServiceTests` → falla al compilar (CS0246, no existe `UsuarioService`); tras implementar → 21 aprobadas.
+- `dotnet build CasinoErp.sln` → 0 advertencias.
+- `dotnet test CasinoErp.sln` → 294 aprobadas (260 unitarias + 34 de integración), 0 fallos.
+- Cobertura de líneas de `CasinoErp.Dominio` → 97,22 %.
+**Decisiones (solo afectan a mi módulo):**
+- **Por confirmar con Iván:** `CambiarRolAsync` a Crupier cuando el documento vinculado ya no existe → `NoEncontradoException("Empleado no encontrado")`, igual que en `CrearAsync`. El plan no define este caso.
+- "Único administrador activo" cuenta solo a los administradores activos.
+- `DesactivarAsync` revisa primero "ya está inactivo" y después la regla del último administrador.
+- La rama sale de `feature/HU-06-autenticacion` porque el #4 y el #5 aún no están fusionados.
+**Pendientes:** la confirmación de la regla de arriba.
+**Bloqueos / necesito de otros:** que Jorge fusione en orden #4 → #5 → #6.
+**Siguiente paso:** I4 (hash con Identity, TOTP con Otp.NET, configuración EF, repositorio y semilla de las 11 cuentas) en `feature/HU-06-infraestructura`.
+**Commits/PR:** `9061c6b` · https://github.com/camilo1503/Casino-ERP-Repositorio/pull/6
 
 ## 2026-11-18 22:45 · Tarea I2 · Terminada (en revisión)
 **Hecho:**
