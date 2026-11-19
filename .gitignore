@@ -29,3 +29,6 @@ coverage.json
 *.tfstate.*
 backend.hcl
 *.tfplan
+
+# Valores locales de Terraform (pueden llevar ids de la suscripcion)
+*.tfvars

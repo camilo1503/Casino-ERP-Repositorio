@@ -15,6 +15,10 @@ terraform {
 
 provider "azurerm" {
   features {}
+
+  # La cuenta de storage tiene shared_access_key_enabled = false: el proveedor debe
+  # usar Entra ID, no claves, en las llamadas al plano de datos.
+  storage_use_azuread = true
 }
 
 # Sufijo para que el nombre de la cuenta de storage sea único en Azure.
