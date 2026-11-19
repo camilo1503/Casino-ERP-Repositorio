@@ -8,20 +8,20 @@
 |---|---|---|---|
 | J0 | Fase 0 (bloqueante) | Hecha | `chore/fase-0` → `develop` (8fff1ce) |
 | J1 | Sprint 2 en Jira | Hecha | sprint 35 activo |
-| J2 | Backend remoto del state | A: hecha (sin fusionar) · B: bloqueada por F9 | rama `feature/HU-07-bootstrap-state` (`ce37957`) |
-| J3 | Terraform con import | A: hecha (sin fusionar) · B: bloqueada por F9 | rama `feature/HU-07-bootstrap-state` (`815ddf6`) |
-| J4 | Workflow terraform plan | A: hecha (sin fusionar) · B: bloqueada por F9 | rama `feature/HU-07-bootstrap-state` (`08f072a`) |
+| J2 | Backend remoto del state | A: hecha, rama sin fusionar a propósito · B: bloqueada por F9 | rama `feature/HU-07-bootstrap-state` (`ce37957`) |
+| J3 | Terraform con import | A: hecha, rama sin fusionar a propósito · B: bloqueada por F9 | rama `feature/HU-07-bootstrap-state` (`815ddf6`) |
+| J4 | Workflow terraform plan | A: hecha, rama sin fusionar a propósito · B: bloqueada por F9 | rama `feature/HU-07-bootstrap-state` (`08f072a`) |
 | J5 | Integración continua (permanente) | En curso | — |
 | J6 | Despliegue del Sprint 2 en Azure | Pendiente | — |
-| J7 | arc42 consolidación | En curso: J7.1–J7.3 y J7.5 hechos; J7.4 espera las secciones de los demás | rama `docs/HU-08-arc42-jorge` (`7d0d8a7`) |
-| J8 | Artefactos Scrum | En curso: 4 documentos escritos; faltan capacidad, video, captura y retrospectiva de cada integrante | rama `docs/sprint-2-scrum` (`004a597`) |
+| J7 | arc42 consolidación | En curso: J7.1–J7.3 y J7.5 hechos; J7.4 espera las secciones de los demás | fusionada en `develop` (`1c9546b`) |
+| J8 | Artefactos Scrum | En curso: 4 documentos escritos; faltan capacidad, video, captura y retrospectiva de cada integrante | fusionada en `develop` (`fe5141a`) |
 | J9 | Cierre del sprint | Pendiente | — |
 
 ## Pendientes abiertos
 - Avisar al equipo por el chat del grupo que la Fase 0 está en `develop` (D-007).
 - J2: Felipe debe hacer la tarea **F9** de su plan (roles en la suscripción). Ya está escrita en `Plan-Felipe.md`; falta que la lea y avisarle por el chat del grupo.
 - ~~Hacer J2-A, J3-A y J4-A, J7 y J8~~ (hechos, ver la entrada de hoy 2026-11-18 · J2-A a J8).
-- **Fusionar las cuatro ramas de Jorge** cuando el CI esté en verde (`gh` no tiene sesión, así que el CI se revisa en GitHub): `docs/ajuste-acceso-azure-j2`, `docs/HU-08-arc42-jorge`, `docs/sprint-2-scrum` y `feature/HU-07-bootstrap-state`. Esta última **no** debe fusionarse antes de la parte B: el workflow `terraform-plan.yml` fallará en cada PR que cambie un `.tf` mientras no existan los secretos de Azure.
+- ~~Fusionar las ramas de docs de Jorge~~ (hecho, ver la entrada de J5.2 de hoy). Falta **`feature/HU-07-bootstrap-state`**: no debe fusionarse antes de la parte B, porque el workflow `terraform-plan.yml` fallará en cada PR que cambie un `.tf` mientras no existan los secretos de Azure.
 - Actualizar ADR-003 y la vista de despliegue (§7) cuando se aplique Terraform (parte B).
 - J7.4: revisión cruzada cuando estén en `develop` `10-conceptos-seguridad.md` y los `05-bloques/*.md`.
 - J8: llenar la capacidad del sprint, definir quién graba el video, guardar la captura `terraform-plan-pr.png` y pedir a cada integrante su parte de la retrospectiva (incluida la "Retrospectiva HU-04" de Felipe, F8.3).
@@ -34,6 +34,29 @@
 - Desde 2026-11-18: sin roles en la suscripción de Azure (parte B de J2, J3 y J4, y J6). Depende de **F9 de Felipe**.
 
 ## Entradas
+
+## 2026-11-18 · Tarea J5.2 · Fusión de ramas de Jorge · Terminada
+**Hecho:**
+- `gh` quedó con sesión (cuenta JorgeDLZ). No hay PR abiertos hacia `develop`.
+- Se revisó el CI de las cuatro ramas de Jorge: todas en verde.
+- Fusionadas en `develop` con `--no-ff`, sin conflictos:
+  - `docs/ajuste-acceso-azure-j2` (F9, D-010 y bitácora) → `10674bf`.
+  - `docs/HU-08-arc42-jorge` (arc42 y ADR 001, 003 y 004) → `1c9546b`.
+  - `docs/sprint-2-scrum` (backlog, retrospectiva, investigación de Terraform y guion) → `fe5141a`.
+- **No se fusionó** `feature/HU-07-bootstrap-state` (J2-A, J3-A y J4-A): el workflow `terraform-plan.yml` fallaría en cada PR que cambie un `.tf` mientras no existan los secretos de Azure. Se fusiona tras la parte B.
+- Tablero de `desarrollo/README.md` actualizado.
+
+**Evidencia:** después de fusionar, `dotnet test CasinoErp.sln` → 210 unitarias + 18 de integración, 0 fallos. Revisión de marcas de IA (AGENT.md §4.1) sin coincidencias. El CI de `develop` terminó en verde después del push.
+
+**Decisiones:** ninguna nueva (D-009).
+
+**Pendientes:** ver "Pendientes abiertos".
+
+**Bloqueos / necesito de otros:** F9 de Felipe.
+
+**Siguiente paso:** avisar a Felipe por el chat del grupo que F9 ya está en `develop`; J5.2 en la próxima sesión.
+
+**Commits/PR:** `10674bf`, `1c9546b`, `fe5141a`.
 
 ## 2026-11-18 · Tareas J2-A, J3-A, J4-A, J7 y J8 · Parte A, J7 y J8 escritos · Terminada (sin fusionar)
 **Hecho:**

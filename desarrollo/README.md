@@ -89,7 +89,7 @@ Ola 5 (cierre)
 | Felipe | F9 (acceso de Jorge a Azure) y F4 | F1 (contrato C4, `f083b68`), F2–F3 (`5ce30c7`) | — | — |
 | Iván | I0 | — | — | — |
 | Camilo | C0 | — | — | — |
-| Jorge | J2-A / J3-A / J4-A, J5 | J0 (Fase 0, `8fff1ce`), J1 | — | J2-B, J3-B, J4-B y J6 esperan **F9 de Felipe** (D-010) |
+| Jorge | J5; J7.4 y J8 (faltantes) | J0 (Fase 0, `8fff1ce`), J1, J7.1–J7.3 y J8 escrito (`1c9546b`, `fe5141a`), D-010 y F9 (`10674bf`) | `feature/HU-07-bootstrap-state` (J2-A, J3-A, J4-A, CI en verde): no se fusiona antes de la parte B | J2-B, J3-B, J4-B y J6 esperan **F9 de Felipe** (D-010) |
 
 ## Guion de la Sprint Review (aprox. 10 minutos)
 
