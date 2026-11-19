@@ -14,7 +14,7 @@
 | I5 | JWT y autorización (hito Seguridad activa) | Hecha (`cce0aa1`; D-012) | [#9](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/9) |
 | I6 | Front seguridad.js | Hecha (`cce0aa1`) | [#10](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/10) |
 | I7 | arc42 sección 10 | Hecha (`2932d93`) | [#11](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/11) |
-| I8 | Cierre y demo | Hecha (ensayo automático; sin ensayo con persona) | [#14](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/14) |
+| I8 | Cierre y demo | Hecha (demo grabada a ritmo de presentación: 1:58) | [#14](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/14) |
 
 ## Pendientes abiertos
 - ~~Confirmar la regla de I3~~ → confirmada el 2026-11-18 23:04.
@@ -22,7 +22,7 @@
 - ~~Merge de #4 → #11~~ → fusionados el 2026-11-18 23:23 (`cce0aa1`, `2932d93`).
 - ~~I5.9: publicar la decisión de seguridad activa~~ → D-012.
 - ~~I8.1 y I8.3: retrospectiva y HU-06 a Listo~~ → hecho el 2026-11-18 23:30, sin las horas personales de Iván (no se registraron).
-- Ensayar la demo con persona y cronómetro antes de la Sprint Review (solo se ensayó de forma automática).
+- ~~Ensayar la demo con tiempo real~~ → grabada a ritmo de presentación el 2026-11-18 23:40 (1:58). Iván no la ensayó en persona.
 - Seguimiento: Camilo debe migrar `InventarioComprasApiTests` del PR #8 a `ClienteComoAsync` (D-012).
 - Deuda para el Sprint 3: escáner de secretos en el CI (arc42 §10.4).
 
@@ -30,6 +30,21 @@
 - (ninguno)
 
 ## Entradas
+
+## 2026-11-18 23:40 · Tarea I8.2 · Ensayo cronometrado de la demo · Terminada
+**Hecho:** a pedido de Iván, que no tenía tiempo de ensayarla, la demo se ejecutó y grabó a ritmo de presentación (escritura y pausas de persona, con rótulos en pantalla), contra la API en Development con la base recreada. Duración: **1:58** (máximo del guion: 2:00). El video (`demo-hu06.mp4`, 1280×760) se le entregó a Iván por el chat; no se sube al repo.
+| Tramo | Guion | Medido | Qué se ve |
+|---|---|---|---|
+| 1 | 0:00–0:25 | 0:00–0:07 (login) y explicación hasta 0:25 | ivan.leon entra con contraseña + TOTP 482913 |
+| 2 | 0:25–0:50 | 0:35 rol cambiado; hasta 0:50 | Matriz de acceso; Cambiar rol de Sebastián → Cajero (toast "Sebastián Prada ahora es cajero."); Iván cierra sesión |
+| 3 | 0:50–1:20 | 0:54 | sebastian.prada entra y solo ve Caja / POS e Inventario de fichas |
+| 4 | 1:20–2:00 | 1:21 Swagger; 1:33 resultado | Authorize con el token de Sebastián → `GET /api/nomina` → **403 Forbidden** |
+**Evidencia:** script de Playwright con grabación de video (fuera del repo); salida: `[0:07] Iván entra`, `[0:35] Rol → Cajero`, `[0:54] Sebastián solo ve: Caja / POS, Inventario de fichas`, `[1:33] GET /api/nomina → 403`, `[1:58] Fin`.
+**Decisiones:** en Swagger se pega el token de la sesión de Sebastián en vez de hacer `POST /api/auth/login` dentro de Swagger, para no pasarse de los 2 minutos. Si se presenta en vivo, puede hacerse igual (copiarlo con F12 → Application → Session Storage → `pitboss.token`) o usar el login de Swagger si sobra tiempo.
+**Pendientes:** ninguno de I8.
+**Bloqueos / necesito de otros:** ninguno.
+**Siguiente paso:** presentar en la Sprint Review (en vivo o con el video).
+**Commits/PR:** https://github.com/camilo1503/Casino-ERP-Repositorio/pull/14
 
 ## 2026-11-18 23:30 · Retrospectiva HU-06 (I8.1)
 **Horas reales contra lo estimado:**
