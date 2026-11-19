@@ -14,5 +14,6 @@ La infraestructura de Azure (grupo de recursos, App Service F1, Azure SQL gratui
 ## Consecuencias
 - Los cambios de infraestructura se revisan como cualquier otro PR.
 - El proveedor `azurerm` 4.81 no representa la marca "oferta gratuita" de Azure SQL: la base se importa y lleva `ignore_changes` y `prevent_destroy` para que un `apply` no la recree.
-- Hace falta que alguien con rol de Owner en la suscripción asigne los roles a quien opere Terraform (tarea F9, D-010).
+- Hace falta que alguien con rol de Owner en la suscripción asigne los roles a quien opere Terraform (tarea F9, D-010). Se asignó Contributor y un administrador de roles con condición (D-011): solo permite asignar Reader, Contributor y Storage Blob Data Contributor.
+- El directorio de la universidad no permite registrar aplicaciones en Entra ID. El workflow usa por eso una identidad administrada asignada por el usuario, con credencial federada para GitHub, en lugar de una App Registration. El efecto es el mismo (OIDC, sin secretos de larga duración).
 - El state contiene `Jwt__Clave`; solo debe leerlo el equipo.

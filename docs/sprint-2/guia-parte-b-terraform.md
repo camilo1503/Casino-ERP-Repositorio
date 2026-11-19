@@ -1,5 +1,16 @@
 # Guía de la parte B de J2, J3 y J4 (Terraform con acceso a Azure)
 
+> **Estado (2026-11-18):** J2-B y J3-B están hechas y J4-B está hecha salvo la carga de los secretos y la prueba del PR (ver la bitácora). La guía queda como referencia y por las correcciones de abajo.
+
+## Correcciones descubiertas al ejecutarla
+
+- **Git Bash deforma las rutas** que empiezan por `/subscriptions/...` (por ejemplo en `--scope`): da `MissingSubscription`. Usar PowerShell.
+- **PowerShell 5.1 y argumentos con punto o comillas:** escribir `'-backend-config=backend.hcl'` y `'-var-file=local.tfvars'` entre comillas simples, y las claves de `for_each` con comillas escapadas, por ejemplo `'azurerm_mssql_firewall_rule.regla[\"Nombre\"]'`.
+- **Faltaban valores reales** en `main.tf`: `BaseDatos__CargarDatosDemo`, `TrustServerCertificate=False;Connect Timeout=60;` en la cadena de conexión, `ftps_state = "FtpsOnly"`, `http2_enabled`, `client_affinity_enabled` y `app_command_line`. Ya están corregidos.
+- **`https_only` está en `false` en Azure.** Se dejó igual; pasarlo a `true` es una mejora aparte.
+- **La App Registration falló** (`Insufficient privileges`): el directorio de la universidad no deja registrar aplicaciones. Se usó la opción B.
+- Felipe asignó *Role Based Access Control Administrator* con condición (D-011), no *User Access Administrator*. Solo se pueden asignar Reader, Contributor y Storage Blob Data Contributor.
+
 Lista para ejecutar cuando Felipe termine la tarea **F9** (D-010). El código está en la rama `feature/HU-07-bootstrap-state` (parte A). Todo se ejecuta desde la raíz del repositorio, en PowerShell. **Nada de esto se ha probado contra Azure todavía.**
 
 > Los comandos de `az` y de importación no se han corrido; los formatos de ID salen de la documentación del proveedor `azurerm` 4.x. Si un comando falla, se anota en la bitácora y se corrige aquí.

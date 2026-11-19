@@ -86,10 +86,10 @@ Ola 5 (cierre)
 
 | Plan | Tarea en curso | Hechas | En revisión (PR) | Bloqueos |
 |---|---|---|---|---|
-| Felipe | F9 (acceso de Jorge a Azure); F7 espera la I5 | F1 (`f083b68`), F2–F3 (`5ce30c7`), F4, F5, F6 y F8 (`04e37c9`) | — | F7 espera «seguridad activa» de Iván; F9 pendiente |
+| Felipe | F7 espera la I5; F9.6 (secretos) lo carga Camilo | F1 (`f083b68`), F2–F3 (`5ce30c7`), F4, F5, F6 y F8 (`04e37c9`), F9 (`1bf6a6f`, D-011) | — | F7 espera «seguridad activa» de Iván |
 | Iván | I0 | — | — | — |
 | Camilo | C0 | — | — | — |
-| Jorge | J5; J7.4 y J8 (faltantes) | J0 (Fase 0, `8fff1ce`), J1, J7.1–J7.3 y J8 escrito (`1c9546b`, `fe5141a`), D-010 y F9 (`10674bf`) | `feature/HU-07-bootstrap-state` (J2-A, J3-A, J4-A, CI en verde): no se fusiona antes de la parte B | J2-B, J3-B, J4-B y J6 esperan **F9 de Felipe** (D-010) |
+| Jorge | J4.3 (prueba del workflow), J5; J7.4 y J8 (faltantes) | J0 (Fase 0, `8fff1ce`), J1, J2, J3 (`9be6eec`), J7.1–J7.3 y J8 escrito (`1c9546b`, `fe5141a`) | — | J4.3 espera que Camilo cargue los 5 secretos de GitHub; J6 espera los PR de Iván y Camilo |
 
 ## Guion de la Sprint Review (aprox. 10 minutos)
 

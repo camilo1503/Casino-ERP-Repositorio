@@ -8,9 +8,9 @@
 |---|---|---|---|
 | J0 | Fase 0 (bloqueante) | Hecha | `chore/fase-0` → `develop` (8fff1ce) |
 | J1 | Sprint 2 en Jira | Hecha | sprint 35 activo |
-| J2 | Backend remoto del state | A: hecha, rama sin fusionar a propósito · B: bloqueada por F9 | rama `feature/HU-07-bootstrap-state` (`ce37957`) |
-| J3 | Terraform con import | A: hecha, rama sin fusionar a propósito · B: bloqueada por F9 | rama `feature/HU-07-bootstrap-state` (`815ddf6`) |
-| J4 | Workflow terraform plan | A: hecha, rama sin fusionar a propósito · B: bloqueada por F9 | rama `feature/HU-07-bootstrap-state` (`08f072a`) |
+| J2 | Backend remoto del state | Hecha (bootstrap aplicado) | `9be6eec` |
+| J3 | Terraform con import | Hecha (importado, plan revisado, sin aplicar) | `9be6eec` |
+| J4 | Workflow terraform plan | Workflow e identidad listos; faltan los 5 secretos (los carga Camilo) y la prueba del PR (J4.3) | `9be6eec` |
 | J5 | Integración continua (permanente) | En curso | — |
 | J6 | Despliegue del Sprint 2 en Azure | Pendiente | — |
 | J7 | arc42 consolidación | En curso: J7.1–J7.3 y J7.5 hechos; J7.4 espera las secciones de los demás | fusionada en `develop` (`1c9546b`) |
@@ -31,9 +31,36 @@
 - PR #3 (`feature/CER-6-despliegue-azure` → `main`): **Jorge decidió dejarlo abierto** hasta el cierre del sprint (J9). No se fusiona ni se cierra en las revisiones de PR; su contenido ya está en `develop`.
 
 ## Bloqueos abiertos
-- Desde 2026-11-18: sin roles en la suscripción de Azure (parte B de J2, J3 y J4, y J6). Depende de **F9 de Felipe**.
+- De acceso a Azure: ninguno (F9 resuelta, D-011). Para J4.3 hacen falta los 5 secretos de GitHub, que solo puede cargar el administrador del repositorio (Camilo); Jorge tiene `push` pero no `admin`.
 
 ## Entradas
+
+## 2026-11-18 · Tareas J2-B, J3-B y J4-B · Terminadas (J4.3 pendiente)
+**Hecho:**
+- **F9 resuelta:** Felipe asignó Contributor y *RBAC Administrator* con condición sobre la suscripción (D-011). Verificado con `az role assignment list`.
+- **J2-B:** `terraform apply` del bootstrap → `rg-pitboss-tfstate`, `stpitbosstfjfie3s` y el contenedor `tfstate` (4 recursos). `Storage Blob Data Contributor` asignado a Jorge sobre la cuenta; se verificó el acceso al contenedor. El `terraform.tfstate` del bootstrap está copiado en `C:\Users\Asus M3604Y\.pitboss-terraform\bootstrap.tfstate` (fuera del repo).
+- **J3-B:** `init` con el backend remoto e importados los 7 recursos: grupo, plan `plan-pitboss-erp`, web app, servidor SQL, base `CasinoErp` y las reglas `MacFelipe` y `PermitirServiciosAzure`. Se corrigió `main.tf` para igualar a Azure (commit `03f6abd`). Plan final: `1 to add, 1 to change, 0 to destroy` (clave JWT, tres app settings nuevos y `ip_restriction_default_action`). No se aplicó.
+- **J4-B:** la App Registration falló (`Insufficient privileges`, directorio de la universidad). Se creó la identidad administrada `id-github-pitboss-terraform` con credencial federada para `repo:camilo1503/Casino-ERP-Repositorio:pull_request`, con Contributor sobre `rg-pitboss-erp` y Storage Blob Data Contributor sobre la cuenta del state.
+- Fusionadas en `develop`: la rama de Felipe con F9 y D-011 (`1bf6a6f`) y `feature/HU-07-bootstrap-state` (`9be6eec`).
+
+**Evidencia:** CI de ambas ramas en verde. Después de fusionar, `dotnet test CasinoErp.sln` → 210 unitarias + 34 de integración, 0 fallos. `terraform validate` y `fmt -check` correctos. Revisión de marcas de IA sin coincidencias.
+
+**Decisiones:**
+- Opción B (identidad administrada) para el OIDC, porque Entra ID no deja registrar aplicaciones.
+- `https_only` se deja en `false` (igual que Azure); subirlo a `true` queda como mejora aparte.
+- Los valores personales (correo del administrador SQL y la IP `MacFelipe`) quedan solo en `local.tfvars` (ignorado por Git). Consecuencia: el `plan` del CI propondrá diferencias en esos valores hasta decidirlo; ver pendientes.
+
+**Pendientes:**
+- Que Camilo cargue los 5 secretos en GitHub (valores abajo) y probar el workflow con un PR (J4.3 y captura).
+- Decidir si el correo del administrador SQL y la IP de Felipe pueden ir al repositorio, para que el plan del CI dé cero diferencias.
+
+**Valores de los secretos (son identificadores, no credenciales):** `AZURE_CLIENT_ID` = `66213a21-fc51-4a76-86bd-1748718bfc34`; `AZURE_TENANT_ID` = `07da67a0-1f43-4e8c-977f-5f88b6470ee6`; `AZURE_SUBSCRIPTION_ID` = `12f1bc21-94a3-4b28-9a90-8224d1e5fcc8`; `TFSTATE_RG` = `rg-pitboss-tfstate`; `TFSTATE_SA` = `stpitbosstfjfie3s`.
+
+**Bloqueos / necesito de otros:** de Camilo, la carga de los secretos de GitHub.
+
+**Siguiente paso:** J4.3 cuando estén los secretos; J6 cuando estén en `develop` los PR de Iván y Camilo.
+
+**Commits/PR:** `03f6abd`, `1bf6a6f`, `9be6eec`.
 
 ## 2026-11-18 · Tarea J5.2 · Revisión de ramas de Felipe · Terminada
 **Hecho:**
