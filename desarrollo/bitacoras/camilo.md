@@ -7,8 +7,8 @@
 | Tarea | Descripción | Estado | PR |
 |---|---|---|---|
 | C0 | Arranque | Hecha | — |
-| C1 | Umbral y alertas (dominio, C8) | En revisión | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8) |
-| C2 | Persistencia y API de alertas | En revisión | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8) |
+| C1 | Umbral y alertas (dominio, C8) | Hecha (fusionada) | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8) |
+| C2 | Persistencia y API de alertas | Hecha (fusionada) | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8) |
 | C3 | Proveedores (dominio) | En revisión | [#16](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/16) |
 | C4 | Órdenes de compra (dominio) | En revisión | [#16](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/16) |
 | C5 | Persistencia y API de compras | En revisión | [#16](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/16) |
