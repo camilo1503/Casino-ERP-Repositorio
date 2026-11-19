@@ -35,6 +35,19 @@
 
 ## Entradas
 
+## 2026-11-18 23:47 · Hallazgo de la revisión cruzada en el front de nómina (F6) · Terminada
+**Hecho:**
+- Hallazgo reportado en la revisión: después de aprobar la nómina y volver a entrar, la tarjeta "Nómina de octubre" de Turnos y nómina seguía diciendo «Borrador» aunque `GET /api/nomina` devuelve `APROBADA`.
+- Causa: la insignia está fija en `index.html` (`V.rrhh`, `B('Borrador','warn')`); `personal.js` cambiaba el modal pero no la tarjeta.
+- Corrección en `src/CasinoErp.Api/wwwroot/js/api/personal.js` (sin tocar `index.html`): se envuelve `V.rrhh`; con la API en línea y la nómina del mes `APROBADA`, la insignia pasa a «Aprobada» y el botón «Calcular nómina» a «Ver nómina». Sin API o sin nómina aprobada, la vista queda igual que el mockup.
+- El otro hallazgo (el pie del menú dice «v0.3 · Sprint 1») está en `index.html`, que no es mío ni se edita (AGENT.md); se lo dejo al dueño del front.
+**Evidencia:** en `http://localhost:5080` con la base recreada, como felipe.cortes: sin nómina → «Borrador»; Calcular → Aprobar → «Aprobada» y «Ver nómina»; recargando la página y volviendo a Turnos y nómina sigue «Aprobada»; «Ver nómina» abre el modal "Aprobada" sin `POST /api/nomina/calculate` (solo `GET /api/nomina`). Consola sin errores. `node --check` correcto.
+**Decisiones:** ninguna.
+**Pendientes:** PR de `feature/HU-04-autorizacion` (incluye esta corrección).
+**Bloqueos / necesito de otros:** ninguno.
+**Siguiente paso:** ninguno de código.
+**Commits/PR:** ver el commit `HU-04: Tarjeta de nomina con el estado real tras aprobar`.
+
 ## 2026-11-18 23:32 · Pedidos de Jorge (F7, retrospectiva, nomina.md) · Terminada
 **Hecho:**
 - F7 confirmada: los atributos los puso Iván (I5) y las 3 pruebas de permisos están en esta rama.
