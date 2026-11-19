@@ -11,7 +11,7 @@
 | F2 | Parámetros y reglas de liquidación | Hecha (fusionada en `develop`, `5ce30c7`) | Fusión del integrador (D-009) |
 | F3 | PayrollEngine y NominaService | Hecha (fusionada en `develop`, `5ce30c7`) | Fusión del integrador (D-009) |
 | F4 | Persistencia y API de empleados | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-empleados-api) |
-| F5 | Persistencia y API de nómina | Pendiente | — |
+| F5 | Persistencia y API de nómina | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-nomina-api) |
 | F6 | Front personal.js | Pendiente | — |
 | F7 | Autorización de mis controladores | Pendiente | — |
 | F8 | arc42 bloque Nómina y cierre | Pendiente | — |
@@ -21,13 +21,36 @@
 - ~~F1.5: abrir el PR de F1~~ (resuelto: el integrador la fusionó en `develop`, D-009).
 - ~~Comando de cobertura de AGENT.md §10 sin `coverlet.msbuild`~~ (resuelto: la Fase 0 agregó el paquete).
 - La rama `feature/HU-04-reglas-liquidacion` quedó obsoleta (F2 ya entró por `feature/HU-04-nomina-motor`). No se fusiona; Felipe o Jorge pueden borrarla.
-- Jira: mover CER-22, CER-23 (F2, F3) a "Listo" y CER-24 (F4) a "En revisión".
+- Jira: mover CER-22, CER-23 (F2, F3) a "Listo" y CER-24 y CER-25 (F4, F5) a "En revisión".
+- `feature/HU-04-nomina-api` (F5) se tomó de `feature/HU-04-empleados-api` (F4) porque F4 aún no está fusionada: conviene fusionar F4 antes que F5.
 
 ## Bloqueos abiertos
 - ~~F4, F5 y F6 esperan la Fase 0 de Jorge~~ (resuelto: Fase 0 en `develop` desde `8fff1ce`, D-007).
 - F7 espera la I5 de Iván ("seguridad activa"). Aún no está en `develop`.
 
 ## Entradas
+
+## 2026-11-18 20:22 · Tarea F5 · Terminada (en revisión)
+**Hecho:**
+- Rama `feature/HU-04-nomina-api`, tomada de la rama de F4 (F4 aún no está fusionada en `develop`; F5 necesita los empleados de su semilla).
+- `src/CasinoErp.Infraestructura/Configuraciones/NominaConfiguracion.cs`: `NominaConfiguracion` (tabla `Nominas`, índice único `Anio`+`Mes`, detalle en cascada, totales ignorados), `LiquidacionEmpleadoConfiguracion` (tabla `LiquidacionesNomina`, enums como texto) y `ParametrosNominaConfiguracion` (índice único por año, tasas con precisión 7,5).
+- `src/CasinoErp.Infraestructura/Repositorios/NominaRepositorios.cs`: `NominaRepositorio` (incluye el detalle; lista por año y mes descendentes) y `ParametrosNominaRepositorio` (guardar es *upsert* por año).
+- `src/CasinoErp.Infraestructura/Semillas/SemillaNomina.cs` (`Orden = 20`): `ParametrosNomina.Decreto2026()` si la tabla está vacía.
+- `src/CasinoErp.Infraestructura/Modulos/ModuloNomina.cs`: reglas y `PayrollEngine` como singleton, repositorios, `NominaService` y la semilla.
+- `src/CasinoErp.Api/Controllers/NominaController.cs`: `POST /api/nomina/calculate`, `GET /api/nomina`, `GET /api/nomina/{anio}/{mes}`, `POST /api/nomina/{id}/aprobar`, `GET` y `PUT /api/nomina/parametros/{anio}` (el año de la ruta manda).
+- `tests/CasinoErp.PruebasIntegracion/PersonalNominaApiTests.cs`: clase nueva `NominaApiTests` con 9 pruebas (las 4 del plan más totales en el JSON, recalcular un borrador, 404, guardar parámetros de 2027 y parámetros inválidos).
+- TDD: primero las pruebas (fallaban las 9 por rutas inexistentes).
+**Evidencia:**
+- `dotnet test tests/CasinoErp.PruebasIntegracion --filter "FullyQualifiedName~NominaApiTests"` → 16 aprobadas (9 de nómina + 7 de empleados), 0 fallos.
+- `dotnet test CasinoErp.sln` → 244 aprobadas (210 unitarias + 34 de integración), 0 fallos. `dotnet build` → 0 advertencias. Cobertura oficial del dominio: 97,35 % de líneas.
+- Prueba manual con `BaseDatos:RecrearAlIniciar=true`: `POST /api/nomina/calculate` (2026/10) → 200, `BORRADOR`, 18 filas; Bruno Lara recargo 910.000, auxilio 0, neto 3.229.200; Ana Torres auxilio 249.095, neto 2.641.095; total neto 49.074.720, aportes del empleador 14.713.782. Aprobar → 200 `APROBADA`; recalcular → 400 "La nómina de 10/2026 ya está aprobada."; `GET /api/nomina/parametros/2026` → 1.750.905 y 249.095.
+**Decisiones:**
+- Las pruebas de nómina van en una segunda clase (`NominaApiTests`) del mismo archivo, con su propia base, para que la nómina de octubre tenga exactamente las 18 filas del plan sin depender del orden de las pruebas de empleados (que registran empleados nuevos en la base compartida de su clase).
+- El repositorio carga el detalle ordenado por `Id`, que es el orden en que el motor lo generó (por nombre).
+**Pendientes:** fusionar F4 antes que F5 (integrador); mover CER-25 en Jira.
+**Bloqueos / necesito de otros:** F7 espera la I5 de Iván.
+**Siguiente paso:** F6, front `js/api/personal.js`.
+**Commits/PR:** ver el commit `HU-04: Persistencia de nomina y POST /api/nomina/calculate`.
 
 ## 2026-11-18 20:11 · Tarea F4 · Terminada (en revisión)
 **Hecho:**
