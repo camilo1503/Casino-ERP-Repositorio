@@ -8,26 +8,82 @@
 |---|---|---|---|
 | J0 | Fase 0 (bloqueante) | Hecha | `chore/fase-0` → `develop` (8fff1ce) |
 | J1 | Sprint 2 en Jira | Hecha | sprint 35 activo |
-| J2 | Backend remoto del state | Pendiente | — |
-| J3 | Terraform con import | Pendiente | — |
-| J4 | Workflow terraform plan | Pendiente | — |
+| J2 | Backend remoto del state | A: hecha (sin fusionar) · B: bloqueada por F9 | rama `feature/HU-07-bootstrap-state` (`ce37957`) |
+| J3 | Terraform con import | A: hecha (sin fusionar) · B: bloqueada por F9 | rama `feature/HU-07-bootstrap-state` (`815ddf6`) |
+| J4 | Workflow terraform plan | A: hecha (sin fusionar) · B: bloqueada por F9 | rama `feature/HU-07-bootstrap-state` (`08f072a`) |
 | J5 | Integración continua (permanente) | En curso | — |
 | J6 | Despliegue del Sprint 2 en Azure | Pendiente | — |
-| J7 | arc42 consolidación | Pendiente | — |
-| J8 | Artefactos Scrum | Pendiente | — |
+| J7 | arc42 consolidación | En curso: J7.1–J7.3 y J7.5 hechos; J7.4 espera las secciones de los demás | rama `docs/HU-08-arc42-jorge` (`7d0d8a7`) |
+| J8 | Artefactos Scrum | En curso: 4 documentos escritos; faltan capacidad, video, captura y retrospectiva de cada integrante | rama `docs/sprint-2-scrum` (`004a597`) |
 | J9 | Cierre del sprint | Pendiente | — |
 
 ## Pendientes abiertos
 - Avisar al equipo por el chat del grupo que la Fase 0 está en `develop` (D-007).
-- J2: pedirle a Felipe (usuario de GitHub `Flashtwiice`, dueño de la suscripción de Azure donde está `rg-pitboss-erp`) el rol Contributor + User Access Administrator para Jorge.
+- J2: Felipe debe hacer la tarea **F9** de su plan (roles en la suscripción). Ya está escrita en `Plan-Felipe.md`; falta que la lea y avisarle por el chat del grupo.
+- ~~Hacer J2-A, J3-A y J4-A, J7 y J8~~ (hechos, ver la entrada de hoy 2026-11-18 · J2-A a J8).
+- **Fusionar las cuatro ramas de Jorge** cuando el CI esté en verde (`gh` no tiene sesión, así que el CI se revisa en GitHub): `docs/ajuste-acceso-azure-j2`, `docs/HU-08-arc42-jorge`, `docs/sprint-2-scrum` y `feature/HU-07-bootstrap-state`. Esta última **no** debe fusionarse antes de la parte B: el workflow `terraform-plan.yml` fallará en cada PR que cambie un `.tf` mientras no existan los secretos de Azure.
+- Actualizar ADR-003 y la vista de despliegue (§7) cuando se aplique Terraform (parte B).
+- J7.4: revisión cruzada cuando estén en `develop` `10-conceptos-seguridad.md` y los `05-bloques/*.md`.
+- J8: llenar la capacidad del sprint, definir quién graba el video, guardar la captura `terraform-plan-pr.png` y pedir a cada integrante su parte de la retrospectiva (incluida la "Retrospectiva HU-04" de Felipe, F8.3).
+- Crear la subtarea de Jira de F9 de Felipe.
 
 ## Notas para J5.2
 - PR #3 (`feature/CER-6-despliegue-azure` → `main`): **Jorge decidió dejarlo abierto** hasta el cierre del sprint (J9). No se fusiona ni se cierra en las revisiones de PR; su contenido ya está en `develop`.
 
 ## Bloqueos abiertos
-- (ninguno)
+- Desde 2026-11-18: sin roles en la suscripción de Azure (parte B de J2, J3 y J4, y J6). Depende de **F9 de Felipe**.
 
 ## Entradas
+
+## 2026-11-18 · Tareas J2-A, J3-A, J4-A, J7 y J8 · Parte A, J7 y J8 escritos · Terminada (sin fusionar)
+**Hecho:**
+- **J2-A** (`ce37957`): `infra/terraform/bootstrap/main.tf` y `outputs.tf` (grupo `rg-pitboss-tfstate`, cuenta de storage sin claves de acceso, contenedor privado `tfstate`), `.terraform.lock.hcl` y `.gitignore` con `.terraform/`, `*.tfstate*`, `backend.hcl` y `*.tfplan`.
+- **J3-A** (`815ddf6`): `versions.tf`, `backend.tf`, `backend.hcl.example`, `variables.tf`, `main.tf`, `outputs.tf` y `README.md` en `infra/terraform/`.
+- **J4-A** (`08f072a`): `.github/workflows/terraform-plan.yml` (disparo por `pull_request` a `develop` con `paths` de `.tf`, OIDC, `fmt`, `init`, `validate`, `plan` y resumen del job) y la sección OIDC del README de Terraform.
+- **J7** (`7d0d8a7`): `docs/arc42/05-vista-bloques.md` (nivel 1 y tabla de bloques), `07-vista-despliegue.md`, `09-decisiones/ADR-001`, `ADR-003` y `ADR-004` y los enlaces del índice.
+- **J8** (`004a597`): `docs/sprint-2/sprint-backlog.md`, `retrospectiva.md`, `investigacion-terraform-actions.md`, `guion-video.md` y la carpeta `evidencias/`.
+
+**Evidencia:**
+- Terraform (J2-A y J3-A): `terraform init -backend=false` y `terraform validate` → `Success! The configuration is valid.`; `terraform fmt -check -recursive` limpio.
+- Workflow (J4-A): el YAML se parsea con PyYAML (7 pasos). **No se ha ejecutado en GitHub.**
+- Revisión de marcas de IA de AGENT.md §4.1 sobre los commits de cada rama: sin coincidencias.
+- J7 y J8 son solo documentos: no se corrió `dotnet test` ni se vieron renderizados los diagramas Mermaid.
+- Estado de `develop` al partir (`dotnet test` de esta sesión): 210 unitarias + 18 de integración, 0 fallos.
+
+**Decisiones:**
+- **D-010.** Además:
+  - J4: el paso final del workflow del plan no era YAML válido (`run: { echo ...; cat } >> ...`), así que se escribió como bloque `run: |` con `if: always()`.
+  - J3: el proveedor `azurerm` 4.81 no tiene `use_free_limit` ni `free_limit_exhaustion_behavior`, así que la base `CasinoErp` solo se importa. Se agregaron `lifecycle { prevent_destroy = true }` e `ignore_changes`.
+  - J3: se agregaron las variables `nombre_plan`, `admin_sql_login`, `admin_sql_object_id` y `reglas_firewall`, con valores por defecto vacíos que se completan al importar (J3.5).
+- Se corrigió el contenido de `Comun` en arc42 §5 tras revisar el código: `Respuesta<T>` vive en la API.
+
+**Pendientes:** la parte B de J2, J3 y J4; J6 y J9; la fusión de las cuatro ramas; el resto de J7.4 y de J8 (ver "Pendientes abiertos").
+
+**Bloqueos / necesito de otros:** de Felipe, F9 (desde 2026-11-18); de Iván y Camilo, sus secciones de arc42 para J7.4.
+
+**Siguiente paso:** cuando Felipe asigne los roles, comprobar con `az role assignment list` y ejecutar J2-B (bootstrap `apply`). Mientras tanto, J5 (revisar PR y ramas) en cada sesión.
+
+**Commits/PR:** ramas `feature/HU-07-bootstrap-state` (`ce37957`, `815ddf6`, `08f072a`), `docs/HU-08-arc42-jorge` (`7d0d8a7`), `docs/sprint-2-scrum` (`004a597`) y `docs/ajuste-acceso-azure-j2` (F9 y D-010). Sin PR.
+
+## 2026-11-18 · Tarea J2 · Acceso a Azure · Bloqueada
+**Hecho:**
+- Instalados con winget Azure CLI 2.93.0 y Terraform 1.17.1.
+- `az login` con `jalcidesdiaz@ucundinamarca.edu.co` en la suscripción Azure for Students (`12f1bc21-94a3-4b28-9a90-8224d1e5fcc8`).
+- Se comprobó el acceso: `az role assignment list` muestra solo **Contributor sobre la web app `pitboss-erp-8szxa`**. `az group list` vuelve vacío y `az group show -n rg-pitboss-erp` responde `AuthorizationFailed`. En el portal solo aparece la web app.
+- Plan de Felipe: tarea **F9** (asignar Contributor + User Access Administrator, o Owner, sobre la suscripción completa).
+- Plan de Jorge: J2, J3 y J4 se parten en parte A (sin Azure) y parte B (con Azure), con el orden J2-A → J3-A → J4-A → J7 → J8.
+
+**Evidencia:** salidas de `az role assignment list` y `az group show` descritas arriba. No hubo cambios de código, así que no se corrieron pruebas nuevas (`dotnet test` de la sesión: 210 unitarias + 18 de integración, 0 fallos).
+
+**Decisiones:** `D-010-jorge-acceso-azure-en-plan-felipe.md`. Se editó el plan de Felipe porque Jorge lo ordenó en el chat (AGENT.md §1).
+
+**Pendientes:** que Felipe haga F9; J2-A, J3-A, J4-A, J7 y J8.
+
+**Bloqueos / necesito de otros:** de Felipe, los roles en la suscripción (desde 2026-11-18).
+
+**Siguiente paso:** J2-A (escribir `infra/terraform/bootstrap/*.tf` y validarlo con `init -backend=false`).
+
+**Commits/PR:** rama `docs/ajuste-acceso-azure-j2`.
 
 ## 2026-11-18 · Tarea J5.2 · Revisión de ramas · Terminada
 **Hecho:**
