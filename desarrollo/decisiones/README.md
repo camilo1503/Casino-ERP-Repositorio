@@ -15,5 +15,7 @@ Una decisión por archivo: `D-NNN-<autor>-<tema>.md`, con la plantilla de `desar
 | D-009 | El integrador busca y fusiona los PR hacia develop | Aceptada |
 | D-010 | Los roles de Azure los asigna Felipe (F9) y J2–J4 se parten en partes A y B | Aceptada |
 | D-011 | Jorge recibe Contributor y un administrador de roles con condición, en vez de User Access Administrator | Aceptada |
+| D-012 | Seguridad activa en develop (Iván) | Ver el archivo |
+| D-013 | El documento de evidencias de reuniones y sus capturas van en `docs/sprint-2/evidencias/` (Camilo; renumerada desde D-012) | Propuesta |
 
 > Esta tabla la actualiza Jorge al revisar los PR. Cada autor crea su archivo; no hace falta editar la tabla para que la decisión exista.

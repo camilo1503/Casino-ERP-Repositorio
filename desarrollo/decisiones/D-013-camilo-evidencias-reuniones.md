@@ -1,4 +1,4 @@
-# D-012 · El documento de evidencias de reuniones y sus capturas se guardan en `docs/sprint-2/evidencias/`
+# D-013 · El documento de evidencias de reuniones y sus capturas se guardan en `docs/sprint-2/evidencias/`
 
 - **Estado:** Propuesta
 - **Autor:** Camilo
@@ -22,3 +22,5 @@ Se agregan `docs/sprint-2/evidencias/PitBoss_Sprint_Meetings_Evidence.docx` y `d
 
 ## Aprobación
 - Dueño de `docs/`: Jorge · pendiente
+
+> Renumerada de D-012 a D-013 por el integrador: Ivan y Camilo tomaron D-012 a la vez (AGENT.md §8.2) y D-012 queda para la seguridad activa, que ya se cita en otros archivos.

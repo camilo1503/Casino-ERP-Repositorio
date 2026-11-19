@@ -35,6 +35,28 @@
 
 ## Entradas
 
+## 2026-11-19 · Tarea J5.2 · Fusión de F7, D-012 y evidencias de reuniones · Terminada
+**Hecho:**
+- Revisadas y **fusionadas** tres ramas, con el CI en verde, sin marcas de IA y sin conflictos:
+  - `feature/HU-04-autorizacion` (Felipe, F7: tres pruebas de autorización por módulo en `PersonalNominaApiTests` y su bitácora).
+  - `feature/HU-06-seguridad-activa` (Iván, I5.9: D-012 de seguridad activa y su bitácora).
+  - `docs/sprint-2-evidencias-reuniones` (Camilo: documento `.docx` de evidencias de reuniones Scrum y 12 capturas en `docs/sprint-2/evidencias/`, más su decisión).
+- **Colisión de numeración:** Camilo (23:25) e Iván (23:26) tomaron D-012. Se dejó D-012 para la seguridad activa (se cita en otros archivos) y la decisión de Camilo se **renumeró a D-013** (archivo, título y una nota). Es un cambio al archivo de otro integrante, hecho por el integrador para resolver la colisión.
+- Revisadas las capturas de Camilo (el repositorio es público): son páginas públicas de GitHub y una terminal; la única información personal es el nombre de usuario de Windows de Camilo en `tests.png`.
+- PR #8 (HU-05, Camilo): sigue abierto y retenido, sin cambios desde mi comentario.
+
+**Evidencia:** después de fusionar, `dotnet test CasinoErp.sln` → 260 unitarias + 57 de integración, 0 fallos. Revisión de marcas de IA sin coincidencias.
+
+**Decisiones:** D-013 (renumeración, ver arriba). D-013 queda en estado `Propuesta`: el dueño de `docs/` (Jorge) debe aprobarla.
+
+**Pendientes:** que Camilo actualice el PR #8; aprobar D-013; cinco capturas que solo puede tomar el equipo (Jira y las reuniones de Teams, según D-013).
+
+**Bloqueos / necesito de otros:** Camilo, el PR #8 y los secretos de GitHub.
+
+**Siguiente paso:** J5.2 cuando Camilo actualice el PR #8.
+
+**Commits/PR:** fusiones de las tres ramas y la renumeración de D-013 en este commit.
+
 ## 2026-11-18 · Tarea J5.2 · Fusión de la seguridad de Iván · Terminada (HU-05 de Camilo retenida)
 **Hecho:**
 - Revisados los 8 PR abiertos hacia `develop` (#4 a #11), con el CI en verde en todos y sin marcas de IA. Las ramas de Iván están encadenadas (cada una contiene a la anterior).
