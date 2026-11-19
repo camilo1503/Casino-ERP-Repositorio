@@ -35,6 +35,31 @@
 
 ## Entradas
 
+## 2026-11-18 · Tarea J5.2 · Revisión de ramas de Felipe · Terminada
+**Hecho:**
+- No hay PR abiertos hacia `develop`. Felipe empujó cuatro ramas encadenadas (cada una contiene a la anterior): `feature/HU-04-empleados-api` (F4), `-nomina-api` (F5), `-front` (F6) y `-arc42-nomina` (F8).
+- Se revisó la última, que contiene las cuatro:
+  - CI en verde.
+  - Sin marcas de IA en sus commits.
+  - Solo toca archivos del módulo de Felipe (controladores, configuraciones, repositorios, semillas, módulos DI, `personal.js`, pruebas de integración de personal y nómina, arc42 de Nómina y ADR-005) y su bitácora.
+  - Se fusiona sin conflictos.
+  → **Fusionada** en `develop` (`04e37c9`).
+- Las ramas intermedias quedan incluidas y no hace falta fusionarlas. `feature/HU-04-reglas-liquidacion` sigue obsoleta (F2 entró por `nomina-motor`).
+- Tablero actualizado: Felipe tiene hechas F1–F6 y F8; F7 espera la I5 de Iván.
+- Con `docs/arc42/05-bloques/nomina.md` ya en `develop`, el enlace del §5 de arc42 funciona y J7.4 solo espera la sección 10 de Iván.
+
+**Evidencia:** después de fusionar, `dotnet test CasinoErp.sln` → 210 unitarias + 34 de integración (16 nuevas), 0 fallos. Revisión de marcas de IA sin coincidencias.
+
+**Decisiones:** ninguna nueva (D-009).
+
+**Pendientes:** que Felipe haga F9; Iván y Camilo no tienen ramas en el remoto todavía.
+
+**Bloqueos / necesito de otros:** F9 de Felipe; las secciones de Iván y Camilo para J7.4.
+
+**Siguiente paso:** J5.2 en la próxima sesión.
+
+**Commits/PR:** `04e37c9`.
+
 ## 2026-11-18 · Tarea J5.2 · Fusión de ramas de Jorge · Terminada
 **Hecho:**
 - `gh` quedó con sesión (cuenta JorgeDLZ). No hay PR abiertos hacia `develop`.
