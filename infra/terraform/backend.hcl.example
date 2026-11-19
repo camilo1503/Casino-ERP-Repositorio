@@ -1,0 +1,3 @@
+resource_group_name  = "rg-pitboss-tfstate"
+storage_account_name = "stpitbosstfXXXXXX"
+container_name       = "tfstate"
