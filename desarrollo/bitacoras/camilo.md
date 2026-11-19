@@ -9,21 +9,30 @@
 | C0 | Arranque | Hecha | — |
 | C1 | Umbral y alertas (dominio, C8) | Hecha (fusionada) | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8) |
 | C2 | Persistencia y API de alertas | Hecha (fusionada) | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8) |
-| C3 | Proveedores (dominio) | En revisión | [#16](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/16) |
-| C4 | Órdenes de compra (dominio) | En revisión | [#16](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/16) |
-| C5 | Persistencia y API de compras | En revisión | [#16](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/16) |
-| C6 | Front inventario.js y compras.js | En revisión | [#17](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/17) |
-| C7 | Autorización | En revisión (alertas en #8; proveedores y compras con C5) | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8), [#16](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/16) |
-| C8 | arc42 bloque Inventario/Compras y cierre | En revisión | [#18](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/18) |
+| C3 | Proveedores (dominio) | Hecha (fusionada) | [#16](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/16) |
+| C4 | Órdenes de compra (dominio) | Hecha (fusionada) | [#16](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/16) |
+| C5 | Persistencia y API de compras | Hecha (fusionada) | [#16](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/16) |
+| C6 | Front inventario.js y compras.js | Hecha (fusionada) | [#17](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/17) |
+| C7 | Autorización | Hecha (fusionada) | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8), [#16](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/16) |
+| C8 | arc42 bloque Inventario/Compras y cierre | Hecha (fusionada) | [#18](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/18) |
 
 ## Pendientes abiertos
 - Mover en Jira HU-05 (CER-14), la historia de Proveedores (CER-15) y las subtareas CER-29 a CER-37. Lo hace Camilo a mano en Jira.
 - Ensayar en persona la parte de la demo (pasos 1 a 3 de C6.2) y anotar el tiempo (C8.3).
 
 ## Bloqueos abiertos
-- (ninguno) La seguridad de Iván (#4 a #10) ya está en `develop` desde `cce0aa1`; C7 queda desbloqueada.
+- (ninguno)
 
 ## Entradas
+
+## 2026-11-19 · Cierre del plan · Terminada
+**Hecho:** el integrador fusionó los PR #16 (C3–C5 y C7), #17 (C6) y #18 (C8). Todas las tareas C0–C8 de Plan-Camilo están en `develop` (`6caa823`).
+**Evidencia:** en `develop`, `dotnet test CasinoErp.sln` → 310 unitarias + 72 de integración aprobadas, 0 fallos.
+**Decisiones:** ninguna nueva.
+**Pendientes:** mover en Jira CER-14, CER-15 y CER-29 a CER-37 a "Listo" (el intento de iniciar sesión desde el navegador automatizado no se completó; lo hace Camilo a mano); ensayo en persona de la demo (C8.3).
+**Bloqueos / necesito de otros:** ninguno.
+**Siguiente paso:** Sprint Review.
+**Commits/PR:** #16, #17, #18.
 
 ## 2026-11-18 23:55 · Retrospectiva HU-05 (C8.2)
 **(a) Tiempo real contra lo estimado.** HU-05 (5 SP) y Proveedores (3 SP) se estimaron en 8 SP; el plan no traía horas. Trabajo registrado en esta bitácora: C0–C2 de 22:20 a 22:50 del 18-11 (≈ 30 min), integración con la seguridad de Iván ≈ 30 min y C3–C8 de 23:00 a 23:55 (≈ 1 h). Total ≈ 2 h, sin contar la revisión del integrador ni la espera del CI (≈ 1 min por push).
