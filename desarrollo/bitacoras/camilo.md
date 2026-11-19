@@ -7,8 +7,8 @@
 | Tarea | Descripción | Estado | PR |
 |---|---|---|---|
 | C0 | Arranque | Hecha | — |
-| C1 | Umbral y alertas (dominio, C8) | En revisión | ver C2 |
-| C2 | Persistencia y API de alertas | En revisión | ver entrada C2 |
+| C1 | Umbral y alertas (dominio, C8) | En revisión | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8) |
+| C2 | Persistencia y API de alertas | En revisión | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8) |
 | C3 | Proveedores (dominio) | Pendiente | — |
 | C4 | Órdenes de compra (dominio) | Pendiente | — |
 | C5 | Persistencia y API de compras | Pendiente | — |
@@ -23,6 +23,15 @@
 - C7 espera el hito «seguridad activa» (I5 de Iván). A la fecha, I1–I4 están en PR abiertos (#4 a #7) y no hay I5.
 
 ## Entradas
+
+## 2026-11-18 23:15 · Cierre de sesión · C1 + C2 en revisión
+**Hecho:** PR [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8) hacia `develop` (C1 + C2) abierto con la plantilla.
+**Evidencia:** CI del PR #8 en verde: "Backend .NET (build + pruebas)" y el paso de marcas, ambos `pass`. En local, `dotnet test CasinoErp.sln` → 221 + 38 aprobadas, 0 fallos.
+**Decisiones:** ninguna nueva.
+**Pendientes:** que el integrador fusione el PR #8; mover las tarjetas de Jira (Camilo).
+**Bloqueos / necesito de otros:** C7 espera la I5 de Iván, que ya está en el PR #9 (abierto, sin fusionar).
+**Siguiente paso:** C3 (proveedores, dominio) en `feature/HU-05-proveedores`, tomada de `develop` actualizado.
+**Commits/PR:** `d1cf642`, `5a60ede`; PR #8.
 
 ## 2026-11-18 22:49 · Tarea C2 · Terminada (en revisión)
 **Hecho:**
