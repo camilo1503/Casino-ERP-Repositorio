@@ -86,10 +86,10 @@ Ola 5 (cierre)
 
 | Plan | Tarea en curso | Hechas | En revisión (PR) | Bloqueos |
 |---|---|---|---|---|
-| Felipe | F4 | F1 (contrato C4, `f083b68`), F2–F3 (`5ce30c7`) | — | — |
+| Felipe | F9 (acceso de Jorge a Azure) y F4 | F1 (contrato C4, `f083b68`), F2–F3 (`5ce30c7`) | — | — |
 | Iván | I0 | — | — | — |
 | Camilo | C0 | — | — | — |
-| Jorge | J1 / J5 | J0 (Fase 0, `8fff1ce`) | — | — |
+| Jorge | J2-A / J3-A / J4-A, J5 | J0 (Fase 0, `8fff1ce`), J1 | — | J2-B, J3-B, J4-B y J6 esperan **F9 de Felipe** (D-010) |
 
 ## Guion de la Sprint Review (aprox. 10 minutos)
 

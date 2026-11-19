@@ -13,5 +13,6 @@ Una decisión por archivo: `D-NNN-<autor>-<tema>.md`, con la plantilla de `desar
 | D-007 | Fase 0 en develop (aviso) | Aceptada |
 | D-008 | Ajustes a los contratos C1, C2 y C5 durante la Fase 0 | Aceptada |
 | D-009 | El integrador busca y fusiona los PR hacia develop | Aceptada |
+| D-010 | Los roles de Azure los asigna Felipe (F9) y J2–J4 se parten en partes A y B | Aceptada |
 
 > Esta tabla la actualiza Jorge al revisar los PR. Cada autor crea su archivo; no hace falta editar la tabla para que la decisión exista.

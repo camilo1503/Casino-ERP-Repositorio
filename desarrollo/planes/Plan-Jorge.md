@@ -24,14 +24,20 @@
 |---|---|---|
 | J0 Fase 0 | — | Infraestructura, API y front de Felipe, Iván y Camilo |
 | J1 Jira del Sprint 2 | — | Seguimiento del equipo |
-| J2 Backend remoto del state | Acceso a la suscripción de Azure | J3 |
-| J3 Terraform con import | J2 | J4 y J6 |
-| J4 Workflow `terraform plan` | J3 | Criterio "IaC en PR" de la guía |
+| J2 Backend remoto del state | **Parte A** (escribir el código): nada. **Parte B** (aplicar): **F9 de Felipe** (roles en Azure) | J3 |
+| J3 Terraform con import | **Parte A** (escribir y validar): nada. **Parte B** (import y plan): J2 parte B | J4 y J6 |
+| J4 Workflow `terraform plan` | **Parte A** (escribir el workflow): nada. **Parte B** (OIDC y prueba): J3 parte B y F9.6 | Criterio "IaC en PR" de la guía |
 | J5 Integración continua (rol permanente) | J0 | — |
 | J6 Despliegue del Sprint 2 en Azure | J3 y los PR de los demás en `develop` | J9 |
 | J7 arc42 (consolidación) | Las secciones de cada integrante | J8 (video) |
 | J8 Artefactos Scrum | J7 | Retrospectiva |
 | J9 Cierre del sprint | Todo | — |
+
+**Orden revisado (decisión D-010, 2026-11-18).** El acceso a Azure aún no llega: hoy Jorge solo es Contributor de la web app `pitboss-erp-8szxa`. Asignar los roles pasa a ser la tarea **F9 de Felipe** (dueño de la suscripción). Mientras tanto, J2, J3 y J4 se parten en dos:
+- **Parte A (se puede hacer ya, sin Azure):** escribir el código de Terraform y del workflow y validarlo con `terraform init -backend=false` + `terraform validate` + `terraform fmt -check`.
+- **Parte B (necesita F9):** `az login`, `apply`, `import`, `plan` real, OIDC y la prueba del PR.
+
+Orden de trabajo hasta que llegue F9: **J2-A → J3-A → J4-A → J7 → J8**. J6 y J9 esperan a la parte B y a los PR de los demás. Las tareas se marcan con `[A]` o `[B]` en las casillas de J2, J3 y J4.
 
 ---
 
@@ -173,20 +179,20 @@ Jira hoy tiene: épicas CER-1 a CER-4, historias CER-5 a CER-7 (Sprint 1) y la t
 
 ### Tarea J2 · Backend remoto del state de Terraform (HU-07)
 
-**Requisito:** acceso a la suscripción de Azure donde están `rg-pitboss-erp` y `pitboss-erp-8szxa`. La creó el autor del commit `b9f4410` (usuario de GitHub Flashtwiice). Hay que pedirle el rol **Owner** o **Contributor + User Access Administrator** sobre la suscripción o sobre `rg-pitboss-erp`. Si no se consigue, queda como bloqueo en la bitácora y se avisa a Jorge de inmediato.
+**Requisito (solo parte B):** acceso a la suscripción de Azure donde están `rg-pitboss-erp` y `pitboss-erp-8szxa`. Es la de Felipe (Flashtwiice) y la **tarea F9 de su plan** le pide asignarte **Contributor + User Access Administrator** (o Owner) sobre la **suscripción completa**, porque J2 crea `rg-pitboss-tfstate` y J3 lee e importa todo `rg-pitboss-erp`. Comprobación: `az role assignment list --assignee jalcidesdiaz@ucundinamarca.edu.co --all -o table` debe mostrar esos roles con alcance `/subscriptions/<id>`, no solo sobre la web app. Mientras no llegue, la parte A se hace igual y el bloqueo queda en la bitácora.
 
 **Archivos:** `infra/terraform/bootstrap/main.tf`, `infra/terraform/bootstrap/outputs.tf`, `.gitignore` (agregar `.terraform/`, `*.tfstate`, `*.tfstate.*`, `backend.hcl`, `*.tfplan`, `.terraform.lock.hcl` **no**: el lock sí se sube).
 
-- [ ] **J2.1** Escribir `bootstrap/main.tf`:
+- [ ] **J2.1 [A]** Escribir `bootstrap/main.tf` y validarlo con `terraform -chdir=infra/terraform/bootstrap init -backend=false` y `validate`:
   - `terraform { required_version = ">= 1.6" required_providers { azurerm = { source = "hashicorp/azurerm", version = "~> 4.0" } random = { source = "hashicorp/random", version = "~> 3.6" } } }` y `provider "azurerm" { features {} }`
   - `random_string.sufijo` (6 caracteres, `upper = false`, `special = false`)
   - `azurerm_resource_group.tfstate` (`"rg-pitboss-tfstate"`, `"brazilsouth"`)
   - `azurerm_storage_account.tfstate` (`"stpitbosstf${random_string.sufijo.result}"`, `Standard`/`LRS`, `min_tls_version = "TLS1_2"`, `allow_nested_items_to_be_public = false`, `shared_access_key_enabled = false`)
   - `azurerm_storage_container.tfstate` (`"tfstate"`, `container_access_type = "private"`, `storage_account_id`)
   - Outputs: `resource_group_name` y `storage_account_name`.
-- [ ] **J2.2** Aplicar: `az login`, luego `$env:ARM_SUBSCRIPTION_ID="<id>"`, `terraform -chdir=infra/terraform/bootstrap init` y `terraform -chdir=infra/terraform/bootstrap apply`. Esperado: `Apply complete! Resources: 4 added`. El `terraform.tfstate` local del bootstrap **no se sube**; se guarda en un lugar seguro y se anota dónde en la bitácora.
-- [ ] **J2.3** Asignarse el rol `Storage Blob Data Contributor` sobre la cuenta de storage (`az role assignment create`).
-- [ ] **J2.4** Commit: `HU-07: Bootstrap del backend remoto del state en Azure Storage`.
+- [ ] **J2.2 [B]** Aplicar: `az login`, luego `$env:ARM_SUBSCRIPTION_ID="<id>"`, `terraform -chdir=infra/terraform/bootstrap init` y `terraform -chdir=infra/terraform/bootstrap apply`. Esperado: `Apply complete! Resources: 4 added`. El `terraform.tfstate` local del bootstrap **no se sube**; se guarda en un lugar seguro y se anota dónde en la bitácora.
+- [ ] **J2.3 [B]** Asignarse el rol `Storage Blob Data Contributor` sobre la cuenta de storage (`az role assignment create`).
+- [ ] **J2.4 [A]** Commit (la parte A se puede commitear ya; el `apply` de la parte B no cambia los archivos): `HU-07: Bootstrap del backend remoto del state en Azure Storage`.
 
 ---
 
@@ -205,10 +211,10 @@ Jira hoy tiene: épicas CER-1 a CER-4, historias CER-5 a CER-7 (Sprint 1) y la t
 | `azurerm_mssql_database.erp` | `CasinoErp` (oferta gratuita serverless) |
 | `azurerm_mssql_firewall_rule.*` | las reglas que devuelva `az sql server firewall-rule list -g rg-pitboss-erp -s pitboss-sql-8szxa` |
 
-- [ ] **J3.1** `versions.tf`: las mismas versiones que el bootstrap. `provider "azurerm" { features {} }` (la suscripción llega por `ARM_SUBSCRIPTION_ID`).
-- [ ] **J3.2** `backend.tf`: `terraform { backend "azurerm" { key = "pitboss.tfstate" use_azuread_auth = true } }`. `backend.hcl.example` contiene `resource_group_name = "rg-pitboss-tfstate"`, `storage_account_name = "stpitbosstfXXXXXX"` y `container_name = "tfstate"`.
-- [ ] **J3.3** `variables.tf`: `ubicacion` (por defecto `"brazilsouth"`), `nombre_app` (`"pitboss-erp-8szxa"`), `nombre_sql` (`"pitboss-sql-8szxa"`), `codigo_totp_demo` (string, por defecto `""`, `sensitive = true`) y `recrear_base_al_iniciar` (bool, por defecto `false`).
-- [ ] **J3.4** `main.tf`: los recursos de la tabla, más `random_password.jwt` (48 caracteres, `special = false`). Los `app_settings` de la web app:
+- [ ] **J3.1 [A]** `versions.tf`: las mismas versiones que el bootstrap. `provider "azurerm" { features {} }` (la suscripción llega por `ARM_SUBSCRIPTION_ID`).
+- [ ] **J3.2 [A]** `backend.tf`: `terraform { backend "azurerm" { key = "pitboss.tfstate" use_azuread_auth = true } }`. `backend.hcl.example` contiene `resource_group_name = "rg-pitboss-tfstate"`, `storage_account_name = "stpitbosstfXXXXXX"` y `container_name = "tfstate"`.
+- [ ] **J3.3 [A]** `variables.tf`: `ubicacion` (por defecto `"brazilsouth"`), `nombre_app` (`"pitboss-erp-8szxa"`), `nombre_sql` (`"pitboss-sql-8szxa"`), `codigo_totp_demo` (string, por defecto `""`, `sensitive = true`) y `recrear_base_al_iniciar` (bool, por defecto `false`).
+- [ ] **J3.4 [A]** `main.tf`: los recursos de la tabla, más `random_password.jwt` (48 caracteres, `special = false`). Los `app_settings` de la web app:
   - `BaseDatos__Proveedor = "SqlServer"`
   - `ConnectionStrings__CasinoErp = "Server=tcp:${azurerm_mssql_server.principal.fully_qualified_domain_name},1433;Database=CasinoErp;Authentication=Active Directory Default;Encrypt=True;"`
   - `TZ = "America/Bogota"`
@@ -217,7 +223,7 @@ Jira hoy tiene: épicas CER-1 a CER-4, historias CER-5 a CER-7 (Sprint 1) y la t
   - `BaseDatos__RecrearAlIniciar = tostring(var.recrear_base_al_iniciar)`
   
   `site_config { always_on = false application_stack { dotnet_version = "8.0" } }`, porque F1 no permite `always_on`.
-- [ ] **J3.5** Importar (state remoto) y llevar el plan a cero diferencias:
+- [ ] **J3.5 [B]** Importar (state remoto) y llevar el plan a cero diferencias:
 
 ```powershell
 Copy-Item infra/terraform/backend.hcl.example infra/terraform/backend.hcl   # completar con los outputs de J2
@@ -228,10 +234,10 @@ terraform -chdir=infra/terraform plan
 ```
 
 Se ajustan los argumentos hasta que el plan **solo** muestre los cambios intencionales: la creación de `random_password.jwt` y el agregado de `Jwt__Clave`, `Seguridad__CodigoTotpDemo` y `BaseDatos__RecrearAlIniciar`. Los atributos que el proveedor no puede representar (por ejemplo, los de la oferta gratuita de SQL) van en `lifecycle { ignore_changes = [...] }`, con un comentario que explique por qué. **No aplicar todavía** (se aplica en J6).
-- [ ] **J3.6** `outputs.tf`: `url_app = "https://${azurerm_linux_web_app.erp.default_hostname}"` y `principal_id_app` (la identidad administrada).
-- [ ] **J3.7** `infra/terraform/README.md`: requisitos (Azure CLI, Terraform ≥ 1.6), orden (bootstrap → `backend.hcl` → `init` → imports, que ya están hechos en el state remoto → `plan`/`apply`), cómo publicar la app (los comandos de la sección "Despliegue en Azure" del README) y una nota: el usuario SQL de la identidad administrada (`CREATE USER [pitboss-erp-8szxa] FROM EXTERNAL PROVIDER`) se creó a mano y no lo maneja Terraform.
-- [ ] **J3.8** Verificar: `terraform -chdir=infra/terraform fmt -check -recursive` y `terraform -chdir=infra/terraform validate` → `Success! The configuration is valid.`
-- [ ] **J3.9** Commit y PR: `HU-07: Terraform de la infraestructura existente (App Service F1, Azure SQL) con state remoto`.
+- [ ] **J3.6 [A]** `outputs.tf`: `url_app = "https://${azurerm_linux_web_app.erp.default_hostname}"` y `principal_id_app` (la identidad administrada).
+- [ ] **J3.7 [A]** `infra/terraform/README.md`: requisitos (Azure CLI, Terraform ≥ 1.6), orden (bootstrap → `backend.hcl` → `init` → imports, que ya están hechos en el state remoto → `plan`/`apply`), cómo publicar la app (los comandos de la sección "Despliegue en Azure" del README) y una nota: el usuario SQL de la identidad administrada (`CREATE USER [pitboss-erp-8szxa] FROM EXTERNAL PROVIDER`) se creó a mano y no lo maneja Terraform.
+- [ ] **J3.8 [A]** (con `init -backend=false`) Verificar: `terraform -chdir=infra/terraform fmt -check -recursive` y `terraform -chdir=infra/terraform validate` → `Success! The configuration is valid.`
+- [ ] **J3.9 [A]** Commit y PR: `HU-07: Terraform de la infraestructura existente (App Service F1, Azure SQL) con state remoto`.
 
 ---
 
@@ -239,8 +245,8 @@ Se ajustan los argumentos hasta que el plan **solo** muestre los cambios intenci
 
 **Archivos:** `.github/workflows/terraform-plan.yml`; `infra/terraform/README.md` (sección OIDC).
 
-- [ ] **J4.1** Crear la identidad del workflow: un App Registration "github-pitboss-terraform" con una credencial federada para `repo:camilo1503/Casino-ERP-Repositorio:pull_request`, el rol `Contributor` sobre `rg-pitboss-erp` (hace falta para leer los app settings) y el rol `Storage Blob Data Contributor` sobre la cuenta del state. Quien administre el repo carga los secretos `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `TFSTATE_RG` y `TFSTATE_SA`.
-- [ ] **J4.2** Escribir el workflow:
+- [ ] **J4.1 [B]** Crear la identidad del workflow: un App Registration "github-pitboss-terraform" con una credencial federada para `repo:camilo1503/Casino-ERP-Repositorio:pull_request`, el rol `Contributor` sobre `rg-pitboss-erp` (hace falta para leer los app settings) y el rol `Storage Blob Data Contributor` sobre la cuenta del state. Quien administre el repo carga los secretos `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `TFSTATE_RG` y `TFSTATE_SA`.
+- [ ] **J4.2 [A]** Escribir el workflow:
 
 ```yaml
 name: Terraform plan
@@ -274,8 +280,8 @@ jobs:
       - run: { echo '```'; cat plan.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
 ```
 
-- [ ] **J4.3** Probar: abrir un PR a `develop` que solo agregue un comentario en `variables.tf`. Esperado: el check "Terraform plan" en verde y el resumen con `No changes.` (o solo los cambios pendientes de J6). Guardar una captura en `docs/sprint-2/evidencias/terraform-plan-pr.png`.
-- [ ] **J4.4** Commit: `HU-07: Workflow de terraform plan en PR a develop con OIDC`.
+- [ ] **J4.3 [B]** Probar: abrir un PR a `develop` que solo agregue un comentario en `variables.tf`. Esperado: el check "Terraform plan" en verde y el resumen con `No changes.` (o solo los cambios pendientes de J6). Guardar una captura en `docs/sprint-2/evidencias/terraform-plan-pr.png`.
+- [ ] **J4.4 [A]** Commit: `HU-07: Workflow de terraform plan en PR a develop con OIDC`.
 
 ---
 

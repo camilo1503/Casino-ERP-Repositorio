@@ -8,9 +8,9 @@
 |---|---|---|---|
 | J0 | Fase 0 (bloqueante) | Hecha | `chore/fase-0` → `develop` (8fff1ce) |
 | J1 | Sprint 2 en Jira | Hecha | sprint 35 activo |
-| J2 | Backend remoto del state | Pendiente | — |
-| J3 | Terraform con import | Pendiente | — |
-| J4 | Workflow terraform plan | Pendiente | — |
+| J2 | Backend remoto del state | A: pendiente · B: bloqueada por F9 | — |
+| J3 | Terraform con import | A: pendiente · B: bloqueada por F9 | — |
+| J4 | Workflow terraform plan | A: pendiente · B: bloqueada por F9 | — |
 | J5 | Integración continua (permanente) | En curso | — |
 | J6 | Despliegue del Sprint 2 en Azure | Pendiente | — |
 | J7 | arc42 consolidación | Pendiente | — |
@@ -19,15 +19,36 @@
 
 ## Pendientes abiertos
 - Avisar al equipo por el chat del grupo que la Fase 0 está en `develop` (D-007).
-- J2: pedirle a Felipe (usuario de GitHub `Flashtwiice`, dueño de la suscripción de Azure donde está `rg-pitboss-erp`) el rol Contributor + User Access Administrator para Jorge.
+- J2: Felipe debe hacer la tarea **F9** de su plan (roles en la suscripción). Ya está escrita en `Plan-Felipe.md`; falta que la lea y avisarle por el chat del grupo.
+- Hacer J2-A, J3-A y J4-A (código de Terraform y workflow, sin Azure), luego J7 y J8.
 
 ## Notas para J5.2
 - PR #3 (`feature/CER-6-despliegue-azure` → `main`): **Jorge decidió dejarlo abierto** hasta el cierre del sprint (J9). No se fusiona ni se cierra en las revisiones de PR; su contenido ya está en `develop`.
 
 ## Bloqueos abiertos
-- (ninguno)
+- Desde 2026-11-18: sin roles en la suscripción de Azure (parte B de J2, J3 y J4, y J6). Depende de **F9 de Felipe**.
 
 ## Entradas
+
+## 2026-11-18 · Tarea J2 · Acceso a Azure · Bloqueada
+**Hecho:**
+- Instalados con winget Azure CLI 2.93.0 y Terraform 1.17.1.
+- `az login` con `jalcidesdiaz@ucundinamarca.edu.co` en la suscripción Azure for Students (`12f1bc21-94a3-4b28-9a90-8224d1e5fcc8`).
+- Se comprobó el acceso: `az role assignment list` muestra solo **Contributor sobre la web app `pitboss-erp-8szxa`**. `az group list` vuelve vacío y `az group show -n rg-pitboss-erp` responde `AuthorizationFailed`. En el portal solo aparece la web app.
+- Plan de Felipe: tarea **F9** (asignar Contributor + User Access Administrator, o Owner, sobre la suscripción completa).
+- Plan de Jorge: J2, J3 y J4 se parten en parte A (sin Azure) y parte B (con Azure), con el orden J2-A → J3-A → J4-A → J7 → J8.
+
+**Evidencia:** salidas de `az role assignment list` y `az group show` descritas arriba. No hubo cambios de código, así que no se corrieron pruebas nuevas (`dotnet test` de la sesión: 210 unitarias + 18 de integración, 0 fallos).
+
+**Decisiones:** `D-010-jorge-acceso-azure-en-plan-felipe.md`. Se editó el plan de Felipe porque Jorge lo ordenó en el chat (AGENT.md §1).
+
+**Pendientes:** que Felipe haga F9; J2-A, J3-A, J4-A, J7 y J8.
+
+**Bloqueos / necesito de otros:** de Felipe, los roles en la suscripción (desde 2026-11-18).
+
+**Siguiente paso:** J2-A (escribir `infra/terraform/bootstrap/*.tf` y validarlo con `init -backend=false`).
+
+**Commits/PR:** rama `docs/ajuste-acceso-azure-j2`.
 
 ## 2026-11-18 · Tarea J5.2 · Revisión de ramas · Terminada
 **Hecho:**

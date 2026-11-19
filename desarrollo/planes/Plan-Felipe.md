@@ -55,6 +55,7 @@ EmpleadosController ──▶ EmpleadoService ──▶ IEmpleadoRepositorio
 | F6 Front (`personal.js`) | Fase 0 (C2) | |
 | F7 Autorización de tus controladores | **I5 de Iván** | Cuando Iván anuncie "seguridad activa" |
 | F8 arc42 y cierre | F5 | |
+| **F9 Acceso de Jorge a Azure (asignar roles)** | — (solo tu suscripción) | **Hoy, antes de F4**: son 5 minutos y desbloquea J2, J3, J4 y J6 de Jorge |
 
 Mientras esperas la Fase 0, haz F1, F2 y F3, que solo crean archivos nuevos en `Dominio/` y en las pruebas unitarias.
 
@@ -589,3 +590,20 @@ Cuando Iván anuncie en su decisión D-0NN que "la seguridad está activa en dev
 - [ ] **F8.3** **Aporte a la retrospectiva:** en tu bitácora, una entrada "Retrospectiva HU-04" con (a) cuántas horas tomó realmente contra lo estimado, (b) qué casos de borde no se vieron en el planning y (c) tu propuesta para la regla de estimación del Sprint 3. Jorge lo consolida en `docs/sprint-2/retrospectiva.md`.
 - [ ] **F8.4 Demo de la Sprint Review** (tu parte, máximo 2 minutos): login como Felipe → Turnos y nómina → Calcular → mostrar la fila de Bruno Lara (recargo nocturno sin auxilio) y la de Ana Torres (auxilio) → Aprobar. Ensayarla una vez y anotar el tiempo en la bitácora.
 - [ ] **F8.5** Commit y PR: `HU-08: arc42 bloque Nomina con diagrama de secuencia y ADR-005`. Mover HU-04 a "Listo" en Jira. Escribir la entrada final de la bitácora: estado de cada tarea, pendientes y decisiones.
+
+---
+
+### Tarea F9 · Dar a Jorge acceso a la suscripción de Azure (decisión D-010)
+
+**Por qué es tuya:** la suscripción de Azure donde están `rg-pitboss-erp` y `pitboss-erp-8szxa` es tuya (usuario de GitHub `Flashtwiice`) y solo quien es Owner de la suscripción puede asignar roles. Hoy Jorge (`jalcidesdiaz@ucundinamarca.edu.co`) solo tiene **Contributor sobre la web app `pitboss-erp-8szxa`**, y eso no alcanza para la HU-07 (Terraform). No es código: no lleva rama ni PR. Hazla **antes de F4**.
+
+**Archivos:** ninguno. Solo el portal de Azure y tu bitácora.
+
+- [ ] **F9.1** En portal.azure.com abre **Suscripciones** → la suscripción *Azure for Students* → **Control de acceso (IAM)** → **Agregar** → **Agregar asignación de roles**.
+- [ ] **F9.2** Asigna el rol **Contributor** (pestaña *Roles de administrador con privilegios*) a `jalcidesdiaz@ucundinamarca.edu.co`, con alcance en la **suscripción completa**, no solo en la web app. Hace falta porque Jorge debe crear el grupo `rg-pitboss-tfstate` (J2) y leer e importar el plan de App Service, el servidor SQL, la base de datos y las reglas de firewall de `rg-pitboss-erp` (J3).
+- [ ] **F9.3** Repite con el rol **User Access Administrator** (mismo correo, misma suscripción). Hace falta para que Jorge pueda asignarse `Storage Blob Data Contributor` sobre el state (J2.3) y crear los roles del workflow de GitHub con OIDC (J4.1). Si prefieres un solo paso, asigna **Owner** sobre la suscripción: cubre los dos roles.
+- [ ] **F9.4** Verifica en **Control de acceso (IAM)** → **Asignaciones de roles** que Jorge aparece con los dos roles (o Owner) con alcance *Esta suscripción*.
+- [ ] **F9.5** Avísale a Jorge (chat del grupo) y anota en tu bitácora: fecha y hora, roles asignados y alcance. Jorge comprueba con `az role assignment list` y retoma J2.
+- [ ] **F9.6** *(Para J4, cuando Jorge lo pida)* Cargar en el repositorio de GitHub los secretos `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `TFSTATE_RG` y `TFSTATE_SA` (solo quien administra el repo puede hacerlo). Jorge te pasa los valores cuando termine J4.1.
+
+**Fuera de alcance:** no instales ni ejecutes Terraform; eso es de Jorge. No cambies nada más de la suscripción.
