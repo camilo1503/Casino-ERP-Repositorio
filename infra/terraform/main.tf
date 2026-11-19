@@ -20,18 +20,22 @@ resource "random_password" "jwt" {
 }
 
 resource "azurerm_linux_web_app" "erp" {
-  name                = var.nombre_app
-  resource_group_name = azurerm_resource_group.principal.name
-  location            = azurerm_resource_group.principal.location
-  service_plan_id     = azurerm_service_plan.principal.id
-  https_only          = true
+  name                    = var.nombre_app
+  resource_group_name     = azurerm_resource_group.principal.name
+  location                = azurerm_resource_group.principal.location
+  service_plan_id         = azurerm_service_plan.principal.id
+  https_only              = false # igual que en Azure hoy; pasar a true es una mejora pendiente (decisión aparte).
+  client_affinity_enabled = true
 
   identity {
     type = "SystemAssigned"
   }
 
   site_config {
-    always_on = false # F1 no permite always_on.
+    always_on        = false # F1 no permite always_on.
+    ftps_state       = "FtpsOnly"
+    http2_enabled    = true
+    app_command_line = "dotnet CasinoErp.Api.dll"
 
     application_stack {
       dotnet_version = "8.0"
@@ -40,7 +44,8 @@ resource "azurerm_linux_web_app" "erp" {
 
   app_settings = {
     BaseDatos__Proveedor         = "SqlServer"
-    ConnectionStrings__CasinoErp = "Server=tcp:${azurerm_mssql_server.principal.fully_qualified_domain_name},1433;Database=CasinoErp;Authentication=Active Directory Default;Encrypt=True;"
+    BaseDatos__CargarDatosDemo   = "true"
+    ConnectionStrings__CasinoErp = "Server=tcp:${azurerm_mssql_server.principal.fully_qualified_domain_name},1433;Database=CasinoErp;Authentication=Active Directory Default;Encrypt=True;TrustServerCertificate=False;Connect Timeout=60;"
     TZ                           = "America/Bogota"
     Jwt__Clave                   = random_password.jwt.result
     Seguridad__CodigoTotpDemo    = var.codigo_totp_demo
