@@ -19,12 +19,37 @@
 
 ## Pendientes abiertos
 - Avisar al equipo por el chat del grupo que la Fase 0 está en `develop` (D-007).
-- Revisar la rama `feature/HU-04-empleados-dominio` de Felipe cuando abra el PR o termine F1.
+- PR #3 (`feature/CER-6-despliegue-azure` → `main`, de Flashtwiice): no se fusiona porque `main` solo recibe el cierre del sprint y su contenido ya está en `develop` desde la Fase 0. Pendiente que Jorge decida si cerrarlo.
+- Confirmar con el equipo quién es el usuario de GitHub `Flashtwiice`: firmó los commits de F1 de Felipe y también el despliegue manual de Azure (`b9f4410`). Si es Felipe, él tiene la suscripción que necesita J2.
 
 ## Bloqueos abiertos
 - (ninguno)
 
 ## Entradas
+
+## 2026-11-18 · Tarea J5.2 · Revisión de PR y ramas · Terminada
+**Hecho:**
+- PR abiertos (API de GitHub): solo #3 `feature/CER-6-despliegue-azure` → `main`. No se fusiona (ver pendientes).
+- Rama sin PR `feature/HU-04-empleados-dominio` (F1 de Felipe, commits `6dca7ce` y `0d59388`). Se revisó:
+  - CI en verde (run 44430511001);
+  - sin marcas de IA;
+  - solo toca archivos de Felipe (`Dominio/Personal`, `Dobles/PersonalEnMemoria.cs`, `EmpleadoServiceTests.cs`, su bitácora);
+  - `Empleado.cs` idéntico al contrato C4;
+  - los mensajes coinciden con el plan.
+  
+  → **Fusionada** en `develop` (`f083b68`).
+
+**Evidencia:** después de fusionar, `dotnet test` → 160 unitarias + 18 integración en verde; cobertura del dominio 97,05 % de líneas.
+
+**Decisiones:** ninguna nueva (se aplicó D-009).
+
+**Pendientes:** decisión sobre el PR #3; identificar a Flashtwiice.
+
+**Bloqueos / necesito de otros:** ninguno.
+
+**Siguiente paso:** avisar a Iván que C4 ya está en `develop` (puede empezar I3).
+
+**Commits/PR:** `f083b68`.
 
 ## 2026-11-18 · Tarea J0 / J5 · Fase 0 fusionada · Terminada
 **Hecho:**
