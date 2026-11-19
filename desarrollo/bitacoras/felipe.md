@@ -17,13 +17,12 @@
 | F8 | arc42 bloque Nómina y cierre | En revisión (falta ensayar la demo) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-arc42-nomina) |
 
 ## Pendientes abiertos
-- F0.3: mover HU-04 y la subtarea F1 a "En curso" en Jira (lo hace Felipe; el agente no tiene acceso a Jira).
+- ~~F0.3: mover HU-04 y la subtarea F1 a "En curso" en Jira~~ (resuelto: HU-04 en "En curso" y F0–F3 en "Listo").
 - ~~F1.5: abrir el PR de F1~~ (resuelto: el integrador la fusionó en `develop`, D-009).
 - ~~Comando de cobertura de AGENT.md §10 sin `coverlet.msbuild`~~ (resuelto: la Fase 0 agregó el paquete).
 - La rama `feature/HU-04-reglas-liquidacion` quedó obsoleta (F2 ya entró por `feature/HU-04-nomina-motor`). No se fusiona; Felipe o Jorge pueden borrarla.
-- Jira: mover CER-22, CER-23 (F2, F3) a "Listo" y CER-24 y CER-25 (F4, F5) a "En revisión".
 - Orden de fusión de mis ramas: F4 (`feature/HU-04-empleados-api`) → F5 (`feature/HU-04-nomina-api`) → F6 (`feature/HU-04-front`) → F8 (`feature/HU-04-arc42-nomina`). Cada una contiene a la anterior.
-- Jira: CER-26 (F6) y CER-28 (F8) a "En revisión"; HU-04 (CER-13) a "Listo" cuando se fusionen todas y se haga F7.
+- ~~Jira: mover las tarjetas de F4–F8~~ (resuelto el 2026-11-18: CER-24, 25, 26 y 28 en "En curso" con un comentario de evidencia cada una; CER-27 en "Por hacer" con el comentario de bloqueo. El tablero no tiene columna "En revisión"; el integrador las pasa a "Listo" al fusionar). Falta: HU-04 (CER-13) a "Listo" cuando se fusionen todas y se haga F7.
 - F8.4: ensayar la demo de 2 minutos (guion en la entrada de F8) y anotar el tiempo real (lo hace Felipe).
 
 ## Bloqueos abiertos
