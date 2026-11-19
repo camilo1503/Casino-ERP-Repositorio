@@ -12,7 +12,7 @@
 | F3 | PayrollEngine y NominaService | Hecha (fusionada en `develop`, `5ce30c7`) | Fusión del integrador (D-009) |
 | F4 | Persistencia y API de empleados | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-empleados-api) |
 | F5 | Persistencia y API de nómina | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-nomina-api) |
-| F6 | Front personal.js | Pendiente | — |
+| F6 | Front personal.js | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-front) |
 | F7 | Autorización de mis controladores | Pendiente | — |
 | F8 | arc42 bloque Nómina y cierre | Pendiente | — |
 
@@ -22,13 +22,41 @@
 - ~~Comando de cobertura de AGENT.md §10 sin `coverlet.msbuild`~~ (resuelto: la Fase 0 agregó el paquete).
 - La rama `feature/HU-04-reglas-liquidacion` quedó obsoleta (F2 ya entró por `feature/HU-04-nomina-motor`). No se fusiona; Felipe o Jorge pueden borrarla.
 - Jira: mover CER-22, CER-23 (F2, F3) a "Listo" y CER-24 y CER-25 (F4, F5) a "En revisión".
-- `feature/HU-04-nomina-api` (F5) se tomó de `feature/HU-04-empleados-api` (F4) porque F4 aún no está fusionada: conviene fusionar F4 antes que F5.
+- Orden de fusión de mis ramas: F4 (`feature/HU-04-empleados-api`) → F5 (`feature/HU-04-nomina-api`, tomada de F4) → F6 (`feature/HU-04-front`, tomada de F5). Cada una contiene a la anterior.
+- Jira: CER-26 (F6) a "En revisión".
 
 ## Bloqueos abiertos
 - ~~F4, F5 y F6 esperan la Fase 0 de Jorge~~ (resuelto: Fase 0 en `develop` desde `8fff1ce`, D-007).
 - F7 espera la I5 de Iván ("seguridad activa"). Aún no está en `develop`.
 
 ## Entradas
+
+## 2026-11-18 20:30 · Tarea F6 · Terminada (en revisión)
+**Hecho:**
+- Rama `feature/HU-04-front`, tomada de la rama de F5 (F4 y F5 aún no están fusionadas y el front las necesita).
+- Solo se editó `src/CasinoErp.Api/wwwroot/js/api/personal.js` (IIFE con `PitBossApi`; no se tocó `index.html`):
+  1. carga `empleados` (orden 15): `S.staff` desde `GET /api/empleados?soloActivos=true`, conservando `id` (`s1`…`s18`) y certificación; los nuevos con `id = 'se' + id`;
+  2. `FORM.employee` conectado a `POST /api/empleados`;
+  3. carga `nomina` (orden 80): `S.nomina` = nómina 2026/10;
+  4. `payroll()` redefinido: usa la nómina real si hay API y `S.nomina` (así `V.rrhh` muestra los totales reales sin tocarlo); si no, el cálculo del mockup;
+  5. `ACT.modal` conectado: al abrir el modal de nómina en borrador se llama `POST /api/nomina/calculate`;
+  6. `MODALS.payroll` nuevo con el título, subtítulo, columnas, etiquetas de contrato, pie (total neto y aportes del empleador) y botones del plan; sin API usa el del mockup;
+  7. `ACT.approvePayroll` conectado a `POST /api/nomina/{id}/aprobar`.
+**Evidencia (prueba manual F6.2, API con `BaseDatos:RecrearAlIniciar=true`, usuario Felipe Cortés · Coordinador de talento humano):**
+1. Competencias → + Registrar empleado "Marta Gil", `1099888777`, Cajero → toast "Marta Gil registrado. Requiere examen de manejo de caja."; en la API: Cajero · Caja. Tras recargar la página, Marta sigue (19 empleados). ✅
+2. Registrar otra vez `1099888777` → "Ya existe un empleado con ese documento." ✅
+3. Turnos y nómina → Calcular nómina → 19 filas. Bruno Lara: recargo $910.000, auxilio —, neto $3.229.200. Ana Torres: auxilio $249.095, neto $2.641.095. Total neto $51.439.815; aportes del empleador $15.404.288. La tarjeta "Nómina de octubre" de `V.rrhh` muestra los mismos totales. ✅
+4. Aprobar nómina → toast "Nómina aprobada. Se pagará el 30/10/2026."; API en `APROBADA`; al reabrir, etiqueta **Aprobada** y sin botón (no se recalcula). ✅
+5. Como Ana Torres (Crupier, `sid s1`): **Mi mesa** muestra M-01 · Blackjack. ✅
+6. Sin API (front servido solo con un servidor estático en el puerto 5081): toast de modo demostración y el modal muestra el cálculo de ejemplo del mockup (6 columnas, "Valores de ejemplo."). ✅
+- `node --check personal.js` sin errores. `dotnet test CasinoErp.sln` → 244 aprobadas (210 + 34), 0 fallos.
+**Decisiones:**
+- Las cargas usan `pedirSi` (D-008) en vez de `if (!S.user || ...some(allowed))`: es la misma regla escrita con el ayudante del núcleo, y además permite que la nómina se cargue antes del inicio de sesión, igual que los empleados.
+- La etiqueta "Aprobada" se muestra junto al título del modal.
+**Pendientes:** fusionar F4 → F5 → F6 en ese orden (integrador); mover CER-26 en Jira.
+**Bloqueos / necesito de otros:** F7 espera la I5 de Iván ("seguridad activa").
+**Siguiente paso:** F8 (arc42 del bloque Nómina, diagrama de secuencia y ADR-005), que no depende de F7.
+**Commits/PR:** ver el commit `HU-04: Front de empleados y nomina conectado a la API`.
 
 ## 2026-11-18 20:22 · Tarea F5 · Terminada (en revisión)
 **Hecho:**
