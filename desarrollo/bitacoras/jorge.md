@@ -35,6 +35,27 @@
 
 ## Entradas
 
+## 2026-11-18 · Tarea J5.2 · Fusión de la seguridad de Iván · Terminada (HU-05 de Camilo retenida)
+**Hecho:**
+- Revisados los 8 PR abiertos hacia `develop` (#4 a #11), con el CI en verde en todos y sin marcas de IA. Las ramas de Iván están encadenadas (cada una contiene a la anterior).
+- **Fusionada** `feature/HU-06-front` (la punta de la cadena, que incluye los PR #4, #5, #6, #7, #9 y #10) → `cce0aa1`. GitHub los marcó como fusionados.
+- **Fusionada** `feature/HU-06-arc42-seguridad` (PR #11) → `2932d93`.
+- **No fusionada** `feature/HU-05-alertas-stock` (PR #8, Camilo): al probarla junto con la seguridad activa fallan 4 pruebas de integración de `InventarioComprasApiTests` con 401, porque llaman a la API sin sesión. Comentado en el PR con lo que falta (rebase, `ClienteComoAsync`, `[AutorizarModulo]` en controladores nuevos y volver a probar).
+- Con la seguridad activa, `NominaController` y `EmpleadosController` ya llevan `[AutorizarModulo]` (los puso Iván en I5): queda cubierta la parte de código de F7 de Felipe.
+- J7.4 parcial: la sección 10 de Iván coincide con el bloque Nómina de Felipe (resultado en `docs/sprint-2/guion-video.md`).
+
+**Evidencia:** después de fusionar, `dotnet test CasinoErp.sln` → 260 unitarias + 54 de integración, 0 fallos. Probada también la combinación con el PR #8: 271 unitarias + 4 integración fallidas (por eso se retuvo). La cobertura del dominio la comprobó el CI de cada rama (el comando local no se pudo repetir con este SDK).
+
+**Decisiones:** ninguna nueva (D-009). Iván crea D-012 con el hash `cce0aa1`.
+
+**Pendientes:** que Camilo actualice el PR #8; avisar a Iván (D-012, CER-43, CER-46 y CER-16), a Felipe (F7) y a Camilo (C7); el resto de J7.4; J4.3; J6.
+
+**Bloqueos / necesito de otros:** de Camilo, el PR #8 corregido y los secretos de GitHub.
+
+**Siguiente paso:** J5.2 cuando Camilo actualice el PR #8.
+
+**Commits/PR:** `cce0aa1`, `2932d93`; PR #4 a #7 y #9 a #11 fusionados.
+
 ## 2026-11-18 · Tareas J2-B, J3-B y J4-B · Terminadas (J4.3 pendiente)
 **Hecho:**
 - **F9 resuelta:** Felipe asignó Contributor y *RBAC Administrator* con condición sobre la suscripción (D-011). Verificado con `az role assignment list`.

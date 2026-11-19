@@ -78,7 +78,7 @@ Ola 5 (cierre)
 |---|---|---|
 | Fase 0 en develop ✅ (2026-11-18, `8fff1ce`) | `decisiones/D-007-jorge-fase-0-lista.md` | `git pull --rebase origin develop`; empezar las tareas de infraestructura, API y front |
 | Contrato C4 en develop ✅ (2026-11-18, `f083b68`) | PR de F1 fusionado | Iván empieza I3 |
-| Seguridad activa | `decisiones/D-0NN-ivan-seguridad-activa.md` | `pull --rebase`; pruebas de integración con `ClienteComoAsync`; `[AutorizarModulo]` en los controladores nuevos |
+| Seguridad activa ✅ (2026-11-18, `cce0aa1`) | `decisiones/D-0NN-ivan-seguridad-activa.md` | `pull --rebase`; pruebas de integración con `ClienteComoAsync`; `[AutorizarModulo]` en los controladores nuevos |
 | Congelamiento | Jorge lo anuncia en el tablero | Solo correcciones; todo en `develop` para desplegar |
 | Sprint Review | — | Demo (ver abajo) |
 
@@ -87,8 +87,8 @@ Ola 5 (cierre)
 | Plan | Tarea en curso | Hechas | En revisión (PR) | Bloqueos |
 |---|---|---|---|---|
 | Felipe | F7 espera la I5; F9.6 (secretos) lo carga Camilo | F1 (`f083b68`), F2–F3 (`5ce30c7`), F4, F5, F6 y F8 (`04e37c9`), F9 (`1bf6a6f`, D-011) | — | F7 espera «seguridad activa» de Iván |
-| Iván | I0 | — | — | — |
-| Camilo | C0 | — | — | — |
+| Iván | I8 (cierre y demo; D-012 y Jira) | I1–I7 (`cce0aa1`, `2932d93`): seguridad activa en `develop` | — | — |
+| Camilo | Rebase del PR #8 y C3–C8 | — | PR #8 (C1–C2): retenido, 4 pruebas fallan con 401 por la seguridad activa | Tiene que migrar sus pruebas a `ClienteComoAsync` |
 | Jorge | J4.3 (prueba del workflow), J5; J7.4 y J8 (faltantes) | J0 (Fase 0, `8fff1ce`), J1, J2, J3 (`9be6eec`), J7.1–J7.3 y J8 escrito (`1c9546b`, `fe5141a`) | — | J4.3 espera que Camilo cargue los 5 secretos de GitHub; J6 espera los PR de Iván y Camilo |
 
 ## Guion de la Sprint Review (aprox. 10 minutos)
