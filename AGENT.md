@@ -74,7 +74,7 @@ Nada de lo que llega al repositorio puede llevar marcas de agua ni coautoría de
 - **Si tu herramienta las agrega sola, quítalas antes del push.** En Claude Code, el usuario puede desactivarlo en su configuración personal (`~/.claude/settings.json`) con `"includeCoAuthoredBy": false` o con el ajuste de atribución equivalente de su versión. Aun así, revisa cada mensaje.
 - **Verificación antes de cada `git push`.** Este comando no debe imprimir nada:
   ```powershell
-  git log origin/develop..HEAD --format=%B | Select-String -Pattern "co-authored-by:.*(claude|anthropic|openai|copilot|gpt)|generated (with|by) .*(claude|ai)|noreply@anthropic\.com"
+  git log origin/develop..HEAD --format=%B | Select-String -Pattern "co-authored-by:.*(claude|anthropic|openai|copilot|gpt)|generated (with|by) .*\b(claude|ai)\b|noreply@anthropic\.com"
   ```
   Si imprime algo, corrige los commits **que todavía no has empujado** (`git commit --amend` para el último, o `git rebase -i` sobre tus commits locales si tu herramienta lo permite; si no, pídele ayuda a tu integrante) y vuelve a verificar. Nunca reescribas commits que ya están en `origin`.
 - El CI tiene un paso "Sin marcas de agua de IA" que falla si encuentra alguna de estas marcas en los commits del push o del PR. Un PR con ese paso en rojo no se fusiona.

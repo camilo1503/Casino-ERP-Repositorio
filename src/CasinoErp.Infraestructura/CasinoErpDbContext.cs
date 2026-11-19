@@ -124,5 +124,9 @@ public class CasinoErpDbContext : DbContext
             e.Property(m => m.Tipo).HasConversion<string>().HasMaxLength(20);
             e.HasIndex(m => m.CodigoFicha);
         });
+
+        // Sprint 2: cada módulo registra sus entidades con un IEntityTypeConfiguration<T>
+        // en Configuraciones/ (contrato C1, decisión D-004). Este archivo ya no se edita.
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CasinoErpDbContext).Assembly);
     }
 }

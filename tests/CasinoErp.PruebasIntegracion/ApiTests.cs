@@ -2,29 +2,8 @@ using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
 using FluentAssertions;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace CasinoErp.PruebasIntegracion;
-
-/// <summary>Levanta la API con una base SQLite temporal y los datos de demostración.</summary>
-public class CasinoErpFactory : WebApplicationFactory<Program>
-{
-    private readonly string _archivo = Path.Combine(Path.GetTempPath(), $"casino-erp-{Guid.NewGuid():N}.db");
-
-    protected override void ConfigureWebHost(IWebHostBuilder builder)
-    {
-        builder.UseSetting("BaseDatos:Proveedor", "Sqlite");
-        builder.UseSetting("BaseDatos:CargarDatosDemo", "true");
-        builder.UseSetting("ConnectionStrings:CasinoErp", $"Data Source={_archivo};Pooling=False");
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        base.Dispose(disposing);
-        if (File.Exists(_archivo)) File.Delete(_archivo);
-    }
-}
 
 /// <summary>Pruebas de integración: controlador + servicio + EF Core + base de datos real (SQLite).</summary>
 public class ApiTests : IClassFixture<CasinoErpFactory>
@@ -33,8 +12,7 @@ public class ApiTests : IClassFixture<CasinoErpFactory>
 
     public ApiTests(CasinoErpFactory factory) => _cliente = factory.CreateClient();
 
-    private static async Task<JsonElement> Json(HttpResponseMessage respuesta) =>
-        (await respuesta.Content.ReadFromJsonAsync<JsonElement>());
+    private static Task<JsonElement> Json(HttpResponseMessage respuesta) => respuesta.LeerJsonAsync();
 
     [Fact]
     public async Task Lista_los_jugadores_de_demostracion()

@@ -374,7 +374,7 @@ public record CambiarContrasenaRequest(string Actual, string Nueva);
 | `POST /api/auth/login` | `[AllowAnonymous]` | 200 `LoginResponse`; 401 `{ mensaje }` |
 | `GET /api/auth/yo` | `[Authorize]` | `{ usuario: UsuarioDto, modulos }` |
 | `POST /api/auth/cambiar-contrasena` | `[Authorize]` (usa el `sub` del token) | `{ mensaje: "Contraseña actualizada" }` |
-| `GET /api/salud` | Anónimo (`app.MapGet("/api/salud", () => Results.Ok(new { estado = "ok" })).AllowAnonymous()`) | `{ estado: "ok" }` |
+| `GET /api/salud` | Anónimo. **Ya existe desde la Fase 0** en `Program.cs` con `.AllowAnonymous()`; solo verifica que siga respondiendo 200 sin token (prueba `Salud_y_front_son_anonimos`) | `{ estado: "ok" }` |
 | `GET /api/usuarios` | `[AutorizarModulo(Modulos.Usuarios)]` | `IReadOnlyList<UsuarioDto>` |
 | `POST /api/usuarios` | idem | 201 `{ mensaje: "Usuario creado", datos: { usuario, contrasenaTemporal, uriTotp } }` |
 | `PUT /api/usuarios/{id}/rol` | idem | `Respuesta<UsuarioDto>("Rol actualizado", …)` |
