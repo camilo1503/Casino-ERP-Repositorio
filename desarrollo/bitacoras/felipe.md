@@ -13,7 +13,7 @@
 | F4 | Persistencia y API de empleados | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-empleados-api) |
 | F5 | Persistencia y API de nómina | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-nomina-api) |
 | F6 | Front personal.js | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-front) |
-| F7 | Autorización de mis controladores | Terminada (en revisión; el PR se abre cuando entren #9 y #10 de Iván) | Rama `feature/HU-04-autorizacion` |
+| F7 | Autorización de mis controladores | Terminada (en revisión) | PR de `feature/HU-04-autorizacion` hacia `develop` |
 | F8 | arc42 bloque Nómina y cierre | En revisión (demo ensayada: 2 min) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-arc42-nomina) |
 | F9 | Acceso de Jorge a Azure (D-010, D-011) | Hecha (F9.6 pendiente: secretos de GitHub cuando Jorge los pida) | Sin PR (tarea de portal) |
 
@@ -31,9 +31,45 @@
 
 ## Bloqueos abiertos
 - ~~F4, F5 y F6 esperan la Fase 0 de Jorge~~ (resuelto: Fase 0 en `develop` desde `8fff1ce`, D-007).
-- ~~F7 espera la I5 de Iván~~ (resuelto en código el 2026-11-18: F7 hecha sobre la rama de Iván). Queda: abrir el PR de `feature/HU-04-autorizacion` hacia `develop` cuando Jorge fusione los PR #9 y #10 de Iván.
+- ~~F7 espera la I5 de Iván~~ (resuelto en código el 2026-11-18: F7 hecha sobre la rama de Iván). La seguridad entró a `develop` en `cce0aa1` (merge normal, sin *squash*); el PR de F7 ya solo muestra mis cambios.
 
 ## Entradas
+
+## 2026-11-18 23:47 · Hallazgo de la revisión cruzada en el front de nómina (F6) · Terminada
+**Hecho:**
+- Hallazgo reportado en la revisión: después de aprobar la nómina y volver a entrar, la tarjeta "Nómina de octubre" de Turnos y nómina seguía diciendo «Borrador» aunque `GET /api/nomina` devuelve `APROBADA`.
+- Causa: la insignia está fija en `index.html` (`V.rrhh`, `B('Borrador','warn')`); `personal.js` cambiaba el modal pero no la tarjeta.
+- Corrección en `src/CasinoErp.Api/wwwroot/js/api/personal.js` (sin tocar `index.html`): se envuelve `V.rrhh`; con la API en línea y la nómina del mes `APROBADA`, la insignia pasa a «Aprobada» y el botón «Calcular nómina» a «Ver nómina». Sin API o sin nómina aprobada, la vista queda igual que el mockup.
+- El otro hallazgo (el pie del menú dice «v0.3 · Sprint 1») está en `index.html`, que no es mío ni se edita (AGENT.md); se lo dejo al dueño del front.
+**Evidencia:** en `http://localhost:5080` con la base recreada, como felipe.cortes: sin nómina → «Borrador»; Calcular → Aprobar → «Aprobada» y «Ver nómina»; recargando la página y volviendo a Turnos y nómina sigue «Aprobada»; «Ver nómina» abre el modal "Aprobada" sin `POST /api/nomina/calculate` (solo `GET /api/nomina`). Consola sin errores. `node --check` correcto.
+**Decisiones:** ninguna.
+**Pendientes:** PR de `feature/HU-04-autorizacion` (incluye esta corrección).
+**Bloqueos / necesito de otros:** ninguno.
+**Siguiente paso:** ninguno de código.
+**Commits/PR:** ver el commit `HU-04: Tarjeta de nomina con el estado real tras aprobar`.
+
+## 2026-11-18 23:32 · Pedidos de Jorge (F7, retrospectiva, nomina.md) · Terminada
+**Hecho:**
+- F7 confirmada: los atributos los puso Iván (I5) y las 3 pruebas de permisos están en esta rama.
+- Retrospectiva: llenadas **solo mis tres líneas** de `docs/sprint-2/retrospectiva.md` (qué salió bien, qué mejorar, impedimentos), como pide la plantilla ("cada integrante escribe lo suyo"). Cambio mínimo en un archivo compartido (AGENT.md). La entrada "Retrospectiva HU-04 (F8.3)" de abajo sigue siendo el detalle.
+- Horas reales de HU-04, para el punto (a) de F8.3: 8 SP estimados, sin horas en el plan; real ≈ 4 h 25 min de sesión (19:00–23:24), incluidas las esperas de Jira, de la I5 de Iván y la prueba de la demo.
+- `docs/arc42/05-bloques/nomina.md`: el encabezado pasa de "5.x" a **"5.2.7"**, según su fila en la tabla del Nivel 2 de `05-vista-bloques.md` (Jugadores 5.2.1 … Inventario 5.2.6, Nómina 5.2.7, Seguridad 5.2.8). Los bloques de Iván y Camilo no se tocan.
+- Integrado `origin/develop` en la rama con `git merge` (no rebase: la rama ya estaba publicada).
+**Evidencia:** `dotnet test CasinoErp.sln -c Release` con `develop` integrado → 260 unitarias + 57 de integración, 0 fallos.
+**Decisiones:** numeración de bloques por la fila de la tabla del Nivel 2; se lo propongo a Iván (5.2.8) y Camilo (5.2.6).
+**Pendientes:** abrir el PR y fusionarlo (Jorge); CER-27 y CER-13 a "Listo" al fusionar.
+**Bloqueos / necesito de otros:** ninguno.
+**Siguiente paso:** ninguno de código.
+**Commits/PR:** ver el commit `HU-04: Retrospectiva de Felipe y encabezado numerado del bloque Nomina`.
+
+## 2026-11-18 23:31 · Tarea F7 · PR listo para abrir
+**Hecho:** Jorge fusionó la seguridad de Iván en `develop` (`cce0aa1`, merge normal que incluye los PR #4 a #10) y anotó en su bitácora que el código de F7 queda cubierto por los atributos de la I5. Como no fue *squash*, `feature/HU-04-autorizacion` no necesita rebase: frente a `develop` solo trae el commit de F7 y esta entrada.
+**Evidencia:** `develop` (`d88fc73`) + `4b502cf` combinados en una copia aparte, sin conflictos → `dotnet test CasinoErp.sln -c Release`: 260 unitarias + 57 de integración (54 de `develop` + 3 de F7), 0 fallos.
+**Decisiones:** ninguna.
+**Pendientes:** abrir el PR (Felipe) y fusionarlo (Jorge, D-009); HU-04 (CER-13) y CER-27 a "Listo" al fusionar.
+**Bloqueos / necesito de otros:** ninguno.
+**Siguiente paso:** ninguno de código.
+**Commits/PR:** ver el commit `HU-04: Bitacora de Felipe, F7 lista para PR tras fusionar la seguridad`.
 
 ## 2026-11-18 23:23 · Tarea F7 · Terminada (en revisión)
 **Hecho:**
