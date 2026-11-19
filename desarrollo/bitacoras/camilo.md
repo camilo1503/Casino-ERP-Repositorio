@@ -13,25 +13,37 @@
 | C4 | Órdenes de compra (dominio) | Pendiente | — |
 | C5 | Persistencia y API de compras | Pendiente | — |
 | C6 | Front inventario.js y compras.js | Pendiente | — |
-| C7 | Autorización | Pendiente | — |
+| C7 | Autorización | En curso (alertas cubiertas en #8; faltan Proveedores y Compras, C3–C5) | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8) |
 | C8 | arc42 bloque Inventario/Compras y cierre | Pendiente | — |
 
 ## Pendientes abiertos
 - Mover en Jira HU-05 (CER-14) y las subtareas C0, C1 y C2 (CER-29, 30, 31) a "En curso" / "Listo" (C0.3). Lo hace Camilo a mano en Jira.
-- Cargar los 5 secretos de GitHub del workflow de `terraform plan` que pide Jorge para J4.3 (F9.6; Camilo es el dueño del repositorio).
 
 ## Bloqueos abiertos
 - (ninguno) La seguridad de Iván (#4 a #10) ya está en `develop` desde `cce0aa1`; C7 queda desbloqueada.
 
 ## Entradas
 
+## 2026-11-19 04:40 · PR #8 corregido y secretos de GitHub · Terminada
+**Hecho:**
+- Respuesta al comentario de Jorge en el PR #8: `git merge origin/develop` otra vez (entraron F7, I5.9 y las evidencias); las pruebas de `InventarioComprasApiTests` ya usaban `ClienteComoAsync` desde `56272e0`; se agrega `Un_crupier_no_ve_alertas_de_inventario` (C7.3: `ana.torres` recibe 403 en `GET /api/inventario/alertas` y en `PUT .../minimo`).
+- El PR #8 no crea controladores nuevos, así que no hay `[AutorizarModulo]` que poner: `InventarioController` ya lo tiene desde la I5 de Iván. `ProveedoresController` y `ComprasController` lo llevarán al nacer en C5.
+- No se usó `pull --rebase`: la rama ya estaba publicada y reescribirla exigiría `push --force`, que AGENT.md §4 prohíbe.
+- Cargados los 5 secretos de GitHub Actions para el workflow `terraform-plan.yml` (F9.6 / J4.3), con los valores de la bitácora de Jorge: `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `TFSTATE_RG` y `TFSTATE_SA`. Verificado con `gh secret list`.
+**Evidencia:** `dotnet build` → 0 advertencias. `dotnet test CasinoErp.sln` → 271 unitarias + 62 de integración aprobadas, 0 fallos.
+**Decisiones:** merge en vez de rebase (ver arriba).
+**Pendientes:** Jira; fusión del PR #8 (integrador); J4.3, la prueba del workflow, la hace Jorge.
+**Bloqueos / necesito de otros:** ninguno.
+**Siguiente paso:** C3 (proveedores, dominio).
+**Commits/PR:** merge de `develop` y la prueba de C7 en el PR #8.
+
 ## 2026-11-18 23:35 · Integración de develop en el PR #8 y documento de evidencias · Terminada
 **Hecho:**
 - `feature/HU-05-alertas-stock`: `git merge origin/develop` (con *merge* y no *rebase*, porque la rama ya estaba publicada). Entró la seguridad de Iván sin conflictos; `InventarioController` conserva el `[AutorizarModulo(Modulos.Inventario, Modulos.Caja)]` de Iván y mis dos endpoints.
 - `InventarioComprasApiTests` (y la clase anidada `Demo`) crean el cliente con `ClienteComoAsync("laura.gomez@pitboss.co")`, como pide C2.1 cuando la I5 está en `develop`. Sin ese cambio, las 4 pruebas fallaban con 401.
-- Documento de evidencias de reuniones (APA, portada del Sprint 1) con 12 capturas de GitHub y de las pruebas, en la rama `docs/sprint-2-evidencias-reuniones`: PR [#13](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/13) y decisión [D-012](../decisiones/D-012-camilo-evidencias-reuniones.md) (va en ese PR).
+- Documento de evidencias de reuniones (APA, portada del Sprint 1) con 12 capturas de GitHub y de las pruebas, en la rama `docs/sprint-2-evidencias-reuniones`: PR [#13](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/13) y decisión [D-013](../decisiones/D-013-camilo-evidencias-reuniones.md) (va en ese PR).
 **Evidencia:** `dotnet build` → 0 advertencias. `dotnet test CasinoErp.sln` → 271 unitarias + 58 de integración aprobadas, 0 fallos. Cobertura de líneas de `CasinoErp.Dominio` → 97,36 %.
-**Decisiones:** D-012 (el documento vive en `docs/sprint-2/evidencias/`, carpeta de Jorge; Camilo lo pidió). Roles Scrum registrados en el documento: Jorge, Scrum Master; Camilo, Product Owner.
+**Decisiones:** D-013, renumerada por Jorge desde D-012 (el documento vive en `docs/sprint-2/evidencias/`, carpeta de Jorge; Camilo lo pidió). Roles Scrum registrados en el documento: Jorge, Scrum Master; Camilo, Product Owner.
 **Pendientes:** Jira; los 5 secretos de GitHub para J4.3; 5 capturas del documento que solo puede tomar el equipo (tablero y backlog de Jira, una reunión de Teams por sprint).
 **Bloqueos / necesito de otros:** ninguno.
 **Siguiente paso:** C3 (proveedores, dominio) en `feature/HU-05-proveedores`.

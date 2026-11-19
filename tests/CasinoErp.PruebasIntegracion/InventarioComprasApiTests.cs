@@ -45,6 +45,16 @@ public class InventarioComprasApiTests(CasinoErpFactory factory) : IClassFixture
         (await r.LeerJsonAsync()).GetProperty("mensaje").GetString().Should().Be("El stock mínimo no puede ser negativo");
     }
 
+    [Fact]
+    public async Task Un_crupier_no_ve_alertas_de_inventario()
+    {
+        var crupier = await factory.ClienteComoAsync("ana.torres@pitboss.co");
+
+        (await crupier.GetAsync("/api/inventario/alertas")).StatusCode.Should().Be(HttpStatusCode.Forbidden);
+        (await crupier.PutAsJsonAsync("/api/inventario/fichas/FICHA-5K/minimo", new { stockMinimo = 1 }))
+            .StatusCode.Should().Be(HttpStatusCode.Forbidden);
+    }
+
     /// <summary>
     /// Flujo de la Sprint Review. Tiene su propia base porque retira de FICHA-500K
     /// y las pruebas de arriba asumen que esa ficha sigue en 420.
