@@ -1,10 +1,10 @@
 # Casino-ERP-Repositorio
-Sistema ERP para la gestión integral de casinos, desarrollado para Ingeniería de Software II (6° semestre). Incluye perfiles de jugador, catálogo de mesas, caja, retención de jugadores, rellenos de fichas e inventario de la bóveda.
+Sistema ERP para la gestión integral de casinos, desarrollado para Ingeniería de Software II (6° semestre). Incluye perfiles de jugador, catálogo de mesas, caja, retención de jugadores, rellenos de fichas e inventario de la bóveda (Sprint 1), y en el Sprint 2 talento humano y nómina, usuarios con roles y autenticación de dos factores, y la infraestructura de Azure como código.
 
 ## Incremento: PitBoss ERP conectado a la API (C# · ASP.NET Core · SQL Server)
 
 El front del prototipo (`src/CasinoErp.Api/wwwroot/index.html`) se mantiene igual y ahora guarda en la base de datos a través de la API.
-El archivo `wwwroot/js/conexion-api.js` conecta los módulos del incremento sin cambiar las pantallas:
+Los archivos de `wwwroot/js/api/` (`nucleo.js`, `sprint1.js`, `inventario.js`, `personal.js`, `seguridad.js`, `compras.js` y `arranque.js`) conectan los módulos sin cambiar las pantallas:
 
 | Módulo del front | Qué se guarda en la API |
 | --- | --- |
@@ -16,7 +16,7 @@ El archivo `wwwroot/js/conexion-api.js` conecta los módulos del incremento sin 
 | Retención de jugadores | Ofertas aceptadas y rechazadas, límite diario y configuración |
 | Cumplimiento | Reportar y escalar transacciones sobre el umbral |
 
-Promociones, Competencias, Turnos y nómina, Reportes, Usuarios, el inicio de sesión y la app del jugador siguen con los datos de ejemplo del prototipo (próximo incremento).
+Competencias, Turnos y nómina, Usuarios y el inicio de sesión (con 2FA) ya usan la API desde el Sprint 2. Promociones, Reportes y la app del jugador siguen con los datos de ejemplo del prototipo.
 Si la API rechaza una operación, el front muestra el mensaje de la regla de negocio y vuelve a cargar los datos reales.
 
 | Categoría | Tecnología |
@@ -36,9 +36,13 @@ CasinoErp.sln
 src/CasinoErp.Dominio/          reglas de negocio (servicios, entidades, interfaces de repositorio)
 src/CasinoErp.Infraestructura/  Entity Framework Core, repositorios y datos de demostración
 src/CasinoErp.Api/              controladores REST + Swagger
-src/CasinoErp.Api/wwwroot/       front del ERP + conexion-api.js
-tests/CasinoErp.PruebasUnitarias/    132 pruebas unitarias del dominio (TDD)
-tests/CasinoErp.PruebasIntegracion/  15 pruebas de la API contra una base SQLite real
+src/CasinoErp.Api/wwwroot/       front del ERP + js/api/*.js (un archivo por módulo)
+tests/CasinoErp.PruebasUnitarias/    260 pruebas unitarias del dominio (TDD)
+tests/CasinoErp.PruebasIntegracion/  57 pruebas de la API contra una base SQLite real
+infra/terraform/                 infraestructura de Azure como código (HU-07)
+docs/arc42/                      arquitectura (arc42): bloques, despliegue, seguridad y ADR
+docs/sprint-2/                   artefactos Scrum del Sprint 2
+desarrollo/                      planes, bitácoras, contratos y decisiones del Sprint 2
 ```
 
 ### Módulos y endpoints
@@ -52,6 +56,13 @@ tests/CasinoErp.PruebasIntegracion/  15 pruebas de la API contra una base SQLite
 | Rellenos y bóveda | `GET/POST /api/rellenos`, `POST /api/rellenos/{id}/aprobar`, `.../rechazar`, `GET /api/boveda`, `POST /api/boveda/depositos` |
 | Inventario de fichas | `GET/POST /api/inventario/fichas`, `POST .../entradas`, `POST .../retiros`, `GET /api/inventario/movimientos` |
 | Tablero | `GET /api/resumen` |
+| Empleados (HU-04) | `GET/POST /api/empleados`, `GET/PUT /api/empleados/{documento}`, `POST /api/empleados/{documento}/retirar` |
+| Nómina (HU-04) | `POST /api/nomina/calculate`, `GET /api/nomina`, `GET /api/nomina/{anio}/{mes}`, `POST /api/nomina/{id}/aprobar`, `GET/PUT /api/nomina/parametros/{anio}` |
+| Autenticación (HU-06) | `POST /api/auth/login` (con código 2FA), `GET /api/auth/yo`, `POST /api/auth/cambiar-contrasena` |
+| Usuarios y roles (HU-06) | `GET/POST /api/usuarios`, `PUT /api/usuarios/{id}/rol`, `POST .../restablecer`, `.../desactivar`, `.../reactivar` |
+| Estado del servicio | `GET /api/salud` (anónimo) |
+
+Todos los endpoints, salvo `login` y `salud`, exigen el token JWT y el rol con acceso al módulo (`[AutorizarModulo]`); sin permiso responden `403`. Las alertas de stock crítico (HU-05), los proveedores y las órdenes de compra se agregarán a esta tabla cuando entren en `develop`.
 
 Los errores de negocio responden `400` y los registros inexistentes `404`, ambos con `{ "mensaje": "..." }` (los mismos mensajes de los escenarios Gherkin).
 
@@ -60,13 +71,13 @@ Los errores de negocio responden `400` y los registros inexistentes `404`, ambos
 Requiere el SDK de .NET 8. En Visual Studio 2022 basta con abrir `CasinoErp.sln` y ejecutar `CasinoErp.Api`.
 
 ```bash
-dotnet test                                   # 147 pruebas
+dotnet test CasinoErp.sln                     # 317 pruebas (260 unitarias + 57 de integración)
 dotnet run --project src/CasinoErp.Api        # front: http://localhost:5080 · API: http://localhost:5080/swagger
 ```
 
 Por defecto usa SQLite (`casino-erp.db`) y carga los mismos datos de ejemplo del prototipo. Para empezar de cero, borra `src/CasinoErp.Api/casino-erp.db`. Para SQL Server / Azure SQL, completar el servidor en `src/CasinoErp.Api/appsettings.SqlServer.json` y ejecutar con `ASPNETCORE_ENVIRONMENT=SqlServer`.
 
-Cobertura del dominio con las pruebas unitarias: 97 % de líneas y 88 % de ramas.
+Cobertura del dominio con las pruebas unitarias: 97,22 % de líneas, 90,04 % de ramas y 94,64 % de métodos (medido el 2026-11-19 con el comando de AGENT.md §10; el CI exige al menos 80 % de líneas). Se vuelve a medir al cierre del sprint.
 
 ## Pruebas (Ingeniería de Software II · Taller de herramientas de prueba para CRUD)
 
@@ -80,6 +91,14 @@ La carpeta [`pruebas/`](pruebas/) contiene el taller aplicado a PitBoss ERP: esc
 | Reqnroll (`dotnet test`) | 2 de 2 escenarios aprobados |
 
 Instrucciones de ejecución y evidencias en [`pruebas/README.md`](pruebas/README.md).
+
+### Cuentas de demostración (Sprint 2)
+
+Todas usan la contraseña `Casino2026`. El código de doble factor de demostración es `482913` y solo se acepta cuando `Seguridad:CodigoTotpDemo` está configurado (Development y pruebas). La lista completa de cuentas y roles está en [`desarrollo/contratos.md`](desarrollo/contratos.md) (C6). Ejemplos: `felipe.cortes@pitboss.co` (Talento humano), `laura.gomez@pitboss.co` (Cajero) e `ivan.leon@pitboss.co` (Administrador).
+
+### Infraestructura como código (Terraform)
+
+La infraestructura de Azure está descrita en [`infra/terraform/`](infra/terraform/README.md): el state vive en Azure Blob Storage (`bootstrap/` lo crea) y los recursos existentes se importaron. Cada PR a `develop` que cambia un `.tf` ejecuta `terraform plan` con el workflow [`terraform-plan.yml`](.github/workflows/terraform-plan.yml) (OIDC, sin secretos de larga duración). Más detalle en [`docs/arc42/07-vista-despliegue.md`](docs/arc42/07-vista-despliegue.md).
 
 ### Despliegue en Azure
 
