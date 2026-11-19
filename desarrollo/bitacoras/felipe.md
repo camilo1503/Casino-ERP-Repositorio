@@ -14,7 +14,7 @@
 | F5 | Persistencia y API de nómina | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-nomina-api) |
 | F6 | Front personal.js | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-front) |
 | F7 | Autorización de mis controladores | Bloqueada (espera la I5 de Iván) | — |
-| F8 | arc42 bloque Nómina y cierre | En revisión (falta ensayar la demo) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-arc42-nomina) |
+| F8 | arc42 bloque Nómina y cierre | En revisión (demo ensayada: 2 min) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-arc42-nomina) |
 
 ## Pendientes abiertos
 - ~~F0.3: mover HU-04 y la subtarea F1 a "En curso" en Jira~~ (resuelto: HU-04 en "En curso" y F0–F3 en "Listo").
@@ -23,7 +23,7 @@
 - La rama `feature/HU-04-reglas-liquidacion` quedó obsoleta (F2 ya entró por `feature/HU-04-nomina-motor`). No se fusiona; Felipe o Jorge pueden borrarla.
 - Orden de fusión de mis ramas: F4 (`feature/HU-04-empleados-api`) → F5 (`feature/HU-04-nomina-api`) → F6 (`feature/HU-04-front`) → F8 (`feature/HU-04-arc42-nomina`). Cada una contiene a la anterior.
 - ~~Jira: mover las tarjetas de F4–F8~~ (resuelto el 2026-11-18: CER-24, 25, 26 y 28 en "En curso" con un comentario de evidencia cada una; CER-27 en "Por hacer" con el comentario de bloqueo. El tablero no tiene columna "En revisión"; el integrador las pasa a "Listo" al fusionar). Falta: HU-04 (CER-13) a "Listo" cuando se fusionen todas y se haga F7.
-- F8.4: ensayar la demo de 2 minutos (guion en la entrada de F8) y anotar el tiempo real (lo hace Felipe).
+- ~~F8.4: ensayar la demo de 2 minutos~~ (resuelto: 2 minutos).
 
 ## Bloqueos abiertos
 - ~~F4, F5 y F6 esperan la Fase 0 de Jorge~~ (resuelto: Fase 0 en `develop` desde `8fff1ce`, D-007).
@@ -54,7 +54,7 @@
 6. **Aprobar nómina** → toast "Nómina aprobada. Se pagará el 30/10/2026." → abrir otra vez el modal: etiqueta **Aprobada**, sin botón.
 7. (Si sobra tiempo) Swagger: `POST /api/nomina/calculate` con el mismo mes → 400 "La nómina de 10/2026 ya está aprobada."
 - Antes de la demo: arrancar con `BaseDatos__RecrearAlIniciar=true` para que la nómina de octubre no esté aprobada.
-- **Tiempo del ensayo:** (pendiente: lo anota Felipe después de ensayar).
+- **Tiempo del ensayo:** 2 minutos (ensayo de Felipe del 2026-11-18, app local con `BaseDatos:RecrearAlIniciar=true`). Cabe en el tiempo asignado (minutos 3–5 del guion de la Sprint Review).
 
 ## 2026-11-18 20:34 · Retrospectiva HU-04 (F8.3)
 **(a) Tiempo real contra lo estimado.** HU-04 se estimó en 8 SP; el plan no traía horas. Trabajo del agente en esta sesión: F0 a F8 entre las 19:00 y las 20:34 (≈ 1 h 35 min), sin contar el tiempo de Felipe en revisión, Jira, PR y la espera del CI (≈ 3 a 5 min por push). Las tareas de dominio (F1–F3) fueron las más rápidas; F4–F6 tomaron más por la prueba manual en el navegador.
