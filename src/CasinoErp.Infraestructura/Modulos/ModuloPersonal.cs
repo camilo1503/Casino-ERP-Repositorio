@@ -1,3 +1,6 @@
+using CasinoErp.Dominio.Personal;
+using CasinoErp.Infraestructura.Repositorios;
+using CasinoErp.Infraestructura.Semillas;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CasinoErp.Infraestructura.Modulos;
@@ -8,5 +11,11 @@ namespace CasinoErp.Infraestructura.Modulos;
 /// </summary>
 public static class ModuloPersonal
 {
-    public static IServiceCollection AgregarPersonal(this IServiceCollection services) => services;
+    public static IServiceCollection AgregarPersonal(this IServiceCollection services)
+    {
+        services.AddScoped<IEmpleadoRepositorio, EmpleadoRepositorio>();
+        services.AddScoped<EmpleadoService>();
+        services.AddScoped<ISemilla, SemillaPersonal>();
+        return services;
+    }
 }
