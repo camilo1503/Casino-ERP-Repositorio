@@ -113,3 +113,132 @@ public class PersonalNominaApiTests : IClassFixture<CasinoErpFactory>
         activos.EnumerateArray().Should().NotContain(e => e.GetProperty("documento").GetString() == "1099888702");
     }
 }
+
+/// <summary>
+/// HU-04 · API de nómina (Plan-Felipe F5). Va en su propia clase, con su propia base, para que los empleados
+/// que registran las pruebas de PersonalNominaApiTests no cambien el número de filas de la nómina de octubre.
+/// </summary>
+public class NominaApiTests : IClassFixture<CasinoErpFactory>
+{
+    private readonly HttpClient _cliente;
+
+    public NominaApiTests(CasinoErpFactory factory) => _cliente = factory.CreateClient();
+
+    [Fact]
+    public async Task Calcula_la_nomina_de_octubre_con_los_empleados_de_demostracion()
+    {
+        var r = await _cliente.PostAsJsonAsync("/api/nomina/calculate", new { anio = 2026, mes = 10 });
+
+        r.StatusCode.Should().Be(HttpStatusCode.OK);
+        var j = await r.LeerJsonAsync();
+        j.GetProperty("mensaje").GetString().Should().Be("Nómina calculada");
+        var datos = j.GetProperty("datos");
+        datos.GetProperty("estado").GetString().Should().Be("BORRADOR");
+        datos.GetProperty("detalle").GetArrayLength().Should().Be(18);
+        datos.GetProperty("totalNeto").GetInt64().Should().BeGreaterThan(0);
+        datos.GetProperty("detalle").EnumerateArray()
+             .Single(d => d.GetProperty("empleadoDocumento").GetString() == "1010334923")
+             .GetProperty("neto").GetInt64().Should().Be(3_229_200);       // Bruno Lara, turno noche
+        datos.GetProperty("detalle").EnumerateArray()
+             .Single(d => d.GetProperty("empleadoDocumento").GetString() == "1010200300")
+             .GetProperty("auxilioTransporte").GetInt64().Should().Be(249_095); // Ana Torres, con auxilio
+    }
+
+    [Fact]
+    public async Task Los_totales_calculados_aparecen_en_el_json()
+    {
+        var datos = (await (await _cliente.PostAsJsonAsync("/api/nomina/calculate", new { anio = 2026, mes = 9 })).LeerJsonAsync())
+            .GetProperty("datos");
+        var detalle = datos.GetProperty("detalle").EnumerateArray().ToList();
+
+        datos.GetProperty("totalNeto").GetInt64().Should().Be(detalle.Sum(d => d.GetProperty("neto").GetInt64()));
+        datos.GetProperty("totalRecargos").GetInt64().Should().Be(910_000);
+        datos.GetProperty("totalDeducciones").GetInt64().Should().Be(detalle.Sum(d => d.GetProperty("totalDeducciones").GetInt64()));
+        datos.GetProperty("totalAportesEmpleador").GetInt64().Should().BeGreaterThan(0);
+    }
+
+    [Fact]
+    public async Task Aprueba_y_luego_no_permite_recalcular()
+    {
+        var calculada = await (await _cliente.PostAsJsonAsync("/api/nomina/calculate", new { anio = 2026, mes = 11 })).LeerJsonAsync();
+        var id = calculada.GetProperty("datos").GetProperty("id").GetInt32();
+
+        var aprobar = await _cliente.PostAsync($"/api/nomina/{id}/aprobar", null);
+        aprobar.StatusCode.Should().Be(HttpStatusCode.OK);
+        var aprobada = await aprobar.LeerJsonAsync();
+        aprobada.GetProperty("mensaje").GetString().Should().Be("Nómina aprobada");
+        aprobada.GetProperty("datos").GetProperty("estado").GetString().Should().Be("APROBADA");
+
+        var recalcular = await _cliente.PostAsJsonAsync("/api/nomina/calculate", new { anio = 2026, mes = 11 });
+        recalcular.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        (await recalcular.LeerJsonAsync()).GetProperty("mensaje").GetString().Should().Be("La nómina de 11/2026 ya está aprobada.");
+    }
+
+    [Fact]
+    public async Task Recalcular_un_borrador_lo_reemplaza()
+    {
+        await _cliente.PostAsJsonAsync("/api/nomina/calculate", new { anio = 2026, mes = 8 });
+        var segunda = await _cliente.PostAsJsonAsync("/api/nomina/calculate", new { anio = 2026, mes = 8 });
+
+        segunda.StatusCode.Should().Be(HttpStatusCode.OK);
+        var lista = await _cliente.GetFromJsonAsync<JsonElement>("/api/nomina");
+        lista.EnumerateArray().Count(n => n.GetProperty("anio").GetInt32() == 2026 && n.GetProperty("mes").GetInt32() == 8).Should().Be(1);
+        var consultada = await _cliente.GetFromJsonAsync<JsonElement>("/api/nomina/2026/8");
+        consultada.GetProperty("detalle").GetArrayLength().Should().Be(18);
+    }
+
+    [Fact]
+    public async Task Mes_invalido_responde_400()
+    {
+        var r = await _cliente.PostAsJsonAsync("/api/nomina/calculate", new { anio = 2026, mes = 13 });
+
+        r.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        (await r.LeerJsonAsync()).GetProperty("mensaje").GetString().Should().Be("El mes debe estar entre 1 y 12.");
+    }
+
+    [Fact]
+    public async Task Nomina_inexistente_responde_404()
+    {
+        var r = await _cliente.GetAsync("/api/nomina/2026/1");
+
+        r.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        (await r.LeerJsonAsync()).GetProperty("mensaje").GetString().Should().Be("Nómina no encontrada");
+    }
+
+    [Fact]
+    public async Task Consulta_los_parametros_2026()
+    {
+        var p = await _cliente.GetFromJsonAsync<JsonElement>("/api/nomina/parametros/2026");
+
+        p.GetProperty("salarioMinimo").GetInt64().Should().Be(1_750_905);
+        p.GetProperty("auxilioTransporte").GetInt64().Should().Be(249_095);
+        p.GetProperty("arl").GetDecimal().Should().Be(0.00522m);
+    }
+
+    [Fact]
+    public async Task Guarda_los_parametros_de_otro_anio()
+    {
+        var r = await _cliente.PutAsJsonAsync("/api/nomina/parametros/2027", new
+        {
+            anio = 1999, salarioMinimo = 1_850_000, auxilioTransporte = 260_000,
+            saludEmpleado = 0.04m, pensionEmpleado = 0.04m, fondoSolidaridad = 0.01m, recargoNocturno = 0.35m,
+            retencionServicios = 0.10m, saludEmpleador = 0.085m, pensionEmpleador = 0.12m, arl = 0.00522m,
+            cajaCompensacion = 0.04m, icbf = 0.03m, sena = 0.02m,
+        });
+
+        r.StatusCode.Should().Be(HttpStatusCode.OK);
+        (await r.LeerJsonAsync()).GetProperty("mensaje").GetString().Should().Be("Parámetros de nómina guardados");
+        var p = await _cliente.GetFromJsonAsync<JsonElement>("/api/nomina/parametros/2027");
+        p.GetProperty("anio").GetInt32().Should().Be(2027);   // el año de la ruta manda sobre el del cuerpo
+        p.GetProperty("salarioMinimo").GetInt64().Should().Be(1_850_000);
+    }
+
+    [Fact]
+    public async Task Parametros_invalidos_responden_400()
+    {
+        var r = await _cliente.PutAsJsonAsync("/api/nomina/parametros/2028", new { salarioMinimo = 0, auxilioTransporte = 0 });
+
+        r.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        (await r.LeerJsonAsync()).GetProperty("mensaje").GetString().Should().Be("El salario mínimo debe ser mayor que cero.");
+    }
+}
