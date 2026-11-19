@@ -4,21 +4,21 @@
 
 ## Qué salió bien
 
-- **Felipe:** _¿Qué de tu forma de trabajar o del plan te ayudó más a avanzar?_
+- **Felipe:** El plan partido en tareas pequeñas (F0–F9) con contratos exactos (C4, mensajes literales, valores JSON) permitió avanzar sin esperar a nadie. Separar el motor de cálculo puro (`PayrollEngine`) de la orquestación (`NominaService`) dejó probar cada regla legal con valores conocidos: 260 pruebas unitarias y 97 % de cobertura del dominio.
 - **Iván:** _¿Qué de tu forma de trabajar o del plan te ayudó más a avanzar?_
 - **Camilo:** _¿Qué de tu forma de trabajar o del plan te ayudó más a avanzar?_
 - **Jorge:** _¿Qué de tu forma de trabajar o del plan te ayudó más a avanzar?_
 
 ## Qué se puede mejorar
 
-- **Felipe:** _¿Qué harías distinto en el próximo sprint, y por qué?_
+- **Felipe:** Integrar `develop` con `pull --rebase` solo antes del primer push de una rama (después, `git merge`), porque al rebasar commits ya publicados hubo que rehacer F2 en otra rama. Aislar desde el principio las pruebas de integración que cuentan registros (una factory por clase). Anotar hora de inicio y fin de cada tarea para comparar con lo estimado.
 - **Iván:** _¿Qué harías distinto en el próximo sprint, y por qué?_
 - **Camilo:** _¿Qué harías distinto en el próximo sprint, y por qué?_
 - **Jorge:** _¿Qué harías distinto en el próximo sprint, y por qué?_
 
 ## Impedimentos
 
-- **Felipe:** _¿Qué te frenó y cuánto tiempo?_
+- **Felipe:** F7 dependía de la I5 de Iván: estuvo bloqueada desde F0 (19:00) hasta que la I5 quedó lista (22:51); para no esperar la fusión, se hizo sobre la rama de Iván. El acceso a Jira (la cuenta no estaba en el proyecto CER hasta que Jorge la agregó) retrasó mover las tarjetas, sin frenar el código. HU-04 (8 SP, sin horas estimadas) tomó en total unas 4 h 25 min de sesión (19:00–23:24 del 2026-11-18), incluidas esperas.
 - **Iván:** _¿Qué te frenó y cuánto tiempo?_
 - **Camilo:** _¿Qué te frenó y cuánto tiempo?_
 - **Jorge:** Desde el 2026-11-18 la parte B de J2, J3 y J4 (y J6) dependía de que Felipe asignara los roles de Azure (tarea F9, D-010). _Completar con la fecha en que llegó el acceso._

@@ -35,6 +35,20 @@
 
 ## Entradas
 
+## 2026-11-18 23:32 · Pedidos de Jorge (F7, retrospectiva, nomina.md) · Terminada
+**Hecho:**
+- F7 confirmada: los atributos los puso Iván (I5) y las 3 pruebas de permisos están en esta rama.
+- Retrospectiva: llenadas **solo mis tres líneas** de `docs/sprint-2/retrospectiva.md` (qué salió bien, qué mejorar, impedimentos), como pide la plantilla ("cada integrante escribe lo suyo"). Cambio mínimo en un archivo compartido (AGENT.md). La entrada "Retrospectiva HU-04 (F8.3)" de abajo sigue siendo el detalle.
+- Horas reales de HU-04, para el punto (a) de F8.3: 8 SP estimados, sin horas en el plan; real ≈ 4 h 25 min de sesión (19:00–23:24), incluidas las esperas de Jira, de la I5 de Iván y la prueba de la demo.
+- `docs/arc42/05-bloques/nomina.md`: el encabezado pasa de "5.x" a **"5.2.7"**, según su fila en la tabla del Nivel 2 de `05-vista-bloques.md` (Jugadores 5.2.1 … Inventario 5.2.6, Nómina 5.2.7, Seguridad 5.2.8). Los bloques de Iván y Camilo no se tocan.
+- Integrado `origin/develop` en la rama con `git merge` (no rebase: la rama ya estaba publicada).
+**Evidencia:** `dotnet test CasinoErp.sln -c Release` con `develop` integrado → 260 unitarias + 57 de integración, 0 fallos.
+**Decisiones:** numeración de bloques por la fila de la tabla del Nivel 2; se lo propongo a Iván (5.2.8) y Camilo (5.2.6).
+**Pendientes:** abrir el PR y fusionarlo (Jorge); CER-27 y CER-13 a "Listo" al fusionar.
+**Bloqueos / necesito de otros:** ninguno.
+**Siguiente paso:** ninguno de código.
+**Commits/PR:** ver el commit `HU-04: Retrospectiva de Felipe y encabezado numerado del bloque Nomina`.
+
 ## 2026-11-18 23:31 · Tarea F7 · PR listo para abrir
 **Hecho:** Jorge fusionó la seguridad de Iván en `develop` (`cce0aa1`, merge normal que incluye los PR #4 a #10) y anotó en su bitácora que el código de F7 queda cubierto por los atributos de la I5. Como no fue *squash*, `feature/HU-04-autorizacion` no necesita rebase: frente a `develop` solo trae el commit de F7 y esta entrada.
 **Evidencia:** `develop` (`d88fc73`) + `4b502cf` combinados en una copia aparte, sin conflictos → `dotnet test CasinoErp.sln -c Release`: 260 unitarias + 57 de integración (54 de `develop` + 3 de F7), 0 fallos.
