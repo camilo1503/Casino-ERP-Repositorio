@@ -1,53 +1,26 @@
 /* =====================================================================
-   Conexión del prototipo PitBoss ERP (index.html) con la API del ERP.
-
-   El prototipo guarda todo en memoria (objeto S). Este archivo no cambia
-   ninguna pantalla: envuelve las acciones de los módulos del incremento
-   para que también se guarden en la API (ASP.NET Core + SQL Server) y,
-   después de cada operación, vuelve a cargar los datos desde la API.
-   Si la API rechaza una operación, se muestra su mensaje y se recargan
-   los datos (la pantalla vuelve al estado real de la base de datos).
-
-   Módulos conectados: Perfiles, Catálogo, Operación de mesas, Caja,
-   Inventario de fichas, Retención y el estado de cumplimiento de las
-   transacciones. Los demás siguen con los datos de ejemplo del prototipo.
+   Módulos del Sprint 1 conectados a la API: Perfiles, Catálogo, Operación
+   de mesas, Rellenos, Caja y Retención (y el estado de cumplimiento de las
+   transacciones). Dueño: Jorge · Contrato C2. El inventario de fichas está
+   en inventario.js (Camilo).
    ===================================================================== */
 (function () {
-  const BASE = location.protocol === 'file:' ? 'http://localhost:5080' : '';
-  const API = { online: false };
-
-  async function pedir(metodo, ruta, cuerpo) {
-    const r = await fetch(BASE + '/api' + ruta, {
-      method: metodo,
-      headers: cuerpo ? { 'Content-Type': 'application/json' } : {},
-      body: cuerpo ? JSON.stringify(cuerpo) : undefined,
-    });
-    const texto = await r.text();
-    const datos = texto ? JSON.parse(texto) : null;
-    if (!r.ok) throw new Error((datos && (datos.mensaje || datos.title)) || `Error ${r.status} de la API`);
-    return datos;
-  }
-
-  /* ---------- Fechas: la API usa la fecha real; el prototipo, su fecha fija TODAY ---------- */
-  const dos = n => String(n).padStart(2, '0');
-  const isoLocal = d => `${d.getFullYear()}-${dos(d.getMonth() + 1)}-${dos(d.getDate())}`;
-  const fechaApi = s => new Date(/Z$|[+-]\d\d:\d\d$/.test(s) ? s : s + 'Z');
-  const hora = d => `${dos(d.getHours())}:${dos(d.getMinutes())}`;
-  const sumarDias = (iso, n) => { const d = new Date(iso + 'T12:00:00'); d.setDate(d.getDate() + n); return isoLocal(d); };
-  const hoyReal = isoLocal(new Date());
-  const corrimiento = Math.round((new Date(TODAY + 'T12:00:00') - new Date(hoyReal + 'T12:00:00')) / 864e5);
-  const aFront = iso => iso ? sumarDias(iso.slice(0, 10), corrimiento) : iso;
+  const { pedir, pedirSi, conectar, registrarCarga } = PitBossApi;
+  const { fechaApi, hora, isoLocal, aFront, docApi, docFront, codigoFicha, hoyReal, MESES } = PitBossApi.util;
 
   /* ---------- Equivalencias entre el prototipo y la API ---------- */
-  const docApi = d => String(d || '').replace(/[.\s]/g, '').toUpperCase();
-  const docFront = (tipo, doc) => tipo === 'Pasaporte' ? doc : grp(+doc);
   const EST_JUG = { ACTIVO: 'Activo', INACTIVO: 'Inactivo', AUTOEXCLUIDO: 'Autoexcluido' };
   const EST_TX = { APROBADA: 'Aprobada', EN_REVISION: 'En revisión', ANULADA: 'Anulada' };
   const TIPO_OF = { DESCUENTO_FICHAS: 'descuento', FICHAS_BONO: 'bono', BONO_RECLAMABLE: 'voucher' };
   const TIPO_API = { descuento: 'DESCUENTO_FICHAS', bono: 'FICHAS_BONO', voucher: 'BONO_RECLAMABLE' };
-  const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-  const codigoFicha = v => 'FICHA-' + (v >= 1e6 ? v / 1e6 + 'M' : v / 1000 + 'K');
   const docDe = p => p && !p.soloLocal ? (p.apiDoc || docApi(p.doc)) : null;
+
+  // Módulos que dan acceso a cada recurso (los mismos de [AutorizarModulo] en la API, contrato C5).
+  const MOD_JUGADORES = ['perfiles', 'retencion', 'caja'];
+  const MOD_MESAS = ['catalogo', 'mesas', 'mimesa'];
+  const MOD_RELLENOS = ['mesas', 'inventario'];
+  const MOD_CAJA = ['caja', 'cumplimiento'];
+  const MOD_RETENCION = ['retencion', 'caja', 'mimesa'];
 
   /* ---------- Carga desde la API ---------- */
   function sincJugadores(lista) {
@@ -105,10 +78,6 @@
     });
   }
 
-  function sincFichas(lista) {
-    lista.forEach(f => { if (f.denominacion in S.vault) S.vault[f.denominacion] = f.stock; });
-  }
-
   function sincConfiguracion(c) {
     Object.assign(S.ret, {
       disc: c.porcentajeDescuento, cap: c.topeDescuento, bonus: c.fichasBono, voucher: c.bonoReclamable,
@@ -117,6 +86,8 @@
     Object.assign(S.ret.on, { colorup: c.senalCambioFichas, salida: c.senalQuiereRetirarse, cobro: c.senalCobroCaja, app: c.senalAppJugador });
   }
 
+  // En la primera carga, las señales bloqueadas del prototipo van al final del registro (como en el Sprint 1).
+  let ofertasCargadas = false;
   function sincOfertas(lista) {
     const estadoPrevio = {};
     S.players.forEach(p => p.benefits.forEach(b => { estadoPrevio[b.id] = b.st; }));
@@ -133,7 +104,7 @@
     // Orden: lo más reciente arriba. Una señal bloqueada queda justo encima de la última oferta que existía cuando ocurrió.
     const ultimo = lista.reduce((m, o) => Math.max(m, o.id), 0);
     const bloqueadas = S.retLog.filter(e => e.res === 'Bloqueada');
-    bloqueadas.forEach(e => { if (e._orden === undefined) e._orden = API.online ? ultimo + 0.5 : 0; });
+    bloqueadas.forEach(e => { if (e._orden === undefined) e._orden = ofertasCargadas ? ultimo + 0.5 : 0; });
     const deHoy = lista.filter(o => o.fecha === hoyReal).map(o => {
       const p = S.players.find(x => x.apiDoc === o.documento), k = o.tipo ? TIPO_OF[o.tipo] : null;
       return {
@@ -143,40 +114,20 @@
       };
     });
     S.retLog = [...deHoy, ...bloqueadas].sort((a, b) => b._orden - a._orden);
+    ofertasCargadas = true;
   }
 
-  async function sincronizar() {
-    const [jugadores, mesas, rellenos, transacciones, fichas, ofertas, configuracion] = await Promise.all([
-      pedir('GET', '/jugadores'), pedir('GET', '/mesas'), pedir('GET', '/rellenos'), pedir('GET', '/caja/transacciones'),
-      pedir('GET', '/inventario/fichas'), pedir('GET', '/retencion/ofertas'), pedir('GET', '/retencion/configuracion'),
-    ]);
-    sincJugadores(jugadores);
-    sincMesas(mesas, rellenos);
-    sincTransacciones(transacciones);
-    sincFichas(fichas);
-    sincConfiguracion(configuracion);
-    sincOfertas(ofertas);
-    render();
-  }
+  /* Cargas (orden del contrato C2) */
+  registrarCarga('jugadores', 10, () => pedirSi(MOD_JUGADORES, 'GET', '/jugadores'), sincJugadores);
+  registrarCarga('mesas', 20, async () => {
+    const [mesas, rellenos] = await Promise.all([pedirSi(MOD_MESAS, 'GET', '/mesas'), pedirSi(MOD_RELLENOS, 'GET', '/rellenos')]);
+    return mesas ? { mesas, rellenos: rellenos || [] } : null;
+  }, d => sincMesas(d.mesas, d.rellenos));
+  registrarCarga('transacciones', 30, () => pedirSi(MOD_CAJA, 'GET', '/caja/transacciones'), sincTransacciones);
+  registrarCarga('configuracionRetencion', 40, () => pedirSi(MOD_RETENCION, 'GET', '/retencion/configuracion'), sincConfiguracion);
+  registrarCarga('ofertas', 50, () => pedirSi(MOD_RETENCION, 'GET', '/retencion/ofertas'), sincOfertas);
 
   /* ---------- Envoltura de acciones: el prototipo actúa y la API confirma ---------- */
-  /**
-   * tabla: ACT o FORM del prototipo. antes(...args) captura los datos antes de la acción
-   * (null = no enviar), exito(ctx) dice si la acción local se aplicó y guardar(ctx) llama a la API.
-   */
-  function conectar(tabla, nombre, { antes = () => ({}), exito = () => true, guardar }) {
-    const original = tabla[nombre];
-    tabla[nombre] = function (...args) {
-      const ctx = antes(...args);
-      const resultado = original.apply(this, args);
-      if (API.online && ctx && exito(ctx, ...args)) {
-        guardar(ctx, ...args)
-          .then(sincronizar)
-          .catch(err => { toast(err.message, true); sincronizar().catch(() => {}); });
-      }
-      return resultado;
-    };
-  }
   const modalCerrado = () => S.modal === null;
 
   /* Perfiles de jugador (E-01) */
@@ -260,7 +211,7 @@
     guardar: ({ apiId }) => pedir('POST', `/rellenos/${apiId}/aprobar`, { aprobadoPor: cur().name }),
   });
 
-  /* Caja / POS e inventario de la bóveda */
+  /* Caja / POS (las fichas de la bóveda se mueven aquí; el resto del inventario está en inventario.js) */
   conectar(FORM, 'tx', {
     antes: () => {
       const d = S.txd, total = DENOMS.reduce((s, [v]) => s + v * (d.q[v] || 0), 0), p = player(d.pid);
@@ -288,13 +239,6 @@
   conectar(ACT, 'txVoid', porTransaccion('anular'));
   conectar(ACT, 'txReport', porTransaccion('cumplimiento', { estado: 'Reportada' }));
   conectar(ACT, 'txEscalate', porTransaccion('cumplimiento', { estado: 'Escalada' }));
-  conectar(ACT, 'vaultOrder', {
-    guardar: (ctx, v) => pedir('POST', `/inventario/fichas/${codigoFicha(+v)}/entradas`, { cantidad: 1500 }),
-  });
-  conectar(ACT, 'restock', {
-    antes: id => { const t = table(id), n = Math.ceil(t.minChips * 1.4) - t.chips; return n > 0 ? { n } : null; },
-    guardar: ({ n }) => pedir('POST', `/inventario/fichas/${codigoFicha(25000)}/retiros`, { cantidad: n }),
-  });
 
   /* Retención de jugadores (E-03) */
   const respuestaOferta = (aceptada, desdeApp) => ({
@@ -321,10 +265,4 @@
       senalCambioFichas: S.ret.on.colorup, senalQuiereRetirarse: S.ret.on.salida, senalCobroCaja: S.ret.on.cobro, senalAppJugador: S.ret.on.app,
     }),
   });
-
-  /* ---------- Arranque ---------- */
-  sincronizar()
-    .then(() => { API.online = true; })
-    .catch(() => toast('Sin conexión con la API: el ERP funciona en modo demostración y los cambios no se guardan.', true));
-  window.PitBossApi = { sincronizar, estado: API };
 })();

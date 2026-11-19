@@ -17,7 +17,7 @@ builder.Services.AddCors(o => o.AddDefaultPolicy(p => p.WithOrigins(origenes).Al
 
 var app = builder.Build();
 
-app.Services.PrepararBaseDatos(builder.Configuration.GetValue("BaseDatos:CargarDatosDemo", true));
+app.Services.PrepararBaseDatos(builder.Configuration);
 
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -25,6 +25,8 @@ app.UseCors();
 // El front del ERP (wwwroot/index.html) se sirve desde la misma API: http://localhost:5080
 app.UseDefaultFiles();
 app.UseStaticFiles();
+// Prueba de vida para el front (js/api/nucleo.js). Debe seguir siendo anónima cuando se active la seguridad (HU-06).
+app.MapGet("/api/salud", () => Results.Ok(new { estado = "ok" })).AllowAnonymous().ExcludeFromDescription();
 app.MapControllers();
 
 app.Run();

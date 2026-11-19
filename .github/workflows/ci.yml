@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main, 'feature/**']
+    branches: [main, develop, 'feature/**', 'chore/**', 'docs/**']
   pull_request:
-    branches: [main]
+    branches: [main, develop]
 
 jobs:
   backend:
@@ -30,9 +30,46 @@ jobs:
           --collect:"XPlat Code Coverage"
           --results-directory ./TestResults
 
+      - name: Cobertura mínima del dominio (DoD ≥ 80 %)
+        run: >
+          dotnet test tests/CasinoErp.PruebasUnitarias -c Release --no-build
+          /p:CollectCoverage=true /p:Threshold=80 /p:ThresholdType=line
+          /p:Include="[CasinoErp.Dominio]*"
+
       - name: Publicar resultados
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: resultados-pruebas
           path: TestResults
+
+  sin-marcas-ia:
+    name: Sin marcas de agua de IA (AGENT.md §4.1)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Revisar los mensajes de los commits nuevos
+        env:
+          EVENTO: ${{ github.event_name }}
+          BASE_PR: ${{ github.event.pull_request.base.sha }}
+          HEAD_PR: ${{ github.event.pull_request.head.sha }}
+          ANTES: ${{ github.event.before }}
+          DESPUES: ${{ github.sha }}
+        run: |
+          if [ "$EVENTO" = "pull_request" ]; then
+            RANGO="$BASE_PR..$HEAD_PR"
+          elif [ -z "$ANTES" ] || [ "$ANTES" = "0000000000000000000000000000000000000000" ]; then
+            RANGO="origin/main..$DESPUES"
+          else
+            RANGO="$ANTES..$DESPUES"
+          fi
+          echo "Revisando $RANGO"
+          PATRON='co-authored-by:.*(claude|anthropic|openai|copilot|gpt)|generated (with|by) .*\b(claude|ai)\b|noreply@anthropic\.com'
+          if git log --format='%H%n%B' "$RANGO" | grep -inE "$PATRON"; then
+            echo "::error::Hay marcas de agua o coautoría de IA en los commits de arriba. Ver AGENT.md §4.1."
+            exit 1
+          fi
+          echo "Sin marcas de IA."

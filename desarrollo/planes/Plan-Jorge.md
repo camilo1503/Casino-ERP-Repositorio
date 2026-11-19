@@ -81,7 +81,7 @@ En `ci.yml`:
 
 En `CasinoErp.PruebasUnitarias.csproj`, agregar `<PackageReference Include="coverlet.msbuild" Version="6.0.2" />`.
 
-Agregar también el job `sin-marcas-ia` (AGENT.md §4.1). Hace checkout con `fetch-depth: 0` y revisa los mensajes de los commits nuevos del push (`github.event.before..github.sha`) o del PR (`base.sha..head.sha`). Falla si alguno coincide (sin distinguir mayúsculas) con `co-authored-by:.*(claude|anthropic|openai|copilot|gpt)|generated (with|by) .*(claude|ai)|noreply@anthropic\.com`. Si el push crea una rama nueva (`before` en ceros), revisa los commits que no están en `origin/main`.
+Agregar también el job `sin-marcas-ia` (AGENT.md §4.1). Hace checkout con `fetch-depth: 0` y revisa los mensajes de los commits nuevos del push (`github.event.before..github.sha`) o del PR (`base.sha..head.sha`). Falla si alguno coincide (sin distinguir mayúsculas) con `co-authored-by:.*(claude|anthropic|openai|copilot|gpt)|generated (with|by) .*\b(claude|ai)\b|noreply@anthropic\.com`. Si el push crea una rama nueva (`before` en ceros), revisa los commits que no están en `origin/main`.
 
 - [ ] **J0.3 Escribir la prueba que falla de `RecrearAlIniciar`** (en `tests/CasinoErp.PruebasIntegracion/BaseDatosTests.cs`)
 
@@ -127,7 +127,9 @@ Se mueve el código existente **sin cambiar su comportamiento**:
 | `seguridad.js`, `personal.js`, `compras.js` | Una IIFE vacía con un comentario que dice de quién es el archivo y que apunta a su plan. |
 | `arranque.js` | `PitBossApi.iniciar().catch(() => toast('Sin conexión con la API: el ERP funciona en modo demostración y los cambios no se guardan.', true));` |
 
-- `iniciar()`: `GET /api/salud` (mientras I5 no exista, si responde 404 se usa `GET /api/jugadores` como prueba de vida) → `estado.online = true` → `if (await PitBossApi.antesDeSincronizar()) await sincronizar()`. Mantiene `window.PitBossApi.sincronizar` para depuración.
+- `iniciar()`: `GET /api/salud` (se agrega en la Fase 0 en `Program.cs` con `.AllowAnonymous()`) → `estado.online = true` → `if (await PitBossApi.antesDeSincronizar()) await sincronizar()`; si la sincronización falla, `online` vuelve a `false`. Se mantiene `window.PitBossApi.sincronizar` para depuración.
+- `sprint1.js` lleva su propia marca de "primera carga" para `sincOfertas`: antes, la primera sincronización corría con `online = false` y las señales bloqueadas del prototipo quedaban al final del registro.
+- Cada carga usa `pedirSi([...módulos], ...)` con los mismos módulos que `[AutorizarModulo]` (contrato C5), para no pedir lo que el rol no puede ver cuando llegue la seguridad.
 - En `index.html`, reemplazar `<script src="js/conexion-api.js"></script>` por las 7 etiquetas de C2 en ese orden.
 
 - [ ] **J0.8 Probar el front a mano** (regresión del Sprint 1)

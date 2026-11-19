@@ -28,6 +28,7 @@ public interface ISemilla
 ```
 
 - `CasinoErpDbContext.OnModelCreating` termina con `modelBuilder.ApplyConfigurationsFromAssembly(typeof(CasinoErpDbContext).Assembly);`. Cada entidad nueva se registra con una clase `IEntityTypeConfiguration<T>` en `src/CasinoErp.Infraestructura/Configuraciones/<Entidad>Configuracion.cs`. Los repositorios nuevos usan `db.Set<T>()`, sin agregar `DbSet` al contexto.
+- Namespaces: `CasinoErp.Infraestructura.Semillas` (`ISemilla`, `SemillaSprint1` y las semillas de cada módulo) y `CasinoErp.Infraestructura.Modulos` (`ModuloX`).
 - `ConfiguracionServicios.AgregarCasinoErp` ya llama, desde la Fase 0, a `services.AgregarPersonal()`, `AgregarNomina()`, `AgregarCompras()` y `AgregarSeguridad()`. Están definidos (vacíos al principio) en `src/CasinoErp.Infraestructura/Modulos/ModuloPersonal.cs`, `ModuloNomina.cs`, `ModuloCompras.cs` y `ModuloSeguridad.cs`. Cada dueño llena solo el suyo, y ahí mismo registra sus semillas: `services.AddScoped<ISemilla, SemillaPersonal>();`.
 - `PrepararBaseDatos(this IServiceProvider proveedor, IConfiguration configuracion)`:
   1. si `BaseDatos:RecrearAlIniciar` es `true`, ejecuta `EnsureDeleted()`;
@@ -59,7 +60,7 @@ PitBossApi.estado                 // { online: boolean }
 PitBossApi.pedir(metodo, ruta, cuerpo?)        // Promise<datos>; ruta sin '/api' ("/empleados"); lanza Error(mensaje de la API)
                                                //   401 en una ruta distinta de '/auth/login' -> llama a PitBossApi.alNoAutorizado(r) y luego lanza
                                                //   403 sin mensaje -> lanza Error('No tienes acceso a este módulo.')
-PitBossApi.pedirSi(modulo, metodo, ruta, cuerpo?) // si hay sesión (S.user) y !allowed(modulo) devuelve Promise<null>; si no, igual que pedir
+PitBossApi.pedirSi(modulos, metodo, ruta, cuerpo?) // modulos: 'caja' o ['caja','inventario'] (basta uno); si hay sesión (S.user) y el rol no tiene ninguno, devuelve Promise<null>; si no, igual que pedir
 PitBossApi.conectar(tabla, nombre, { antes, exito, guardar })   // misma semántica que el conectar() actual
 PitBossApi.registrarCarga(nombre, orden, obtener, aplicar)      // obtener: async () => datos (o null); aplicar: (datos) => void, modifica S
 PitBossApi.sincronizar()          // ejecuta todos los obtener() en paralelo; luego los aplicar(datos) en orden ascendente (se omite si datos es null); luego render()
@@ -67,7 +68,7 @@ PitBossApi.iniciar()              // GET /api/salud -> online; luego, si await P
 PitBossApi.antesDeSincronizar     // async () => true   (Iván lo reemplaza: exige sesión)
 PitBossApi.encabezados            // () => ({})          (Iván lo reemplaza: Authorization: Bearer ...)
 PitBossApi.alNoAutorizado         // (respuesta) => {}   (Iván lo reemplaza: vuelve al login si 401)
-PitBossApi.util                   // { docApi, docFront, fechaApi, hora, isoLocal, aFront, codigoFicha, MESES }
+PitBossApi.util                   // { dos, isoLocal, fechaApi, hora, sumarDias, hoyReal, corrimiento, aFront, docApi, docFront, codigoFicha, MESES }
 ```
 
 - **Orden de las cargas** (el orden de aplicación importa: transacciones y ofertas buscan jugadores en `S.players`; mesas busca crupieres en `S.staff`):
@@ -222,7 +223,7 @@ public sealed class AutorizarModuloAttribute : AuthorizeAttribute
 | UsuariosController | `Modulos.Usuarios` | Iván |
 | AuthController | `[AllowAnonymous]` en login; `[Authorize]` en `yo` y `cambiar-contrasena` | Iván |
 
-`GET /api/salud` es anónimo y responde `{ "estado": "ok" }`.
+`GET /api/salud` existe desde la Fase 0 (`Program.cs`, con `.AllowAnonymous()`), responde `{ "estado": "ok" }` y debe seguir siendo anónimo cuando se active la seguridad.
 
 ## C6 · Cuentas de demo (Iván, tarea I4)
 
