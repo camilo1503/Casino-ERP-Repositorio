@@ -9,12 +9,12 @@
 | C0 | Arranque | Hecha | — |
 | C1 | Umbral y alertas (dominio, C8) | En revisión | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8) |
 | C2 | Persistencia y API de alertas | En revisión | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8) |
-| C3 | Proveedores (dominio) | En revisión | PR_PROV |
-| C4 | Órdenes de compra (dominio) | En revisión | PR_PROV |
-| C5 | Persistencia y API de compras | En revisión | PR_PROV |
-| C6 | Front inventario.js y compras.js | En revisión | PR_FRONT |
-| C7 | Autorización | En revisión (alertas en #8; proveedores y compras con C5) | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8), PR_PROV |
-| C8 | arc42 bloque Inventario/Compras y cierre | En revisión | PR_DOCS |
+| C3 | Proveedores (dominio) | En revisión | [#16](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/16) |
+| C4 | Órdenes de compra (dominio) | En revisión | [#16](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/16) |
+| C5 | Persistencia y API de compras | En revisión | [#16](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/16) |
+| C6 | Front inventario.js y compras.js | En revisión | [#17](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/17) |
+| C7 | Autorización | En revisión (alertas en #8; proveedores y compras con C5) | [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8), [#16](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/16) |
+| C8 | arc42 bloque Inventario/Compras y cierre | En revisión | [#18](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/18) |
 
 ## Pendientes abiertos
 - Mover en Jira HU-05 (CER-14), la historia de Proveedores (CER-15) y las subtareas CER-29 a CER-37. Lo hace Camilo a mano en Jira.
@@ -52,7 +52,7 @@
 **Pendientes:** Jira; ensayo en persona de la demo.
 **Bloqueos / necesito de otros:** fusión en orden: PR #8 → proveedores → front → arc42 (integrador).
 **Siguiente paso:** ninguna tarea del plan pendiente; atender comentarios de los PR.
-**Commits/PR:** `d448724`, `79a1e21`, `6c23f12`, `dce201a` y el commit de C8; PR_PROV, PR_FRONT, PR_DOCS.
+**Commits/PR:** `d448724`, `79a1e21`, `6c23f12`, `dce201a` y el commit de C8; [#16](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/16), [#17](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/17), [#18](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/18).
 
 ## 2026-11-18 23:40 · PR #8 corregido y secretos de GitHub · Terminada
 **Hecho:**
