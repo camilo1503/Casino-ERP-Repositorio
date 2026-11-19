@@ -8,6 +8,7 @@
    - Registrar empleado: FORM.employee también lo guarda en POST /api/empleados.
    - Turnos y nómina: payroll() y el modal "Nómina de octubre" usan la nómina real
      (POST /api/nomina/calculate al abrir el modal; aprobar con POST /api/nomina/{id}/aprobar).
+     La tarjeta de V.rrhh muestra "Aprobada" cuando la nómina del mes ya se aprobó.
    Sin API (modo demostración) todo sigue funcionando con los datos de ejemplo del mockup.
    ===================================================================== */
 (function () {
@@ -104,6 +105,18 @@
       + `<div class="mfoot"><button class="btn sec" data-act="closeModal">Cerrar</button>`
       + (aprobada ? '' : `<button class="btn primary" data-act="approvePayroll">Aprobar nómina</button>`)
       + `</div>`;
+  };
+
+  /* ---------- 6b. Tarjeta "Nómina de octubre" de V.rrhh con el estado real ----------
+     index.html deja la insignia fija en "Borrador"; con la nómina aprobada en la API se cambia
+     por "Aprobada" y el botón pasa a "Ver nómina" (el modal ya no recalcula una nómina aprobada). */
+  const vistaRrhhLocal = V.rrhh;
+  V.rrhh = () => {
+    const html = vistaRrhhLocal();
+    if (!PitBossApi.estado.online || !S.nomina || S.nomina.estado !== 'APROBADA') return html;
+    return html
+      .replace(B('Borrador', 'warn'), B('Aprobada', 'ok'))
+      .replace('data-arg="payroll">Calcular nómina</button>', 'data-arg="payroll">Ver nómina</button>');
   };
 
   /* ---------- 7. Aprobar nómina ---------- */
