@@ -6,11 +6,13 @@ using FluentAssertions;
 namespace CasinoErp.PruebasIntegracion;
 
 /// <summary>HU-05 · Umbral mínimo y alertas de stock crítico contra una base SQLite real (Plan-Camilo C2).</summary>
-public class InventarioComprasApiTests : IClassFixture<CasinoErpFactory>
+public class InventarioComprasApiTests(CasinoErpFactory factory) : IClassFixture<CasinoErpFactory>, IAsyncLifetime
 {
-    private readonly HttpClient _cliente;
+    private HttpClient _cliente = null!;
 
-    public InventarioComprasApiTests(CasinoErpFactory factory) => _cliente = factory.CreateClient();
+    public async Task InitializeAsync() => _cliente = await factory.ClienteComoAsync("laura.gomez@pitboss.co");
+
+    public Task DisposeAsync() => Task.CompletedTask;
 
     [Fact]
     public async Task El_umbral_de_demo_de_500K_es_400()
@@ -47,11 +49,13 @@ public class InventarioComprasApiTests : IClassFixture<CasinoErpFactory>
     /// Flujo de la Sprint Review. Tiene su propia base porque retira de FICHA-500K
     /// y las pruebas de arriba asumen que esa ficha sigue en 420.
     /// </summary>
-    public class Demo : IClassFixture<CasinoErpFactory>
+    public class Demo(CasinoErpFactory factory) : IClassFixture<CasinoErpFactory>, IAsyncLifetime
     {
-        private readonly HttpClient _cliente;
+        private HttpClient _cliente = null!;
 
-        public Demo(CasinoErpFactory factory) => _cliente = factory.CreateClient();
+        public async Task InitializeAsync() => _cliente = await factory.ClienteComoAsync("laura.gomez@pitboss.co");
+
+        public Task DisposeAsync() => Task.CompletedTask;
 
         [Fact]
         public async Task La_compra_que_baja_la_boveda_del_umbral_genera_alerta()

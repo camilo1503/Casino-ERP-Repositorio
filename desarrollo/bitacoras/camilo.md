@@ -1,6 +1,6 @@
 # Bitácora · Camilo · Plan-Camilo
 
-> Solo la edita Camilo (o su agente). Las entradas nuevas van **arriba** de la sección *Entradas*. Formato: AGENT.md §8.1.
+> Solo la edita Camilo. Las entradas nuevas van **arriba** de la sección *Entradas*. Formato: AGENT.md §8.1.
 
 ## Estado de mi plan
 
@@ -17,12 +17,25 @@
 | C8 | arc42 bloque Inventario/Compras y cierre | Pendiente | — |
 
 ## Pendientes abiertos
-- Mover en Jira HU-05 (CER-14) y las subtareas C0, C1 y C2 (CER-29, 30, 31) a "En curso" / "Listo" (C0.3). Lo hace Camilo a mano: el agente no tiene acceso a Jira.
+- Mover en Jira HU-05 (CER-14) y las subtareas C0, C1 y C2 (CER-29, 30, 31) a "En curso" / "Listo" (C0.3). Lo hace Camilo a mano en Jira.
+- Cargar los 5 secretos de GitHub del workflow de `terraform plan` que pide Jorge para J4.3 (F9.6; Camilo es el dueño del repositorio).
 
 ## Bloqueos abiertos
-- C7 espera el hito «seguridad activa» (I5 de Iván). A la fecha, I1–I4 están en PR abiertos (#4 a #7) y no hay I5.
+- (ninguno) La seguridad de Iván (#4 a #10) ya está en `develop` desde `cce0aa1`; C7 queda desbloqueada.
 
 ## Entradas
+
+## 2026-11-18 23:35 · Integración de develop en el PR #8 y documento de evidencias · Terminada
+**Hecho:**
+- `feature/HU-05-alertas-stock`: `git merge origin/develop` (con *merge* y no *rebase*, porque la rama ya estaba publicada). Entró la seguridad de Iván sin conflictos; `InventarioController` conserva el `[AutorizarModulo(Modulos.Inventario, Modulos.Caja)]` de Iván y mis dos endpoints.
+- `InventarioComprasApiTests` (y la clase anidada `Demo`) crean el cliente con `ClienteComoAsync("laura.gomez@pitboss.co")`, como pide C2.1 cuando la I5 está en `develop`. Sin ese cambio, las 4 pruebas fallaban con 401.
+- Documento de evidencias de reuniones (APA, portada del Sprint 1) con 12 capturas de GitHub y de las pruebas, en la rama `docs/sprint-2-evidencias-reuniones`: PR [#13](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/13) y decisión [D-012](../decisiones/D-012-camilo-evidencias-reuniones.md) (va en ese PR).
+**Evidencia:** `dotnet build` → 0 advertencias. `dotnet test CasinoErp.sln` → 271 unitarias + 58 de integración aprobadas, 0 fallos. Cobertura de líneas de `CasinoErp.Dominio` → 97,36 %.
+**Decisiones:** D-012 (el documento vive en `docs/sprint-2/evidencias/`, carpeta de Jorge; Camilo lo pidió). Roles Scrum registrados en el documento: Jorge, Scrum Master; Camilo, Product Owner.
+**Pendientes:** Jira; los 5 secretos de GitHub para J4.3; 5 capturas del documento que solo puede tomar el equipo (tablero y backlog de Jira, una reunión de Teams por sprint).
+**Bloqueos / necesito de otros:** ninguno.
+**Siguiente paso:** C3 (proveedores, dominio) en `feature/HU-05-proveedores`.
+**Commits/PR:** merge de `develop` y ajuste de pruebas en el PR #8; PR #13.
 
 ## 2026-11-18 23:15 · Cierre de sesión · C1 + C2 en revisión
 **Hecho:** PR [#8](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/8) hacia `develop` (C1 + C2) abierto con la plantilla.
