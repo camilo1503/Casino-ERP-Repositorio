@@ -11,22 +11,41 @@
 | I2 | Usuario y autenticación | En revisión | [#5](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/5) (depende de #4) |
 | I3 | UsuarioService (necesita C4) | En revisión | [#6](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/6) (depende de #4 y #5) |
 | I4 | Infraestructura y cuentas de demo (C6) | En revisión | [#7](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/7) (depende de #4–#6) |
-| I5 | JWT y autorización (hito Seguridad activa) | En revisión (borrador; falta I5.9 tras el merge) | [#9](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/9) (depende de #4–#7) |
-| I6 | Front seguridad.js | En revisión (borrador, va con #9) | [#10](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/10) |
+| I5 | JWT y autorización (hito Seguridad activa) | En revisión (equipo avisado; falta I5.9 tras el merge) | [#9](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/9) (depende de #4–#7) |
+| I6 | Front seguridad.js | En revisión (va con #9) | [#10](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/10) |
 | I7 | arc42 sección 10 | En revisión | [#11](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/11) (independiente) |
-| I8 | Cierre y demo | Pendiente (después del merge de #9 y #10) | — |
+| I8 | Cierre y demo | En curso (demo ensayada; faltan horas reales y merge) | — |
 
 ## Pendientes abiertos
-- Que Iván confirme la regla de I3: cambiar a Crupier con un documento vinculado que no existe → "Empleado no encontrado".
+- ~~Que Iván confirme la regla de I3~~ → confirmada el 2026-11-18 23:04.
 - Fusión en orden de #4 → #5 → #6 → #7 (la hace Jorge); #9 (I5) cuando Iván lo marque listo.
-- I5: Iván debe avisar al grupo con un día de anticipación y luego pasar los PR #9 y #10 de borrador a listos (se fusionan juntos). Después del merge: D-0NN-ivan-seguridad-activa.md (I5.9) y CER-43 a Listo.
-- I8: retrospectiva con las horas reales (las sabe Iván), ensayo de la demo de 2 minutos y HU-06 (CER-16) a Listo.
+- ~~I5: avisar al grupo y pasar #9 y #10 a listos~~ → hecho el 2026-11-18 23:04. Después del merge: D-012-ivan-seguridad-activa.md (I5.9) y CER-43 a Listo.
+- Cruce con el #8 de Camilo: si el #8 se fusiona antes que el #9, migrar sus 4 pruebas de `InventarioComprasApiTests` a `ClienteComoAsync("daniel.ruiz@pitboss.co")` dentro del #9.
+- I8: horas reales para la retrospectiva (las sabe Iván) y HU-06 (CER-16) a Listo después del merge.
 - Deuda para el Sprint 3: escáner de secretos en el CI (anotado en arc42 §10.4).
 
 ## Bloqueos abiertos
 - (ninguno)
 
 ## Entradas
+
+## 2026-11-18 23:15 · Tarea I8 · En curso
+**Hecho:**
+- Iván confirmó la regla de I3 (cambiar a Crupier con un documento vinculado inexistente → "Empleado no encontrado") y avisó al grupo de la activación de la seguridad. Los PR #9 y #10 pasaron de borrador a listos y se actualizaron sus descripciones.
+- Se revisó el PR #8 de Camilo (HU-05): al combinarlo en local con #9/#10 no hay conflicto de texto en `InventarioController`, pero sus 4 pruebas de `InventarioComprasApiTests` fallan con 401 porque crean clientes sin token. Quedó anotado en el #9 quién las migra según el orden de los merges.
+- **I8.2 · Ensayo de la demo** (automatizado, API en Development con la base recreada): (1) Iván entra con contraseña + TOTP y llega a Usuarios y roles; (2) le asigna Cajero a Sebastián → toast "Sebastián Prada ahora es cajero."; (3) Sebastián entra y solo ve Caja / POS e Inventario de fichas; (4) con el token de Sebastián, `GET /api/nomina` → **403** y `GET /api/caja/transacciones` → 200; (5) Swagger muestra el botón Authorize. Todo funcionó; la máquina tardó 6 s.
+**Guion para la Sprint Review (≈ 2 min, cuentas ivan.leon y sebastian.prada, contraseña Casino2026, código 482913):**
+1. (0:00–0:25) Login de ivan.leon con el código TOTP. Mencionar el bloqueo de 15 min tras 5 intentos.
+2. (0:25–0:50) Usuarios y roles → Cambiar rol de Sebastián Prada → Cajero → Guardar. Mostrar la matriz de acceso por rol.
+3. (0:50–1:20) Ventana privada: login de sebastian.prada → solo Caja / POS e Inventario de fichas.
+4. (1:20–2:00) Swagger: `POST /api/auth/login` con Sebastián → copiar el token → Authorize → `GET /api/nomina` → 403. Cierre: "la barrera está en la API, no solo en el menú".
+- Preparar antes: arrancar con `$env:BaseDatos__RecrearAlIniciar="true"` para tener los roles originales (Sebastián debe empezar como Anfitrión).
+**Evidencia:** script de Playwright contra la API real (fuera del repo); las salidas están arriba.
+**Decisiones:** ninguna nueva.
+**Pendientes:** ensayo con persona y cronómetro (Iván); horas reales para la retrospectiva (I8.1); merge de la cadena #4 → #5 → #6 → #7 → #9 + #10; después, D-012 (I5.9), CER-43 y CER-16 a Listo (I8.3).
+**Bloqueos / necesito de otros:** merges de Jorge.
+**Siguiente paso:** en cuanto Jorge fusione #9, crear `D-012-ivan-seguridad-activa.md` con el hash del merge.
+**Commits/PR:** —
 
 ## 2026-11-19 00:45 · Cierre de la sesión · En curso
 **Hecho en la sesión:** I0 a I7 implementadas con TDD, cada una con su PR hacia `develop`: #4 (I0+I1), #5 (I2), #6 (I3), #7 (I4), #9 (I5, borrador), #10 (I6, borrador) y #11 (I7). Jira: CER-38 a CER-42, CER-44 y CER-45 en Listo; CER-43 (I5) sigue en curso hasta el merge.
