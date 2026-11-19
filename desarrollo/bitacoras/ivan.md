@@ -10,7 +10,7 @@
 | I1 | Roles, módulos y matriz (C5) | En revisión | [#4](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/4) |
 | I2 | Usuario y autenticación | En revisión | [#5](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/5) (depende de #4) |
 | I3 | UsuarioService (necesita C4) | En revisión | [#6](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/6) (depende de #4 y #5) |
-| I4 | Infraestructura y cuentas de demo (C6) | Pendiente | — |
+| I4 | Infraestructura y cuentas de demo (C6) | En revisión | [#7](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/7) (depende de #4–#6) |
 | I5 | JWT y autorización (hito Seguridad activa) | Pendiente | — |
 | I6 | Front seguridad.js | Pendiente | — |
 | I7 | arc42 sección 10 | Pendiente | — |
@@ -18,12 +18,29 @@
 
 ## Pendientes abiertos
 - Que Iván confirme la regla de I3: cambiar a Crupier con un documento vinculado que no existe → "Empleado no encontrado".
-- Fusión en orden de #4 → #5 → #6 (la hace Jorge).
+- Fusión en orden de #4 → #5 → #6 → #7 (la hace Jorge).
 
 ## Bloqueos abiertos
 - (ninguno)
 
 ## Entradas
+
+## 2026-11-18 23:15 · Tarea I4 · Terminada (en revisión)
+**Hecho:**
+- Paquetes `Microsoft.Extensions.Identity.Core` 8.0.11 y `Otp.NET` 1.4.0 en `CasinoErp.Infraestructura.csproj` (solo esos dos, como dice el plan).
+- `Seguridad/HasherContrasena.cs` (PBKDF2 de Identity) y `Seguridad/VerificadorTotp.cs` (Otp.NET, ventana RFC, código demo solo si `Seguridad:CodigoTotpDemo` está configurado).
+- `Configuraciones/UsuarioConfiguracion.cs`, `Repositorios/SeguridadRepositorios.cs`, `Semillas/SemillaSeguridad.cs` (11 cuentas de C6, `Orden = 40`, idempotente) y `Modulos/ModuloSeguridad.cs`.
+- `tests/CasinoErp.PruebasIntegracion/SeguridadApiTests.cs`: `La_semilla_crea_las_11_cuentas_de_demo` (I4.1) y `El_verificador_acepta_un_codigo_TOTP_real_y_rechaza_uno_errado` (extra: el código demo no debe tapar el TOTP real).
+**Evidencia:**
+- TDD: `dotnet test tests/CasinoErp.PruebasIntegracion --filter SeguridadApiTests` → falla con `Cannot create a DbSet for 'Usuario' because this type is not included in the model`; tras implementar → verde.
+- `dotnet build CasinoErp.sln` → 0 advertencias.
+- `dotnet test CasinoErp.sln` → 296 aprobadas (260 unitarias + 36 de integración), 0 fallos.
+- Cobertura de líneas de `CasinoErp.Dominio` → 97,22 %.
+**Decisiones:** ninguna fuera del plan.
+**Pendientes:** las bases locales viejas no tienen la tabla `Usuarios`; hay que arrancar una vez con `BaseDatos__RecrearAlIniciar=true` (D-006).
+**Bloqueos / necesito de otros:** fusión en orden #4 → #5 → #6 → #7.
+**Siguiente paso:** I5 (JWT, login y `[AutorizarModulo]` en toda la API) en `feature/HU-06-jwt`.
+**Commits/PR:** `91a0263` · https://github.com/camilo1503/Casino-ERP-Repositorio/pull/7
 
 ## 2026-11-18 23:00 · Tarea I3 · Terminada (en revisión)
 **Hecho:**
