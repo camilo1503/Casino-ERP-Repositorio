@@ -12,7 +12,7 @@
 | I3 | UsuarioService (necesita C4) | En revisión | [#6](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/6) (depende de #4 y #5) |
 | I4 | Infraestructura y cuentas de demo (C6) | En revisión | [#7](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/7) (depende de #4–#6) |
 | I5 | JWT y autorización (hito Seguridad activa) | En revisión (borrador; falta I5.9 tras el merge) | [#9](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/9) (depende de #4–#7) |
-| I6 | Front seguridad.js | Pendiente | — |
+| I6 | Front seguridad.js | En revisión (borrador, va con #9) | [#10](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/10) |
 | I7 | arc42 sección 10 | Pendiente | — |
 | I8 | Cierre y demo | Pendiente | — |
 
@@ -25,6 +25,22 @@
 - (ninguno)
 
 ## Entradas
+
+## 2026-11-19 00:20 · Tarea I6 · Terminada (en revisión, borrador)
+**Hecho:** `src/CasinoErp.Api/wwwroot/js/api/seguridad.js` con los 9 puntos del plan: token en sessionStorage (con respaldo en memoria), los tres ganchos del núcleo, `entrar`, `loginView` con correo y datalist, `FORM.login` contra la API, `ACT.logout`, la carga `usuarios` (70), crear/rol/restablecer/desactivar/reactivar con `conectar`, y el modal de cambio de contraseña.
+**Evidencia:**
+- `dotnet test CasinoErp.sln` → 314 aprobadas (260 + 54), 0 fallos.
+- I6.2 en el navegador: Chrome sin interfaz manejado con Playwright (scripts fuera del repo), contra la API en Development con la base recreada. 14/14 comprobaciones bien: (1) laura solo ve Caja / POS e Inventario de fichas; (2) "Código incorrecto. Intento 1 de 5." y al quinto "Código incorrecto. Cuenta bloqueada 15 minutos."; (3) carolina → "Esta cuenta está desactivada."; (4) Iván crea a Marta → modal con la contraseña temporal y otpauth://, y después de F5 sigue en la tabla; (5) restablecer levanta el bloqueo de laura; (6) cambiar el rol de Sebastián → "Tu sesión terminó. Inicia sesión de nuevo." en su siguiente petición, y al volver a entrar solo ve Caja e Inventario; (7) Marta cambia la temporal por Nueva#2026x → "Contraseña actualizada." y entra con la nueva; (8) cerrar sesión + F5 → login, sesión + F5 → se restaura; (9) sin API (file://) funciona el login local.
+- En el paso 6, la "siguiente acción" de Sebastián se simuló con `PitBossApi.sincronizar()` (cualquier petición a la API produce el 401).
+**Decisiones (solo afectan a mi módulo):**
+- La carga `usuarios` deja `S.users` igual a la base (quita las filas locales que la API rechazó).
+- `antesDeSincronizar` llama a `render()` cuando no hay sesión, para cambiar al login con correo apenas la API responde.
+- El modal de cambio obligatorio tiene un botón "Después"; reaparece en cada ingreso mientras la contraseña sea temporal (el plan no dice si es bloqueante).
+- PR #10 en borrador: contiene los commits de #9; si se fusionara antes, se saltaría el aviso al equipo.
+**Pendientes:** el aviso al equipo y el merge conjunto de #9 y #10.
+**Bloqueos / necesito de otros:** fusión de #4–#7.
+**Siguiente paso:** I7 (arc42 sección 10, bloque Seguridad y ADR-002).
+**Commits/PR:** `2c27f41` · https://github.com/camilo1503/Casino-ERP-Repositorio/pull/10
 
 ## 2026-11-18 23:50 · Tarea I5 · En curso (PR en borrador; falta I5.9 tras el merge)
 **Hecho:**
