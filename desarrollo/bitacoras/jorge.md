@@ -6,25 +6,44 @@
 
 | Tarea | Descripción | Estado | PR |
 |---|---|---|---|
-| J0 | Fase 0 (bloqueante) | En revisión | rama `chore/fase-0` |
+| J0 | Fase 0 (bloqueante) | Hecha | `chore/fase-0` → `develop` (8fff1ce) |
 | J1 | Sprint 2 en Jira | Pendiente | — |
 | J2 | Backend remoto del state | Pendiente | — |
 | J3 | Terraform con import | Pendiente | — |
 | J4 | Workflow terraform plan | Pendiente | — |
-| J5 | Integración continua (permanente) | Pendiente | — |
+| J5 | Integración continua (permanente) | En curso | — |
 | J6 | Despliegue del Sprint 2 en Azure | Pendiente | — |
 | J7 | arc42 consolidación | Pendiente | — |
 | J8 | Artefactos Scrum | Pendiente | — |
 | J9 | Cierre del sprint | Pendiente | — |
 
 ## Pendientes abiertos
-- Fusionar el PR de `chore/fase-0` en `develop` (necesita la aprobación de un integrante) y luego crear `decisiones/D-007-jorge-fase-0-lista.md` y avisar al equipo.
-- Confirmar en GitHub que el CI (backend + `sin-marcas-ia`) queda en verde en el PR.
+- Avisar al equipo por el chat del grupo que la Fase 0 está en `develop` (D-007).
+- Revisar la rama `feature/HU-04-empleados-dominio` de Felipe cuando abra el PR o termine F1.
 
 ## Bloqueos abiertos
 - (ninguno)
 
 ## Entradas
+
+## 2026-11-18 · Tarea J0 / J5 · Fase 0 fusionada · Terminada
+**Hecho:**
+- El CI de GitHub sobre `chore/fase-0` (run 44430267032) terminó en verde: job backend (build, pruebas y cobertura ≥ 80 %) y job "Sin marcas de agua de IA".
+- Jorge pidió que su agente busque siempre los PR y los fusione él mismo → regla del integrador en AGENT.md §4 y decisión D-009.
+- `chore/fase-0` fusionada en `develop` con `--no-ff` (commit `8fff1ce`); `dotnet test` después de fusionar: 132 + 18 aprobadas. Empujada a `origin/develop`.
+- Creado D-007 (Fase 0 en develop).
+
+**Evidencia:** CI en verde en GitHub; pruebas locales en verde tras la fusión; revisión de marcas §4.1 sin coincidencias.
+
+**Decisiones:** D-009 (el integrador fusiona sin esperar otra aprobación si el CI está en verde, no hay conflictos y se cumple la DoD).
+
+**Pendientes:** avisar al equipo; atender la rama de Felipe.
+
+**Bloqueos / necesito de otros:** ninguno.
+
+**Siguiente paso:** J5.2 en cada sesión; J1 (Jira) y J2 (Azure).
+
+**Commits/PR:** `8fff1ce` (merge de la Fase 0).
 
 ## 2026-11-18 · Tarea J0 · Fase 0 · En revisión
 **Hecho:**
@@ -55,7 +74,7 @@
 
 **Pendientes:** merge del PR y D-007; verificar el CI en GitHub.
 
-**Bloqueos / necesito de otros:** una aprobación del PR de cualquier integrante.
+**Bloqueos / necesito de otros:** ninguno (luego se decidió D-009).
 
 **Siguiente paso:** tras el merge, D-007 + aviso al equipo; luego J1 (Jira) y J2 (backend del state, necesita acceso a la suscripción de Azure).
 

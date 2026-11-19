@@ -155,7 +155,7 @@ Borrar `registro.py` (CER-8). En `docs/index.md`: arreglar las listas mal indent
 git add -A; git commit -m "HU-00: Fase 0 - modulos DI, ISemilla, RecrearAlIniciar, front dividido en js/api, CI con cobertura (CER-8)"; git push -u origin HEAD
 ```
 
-Abrir el PR hacia `develop`. Por excepción, basta la aprobación de **cualquier** integrante para hacer merge: los demás dependen de este PR. Después del merge, crear `desarrollo/decisiones/D-007-jorge-fase-0-lista.md` (estado `Aceptada`) con el texto "Fase 0 en develop: hagan `git pull --rebase origin develop`" y avisar al equipo por el chat del grupo.
+Fusionar en `develop` como integrador (D-009). Después del merge, crear `desarrollo/decisiones/D-007-jorge-fase-0-lista.md` (estado `Aceptada`) con el texto "Fase 0 en develop: hagan `git pull --rebase origin develop`" y avisar al equipo por el chat del grupo.
 
 ---
 
@@ -282,7 +282,12 @@ jobs:
 ### Tarea J5 · Integración continua del equipo (rol permanente durante el sprint)
 
 - [ ] **J5.1** Cada día que haya trabajo, actualizar el **tablero** de `desarrollo/README.md`: el estado de cada tarea de los cuatro planes, leído de las bitácoras y los PR.
-- [ ] **J5.2** Revisar los PR abiertos con este checklist: DoD de AGENT.md §7, contratos respetados, que no toque archivos ajenos sin justificar, bitácora actualizada y CI en verde. Comentar en el PR lo que falte.
+- [ ] **J5.2 Fusionar (regla D-009; se repite al inicio de cada sesión y al terminar cada tarea).**
+  1. Buscar los PR abiertos hacia `develop` (`gh pr list --base develop`, o si `gh` no tiene sesión, `https://api.github.com/repos/camilo1503/Casino-ERP-Repositorio/pulls?base=develop`) y las ramas empujadas sin PR (`git fetch` + `git branch -r --no-merged origin/develop`).
+  2. Por cada uno: verificar que el CI está en verde, que se fusiona sin conflictos y que cumple la DoD de AGENT.md §7, los contratos, los archivos permitidos y la bitácora.
+  3. Si cumple: `git switch develop; git pull --ff-only; git merge --no-ff origin/<rama> -m "Merge <rama>: <resumen>"`, luego `dotnet test CasinoErp.sln` en verde, la revisión de marcas de §4.1 y `git push origin develop`. GitHub marca el PR como fusionado solo.
+  4. Si no cumple: no se fusiona; se comenta en el PR o se deja una nota en `desarrollo/README.md` explicando qué falta.
+  5. Anotar en la bitácora qué se fusionó (hash) y qué no, con el motivo, y actualizar el tablero.
 - [ ] **J5.3** Si `develop` queda en rojo: identificar el commit con `git log` y el CI, avisar al autor y, si en 2 horas no hay arreglo, revertir con `git revert` (nunca reescribir la historia). Registrar el caso en la bitácora.
 - [ ] **J5.4** Actualizar la tabla de `desarrollo/decisiones/README.md` con las decisiones nuevas.
 - [ ] **J5.5** Hitos que hay que vigilar y anunciar en el tablero:

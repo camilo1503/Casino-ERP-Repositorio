@@ -71,7 +71,7 @@ Ola 5 (cierre)
 
 | Hito | Señal | Qué hacen los demás |
 |---|---|---|
-| Fase 0 en develop | `decisiones/D-007-jorge-fase-0-lista.md` | `git pull --rebase origin develop`; empezar las tareas de infraestructura, API y front |
+| Fase 0 en develop ✅ (2026-11-18, `8fff1ce`) | `decisiones/D-007-jorge-fase-0-lista.md` | `git pull --rebase origin develop`; empezar las tareas de infraestructura, API y front |
 | Contrato C4 en develop | PR de F1 fusionado | Iván empieza I3 |
 | Seguridad activa | `decisiones/D-0NN-ivan-seguridad-activa.md` | `pull --rebase`; pruebas de integración con `ClienteComoAsync`; `[AutorizarModulo]` en los controladores nuevos |
 | Congelamiento | Jorge lo anuncia en el tablero | Solo correcciones; todo en `develop` para desplegar |
@@ -81,10 +81,10 @@ Ola 5 (cierre)
 
 | Plan | Tarea en curso | Hechas | En revisión (PR) | Bloqueos |
 |---|---|---|---|---|
-| Felipe | F0 | — | — | — |
+| Felipe | F1 (rama `feature/HU-04-empleados-dominio` empujada) | — | — | — |
 | Iván | I0 | — | — | — |
 | Camilo | C0 | — | — | — |
-| Jorge | J0 | — | — | — |
+| Jorge | J1 / J5 | J0 (Fase 0, `8fff1ce`) | — | — |
 
 ## Guion de la Sprint Review (aprox. 10 minutos)
 

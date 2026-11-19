@@ -10,7 +10,8 @@ Una decisión por archivo: `D-NNN-<autor>-<tema>.md`, con la plantilla de `desar
 | D-004 | Extensión sin conflictos: `ISemilla`, módulos DI y el front dividido en `js/api/*.js` | Aceptada |
 | D-005 | Terraform importa la infraestructura de Azure que ya existe | Aceptada |
 | D-006 | `BaseDatos:RecrearAlIniciar` para aplicar el esquema nuevo mientras se usa `EnsureCreated` | Aceptada |
-| D-007 | Fase 0 en develop (aviso; se crea al fusionar el PR de la Fase 0) | Reservada |
+| D-007 | Fase 0 en develop (aviso) | Aceptada |
 | D-008 | Ajustes a los contratos C1, C2 y C5 durante la Fase 0 | Aceptada |
+| D-009 | El integrador busca y fusiona los PR hacia develop | Aceptada |
 
 > Esta tabla la actualiza Jorge al revisar los PR. Cada autor crea su archivo; no hace falta editar la tabla para que la decisión exista.

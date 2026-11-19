@@ -60,9 +60,16 @@ dotnet test CasinoErp.sln
 git push -u origin HEAD
 ```
 
-**Al terminar una tarea:** abre un PR hacia `develop` con la plantilla `.github/pull_request_template.md`, pide revisión a otro integrante y anota el enlace del PR en tu bitácora.
+**Al terminar una tarea:** abre un PR hacia `develop` con la plantilla `.github/pull_request_template.md` y anota el enlace del PR en tu bitácora. Si no puedes abrir el PR (por ejemplo, porque `gh` no tiene sesión), deja la rama empujada y escribe en tu bitácora el enlace `https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...<tu-rama>`. **No fusiones tú.**
 
-**Prohibido:** `git push --force` a `develop` o `main`; `--no-verify`; reescribir commits ya empujados de otra persona; hacer merge de tu propio PR sin una aprobación y sin el CI en verde; borrar ramas ajenas.
+**Quién fusiona (decisión D-009):** el **integrador** (Jorge y su agente) revisa los PR y ramas abiertos hacia `develop` y los fusiona él mismo, sin esperar otra aprobación, cuando:
+1. el CI está en verde (backend, cobertura ≥ 80 % y "Sin marcas de agua de IA");
+2. la rama se fusiona sin conflictos con el `develop` actual y `dotnet test CasinoErp.sln` pasa en local después de fusionar;
+3. el PR no toca archivos de otro módulo sin justificarlo (AGENT.md §5) ni cambia un contrato sin una decisión aprobada.
+
+Si algo falla, el integrador no fusiona: comenta en el PR (o deja una nota en `desarrollo/README.md`) qué falta. El autor lo corrige en su rama y empuja de nuevo.
+
+**Prohibido:** `git push --force` a `develop` o `main`; `--no-verify`; reescribir commits ya empujados de otra persona; fusionar a `develop` si no eres el integrador; fusionar con el CI en rojo; borrar ramas ajenas.
 
 ### 4.1 Sin marcas de agua de IA (OBLIGATORIO)
 
@@ -169,7 +176,7 @@ Una decisión es cualquier elección que **no está escrita en tu plan** y que a
 
 ## 9. Lo que el agente NUNCA hace
 
-- Commit o push a `main`, `push --force`, merge sin revisión ni CI verde.
+- Commit o push a `main`, `push --force`, fusionar a `develop` si no eres el integrador, o fusionar con el CI en rojo (§4).
 - Dejar marcas de agua o coautoría de Claude (o de otra IA) en commits, PR, código o documentos (§4.1).
 - Subir secretos: claves, cadenas de conexión reales, tokens, `.tfstate`, `backend.hcl` o `casino-erp.db`.
 - Desactivar, borrar o marcar como `Skip` pruebas de otros para que el CI pase.

@@ -161,7 +161,7 @@ public class EmpleadoServiceTests
 - [ ] **F1.2** Ejecutar `dotnet test tests/CasinoErp.PruebasUnitarias --filter EmpleadoServiceTests`. Esperado: error de compilación (`Empleado` no existe).
 - [ ] **F1.3** Implementar `Empleado.cs` (contrato C4 literal) y `EmpleadoService.cs`.
 - [ ] **F1.4** Ejecutar el mismo comando. Esperado: todas aprobadas. Luego `dotnet test CasinoErp.sln`, todo en verde.
-- [ ] **F1.5** Commit, push y PR: `git add src/CasinoErp.Dominio/Personal tests/CasinoErp.PruebasUnitarias; git commit -m "HU-04: Dominio de empleados (contrato C4)"; git push -u origin HEAD`. En el PR, escribir **"Contiene el contrato C4 que necesita Iván"** y pedirle la revisión a Iván. En la bitácora: entrada "F1 Terminada" con el enlace del PR.
+- [ ] **F1.5** Commit, push y PR: `git add src/CasinoErp.Dominio/Personal tests/CasinoErp.PruebasUnitarias; git commit -m "HU-04: Dominio de empleados (contrato C4)"; git push -u origin HEAD`. En el PR, escribir **"Contiene el contrato C4 que necesita Iván"**. Lo fusiona el integrador (D-009). En la bitácora: entrada "F1 Terminada" con el enlace del PR.
 
 ---
 
