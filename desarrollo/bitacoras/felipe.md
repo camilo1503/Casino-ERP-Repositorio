@@ -8,8 +8,8 @@
 |---|---|---|---|
 | F0 | Arranque | Hecha (falta mover Jira) | — |
 | F1 | Dominio de empleados (contrato C4) | Hecha (fusionada en `develop`, `f083b68`) | Fusión del integrador (D-009) |
-| F2 | Parámetros y reglas de liquidación | En revisión (PR F2 + F3) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-reglas-liquidacion) |
-| F3 | PayrollEngine y NominaService | En revisión (PR F2 + F3) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-reglas-liquidacion) |
+| F2 | Parámetros y reglas de liquidación | En revisión (PR F2 + F3) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-nomina-motor) |
+| F3 | PayrollEngine y NominaService | En revisión (PR F2 + F3) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-nomina-motor) |
 | F4 | Persistencia y API de empleados | Pendiente | — |
 | F5 | Persistencia y API de nómina | Pendiente | — |
 | F6 | Front personal.js | Pendiente | — |
@@ -41,8 +41,8 @@
 - El motor valida el salario mínimo de todos los activos antes de liquidar (el primero que incumpla da el mensaje) y ordena por nombre con `StringComparer.CurrentCulture`.
 - `CalcularAsync` ejecuta el motor antes de borrar el borrador anterior: si el cálculo falla, el borrador previo se conserva (hay prueba).
 - `GuardarParametrosAsync` valida en el orden del plan: tasas, salario mínimo, auxilio y año.
-- Git: al hacer `pull --rebase origin develop` (llegó `321814b` de Jorge) se reescribieron los 3 commits de F2 ya empujados, con el mismo contenido (`git range-diff` sin diferencias). Se empujó con `--force-with-lease` solo sobre mi rama `feature/HU-04-reglas-liquidacion`; nunca sobre `develop` ni `main`.
-**Pendientes:** abrir el PR F2 + F3 hacia `develop` (Felipe, con la descripción que preparó el agente); mover CER-22 y CER-23 en Jira.
+- Git: al hacer `pull --rebase origin develop` (llegó `321814b` de Jorge) se reescribieron los 3 commits de F2 ya empujados, con el mismo contenido (`git range-diff` sin diferencias). Para no forzar ningún push, F2 + F3 se suben a la rama nueva `feature/HU-04-nomina-motor`. La rama `feature/HU-04-reglas-liquidacion` queda obsoleta (solo tiene F2, ya incluida en la nueva): no se debe fusionar.
+**Pendientes:** abrir el PR F2 + F3 desde `feature/HU-04-nomina-motor` hacia `develop` (Felipe, con la descripción que preparó el agente); mover CER-22 y CER-23 en Jira; avisarle a Jorge que `feature/HU-04-reglas-liquidacion` está obsoleta.
 **Bloqueos / necesito de otros:** ninguno para F4 (la Fase 0 ya está en `develop`).
 **Siguiente paso:** F4, persistencia y API de empleados, en `feature/HU-04-empleados-api` tomada de `develop`.
 **Commits/PR:** ver el commit `HU-04: PayrollEngine (calculo puro, SRP/DIP) y NominaService`.
