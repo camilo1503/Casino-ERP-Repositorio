@@ -1,4 +1,4 @@
-# 5.x Bloque Nómina y Personal (HU-04)
+# 5.2.7 Bloque Nómina y Personal (HU-04)
 
 > arc42 §5 · Vista de bloques, nivel 2. Dueño: Felipe. Historia: HU-04 *Cálculo de Nómina* (8 SP). Decisiones relacionadas: [ADR-005](../09-decisiones/ADR-005-parametros-nomina.md), D-002 (monolito modular) y D-003 (parámetros por año).
 

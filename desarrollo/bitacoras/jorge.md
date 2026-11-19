@@ -35,6 +35,54 @@
 
 ## Entradas
 
+## 2026-11-19 · Tarea J5.2 · Fusión del PR #8 (HU-05 C1–C2), F7 final y cierre de Iván · Terminada
+**Hecho:**
+- Camilo actualizó el PR #8 (merge de `develop`, pruebas de integración con `ClienteComoAsync` y una prueba de autorización del crupier). Con el CI en verde y sin marcas de IA, se **fusionó** → `d51e4e6`.
+- **Fusionada** `feature/HU-04-autorizacion` (Felipe, PR #15): tarjeta de nómina con el estado real tras aprobar (corrige el hallazgo de la prueba manual), su retrospectiva de HU-04 en `docs/sprint-2/retrospectiva.md` y el encabezado numerado de `nomina.md` → `9aaa9f9`.
+- **Fusionada** `feature/HU-06-seguridad-activa` (Iván, PR #14): cierre de Plan-Ivan, retrospectiva y ensayo de la demo en su bitácora → `cc3c5a8`.
+- README raíz y tablero actualizados.
+
+**Evidencia:** después de fusionar los tres, `dotnet test CasinoErp.sln` → 271 unitarias + 62 de integración, 0 fallos; cobertura del dominio con el comando de AGENT.md §10 (PowerShell): 97,36 % de líneas, 90,24 % de ramas y 94,88 % de métodos. `node --check` sin errores en `personal.js`. Revisión de marcas de IA sin coincidencias. Los PR #8, #14 y #15 figuran como fusionados.
+
+**Decisiones:** ninguna.
+
+**Pendientes:** C3 a C8 de Camilo (proveedores, órdenes de compra, front, autorización y arc42); los secretos de GitHub (F9.6, Camilo); J4.3; J7.4 (bloque de Camilo); J6; J9.
+
+**Bloqueos / necesito de otros:** Camilo (C3–C8 y secretos).
+
+**Siguiente paso:** J5.2 cuando Camilo suba C3 en adelante.
+
+**Commits/PR:** `d51e4e6`, `9aaa9f9`, `cc3c5a8`.
+
+## 2026-11-19 · Tareas J9.1, J9.3 (parcial) y Jira · Prueba manual local, cobertura y tarjetas · Terminada
+**Hecho:**
+- **Cobertura medida** con el comando de AGENT.md §10 sobre `develop` (`8072dcf`): `CasinoErp.Dominio` 97,22 % de líneas, 90,04 % de ramas y 94,64 % de métodos; 260 pruebas unitarias. README actualizado (`ba9c08d`).
+- **Prueba manual local** (`dotnet run`, `BaseDatos__RecrearAlIniciar=true`, navegador integrado):
+  1. Login con 2FA como `felipe.cortes`: el menú muestra solo Panel gerencial, Competencias y Turnos y nómina. ✔
+  2. Turnos y nómina → Calcular nómina: 18 empleados; Ana Torres neto $2.641.095 (con auxilio); Bruno Lara recargo $910.000, sin auxilio, neto $3.229.200; Daniela Vargas (jefe de piso) $3.864.000; total neto $49.074.720 y aportes del empleador $14.713.782. ✔ Coincide con los ejemplos de arc42.
+  3. Aprobar nómina: toast «Nómina aprobada. Se pagará el 30/10/2026.» y la API confirma `APROBADA` con 18 empleados. ✔
+  4. Laura Gómez (cajero): solo ve Caja / POS e Inventario de fichas. ✔
+  5. Iván León (administrador): ve Usuarios y roles (10 cuentas activas, 1 inactiva, 9 roles). ✔
+  6. Cambio de rol por API (Sebastián Prada, de ANFITRION a CAJERO): pasa de `inicio, perfiles, retencion, catalogo` a `caja, inventario`; nómina → 403. ✔
+  7. Matriz por API para 7 cuentas: coincide con la sección 10 de arc42 (p. ej. felipe: nómina y empleados 200, caja e inventario 403; laura: caja e inventario 200, nómina 403). Sin sesión: 401. Código 2FA incorrecto: 401. Cuenta inactiva (`carolina.rios`): 401. ✔
+- **Jira:** CER-49 (J2) y CER-50 (J3) a Listo; CER-51 (J4), CER-54 (J7), CER-55 (J8), CER-17 (HU-07) y CER-18 (HU-08) a En curso. Creada **CER-57** (F9, subtarea de CER-13) en En curso, porque falta F9.6 (los secretos de GitHub).
+
+**Hallazgos (para el dueño de cada archivo, no corregidos):**
+- `personal.js` (Felipe): después de aprobar la nómina y de volver a entrar, la tarjeta «Nómina de octubre» sigue mostrando la etiqueta «Borrador» aunque la API devuelve `APROBADA`. El total sí se actualiza.
+- `index.html` (pie del menú lateral): sigue diciendo «v0.3 · Sprint 1». La pantalla de login ya dice «Sprint 2».
+
+**Evidencia:** pruebas y cobertura descritas arriba; el servidor local se detuvo al terminar.
+
+**Decisiones:** ninguna.
+
+**Pendientes:** que Felipe revise la etiqueta de estado y el texto «Sprint 1»; falta la prueba manual de HU-05 (PR #8) y la del despliegue en Azure; J4.3; J6.
+
+**Bloqueos / necesito de otros:** Camilo (PR #8 y los secretos de GitHub).
+
+**Siguiente paso:** J5.2 cuando Camilo actualice el PR #8.
+
+**Commits/PR:** `ba9c08d` (README).
+
 ## 2026-11-19 · Tarea J5.2 · Fusión de F7, D-012 y evidencias de reuniones · Terminada
 **Hecho:**
 - Revisadas y **fusionadas** tres ramas, con el CI en verde, sin marcas de IA y sin conflictos:
