@@ -1,3 +1,4 @@
+using CasinoErp.Dominio.Compras;
 using CasinoErp.Dominio.Inventario;
 using CasinoErp.Infraestructura.Repositorios;
 using CasinoErp.Infraestructura.Semillas;
@@ -16,6 +17,14 @@ public static class ModuloCompras
         // HU-05: alertas del inventario
         services.AddScoped<IAlertaStockRepositorio, AlertaStockRepositorio>();
         services.AddScoped<ISemilla, SemillaUmbralesInventario>();
+
+        // HU-05: proveedores y órdenes de compra
+        services.AddScoped<IProveedorRepositorio, ProveedorRepositorio>();
+        services.AddScoped<IOrdenCompraRepositorio, OrdenCompraRepositorio>();
+        services.AddScoped<ProveedorService>();
+        services.AddScoped<OrdenCompraService>();
+        services.AddScoped<IObservadorStockCritico, GeneradorOrdenesCompra>();
+        services.AddScoped<ISemilla, SemillaCompras>();
         return services;
     }
 }
