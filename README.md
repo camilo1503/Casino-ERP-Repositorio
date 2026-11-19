@@ -38,7 +38,7 @@ src/CasinoErp.Infraestructura/  Entity Framework Core, repositorios y datos de d
 src/CasinoErp.Api/              controladores REST + Swagger
 src/CasinoErp.Api/wwwroot/       front del ERP + js/api/*.js (un archivo por módulo)
 tests/CasinoErp.PruebasUnitarias/    260 pruebas unitarias del dominio (TDD)
-tests/CasinoErp.PruebasIntegracion/  54 pruebas de la API contra una base SQLite real
+tests/CasinoErp.PruebasIntegracion/  57 pruebas de la API contra una base SQLite real
 infra/terraform/                 infraestructura de Azure como código (HU-07)
 docs/arc42/                      arquitectura (arc42): bloques, despliegue, seguridad y ADR
 docs/sprint-2/                   artefactos Scrum del Sprint 2
@@ -71,13 +71,13 @@ Los errores de negocio responden `400` y los registros inexistentes `404`, ambos
 Requiere el SDK de .NET 8. En Visual Studio 2022 basta con abrir `CasinoErp.sln` y ejecutar `CasinoErp.Api`.
 
 ```bash
-dotnet test CasinoErp.sln                     # 314 pruebas (260 unitarias + 54 de integración)
+dotnet test CasinoErp.sln                     # 317 pruebas (260 unitarias + 57 de integración)
 dotnet run --project src/CasinoErp.Api        # front: http://localhost:5080 · API: http://localhost:5080/swagger
 ```
 
 Por defecto usa SQLite (`casino-erp.db`) y carga los mismos datos de ejemplo del prototipo. Para empezar de cero, borra `src/CasinoErp.Api/casino-erp.db`. Para SQL Server / Azure SQL, completar el servidor en `src/CasinoErp.Api/appsettings.SqlServer.json` y ejecutar con `ASPNETCORE_ENVIRONMENT=SqlServer`.
 
-Cobertura del dominio con las pruebas unitarias: el CI exige al menos 80 % de líneas (97 % al fusionar la nómina; se actualiza al cierre del sprint).
+Cobertura del dominio con las pruebas unitarias: 97,22 % de líneas, 90,04 % de ramas y 94,64 % de métodos (medido el 2026-11-19 con el comando de AGENT.md §10; el CI exige al menos 80 % de líneas). Se vuelve a medir al cierre del sprint.
 
 ## Pruebas (Ingeniería de Software II · Taller de herramientas de prueba para CRUD)
 
