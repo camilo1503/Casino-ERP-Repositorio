@@ -64,7 +64,7 @@ dotnet test                                   # 147 pruebas
 dotnet run --project src/CasinoErp.Api        # front: http://localhost:5080 · API: http://localhost:5080/swagger
 ```
 
-Por defecto usa SQLite (`casino-erp.db`) y carga los mismos datos de ejemplo del prototipo. Para empezar de cero, borra `src/CasinoErp.Api/casino-erp.db`. Para SQL Server / Azure SQL, completar la cadena de conexión en `src/CasinoErp.Api/appsettings.SqlServer.json` y ejecutar con `ASPNETCORE_ENVIRONMENT=SqlServer`.
+Por defecto usa SQLite (`casino-erp.db`) y carga los mismos datos de ejemplo del prototipo. Para empezar de cero, borra `src/CasinoErp.Api/casino-erp.db`. Para SQL Server / Azure SQL, completar el servidor en `src/CasinoErp.Api/appsettings.SqlServer.json` y ejecutar con `ASPNETCORE_ENVIRONMENT=SqlServer`.
 
 Cobertura del dominio con las pruebas unitarias: 97 % de líneas y 88 % de ramas.
 
@@ -80,6 +80,29 @@ La carpeta [`pruebas/`](pruebas/) contiene el taller aplicado a PitBoss ERP: esc
 | Reqnroll (`dotnet test`) | 2 de 2 escenarios aprobados |
 
 Instrucciones de ejecución y evidencias en [`pruebas/README.md`](pruebas/README.md).
+
+### Despliegue en Azure
+
+La aplicación está publicada en **https://pitboss-erp-8szxa.azurewebsites.net** (API en `/swagger`).
+
+| Recurso | Nombre | Plan |
+| --- | --- | --- |
+| Grupo de recursos | `rg-pitboss-erp` (Brazil South) | — |
+| Azure App Service (Linux, .NET 8) | `pitboss-erp-8szxa` | F1 gratuito |
+| Azure SQL Database | `CasinoErp` en el servidor `pitboss-sql-8szxa` | Oferta gratuita (serverless, se pausa si se agota) |
+
+- **Sin contraseñas:** el servidor SQL solo acepta Microsoft Entra ID y la aplicación se conecta con su identidad administrada (`Authentication=Active Directory Default`). No hay claves en el código ni en GitHub.
+- **Configuración del App Service:** `BaseDatos__Proveedor=SqlServer`, `ConnectionStrings__CasinoErp=Server=tcp:pitboss-sql-8szxa.database.windows.net,1433;Database=CasinoErp;Authentication=Active Directory Default;Encrypt=True;`, `TZ=America/Bogota`.
+- Al arrancar, la API crea las tablas en Azure SQL y carga los datos de ejemplo si la base está vacía.
+- La base gratuita se pausa cuando no se usa: la primera carga después de un rato puede tardar hasta un minuto (la API reintenta la conexión).
+
+Para publicar una nueva versión (con Azure CLI y la sesión iniciada con `az login`):
+
+```bash
+dotnet publish src/CasinoErp.Api -c Release -o publish
+cd publish && zip -r ../publish.zip . && cd ..
+az webapp deploy -g rg-pitboss-erp -n pitboss-erp-8szxa --src-path publish.zip --type zip
+```
 
 ### Integrantes
 

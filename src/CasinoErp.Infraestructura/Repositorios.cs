@@ -88,7 +88,7 @@ public class OfertaRepositorio(CasinoErpDbContext db) : IOfertaRepositorio
 
     public async Task<ConfiguracionRetencion> ObtenerConfiguracionAsync()
     {
-        var config = await db.ConfiguracionRetencion.FirstOrDefaultAsync();
+        var config = await db.ConfiguracionRetencion.FirstOrDefaultAsync(c => c.Id == 1);
         if (config is null)
         {
             config = new ConfiguracionRetencion();
@@ -118,7 +118,7 @@ public class RellenoRepositorio(CasinoErpDbContext db) : IRellenoRepositorio
 
     public async Task<Boveda> ObtenerBovedaAsync()
     {
-        var boveda = await db.Bovedas.FirstOrDefaultAsync();
+        var boveda = await db.Bovedas.FirstOrDefaultAsync(b => b.Id == 1);
         if (boveda is null)
         {
             boveda = new Boveda { Id = 1, Saldo = 0 };

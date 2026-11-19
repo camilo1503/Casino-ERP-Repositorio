@@ -17,3 +17,6 @@ public class StockInsuficienteException : ReglaNegocioException
 {
     public StockInsuficienteException() : base("Stock insuficiente") { }
 }
+
+/// <summary>Credenciales o sesión inválidas (HU-06). La API la convierte en 401.</summary>
+public class AutenticacionException(string mensaje) : Exception(mensaje);
