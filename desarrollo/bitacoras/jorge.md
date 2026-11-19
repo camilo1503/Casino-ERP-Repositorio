@@ -29,6 +29,33 @@
 
 ## Entradas
 
+## 2026-11-18 · Tarea J5.2 · Revisión de ramas · Terminada
+**Hecho:**
+- No hay PR abiertos hacia `develop`. Había dos ramas de Felipe sin fusionar:
+  - `feature/HU-04-nomina-motor` (F2 + F3). Se revisó:
+    - CI en verde (run 44433902063);
+    - sin marcas de IA;
+    - solo toca archivos de Felipe;
+    - los mensajes coinciden con el plan;
+    - `PayrollEngine` es puro y documenta SRP, DIP y OCP;
+    - 47 pruebas de nómina.
+    
+    → **Fusionada** en `develop` (`5ce30c7`).
+  - `feature/HU-04-reglas-liquidacion` (F2): **no se fusiona por separado**, porque su contenido es idéntico al F2 rebaseado dentro de `nomina-motor` (verificado con `git diff`: sin diferencias). Queda obsoleta; Felipe puede borrarla.
+- Jira: CER-22 (F2) y CER-23 (F3) pasan a Listo.
+
+**Evidencia:** después de fusionar, `dotnet test` → 210 unitarias + 18 integración en verde; cobertura del dominio 97,35 % de líneas.
+
+**Decisiones:** ninguna nueva (D-009).
+
+**Pendientes:** ninguno.
+
+**Bloqueos / necesito de otros:** ninguno.
+
+**Siguiente paso:** J2 (acceso de Felipe a la suscripción de Azure).
+
+**Commits/PR:** `5ce30c7`.
+
 ## 2026-11-18 · Tarea J1 · Sprint 2 en Jira · Terminada
 **Hecho:**
 - Con la sesión de Jorge en su navegador (Brave, extensión Claude in Chrome) se creó el sprint **"CER Sprint 2"** (id 35) en el tablero CER: del 18-11-2026 al 02-12-2026, con el Sprint Goal.

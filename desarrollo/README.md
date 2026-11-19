@@ -86,7 +86,7 @@ Ola 5 (cierre)
 
 | Plan | Tarea en curso | Hechas | En revisión (PR) | Bloqueos |
 |---|---|---|---|---|
-| Felipe | F2 | F1 (contrato C4, `f083b68`) | — | — |
+| Felipe | F4 | F1 (contrato C4, `f083b68`), F2–F3 (`5ce30c7`) | — | — |
 | Iván | I0 | — | — | — |
 | Camilo | C0 | — | — | — |
 | Jorge | J1 / J5 | J0 (Fase 0, `8fff1ce`) | — | — |
