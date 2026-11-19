@@ -40,3 +40,14 @@ az webapp deploy -g rg-pitboss-erp -n pitboss-erp-8szxa --src-path publish.zip -
 - El usuario SQL de la identidad administrada (`CREATE USER [pitboss-erp-8szxa] FROM EXTERNAL PROVIDER`) se creó a mano y **no** lo maneja Terraform.
 - El proveedor `azurerm` 4.81 no tiene argumentos para la marca "oferta gratuita" de Azure SQL. La base solo se importa; `prevent_destroy` evita que un `apply` la recree y se pierda la oferta.
 - `Jwt__Clave` la genera `random_password.jwt` y queda en el state y en el app setting. El state no se comparte fuera del equipo.
+
+## `terraform plan` en cada PR (workflow `terraform-plan.yml`)
+
+Cada PR a `develop` que cambie un `.tf` ejecuta `fmt`, `init`, `validate` y `plan`, y deja el plan en el resumen del job. Entra a Azure con **OIDC** (sin secretos de larga duración): una App Registration `github-pitboss-terraform` con credencial federada para `repo:camilo1503/Casino-ERP-Repositorio:pull_request`.
+
+| Rol de la identidad | Alcance | Para qué |
+|---|---|---|
+| Contributor | `rg-pitboss-erp` | leer los recursos y sus app settings |
+| Storage Blob Data Contributor | la cuenta del state | leer y bloquear el state |
+
+Secretos del repositorio (los carga quien administre el repo): `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `TFSTATE_RG` y `TFSTATE_SA`. El workflow solo hace `plan`; el `apply` lo ejecuta una persona (J6).

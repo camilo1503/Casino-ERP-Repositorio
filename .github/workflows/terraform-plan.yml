@@ -1,0 +1,55 @@
+name: Terraform plan
+
+on:
+  pull_request:
+    branches: [develop]
+    paths: ['infra/terraform/**/*.tf']
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra/terraform
+    env:
+      ARM_USE_OIDC: true
+      ARM_USE_AZUREAD: true
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.8
+
+      - name: Formato
+        run: terraform fmt -check -recursive
+
+      - name: Init con el state remoto
+        run: >
+          terraform init -input=false
+          -backend-config="resource_group_name=${{ secrets.TFSTATE_RG }}"
+          -backend-config="storage_account_name=${{ secrets.TFSTATE_SA }}"
+          -backend-config="container_name=tfstate"
+
+      - name: Validar
+        run: terraform validate
+
+      - name: Plan
+        run: terraform plan -input=false -no-color -lock-timeout=2m | tee plan.txt
+
+      - name: Resumen del plan en el PR
+        if: always()
+        run: |
+          {
+            echo '## terraform plan'
+            echo '```'
+            cat plan.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
