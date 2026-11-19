@@ -8,7 +8,7 @@
 |---|---|---|---|
 | I0 | Arranque | Hecha | [#4](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/4) |
 | I1 | Roles, módulos y matriz (C5) | En revisión | [#4](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/4) |
-| I2 | Usuario y autenticación | Pendiente | — |
+| I2 | Usuario y autenticación | En revisión | [#5](https://github.com/camilo1503/Casino-ERP-Repositorio/pull/5) (depende de #4) |
 | I3 | UsuarioService (necesita C4) | Pendiente | — |
 | I4 | Infraestructura y cuentas de demo (C6) | Pendiente | — |
 | I5 | JWT y autorización (hito Seguridad activa) | Pendiente | — |
@@ -23,6 +23,26 @@
 - (ninguno)
 
 ## Entradas
+
+## 2026-11-18 22:45 · Tarea I2 · Terminada (en revisión)
+**Hecho:**
+- `src/CasinoErp.Dominio/Seguridad/Usuario.cs`: `Usuario`, `IUsuarioRepositorio`, `IHasherContrasena` e `IVerificadorTotp`, con las firmas del plan.
+- `src/CasinoErp.Dominio/Seguridad/ContrasenaTemporal.cs`: `Generar()` y `EsSegura()`.
+- `src/CasinoErp.Dominio/Seguridad/AutenticacionService.cs`: `IniciarSesionAsync` con el algoritmo del plan y los mensajes copiados literalmente.
+- `tests/CasinoErp.PruebasUnitarias/Dobles/SeguridadEnMemoria.cs` (`UsuariosEnMemoria`, `HasherFalso`, `TotpFalso`, `RelojMovible`) y `AutenticacionServiceTests.cs` (13 pruebas, 16 casos).
+**Evidencia:**
+- TDD: `dotnet test tests/CasinoErp.PruebasUnitarias --filter AutenticacionServiceTests` → falla al compilar (CS0246, no existen `Usuario` ni `AutenticacionService`); tras implementar → 16 aprobadas.
+- `dotnet build CasinoErp.sln` → 0 advertencias.
+- `dotnet test CasinoErp.sln` → 273 aprobadas (239 unitarias + 34 de integración), 0 fallos.
+- Cobertura de líneas de `CasinoErp.Dominio` → 97,35 %.
+**Decisiones (solo afectan a mi módulo):**
+- La rama `feature/HU-06-autenticacion` sale de `feature/HU-06-matriz-acceso` y no de `develop`, porque el PR #4 todavía no está fusionado y la I2 necesita `Rol` y `AutenticacionException`. Hay que fusionar el #4 antes del #5.
+- Un PR por tarea (instrucción de Iván en el chat): I2 tiene su PR propio y la I3 va en otra rama. El plan (I3.5) proponía un solo PR para I2 + I3.
+- `ContrasenaTemporal.Generar()` no usa caracteres ambiguos (`I`, `O`, `l`, `0`, `1`) porque la contraseña temporal se dicta o se copia a mano. Cumple igual la regla del plan (12 caracteres con al menos una mayúscula, una minúscula, un dígito y un carácter de `!@#$%&*?`).
+**Pendientes:** ninguno de la I2.
+**Bloqueos / necesito de otros:** que Jorge fusione el #4 y luego el #5.
+**Siguiente paso:** I3 (`UsuarioService`) en `feature/HU-06-usuarios`. El C4 de Felipe ya está en `develop`.
+**Commits/PR:** `2665919` · https://github.com/camilo1503/Casino-ERP-Repositorio/pull/5
 
 ## 2026-11-18 22:30 · Tarea I1 · Terminada (en revisión)
 **Hecho:**
