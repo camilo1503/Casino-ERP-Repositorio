@@ -6,11 +6,16 @@ using FluentAssertions;
 namespace CasinoErp.PruebasIntegracion;
 
 /// <summary>Pruebas de integración: controlador + servicio + EF Core + base de datos real (SQLite).</summary>
-public class ApiTests : IClassFixture<CasinoErpFactory>
+public class ApiTests : IClassFixture<CasinoErpFactory>, IAsyncLifetime
 {
-    private readonly HttpClient _cliente;
+    private readonly CasinoErpFactory _factory;
+    private HttpClient _cliente = null!;
 
-    public ApiTests(CasinoErpFactory factory) => _cliente = factory.CreateClient();
+    public ApiTests(CasinoErpFactory factory) => _factory = factory;
+
+    // HU-06: el gerente tiene todos los módulos que usan estas pruebas del Sprint 1.
+    public async Task InitializeAsync() => _cliente = await _factory.ClienteComoAsync("daniel.ruiz@pitboss.co");
+    public Task DisposeAsync() => Task.CompletedTask;
 
     private static Task<JsonElement> Json(HttpResponseMessage respuesta) => respuesta.LeerJsonAsync();
 

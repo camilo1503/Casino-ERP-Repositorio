@@ -1,5 +1,7 @@
 using CasinoErp.Dominio.Mesas;
 using Microsoft.AspNetCore.Mvc;
+using CasinoErp.Api.Seguridad;
+using CasinoErp.Dominio.Seguridad;
 
 namespace CasinoErp.Api.Controllers;
 
@@ -8,6 +10,7 @@ public record LimitesRequest(long ApuestaMinima, long ApuestaMaxima, string? Zon
 
 [ApiController]
 [Route("api/mesas")]
+[AutorizarModulo(Modulos.Catalogo, Modulos.Mesas, Modulos.MiMesa)]
 public class MesasController(MesaService servicio) : ControllerBase
 {
     [HttpGet]

@@ -11,6 +11,7 @@ public class FiltroExcepciones : IExceptionFilter
     {
         var estado = context.Exception switch
         {
+            AutenticacionException => StatusCodes.Status401Unauthorized,
             NoEncontradoException => StatusCodes.Status404NotFound,
             ReglaNegocioException => StatusCodes.Status400BadRequest,
             _ => (int?)null,

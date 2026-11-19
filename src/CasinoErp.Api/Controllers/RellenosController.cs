@@ -1,5 +1,7 @@
 using CasinoErp.Dominio.Rellenos;
 using Microsoft.AspNetCore.Mvc;
+using CasinoErp.Api.Seguridad;
+using CasinoErp.Dominio.Seguridad;
 
 namespace CasinoErp.Api.Controllers;
 
@@ -10,6 +12,7 @@ public record DepositoRequest(long Monto);
 
 [ApiController]
 [Route("api")]
+[AutorizarModulo(Modulos.Mesas, Modulos.Inventario)]
 public class RellenosController(RellenoService servicio) : ControllerBase
 {
     [HttpGet("rellenos")]

@@ -9,17 +9,19 @@ namespace CasinoErp.PruebasIntegracion;
 /// <summary>Preparación de la base de datos al arrancar (D-006: BaseDatos:RecrearAlIniciar).</summary>
 public class BaseDatosTests
 {
+    private const string Gerente = "daniel.ruiz@pitboss.co";   // HU-06: todas las rutas de /api exigen token
+
     [Fact]
     public async Task RecrearAlIniciar_borra_los_cambios_y_vuelve_a_cargar_los_datos_demo()
     {
         using var original = new CasinoErpFactory();
-        var cliente = original.CreateClient();
+        var cliente = await original.ClienteComoAsync(Gerente);
         var crear = await cliente.PostAsJsonAsync("/api/jugadores",
             new { documento = "1077888999", nombre = "Persona Temporal", correo = "temporal@correo.com", fechaNacimiento = "1990-03-03" });
         crear.StatusCode.Should().Be(HttpStatusCode.Created);
 
         using var recreada = original.WithWebHostBuilder(b => b.UseSetting("BaseDatos:RecrearAlIniciar", "true"));
-        var clienteRecreado = recreada.CreateClient();
+        var clienteRecreado = await recreada.ClienteComoAsync(Gerente);
 
         (await clienteRecreado.GetAsync("/api/jugadores/1077888999")).StatusCode.Should().Be(HttpStatusCode.NotFound);
         var jugadores = await clienteRecreado.GetFromJsonAsync<System.Text.Json.JsonElement>("/api/jugadores");
@@ -38,11 +40,11 @@ public class BaseDatosTests
     public async Task Sin_RecrearAlIniciar_los_cambios_se_conservan()
     {
         using var original = new CasinoErpFactory();
-        var cliente = original.CreateClient();
+        var cliente = await original.ClienteComoAsync(Gerente);
         await cliente.PostAsJsonAsync("/api/jugadores",
             new { documento = "1077888998", nombre = "Persona Persistente", correo = "persiste@correo.com", fechaNacimiento = "1990-03-03" });
 
         using var reiniciada = original.WithWebHostBuilder(_ => { });
-        (await reiniciada.CreateClient().GetAsync("/api/jugadores/1077888998")).StatusCode.Should().Be(HttpStatusCode.OK);
+        (await (await reiniciada.ClienteComoAsync(Gerente)).GetAsync("/api/jugadores/1077888998")).StatusCode.Should().Be(HttpStatusCode.OK);
     }
 }

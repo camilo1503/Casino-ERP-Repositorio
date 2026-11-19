@@ -1,5 +1,7 @@
 using CasinoErp.Dominio.Personal;
 using Microsoft.AspNetCore.Mvc;
+using CasinoErp.Api.Seguridad;
+using CasinoErp.Dominio.Seguridad;
 
 namespace CasinoErp.Api.Controllers;
 
@@ -11,6 +13,7 @@ public record MotivoEmpleadoRequest(string? Motivo);
 /// <summary>HU-04 Talento Humano: CRUD de empleados con borrado lógico.</summary>
 [ApiController]
 [Route("api/empleados")]
+[AutorizarModulo(Modulos.Competencias, Modulos.Rrhh, Modulos.Mesas)]
 public class EmpleadosController(EmpleadoService servicio) : ControllerBase
 {
     [HttpGet]
