@@ -37,8 +37,8 @@ src/CasinoErp.Dominio/          reglas de negocio (servicios, entidades, interfa
 src/CasinoErp.Infraestructura/  Entity Framework Core, repositorios y datos de demostración
 src/CasinoErp.Api/              controladores REST + Swagger
 src/CasinoErp.Api/wwwroot/       front del ERP + js/api/*.js (un archivo por módulo)
-tests/CasinoErp.PruebasUnitarias/    271 pruebas unitarias del dominio (TDD)
-tests/CasinoErp.PruebasIntegracion/  62 pruebas de la API contra una base SQLite real
+tests/CasinoErp.PruebasUnitarias/    310 pruebas unitarias del dominio (TDD)
+tests/CasinoErp.PruebasIntegracion/  72 pruebas de la API contra una base SQLite real
 infra/terraform/                 infraestructura de Azure como código (HU-07)
 docs/arc42/                      arquitectura (arc42): bloques, despliegue, seguridad y ADR
 docs/sprint-2/                   artefactos Scrum del Sprint 2
@@ -56,6 +56,8 @@ desarrollo/                      planes, bitácoras, contratos y decisiones del 
 | Rellenos y bóveda | `GET/POST /api/rellenos`, `POST /api/rellenos/{id}/aprobar`, `.../rechazar`, `GET /api/boveda`, `POST /api/boveda/depositos` |
 | Inventario de fichas | `GET/POST /api/inventario/fichas`, `POST .../entradas`, `POST .../retiros`, `GET /api/inventario/movimientos` |
 | Alertas de stock crítico (HU-05) | `PUT /api/inventario/fichas/{codigo}/minimo`, `GET /api/inventario/alertas` |
+| Proveedores (HU-05) | `GET/POST /api/proveedores`, `GET/PUT /api/proveedores/{nit}`, `POST .../desactivar`, `.../reactivar` |
+| Órdenes de compra (HU-05) | `GET/POST /api/compras/ordenes`, `POST /api/compras/ordenes/{id}/enviar`, `.../recibir`, `.../cancelar` (la orden en borrador se genera sola ante un stock crítico) |
 | Tablero | `GET /api/resumen` |
 | Empleados (HU-04) | `GET/POST /api/empleados`, `GET/PUT /api/empleados/{documento}`, `POST /api/empleados/{documento}/retirar` |
 | Nómina (HU-04) | `POST /api/nomina/calculate`, `GET /api/nomina`, `GET /api/nomina/{anio}/{mes}`, `POST /api/nomina/{id}/aprobar`, `GET/PUT /api/nomina/parametros/{anio}` |
@@ -63,8 +65,7 @@ desarrollo/                      planes, bitácoras, contratos y decisiones del 
 | Usuarios y roles (HU-06) | `GET/POST /api/usuarios`, `PUT /api/usuarios/{id}/rol`, `POST .../restablecer`, `.../desactivar`, `.../reactivar` |
 | Estado del servicio | `GET /api/salud` (anónimo) |
 
-Todos los endpoints, salvo `login` y `salud`, exigen el token JWT y el rol con acceso al módulo (`[AutorizarModulo]`); sin permiso responden `403`. Los proveedores y las órdenes de compra se agregarán a esta tabla cuando entren en `develop`.
-
+Todos los endpoints, salvo `login` y `salud`, exigen el token JWT y el rol con acceso al módulo (`[AutorizarModulo]`); sin permiso responden `403`. 
 Los errores de negocio responden `400` y los registros inexistentes `404`, ambos con `{ "mensaje": "..." }` (los mismos mensajes de los escenarios Gherkin).
 
 ### Cómo ejecutar
@@ -72,13 +73,13 @@ Los errores de negocio responden `400` y los registros inexistentes `404`, ambos
 Requiere el SDK de .NET 8. En Visual Studio 2022 basta con abrir `CasinoErp.sln` y ejecutar `CasinoErp.Api`.
 
 ```bash
-dotnet test CasinoErp.sln                     # 333 pruebas (271 unitarias + 62 de integración)
+dotnet test CasinoErp.sln                     # 382 pruebas (310 unitarias + 72 de integración)
 dotnet run --project src/CasinoErp.Api        # front: http://localhost:5080 · API: http://localhost:5080/swagger
 ```
 
 Por defecto usa SQLite (`casino-erp.db`) y carga los mismos datos de ejemplo del prototipo. Para empezar de cero, borra `src/CasinoErp.Api/casino-erp.db`. Para SQL Server / Azure SQL, completar el servidor en `src/CasinoErp.Api/appsettings.SqlServer.json` y ejecutar con `ASPNETCORE_ENVIRONMENT=SqlServer`.
 
-Cobertura del dominio con las pruebas unitarias: 97,36 % de líneas, 90,24 % de ramas y 94,88 % de métodos (medido el 2026-11-19 con el comando de AGENT.md §10; el CI exige al menos 80 % de líneas). Se vuelve a medir al cierre del sprint.
+Cobertura del dominio con las pruebas unitarias: 97,64 % de líneas, 90,6 % de ramas y 95,44 % de métodos (medido el 2026-11-19 con el comando de AGENT.md §10; el CI exige al menos 80 % de líneas). Se vuelve a medir al cierre del sprint.
 
 ## Pruebas (Ingeniería de Software II · Taller de herramientas de prueba para CRUD)
 

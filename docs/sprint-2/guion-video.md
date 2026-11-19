@@ -29,6 +29,14 @@ Con la seguridad de Iván ya en `develop` (`cce0aa1`) y su arc42 (`2932d93`):
 - El bloque Nómina (Felipe) dice que solo Gerente y Talento Humano calculan o aprueban la nómina. Es coherente con la sección 10.
 - Detalle para Felipe: `05-bloques/nomina.md` todavía dice que los atributos «se aplican cuando la seguridad (I5) está en develop». Ya están, así que esa frase puede pasar a presente.
 
-### Pendiente
+### Bloque Inventario y Compras (Camilo) frente a la sección 10, revisado el 2026-11-19
 
-Falta el bloque de Camilo (`05-bloques/inventario-compras.md`, PR #8 todavía abierto) para comparar el control de `InventarioController` (`[AutorizarModulo(Modulos.Inventario, Modulos.Caja)]`, ya en el código) con su bloque. Las incoherencias se anotarán como comentarios en el PR de su dueño.
+Con `05-bloques/inventario-compras.md` ya en `develop` (`a97bf8f`):
+
+- La sección 10 lista `ProveedoresController` → módulo `proveedores` (Gerente, Jefe de piso) y `ComprasController` → `proveedores`, `inventario` (Gerente, Jefe de piso, Cajero). El código coincide: `ProveedoresController` lleva `[AutorizarModulo(Modulos.Proveedores)]` y `ComprasController` lleva `[AutorizarModulo(Modulos.Proveedores, Modulos.Inventario)]`.
+- Comprobado en un servidor local: Laura (cajero) recibe 403 en `/api/proveedores` y 200 en `/api/compras/ordenes`; Felipe (talento humano) recibe 403 en proveedores y en alertas. Coincide con la tabla de la sección 10.
+- Sin incoherencias entre la sección 10 y los tres bloques (Nómina, Inventario y Compras, Seguridad).
+
+### Estado de J7.4
+
+Hecha: las secciones 5 y 10 son coherentes para los tres bloques. El guion del video queda listo; falta definir quién graba y el enlace.

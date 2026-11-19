@@ -35,6 +35,31 @@
 
 ## Entradas
 
+## 2026-11-19 · Tareas J5.2 y J7.4 · Fusión de la HU-05 completa y prueba de la demo · Terminada
+**Hecho:**
+- Camilo subió C3 a C8 en tres PR encadenados: #16 (proveedores y órdenes de compra, C3–C5), #17 (front, C6) y #18 (arc42 del bloque, C8; C7 va dentro de #16). Con el CI en verde, sin marcas de IA y solo con archivos de su módulo, se **fusionó** la punta de la cadena (#18) → `a97bf8f`. Los tres PR figuran como fusionados.
+- **Prueba de la demo de HU-05** contra un servidor local, por la API:
+  1. Laura retira 25 fichas de $500.000: stock 395 y nivel crítico. ✔
+  2. Aparece la alerta de FICHA-500K en estado ABIERTA. ✔
+  3. Existe la orden de compra 1 en BORRADOR de FICHA-500K por 165 unidades. ✔
+  4. Daniel (gerente) la envía (ENVIADA) y la recibe (RECIBIDA). ✔
+  5. Después: stock 560, sin nivel crítico y sin alertas abiertas. ✔
+  6. Permisos: Laura recibe 403 en proveedores y 200 en órdenes; Felipe recibe 403 en proveedores y alertas. ✔
+- **J7.4 hecha:** la sección 10 coincide con los tres bloques (Nómina, Inventario y Compras, Seguridad); resultado en `docs/sprint-2/guion-video.md`.
+- README raíz y tablero actualizados. Con la HU-04, HU-05 y HU-06 completas en `develop`, **J6 ya no espera a nadie salvo a los secretos de GitHub (solo para J4.3)**.
+
+**Evidencia:** `dotnet test CasinoErp.sln` → 310 unitarias + 72 de integración, 0 fallos. Cobertura del dominio (PowerShell, comando de AGENT.md §10): 97,64 % de líneas, 90,6 % de ramas y 95,44 % de métodos. `node --check` correcto en `inventario.js` y `compras.js`. El servidor local se detuvo al terminar.
+
+**Decisiones:** ninguna.
+
+**Pendientes:** J6 (despliegue y prueba de humo), J4.3, J9; video (quién graba); capacidad del sprint y retrospectivas de Camilo, Iván y la propia; Jira de Iván y Camilo; ensayo de la demo con cronómetro.
+
+**Bloqueos / necesito de otros:** Camilo, los 5 secretos de GitHub (solo bloquean J4.3).
+
+**Siguiente paso:** J6, con la aprobación de Jorge para modificar el sitio público.
+
+**Commits/PR:** `a97bf8f`.
+
 ## 2026-11-19 · Tarea J5.2 · Fusión del PR #8 (HU-05 C1–C2), F7 final y cierre de Iván · Terminada
 **Hecho:**
 - Camilo actualizó el PR #8 (merge de `develop`, pruebas de integración con `ClienteComoAsync` y una prueba de autorización del crupier). Con el CI en verde y sin marcas de IA, se **fusionó** → `d51e4e6`.

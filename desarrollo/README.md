@@ -88,8 +88,8 @@ Ola 5 (cierre)
 |---|---|---|---|---|
 | Felipe | F9.6 (los secretos los carga Camilo) | F1–F8 (`04e37c9`, `9aaa9f9`), F9 (`1bf6a6f`, D-011); retrospectiva de HU-04 | — | — |
 | Iván | Ninguna: plan cerrado (falta su parte de Jira) | I1–I8 (`cce0aa1`, `2932d93`, `cc3c5a8`; D-012) | — | — |
-| Camilo | C3–C8 (proveedores, órdenes de compra, front, autorización y arc42) | C0, C1 y C2 (PR #8, `d51e4e6`) | — | — |
-| Jorge | J4.3 (prueba del workflow), J5; J7.4 y J8 (faltantes) | J0 (Fase 0, `8fff1ce`), J1, J2, J3 (`9be6eec`), J7.1–J7.3 y J8 escrito (`1c9546b`, `fe5141a`) | — | J4.3 espera que Camilo cargue los 5 secretos de GitHub; J6 espera los PR de Iván y Camilo |
+| Camilo | Retrospectiva de HU-05; F9.6 (cargar los 5 secretos de GitHub) | C0–C8 (`d51e4e6`, `a97bf8f`): HU-05 completa en `develop` | — | — |
+| Jorge | J4.3 (espera los secretos), J6 (despliegue), J9 (cierre); J7.4 hecha | J0, J1, J2, J3 (`9be6eec`), J7 y J8 escritos | — | J4.3 espera que Camilo cargue los 5 secretos de GitHub |
 
 ## Guion de la Sprint Review (aprox. 10 minutos)
 
