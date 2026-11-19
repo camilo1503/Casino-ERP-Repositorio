@@ -13,7 +13,7 @@
 | F4 | Persistencia y API de empleados | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-empleados-api) |
 | F5 | Persistencia y API de nómina | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-nomina-api) |
 | F6 | Front personal.js | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-front) |
-| F7 | Autorización de mis controladores | Terminada (en revisión; el PR se abre cuando entren #9 y #10 de Iván) | Rama `feature/HU-04-autorizacion` |
+| F7 | Autorización de mis controladores | Terminada (en revisión) | PR de `feature/HU-04-autorizacion` hacia `develop` |
 | F8 | arc42 bloque Nómina y cierre | En revisión (demo ensayada: 2 min) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-arc42-nomina) |
 | F9 | Acceso de Jorge a Azure (D-010, D-011) | Hecha (F9.6 pendiente: secretos de GitHub cuando Jorge los pida) | Sin PR (tarea de portal) |
 
@@ -31,9 +31,18 @@
 
 ## Bloqueos abiertos
 - ~~F4, F5 y F6 esperan la Fase 0 de Jorge~~ (resuelto: Fase 0 en `develop` desde `8fff1ce`, D-007).
-- ~~F7 espera la I5 de Iván~~ (resuelto en código el 2026-11-18: F7 hecha sobre la rama de Iván). Queda: abrir el PR de `feature/HU-04-autorizacion` hacia `develop` cuando Jorge fusione los PR #9 y #10 de Iván.
+- ~~F7 espera la I5 de Iván~~ (resuelto en código el 2026-11-18: F7 hecha sobre la rama de Iván). La seguridad entró a `develop` en `cce0aa1` (merge normal, sin *squash*); el PR de F7 ya solo muestra mis cambios.
 
 ## Entradas
+
+## 2026-11-18 23:40 · Tarea F7 · PR listo para abrir
+**Hecho:** Jorge fusionó la seguridad de Iván en `develop` (`cce0aa1`, merge normal que incluye los PR #4 a #10) y anotó en su bitácora que el código de F7 queda cubierto por los atributos de la I5. Como no fue *squash*, `feature/HU-04-autorizacion` no necesita rebase: frente a `develop` solo trae el commit de F7 y esta entrada.
+**Evidencia:** `develop` (`d88fc73`) + `4b502cf` combinados en una copia aparte, sin conflictos → `dotnet test CasinoErp.sln -c Release`: 260 unitarias + 57 de integración (54 de `develop` + 3 de F7), 0 fallos.
+**Decisiones:** ninguna.
+**Pendientes:** abrir el PR (Felipe) y fusionarlo (Jorge, D-009); HU-04 (CER-13) y CER-27 a "Listo" al fusionar.
+**Bloqueos / necesito de otros:** ninguno.
+**Siguiente paso:** ninguno de código.
+**Commits/PR:** ver el commit `HU-04: Bitacora de Felipe, F7 lista para PR tras fusionar la seguridad`.
 
 ## 2026-11-18 23:23 · Tarea F7 · Terminada (en revisión)
 **Hecho:**
