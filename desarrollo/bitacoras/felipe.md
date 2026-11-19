@@ -8,9 +8,9 @@
 |---|---|---|---|
 | F0 | Arranque | Hecha (falta mover Jira) | — |
 | F1 | Dominio de empleados (contrato C4) | Hecha (fusionada en `develop`, `f083b68`) | Fusión del integrador (D-009) |
-| F2 | Parámetros y reglas de liquidación | En revisión (PR F2 + F3) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-nomina-motor) |
-| F3 | PayrollEngine y NominaService | En revisión (PR F2 + F3) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-nomina-motor) |
-| F4 | Persistencia y API de empleados | Pendiente | — |
+| F2 | Parámetros y reglas de liquidación | Hecha (fusionada en `develop`, `5ce30c7`) | Fusión del integrador (D-009) |
+| F3 | PayrollEngine y NominaService | Hecha (fusionada en `develop`, `5ce30c7`) | Fusión del integrador (D-009) |
+| F4 | Persistencia y API de empleados | En revisión | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-empleados-api) |
 | F5 | Persistencia y API de nómina | Pendiente | — |
 | F6 | Front personal.js | Pendiente | — |
 | F7 | Autorización de mis controladores | Pendiente | — |
@@ -20,12 +20,35 @@
 - F0.3: mover HU-04 y la subtarea F1 a "En curso" en Jira (lo hace Felipe; el agente no tiene acceso a Jira).
 - ~~F1.5: abrir el PR de F1~~ (resuelto: el integrador la fusionó en `develop`, D-009).
 - ~~Comando de cobertura de AGENT.md §10 sin `coverlet.msbuild`~~ (resuelto: la Fase 0 agregó el paquete).
+- La rama `feature/HU-04-reglas-liquidacion` quedó obsoleta (F2 ya entró por `feature/HU-04-nomina-motor`). No se fusiona; Felipe o Jorge pueden borrarla.
+- Jira: mover CER-22, CER-23 (F2, F3) a "Listo" y CER-24 (F4) a "En revisión".
 
 ## Bloqueos abiertos
 - ~~F4, F5 y F6 esperan la Fase 0 de Jorge~~ (resuelto: Fase 0 en `develop` desde `8fff1ce`, D-007).
 - F7 espera la I5 de Iván ("seguridad activa"). Aún no está en `develop`.
 
 ## Entradas
+
+## 2026-11-18 20:11 · Tarea F4 · Terminada (en revisión)
+**Hecho:**
+- Rama `feature/HU-04-empleados-api` tomada de `develop` (con la Fase 0, F1, F2 y F3 ya fusionadas).
+- `src/CasinoErp.Infraestructura/Configuraciones/EmpleadoConfiguracion.cs`: tabla `Empleados`, índice único de `Documento`, longitudes del plan y enums como texto.
+- `src/CasinoErp.Infraestructura/Repositorios/PersonalRepositorios.cs`: `EmpleadoRepositorio` con `db.Set<Empleado>()`, orden por `Id`.
+- `src/CasinoErp.Infraestructura/Semillas/SemillaPersonal.cs` (`Orden = 10`, idempotente): los 18 empleados de `seed().staff` en el mismo orden, con `Documento = 1010200300 + i * 7919`, cargo, juego, turno y área del mockup, salario por cargo, `Indefinido` y ingreso `2025-01-15`.
+- `src/CasinoErp.Infraestructura/Modulos/ModuloPersonal.cs`: registra el repositorio, `EmpleadoService` y la semilla.
+- `src/CasinoErp.Api/Controllers/EmpleadosController.cs`: `GET /api/empleados?soloActivos=`, `GET /api/empleados/{documento}`, `POST /api/empleados` (201), `PUT /api/empleados/{documento}` y `POST /api/empleados/{documento}/retirar`.
+- `tests/CasinoErp.PruebasIntegracion/PersonalNominaApiTests.cs`: 7 pruebas (las 5 del plan, la comparación de la semilla con el mockup y `PUT`). Cliente con `factory.CreateClient()` porque la I5 de Iván aún no está en `develop`.
+- TDD: primero las pruebas (fallaban con 404 en las rutas).
+**Evidencia:**
+- `dotnet test tests/CasinoErp.PruebasIntegracion --filter PersonalNominaApiTests` → 7 aprobadas, 0 fallos.
+- `dotnet test CasinoErp.sln` → 235 aprobadas (210 unitarias + 25 de integración), 0 fallos. `dotnet build` → 0 advertencias.
+- Cobertura oficial: `CasinoErp.Dominio` 97,35 % de líneas.
+- Prueba manual (F4.5): API con `BaseDatos:RecrearAlIniciar=true`; en Swagger, `GET /api/empleados` → 200 con 18 empleados (Ana Torres `1010200300` en M-01, Bruno Lara en `NOCHE`, Daniela Vargas en `Supervisión`). El front cargó en línea (8 jugadores, 19 mesas) sin errores en la consola.
+**Decisiones:** ninguna fuera del plan.
+**Pendientes:** abrir el PR de F4 hacia `develop` (o dejar la rama para el integrador, D-009); mover CER-24 en Jira.
+**Bloqueos / necesito de otros:** F7 espera la I5 de Iván. F5 ya se puede hacer (F3 y F4 listos).
+**Siguiente paso:** F5, persistencia de nómina y `POST /api/nomina/calculate`, en `feature/HU-04-nomina-api`.
+**Commits/PR:** ver el commit `HU-04: Persistencia, semilla y API REST de empleados`.
 
 ## 2026-11-18 20:02 · Tarea F3 · Terminada (PR F2 + F3 pendiente)
 **Hecho:**
