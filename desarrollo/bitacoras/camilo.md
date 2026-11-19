@@ -6,9 +6,9 @@
 
 | Tarea | Descripción | Estado | PR |
 |---|---|---|---|
-| C0 | Arranque | Pendiente | — |
-| C1 | Umbral y alertas (dominio, C8) | Pendiente | — |
-| C2 | Persistencia y API de alertas | Pendiente | — |
+| C0 | Arranque | Hecha | — |
+| C1 | Umbral y alertas (dominio, C8) | En revisión | ver C2 |
+| C2 | Persistencia y API de alertas | En revisión | ver entrada C2 |
 | C3 | Proveedores (dominio) | Pendiente | — |
 | C4 | Órdenes de compra (dominio) | Pendiente | — |
 | C5 | Persistencia y API de compras | Pendiente | — |
@@ -17,12 +17,50 @@
 | C8 | arc42 bloque Inventario/Compras y cierre | Pendiente | — |
 
 ## Pendientes abiertos
-- (ninguno)
+- Mover en Jira HU-05 (CER-14) y las subtareas C0, C1 y C2 (CER-29, 30, 31) a "En curso" / "Listo" (C0.3). Lo hace Camilo a mano: el agente no tiene acceso a Jira.
 
 ## Bloqueos abiertos
-- (ninguno)
+- C7 espera el hito «seguridad activa» (I5 de Iván). A la fecha, I1–I4 están en PR abiertos (#4 a #7) y no hay I5.
 
 ## Entradas
+
+## 2026-11-18 22:49 · Tarea C2 · Terminada (en revisión)
+**Hecho:**
+- `Infraestructura/Configuraciones/AlertaStockConfiguracion.cs`: tabla `AlertasStock`, `CodigoFicha` máx. 20 requerido, `Estado` como texto máx. 15, índice no único (`CodigoFicha`, `Estado`).
+- `Infraestructura/Repositorios/InventarioRepositorios.cs`: `AlertaStockRepositorio` con `db.Set<AlertaStock>()`, lista ordenada por `CreadaEn` descendente.
+- `Infraestructura/Semillas/SemillaUmbralesInventario.cs` (`Orden = 5`): baja el mínimo de `FICHA-500K` de 1000 a 400; idempotente.
+- `Infraestructura/Modulos/ModuloCompras.cs`: registra `IAlertaStockRepositorio` y la semilla.
+- `Api/Controllers/InventarioController.cs` (solo se agregan endpoints): `PUT /api/inventario/fichas/{codigo}/minimo` y `GET /api/inventario/alertas?soloAbiertas=true`.
+- `tests/CasinoErp.PruebasIntegracion/InventarioComprasApiTests.cs`: 4 pruebas (umbral de demo 400, actualizar mínimo, mínimo negativo → 400, compra que baja la bóveda del umbral → alerta `ABIERTA`).
+**Evidencia:** `dotnet build CasinoErp.sln` → 0 advertencias. `dotnet test CasinoErp.sln` → 221 unitarias + 38 de integración aprobadas, 0 fallos. Antes de implementar, `--filter InventarioComprasApiTests` → 4 fallos (C2.2).
+**Decisiones:**
+- La prueba de la demo va en la clase anidada `InventarioComprasApiTests.Demo`, con su propia `CasinoErpFactory`, porque retira de `FICHA-500K` y `El_umbral_de_demo_de_500K_es_400` asume stock 420 (nota del plan en C2.1). El filtro `--filter InventarioComprasApiTests` sigue encontrando las 4.
+- Los clientes se crean con `CreateClient()` porque I5 todavía no está en `develop` (lo permite C2.1). Se cambian a `ClienteComoAsync` en C7.
+**Pendientes:** Jira (ver Pendientes abiertos).
+**Bloqueos / necesito de otros:** ninguno para C3–C5.
+**Siguiente paso:** C3 (proveedores, dominio) en `feature/HU-05-proveedores`.
+**Commits/PR:** `d1cf642` (C1), `5a60ede` (C2); PR de C1 + C2 hacia `develop` (enlace en la entrada siguiente o en el PR de la rama `feature/HU-05-alertas-stock`).
+
+## 2026-11-18 22:30 · Tarea C1 · Terminada
+**Hecho:**
+- `Dominio/Inventario/Ficha.cs`: `StockMinimo` (por defecto 1000) y `EnNivelCritico` (contrato C8).
+- `Dominio/Inventario/AlertaStock.cs`: `EstadoAlerta`, `AlertaStock`, `IAlertaStockRepositorio`, `IObservadorStockCritico`.
+- `Dominio/Inventario/InventarioFichasService.cs`: constructor nuevo, `ActualizarStockMinimoAsync`, `ListarAlertasAsync`, `MensajeMinimo` y `EvaluarStockAsync` al final de `RegistrarAsync`, `RegistrarEntradaAsync`, `RetirarAsync` y `ActualizarStockMinimoAsync`.
+- Pruebas: `AlertasStockTests.cs` (11 pruebas del plan), `Dobles/InventarioAlertasEnMemoria.cs` (`AlertasEnMemoria`, `ObservadorEspia`) y el constructor de `InventarioFichasServiceTests`.
+**Evidencia:** `--filter AlertasStockTests` antes de implementar → error de compilación (C1.2). Después: `dotnet test tests/CasinoErp.PruebasUnitarias` → 221 aprobadas, 0 fallos. Cobertura de líneas de `CasinoErp.Dominio` → 97,52 % (umbral 80 %).
+**Decisiones:**
+- `IFichaRepositorio` no tiene un método para guardar la ficha sin registrar un movimiento. `ActualizarStockMinimoAsync` llama a `IAlertaStockRepositorio.GuardarCambiosAsync()` para persistir el mínimo, porque la ficha y las alertas comparten el mismo `DbContext` por solicitud. Así no se cambia la interfaz del Sprint 1. Solo afecta a mi módulo.
+**Pendientes:** ninguno. Entre C1 y C2, la API no arrancaba (faltaba registrar `IAlertaStockRepositorio`), como prevé el plan; por eso C1 no lleva PR propio.
+**Bloqueos / necesito de otros:** ninguno.
+**Siguiente paso:** C2.
+**Commits/PR:** `d1cf642`.
+
+## 2026-11-18 22:20 · Tarea C0 · Terminada
+**Hecho:** rama `feature/HU-05-alertas-stock` tomada de `develop` (`241b185`).
+**Evidencia:** `dotnet test CasinoErp.sln` en `develop` → 210 unitarias + 34 de integración aprobadas, 0 fallos.
+**Estado de `develop` al empezar:** Fase 0 (`8fff1ce`) y contrato C4 (`f083b68`) fusionados. Seguridad de Iván: I1–I4 en PR abiertos #4–#7, sin I5.
+**Pendientes:** C0.3 (Jira) lo hace Camilo a mano.
+**Siguiente paso:** C1.
 
 ## 2026-11-18 · Creación de la bitácora · Terminada
 **Hecho:** se crea la bitácora con el plan del Sprint 2.
