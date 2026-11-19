@@ -7,8 +7,8 @@
 | Tarea | Descripción | Estado | PR |
 |---|---|---|---|
 | F0 | Arranque | Hecha (falta mover Jira) | — |
-| F1 | Dominio de empleados (contrato C4) | En revisión | (enlace al crear el PR) |
-| F2 | Parámetros y reglas de liquidación | Hecha (PR junto con F3) | — |
+| F1 | Dominio de empleados (contrato C4) | Hecha (fusionada en `develop`, `f083b68`) | Fusión del integrador (D-009) |
+| F2 | Parámetros y reglas de liquidación | Hecha (PR junto con F3) | [rama](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-reglas-liquidacion) |
 | F3 | PayrollEngine y NominaService | Pendiente | — |
 | F4 | Persistencia y API de empleados | Pendiente | — |
 | F5 | Persistencia y API de nómina | Pendiente | — |
@@ -18,13 +18,23 @@
 
 ## Pendientes abiertos
 - F0.3: mover HU-04 y la subtarea F1 a "En curso" en Jira (lo hace Felipe; el agente no tiene acceso a Jira).
-- F1.5: abrir el PR de F1 hacia `develop` y pedirle la revisión a Iván.
-- El comando de cobertura de AGENT.md §10 (`/p:CollectCoverage=true`) necesita el paquete `coverlet.msbuild`, que no está en el proyecto de pruebas. Mientras tanto se mide con `--collect:"XPlat Code Coverage"` (coverlet.collector, ya instalado).
+- ~~F1.5: abrir el PR de F1~~ (resuelto: el integrador la fusionó en `develop`, D-009).
+- ~~Comando de cobertura de AGENT.md §10 sin `coverlet.msbuild`~~ (resuelto: la Fase 0 agregó el paquete).
 
 ## Bloqueos abiertos
-- F4, F5 y F6 esperan la Fase 0 de Jorge (D-007). F7 espera la I5 de Iván. Al 2026-11-18 ninguna está en `develop`.
+- ~~F4, F5 y F6 esperan la Fase 0 de Jorge~~ (resuelto: Fase 0 en `develop` desde `8fff1ce`, D-007).
+- F7 espera la I5 de Iván ("seguridad activa"). Aún no está en `develop`.
 
 ## Entradas
+
+## 2026-11-18 19:56 · Fin de sesión · F1 fusionada, F2 terminada
+**Hecho:** al hacer `pull --rebase` de F2 llegaron a `develop` la fusión de F1 (`f083b68`), la Fase 0 (`8fff1ce`, D-007) y las decisiones D-008 (ajustes de C1, C2 y C5) y D-009 (el integrador fusiona los PR). Se leyeron las tres decisiones.
+**Evidencia:** en `feature/HU-04-reglas-liquidacion` rebasada sobre `develop`: `dotnet test CasinoErp.sln` → 196 aprobadas (178 unitarias + 18 de integración), 0 fallos. Comando oficial de cobertura (AGENT.md §10) → `CasinoErp.Dominio` 96,2 % de líneas, 89,4 % de ramas.
+**Decisiones:** ninguna nueva. Según D-009, F2 no lleva PR propio: queda la rama empujada y su PR se abre junto con F3 (F3.6).
+**Pendientes:** F0.3 en Jira (Felipe).
+**Bloqueos / necesito de otros:** F7 espera la I5 de Iván. F4, F5 y F6 ya no están bloqueadas.
+**Siguiente paso:** F3, `PayrollEngine` y `NominaService`; luego F4 (API de empleados), que ya se puede hacer.
+**Commits/PR:** `80427b4`, `b828fbd` en `feature/HU-04-reglas-liquidacion` ([comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-reglas-liquidacion)).
 
 ## 2026-11-18 19:55 · Tarea F2 · Terminada
 **Hecho:**
