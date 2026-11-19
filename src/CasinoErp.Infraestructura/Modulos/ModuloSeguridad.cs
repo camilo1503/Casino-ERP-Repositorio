@@ -1,3 +1,7 @@
+using CasinoErp.Dominio.Seguridad;
+using CasinoErp.Infraestructura.Repositorios;
+using CasinoErp.Infraestructura.Seguridad;
+using CasinoErp.Infraestructura.Semillas;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CasinoErp.Infraestructura.Modulos;
@@ -8,5 +12,14 @@ namespace CasinoErp.Infraestructura.Modulos;
 /// </summary>
 public static class ModuloSeguridad
 {
-    public static IServiceCollection AgregarSeguridad(this IServiceCollection services) => services;
+    public static IServiceCollection AgregarSeguridad(this IServiceCollection services)
+    {
+        services.AddSingleton<IHasherContrasena, HasherContrasena>();
+        services.AddSingleton<IVerificadorTotp, VerificadorTotp>();
+        services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+        services.AddScoped<UsuarioService>();
+        services.AddScoped<AutenticacionService>();
+        services.AddScoped<ISemilla, SemillaSeguridad>();
+        return services;
+    }
 }
