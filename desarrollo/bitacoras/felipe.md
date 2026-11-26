@@ -22,11 +22,11 @@
 | Tarea | Descripción | Estado | PR |
 |---|---|---|---|
 | N0 | Arranque y herramientas | Hecha (falta iniciar sesión de Azure en VS Code) | — |
-| N1 | Publicar en Azure (desde VS Code, D-015) | Bloqueada (espera J6.1 de Jorge) | — |
+| N1 | Publicar en Azure | Código del Sprint 2 publicado con la CLI (`6caa823`); faltan las capturas desde VS Code | — |
 | N2 | Evidencias de base de datos y variables | Pendiente (después de N1) | — |
 | N3 | Acceso de Vercel a Azure SQL (opción B, D-015) | Bloqueada (espera E5 y E5.4 de Jorge) | — |
 | N4 | Despliegue en Vercel | Contingencia publicada (`https://pitboss-erp.vercel.app`); el contenedor espera N3 y E1 | — |
-| N5 | Evidencias, URL y PR | Pendiente | — |
+| N5 | Evidencias, URL y PR | En curso (`urls-despliegue.md` escrito; faltan capturas) | — |
 | N6 | Sustentación y limpieza | Pendiente | — |
 
 ## Pendientes abiertos
@@ -46,6 +46,26 @@
 - ~~F7 espera la I5 de Iván~~ (resuelto en código el 2026-11-18: F7 hecha sobre la rama de Iván). La seguridad entró a `develop` en `cce0aa1` (merge normal, sin *squash*); el PR de F7 ya solo muestra mis cambios.
 
 ## Entradas
+
+## 2026-11-26 00:08 · N1 · Código del Sprint 2 publicado en Azure · Terminada (sin capturas)
+**Hecho:** a pedido de Felipe, para tener la URL funcionando antes de que Jorge termine J6.1:
+1. Agregados a `pitboss-erp-8szxa` `Jwt__Clave` (48 caracteres aleatorios, generados en la terminal sin imprimirse y sin guardarse en ningún archivo) y `Seguridad__CodigoTotpDemo`. Sin ellos la API no arranca en Production.
+2. App detenida, para que la versión del Sprint 1 no volviera a crear sus tablas.
+3. Regla de firewall **temporal** `TempFelipeDespliegue` (181.68.133.42) para entrar con `sqlcmd` como administrador de Entra.
+4. Antes de borrar, `CasinoErp` tenía 9 tablas del Sprint 1, solo con datos de demo: Boveda 1, ConfiguracionRetencion 1, Fichas 6, Jugadores 8, Mesas 19, MovimientosInventario 1, OfertasRetencion 2, Rellenos 2, TransaccionesCaja 15. La identidad `pitboss-erp-8szxa` es `db_owner`.
+5. Borradas las llaves foráneas y las 9 **tablas**; la base no se borró, así que se conserva la oferta gratuita. Felipe aprobó que la base quedara vacía. Resultado: 0 tablas.
+6. `dotnet publish -c Release` de `develop` (`6caa823`) en una copia aparte, empaquetado en zip (19 MB, sin `.db`) y publicado con `az webapp deploy --type zip` (OneDeploy, estado 4, éxito). App iniciada.
+7. Al arrancar, `EnsureCreated` creó el esquema completo (17 tablas) y las semillas cargaron los datos de demo (Empleados 18, Usuarios 11, Jugadores 8, Proveedores 2, Fichas 6).
+8. Regla temporal borrada; quedan `MacFelipe` y `PermitirServiciosAzure`.
+**Evidencia:**
+- Azure: `/api/salud` → `{"estado":"ok"}` (al cuarto intento, mientras arrancaba); login de laura.gomez → token y módulos `caja`, `inventario`; `/api/jugadores` sin sesión → 401.
+- Vercel (`https://pitboss-erp.vercel.app`, contingencia): mismos resultados, porque reenvía a Azure. Como felipe.cortes, `POST /api/nomina/calculate` (2026-10) → "Nómina calculada", 18 filas, total neto $49.074.720.
+- Creado `docs/entrega-final/urls-despliegue.md` (N5.2).
+**Decisiones:** publicar con la CLI de Azure para tener la URL ya; la publicación desde VS Code para la rúbrica (D-015) se repite sobre la misma app cuando se tomen las capturas. No se usó `RecrearAlIniciar` en Azure, porque `EnsureDeleted` hace `DROP DATABASE`.
+**Pendientes:** capturas de N1 (VS Code) y N2; avisar a Jorge que `Jwt__Clave` y `Seguridad__CodigoTotpDemo` ya existen (su `terraform apply` los reemplaza y cierra las sesiones abiertas) y que `recrear_base_al_iniciar` debe quedar en `false`.
+**Bloqueos / necesito de otros:** contenedor en Vercel: E1 (Camilo), E5 y E5.4 (Jorge).
+**Siguiente paso:** capturas de evidencias (N1.7, N2) y PR de esta rama.
+**Commits/PR:** ver el commit `HU-09: Azure con el codigo del Sprint 2, URL de despliegue y bitacora de Felipe`.
 
 ## 2026-11-25 23:52 · N4.8 · Contingencia de Vercel publicada · Terminada
 **Hecho:** a pedido de Felipe, para tener ya la URL de Vercel en el documento, se publicó la **contingencia de D-014** (N4.8), porque aún no hay `Dockerfile` (E1). Se copió `src/CasinoErp.Api/wwwroot` de `develop` (`6caa823`) a una carpeta temporal fuera del repo, con un `vercel.json` igual al de E1.8: `rewrites` de `/api/:path*` y `/swagger/:path*` a `https://pitboss-erp-8szxa.azurewebsites.net`. Se desplegó con `vercel deploy --prod --yes`, lo que creó el proyecto `pitboss-erp` en el equipo `erp`.
