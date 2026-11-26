@@ -2,7 +2,7 @@
 
 > Solo la edita Felipe (o su agente). Las entradas nuevas van **arriba** de la sección *Entradas*. Formato: AGENT.md §8.1.
 
-## Estado de mi plan
+## Estado de mi plan (Sprint 2)
 
 | Tarea | Descripción | Estado | PR |
 |---|---|---|---|
@@ -16,6 +16,18 @@
 | F7 | Autorización de mis controladores | Terminada (en revisión) | PR de `feature/HU-04-autorizacion` hacia `develop` |
 | F8 | arc42 bloque Nómina y cierre | En revisión (demo ensayada: 2 min) | [comparar](https://github.com/camilo1503/Casino-ERP-Repositorio/compare/develop...feature/HU-04-arc42-nomina) |
 | F9 | Acceso de Jorge a Azure (D-010, D-011) | Hecha (F9.6 pendiente: secretos de GitHub cuando Jorge los pida) | Sin PR (tarea de portal) |
+
+## Estado del plan de despliegue (Plan-Felipe-Despliegue, entrega final)
+
+| Tarea | Descripción | Estado | PR |
+|---|---|---|---|
+| N0 | Arranque y herramientas | En curso (falta cuenta de Vercel y Visual Studio) | — |
+| N1 | Publicar en Azure desde Visual Studio | Bloqueada (espera J6.1 de Jorge; Visual Studio 2022 no existe para macOS) | — |
+| N2 | Evidencias de base de datos y variables | Pendiente (después de N1) | — |
+| N3 | Acceso de Vercel a Azure SQL | Bloqueada (el inquilino no permite registrar aplicaciones: opción B de D-014) | — |
+| N4 | Despliegue en Vercel | Pendiente (espera N3 y E1 de Camilo) | — |
+| N5 | Evidencias, URL y PR | Pendiente | — |
+| N6 | Sustentación y limpieza | Pendiente | — |
 
 ## Pendientes abiertos
 - ~~F0.3: mover HU-04 y la subtarea F1 a "En curso" en Jira~~ (resuelto: HU-04 en "En curso" y F0–F3 en "Listo").
@@ -34,6 +46,22 @@
 - ~~F7 espera la I5 de Iván~~ (resuelto en código el 2026-11-18: F7 hecha sobre la rama de Iván). La seguridad entró a `develop` en `cce0aa1` (merge normal, sin *squash*); el PR de F7 ya solo muestra mis cambios.
 
 ## Entradas
+
+## 2026-11-25 23:28 · Tarea N0 (y comprobación de N3.1) · En curso · Bloqueo en N3
+**Hecho:**
+- Leídos `Plan-Felipe-Despliegue.md`, `Plan-Equipo-Entrega-Final.md` y D-014. Llegaron como patch de Jorge (commit `79a62e3`); todavía no están en `develop`.
+- N0.1: `develop` en `6caa823`; `dotnet test CasinoErp.sln -c Release` → 310 unitarias + 72 de integración, 0 fallos.
+- N0.3: CLI de Vercel 67.0.0 instalada en `~/.npm-global` (la ruta global de npm pide permisos de administrador). N0.4: falta crear la cuenta Hobby y `vercel login` (lo hace Felipe).
+- N0.5: `sqlcmd` (versión Go) ya estaba instalado.
+- N0.6: `rg-pitboss-erp` contiene `pitboss-erp-8szxa`, `plan-pitboss-erp`, `pitboss-sql-8szxa` con las bases `CasinoErp` y `master`, y la identidad `id-github-pitboss-terraform` (de Jorge, J4). **Administrador de Microsoft Entra del servidor SQL: Felipe** (`fantoniocortes@ucundinamarca.edu.co`). Solo autenticación Entra: activa. Firewall: `MacFelipe` (181.68.142.218) y `PermitirServiciosAzure`.
+- Estado de J6.1: la web app tiene `BaseDatos__Proveedor`, `BaseDatos__CargarDatosDemo`, `TZ` y `ConnectionStrings__CasinoErp`, pero **no** `Jwt__Clave` ni `Seguridad__CodigoTotpDemo`. El `terraform apply` de Jorge aún no se ha hecho; sin `Jwt__Clave` la versión con seguridad no arranca en Production.
+- N3.1 (comprobado antes de intentar el registro): la política del inquilino de la universidad tiene `allowedToCreateApps: false` (`GET /v1.0/policies/authorizationPolicy`) y la cuenta no tiene un rol de directorio que lo permita. No se puede crear `pitboss-erp-vercel`.
+**Evidencia:** salidas de `az resource list`, `az sql server ad-admin list`, `az sql server firewall-rule list`, `az webapp config appsettings list` (solo nombres) y de la consulta de la política, revisadas en la sesión.
+**Decisiones:** ninguna todavía. La opción B de D-014 (autenticación SQL con usuario contenido) la decide Felipe como dueño y la aplica Jorge en Terraform (E5.4).
+**Pendientes:** cuenta de Vercel y `vercel login` (Felipe); definir cómo se hace N1 sin Visual Studio para Windows; aprobar D-014.
+**Bloqueos / necesito de otros:** Jorge: J6.1 (`terraform apply`), E5.4 (opción B) y E5 (regla `vercel-todas-las-ip`). Camilo: E1 (`Dockerfile`).
+**Siguiente paso:** con la opción B aplicada, crear el usuario contenido de Vercel (N3.3) y verificar con `sqlcmd` (N3.6).
+**Commits/PR:** ver el commit `HU-09: Bitacora de Felipe con N0 y el bloqueo de N3.1`.
 
 ## 2026-11-18 23:47 · Hallazgo de la revisión cruzada en el front de nómina (F6) · Terminada
 **Hecho:**
