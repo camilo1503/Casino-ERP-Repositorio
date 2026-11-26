@@ -25,7 +25,7 @@
 | N1 | Publicar en Azure (desde VS Code, D-015) | Bloqueada (espera J6.1 de Jorge) | — |
 | N2 | Evidencias de base de datos y variables | Pendiente (después de N1) | — |
 | N3 | Acceso de Vercel a Azure SQL (opción B, D-015) | Bloqueada (espera E5 y E5.4 de Jorge) | — |
-| N4 | Despliegue en Vercel | Pendiente (espera N3 y E1 de Camilo) | — |
+| N4 | Despliegue en Vercel | Contingencia publicada (`https://pitboss-erp.vercel.app`); el contenedor espera N3 y E1 | — |
 | N5 | Evidencias, URL y PR | Pendiente | — |
 | N6 | Sustentación y limpieza | Pendiente | — |
 
@@ -46,6 +46,18 @@
 - ~~F7 espera la I5 de Iván~~ (resuelto en código el 2026-11-18: F7 hecha sobre la rama de Iván). La seguridad entró a `develop` en `cce0aa1` (merge normal, sin *squash*); el PR de F7 ya solo muestra mis cambios.
 
 ## Entradas
+
+## 2026-11-25 23:52 · N4.8 · Contingencia de Vercel publicada · Terminada
+**Hecho:** a pedido de Felipe, para tener ya la URL de Vercel en el documento, se publicó la **contingencia de D-014** (N4.8), porque aún no hay `Dockerfile` (E1). Se copió `src/CasinoErp.Api/wwwroot` de `develop` (`6caa823`) a una carpeta temporal fuera del repo, con un `vercel.json` igual al de E1.8: `rewrites` de `/api/:path*` y `/swagger/:path*` a `https://pitboss-erp-8szxa.azurewebsites.net`. Se desplegó con `vercel deploy --prod --yes`, lo que creó el proyecto `pitboss-erp` en el equipo `erp`.
+**Evidencia:**
+- **URL de producción: https://pitboss-erp.vercel.app** (despliegue `pitboss-2lqlzsnel-erp-c7d3.vercel.app`, Ready).
+- `curl`: `/` → 200 (título "PitBoss ERP"); `/js/api/nucleo.js` → 200; `/api/jugadores` → 200, reenviado a Azure; `/api/salud` → 404, porque Azure aún corre el Sprint 1.
+- En el navegador, el login de demo entra al Panel gerencial y la consola no muestra errores.
+**Decisiones:** el front funciona en **modo demostración**: `PitBossApi.iniciar()` no encuentra `/api/salud` y usa los datos de ejemplo. Cuando Azure tenga el código del Sprint 2 (N1), la misma URL usará la API real, sin volver a desplegar.
+**Pendientes:** N1 (código nuevo en Azure, con el esquema de la base y `Jwt__Clave`); despliegue del contenedor (N4.1–N4.7) cuando estén E1 y la opción B.
+**Bloqueos / necesito de otros:** Jorge: J6.1, E5 y E5.4. Camilo: E1.
+**Siguiente paso:** resolver N1 con Felipe.
+**Commits/PR:** ver el commit `HU-09: Bitacora de Felipe con la URL de Vercel (contingencia N4.8)`.
 
 ## 2026-11-25 23:49 · N1.1 (local) y riesgo del esquema de Azure SQL · En curso
 **Hecho:**
