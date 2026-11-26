@@ -21,7 +21,7 @@
 
 | Tarea | Descripción | Estado | PR |
 |---|---|---|---|
-| N0 | Arranque y herramientas | En curso (falta la cuenta de Vercel y `vercel login`) | — |
+| N0 | Arranque y herramientas | Hecha (falta iniciar sesión de Azure en VS Code) | — |
 | N1 | Publicar en Azure (desde VS Code, D-015) | Bloqueada (espera J6.1 de Jorge) | — |
 | N2 | Evidencias de base de datos y variables | Pendiente (después de N1) | — |
 | N3 | Acceso de Vercel a Azure SQL (opción B, D-015) | Bloqueada (espera E5 y E5.4 de Jorge) | — |
@@ -46,6 +46,15 @@
 - ~~F7 espera la I5 de Iván~~ (resuelto en código el 2026-11-18: F7 hecha sobre la rama de Iván). La seguridad entró a `develop` en `cce0aa1` (merge normal, sin *squash*); el PR de F7 ya solo muestra mis cambios.
 
 ## Entradas
+
+## 2026-11-25 23:42 · N0.4 · Terminada
+**Hecho:** cuenta de Vercel (Hobby) creada con el GitHub de Felipe y `vercel login` hecho. La CLI queda en el `PATH` (`~/.npm-global/bin` en `~/.zshrc`).
+**Evidencia:** `vercel whoami` → `flashtwiice`; `vercel teams ls` → equipo `erp` (`erp-c7d3`), plan hobby; `vercel project ls` → sin proyectos (el proyecto `pitboss-erp` se crea en N4.2).
+**Decisiones:** ninguna.
+**Pendientes:** activar 2FA en la cuenta de Vercel (lo recomienda la CLI); iniciar sesión de Azure en VS Code.
+**Bloqueos / necesito de otros:** Jorge: J6.1, E5 y E5.4. Camilo: E1.
+**Siguiente paso:** N1 cuando Jorge avise de J6.1.
+**Commits/PR:** ver el commit `HU-09: Bitacora de Felipe con N0.4 (cuenta de Vercel)`.
 
 ## 2026-11-25 23:34 · N0.2 y N3 · Decisión D-015 · Terminada
 **Hecho:**
