@@ -64,7 +64,13 @@ resource "azurerm_mssql_server" "principal" {
     login_username              = var.admin_sql_login
     object_id                   = var.admin_sql_object_id
     tenant_id                   = data.azurerm_client_config.actual.tenant_id
-    azuread_authentication_only = true
+    azuread_authentication_only = var.solo_autenticacion_entra
+  }
+
+  lifecycle {
+    # El login administrador SQL lo genera Azure y su contraseña se restablece en el portal (D-014, opción B).
+    # Terraform no los gestiona, para no exponer la contraseña en el state ni forzar a recrear el servidor.
+    ignore_changes = [administrator_login, administrator_login_password]
   }
 }
 

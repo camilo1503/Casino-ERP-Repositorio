@@ -26,6 +26,7 @@ Para revisar el código sin Azure: `init -backend=false`, `validate` y `fmt -che
 | `recrear_base_al_iniciar` | Recrea la base al arrancar (D-006) | `false` |
 | `admin_sql_login`, `admin_sql_object_id` | Administrador Entra ID del servidor SQL | se confirman al importar |
 | `reglas_firewall` | Reglas de firewall del servidor SQL | se copian de `az sql server firewall-rule list` |
+| `solo_autenticacion_entra` | `false` habilita usuarios SQL además de Entra ID (D-014, opción B para Vercel) | `true` |
 
 ## Publicar la app
 
@@ -51,3 +52,33 @@ Cada PR a `develop` que cambie un `.tf` ejecuta `fmt`, `init`, `validate` y `pla
 | Storage Blob Data Contributor | la cuenta del state | leer y bloquear el state |
 
 Secretos del repositorio (los carga quien administre el repo): `AZURE_CLIENT_ID`, `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID`, `TFSTATE_RG` y `TFSTATE_SA`. El workflow solo hace `plan`; el `apply` lo ejecuta una persona (J6).
+
+## Despliegue en Vercel (D-014)
+
+Vercel ejecuta la misma API como contenedor y usa la base Azure SQL de `rg-pitboss-erp`. Necesita dos cambios de infraestructura (Plan-Equipo-Entrega-Final, E5):
+
+1. **Regla de firewall.** Las IP de salida de Vercel cambian, así que se agrega al `.tfvars` local (no se sube) esta entrada en `reglas_firewall`:
+
+   ```hcl
+   vercel-todas-las-ip = { ip_inicial = "0.0.0.0", ip_final = "255.255.255.255" }
+   ```
+
+   `terraform plan` debe mostrar **solo** `1 to add`. Si Felipe ya la creó en el portal (Plan-Felipe-Despliegue N3.5), se importa en lugar de crearla:
+   `terraform import 'azurerm_mssql_firewall_rule.regla["vercel-todas-las-ip"]' <id de la regla>` y luego `plan` sin cambios.
+
+2. **Identidad de Vercel en la base.** El directorio de la universidad no permite registrar aplicaciones (ADR-003), así que lo más probable es usar la **opción B**:
+   - Felipe, en el portal: *pitboss-sql-8szxa → Información general → Restablecer contraseña* del login administrador SQL (la guarda en su gestor de contraseñas).
+   - Jorge: `solo_autenticacion_entra = false` en el `.tfvars`, `plan` (solo cambia `azuread_authentication_only` del servidor) y `apply`.
+   - Felipe, en el editor de consultas de `CasinoErp` (como administrador de Entra): crea un usuario contenido solo para Vercel, con permisos de lectura y escritura:
+
+     ```sql
+     CREATE USER [vercel_app] WITH PASSWORD = '<contraseña larga generada>';
+     ALTER ROLE db_datareader ADD MEMBER [vercel_app];
+     ALTER ROLE db_datawriter ADD MEMBER [vercel_app];
+     ```
+
+   - En Vercel, la cadena de conexión usa `User ID=vercel_app;Password=...` en lugar de `Authentication=Active Directory Service Principal`.
+
+   Terraform ignora el login y la contraseña del administrador SQL (`lifecycle.ignore_changes`), así que nunca quedan en el state.
+
+Al terminar la calificación: borrar `vercel_app` (`DROP USER [vercel_app];`), quitar la regla del `.tfvars` y volver a `solo_autenticacion_entra = true` con un `apply`.
