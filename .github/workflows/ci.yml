@@ -43,6 +43,41 @@ jobs:
           name: resultados-pruebas
           path: TestResults
 
+  imagen-docker:
+    name: Imagen Docker y Kubernetes (HU-09, HU-10)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Construir la imagen
+        run: docker build -t pitboss-erp:ci .
+
+      - name: Prueba de humo del contenedor (puerto 8080, usuario sin privilegios)
+        run: |
+          docker run -d --name pitboss -p 8080:8080 -e ASPNETCORE_ENVIRONMENT=Development pitboss-erp:ci
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:8080/api/salud; then echo; echo "Contenedor OK"; exit 0; fi
+            sleep 2
+          done
+          echo "::error::El contenedor no respondió en /api/salud"
+          docker logs pitboss
+          exit 1
+
+      - name: Sin clave JWT fuera de Development, la API no arranca
+        run: |
+          set +e
+          timeout 60 docker run --rm -e ASPNETCORE_ENVIRONMENT=Production pitboss-erp:ci
+          codigo=$?
+          set -e
+          if [ "$codigo" -eq 0 ] || [ "$codigo" -eq 124 ]; then
+            echo "::error::La API arrancó sin Jwt__Clave (código $codigo)"
+            exit 1
+          fi
+          echo "Rechazo esperado sin Jwt__Clave (código $codigo)"
+
+      - name: Validar los manifiestos de Kubernetes
+        run: kubectl apply -k k8s --dry-run=client --validate=false
+
   sin-marcas-ia:
     name: Sin marcas de agua de IA (AGENT.md §4.1)
     runs-on: ubuntu-latest
