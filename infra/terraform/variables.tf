@@ -55,3 +55,9 @@ variable "recrear_base_al_iniciar" {
   type        = bool
   default     = false
 }
+
+variable "solo_autenticacion_entra" {
+  description = "true = el servidor SQL solo acepta Microsoft Entra ID. false = también acepta usuarios SQL (opción B de D-014: usuario contenido para Vercel, porque el directorio de la universidad no permite registrar aplicaciones). La contraseña del login administrador se gestiona en el portal, nunca en Terraform."
+  type        = bool
+  default     = true
+}
