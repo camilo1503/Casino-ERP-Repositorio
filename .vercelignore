@@ -1,0 +1,19 @@
+# Lo que no se sube a Vercel. src/ y Dockerfile deben quedar (el build de la imagen los usa).
+**/bin
+**/obj
+**/*.db
+**/*.db-shm
+**/*.db-wal
+.git
+.github
+.vs
+.vercel
+pruebas/
+tests/
+docs/
+desarrollo/
+infra/
+k8s/
+deploy/
+publish/
+TestResults/
