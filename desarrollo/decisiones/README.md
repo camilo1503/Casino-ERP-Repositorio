@@ -17,5 +17,6 @@ Una decisión por archivo: `D-NNN-<autor>-<tema>.md`, con la plantilla de `desar
 | D-011 | Jorge recibe Contributor y un administrador de roles con condición, en vez de User Access Administrator | Aceptada |
 | D-012 | Seguridad activa en develop (Iván) | Ver el archivo |
 | D-013 | El documento de evidencias de reuniones y sus capturas van en `docs/sprint-2/evidencias/` (Camilo; renumerada desde D-012) | Propuesta |
+| D-015 | Vercel entra a Azure SQL con usuario contenido (opción B de D-014) y Azure se publica desde VS Code (Felipe) | Aceptada por Felipe; falta Terraform de Jorge |
 
 > Esta tabla la actualiza Jorge al revisar los PR. Cada autor crea su archivo; no hace falta editar la tabla para que la decisión exista.

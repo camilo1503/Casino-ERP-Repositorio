@@ -21,10 +21,10 @@
 
 | Tarea | Descripción | Estado | PR |
 |---|---|---|---|
-| N0 | Arranque y herramientas | En curso (falta cuenta de Vercel y Visual Studio) | — |
-| N1 | Publicar en Azure desde Visual Studio | Bloqueada (espera J6.1 de Jorge; Visual Studio 2022 no existe para macOS) | — |
+| N0 | Arranque y herramientas | En curso (falta la cuenta de Vercel y `vercel login`) | — |
+| N1 | Publicar en Azure (desde VS Code, D-015) | Bloqueada (espera J6.1 de Jorge) | — |
 | N2 | Evidencias de base de datos y variables | Pendiente (después de N1) | — |
-| N3 | Acceso de Vercel a Azure SQL | Bloqueada (el inquilino no permite registrar aplicaciones: opción B de D-014) | — |
+| N3 | Acceso de Vercel a Azure SQL (opción B, D-015) | Bloqueada (espera E5 y E5.4 de Jorge) | — |
 | N4 | Despliegue en Vercel | Pendiente (espera N3 y E1 de Camilo) | — |
 | N5 | Evidencias, URL y PR | Pendiente | — |
 | N6 | Sustentación y limpieza | Pendiente | — |
@@ -46,6 +46,19 @@
 - ~~F7 espera la I5 de Iván~~ (resuelto en código el 2026-11-18: F7 hecha sobre la rama de Iván). La seguridad entró a `develop` en `cce0aa1` (merge normal, sin *squash*); el PR de F7 ya solo muestra mis cambios.
 
 ## Entradas
+
+## 2026-11-25 23:34 · N0.2 y N3 · Decisión D-015 · Terminada
+**Hecho:**
+- Felipe aprobó la **opción B de D-014**: autenticación SQL con un usuario contenido para Vercel, porque el inquilino no permite registrar aplicaciones. Aceptó el riesgo de tener la autenticación SQL abierta con la regla `vercel-todas-las-ip` hasta la limpieza de N6.3.
+- Visual Studio 2022 no existe para macOS. Felipe eligió publicar N1 desde **Visual Studio Code**, con capturas de cada paso como evidencia.
+- Escrita `desarrollo/decisiones/D-015-felipe-vercel-sql-opcion-b-y-vscode.md` y agregada al índice de decisiones.
+- N0.2 adaptada: Visual Studio Code instalado con Homebrew, con las extensiones `ms-azuretools.vscode-azureappservice` 0.27.0 (y `vscode-azureresourcegroups`) y `ms-dotnettools.csharp`.
+**Evidencia:** `code --list-extensions` muestra las tres extensiones.
+**Decisiones:** D-015.
+**Pendientes:** cuenta de Vercel y `vercel login` (Felipe); iniciar sesión de Azure dentro de VS Code (Felipe).
+**Bloqueos / necesito de otros:** Jorge: J6.1, E5 (regla de firewall) y E5.4 (opción B en Terraform). Camilo: E1.
+**Siguiente paso:** N1 cuando Jorge avise de J6.1; N3.3 cuando avise de E5.4.
+**Commits/PR:** ver el commit `HU-09: Decision D-015 de Felipe (opcion B para Vercel y publicacion desde VS Code)`.
 
 ## 2026-11-25 23:28 · Tarea N0 (y comprobación de N3.1) · En curso · Bloqueo en N3
 **Hecho:**
