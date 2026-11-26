@@ -47,6 +47,20 @@
 
 ## Entradas
 
+## 2026-11-25 23:49 · N1.1 (local) y riesgo del esquema de Azure SQL · En curso
+**Hecho:**
+- Revisado el avance del equipo: `develop` sigue en `6caa823`; sin `Dockerfile` (E1); la web app sigue sin `Jwt__Clave` (J6.1); el servidor sigue con solo autenticación Entra (E5.4 sin aplicar).
+- Azure hoy corre la versión del Sprint 1: `/api/salud` → 404, `/api/auth/login` → 404 y `/api/jugadores` → 200 sin sesión.
+- N1.1 en local, en Release, sobre `6caa823`: `GET /api/salud` → `{"estado":"ok"}`; login de `laura.gomez@pitboss.co` → token y `modulos` = `caja`, `inventario`.
+- **Hallazgo:** con la base SQLite local del Sprint 1, la API no arranca: `SQLite Error 1: 'no such column: f.StockMinimo'` en `SemillaUmbralesInventario`. `EnsureCreated` no agrega tablas ni columnas a una base que ya tiene tablas. Funcionó al recrear la base (`--BaseDatos:RecrearAlIniciar=true`).
+**Riesgo para N1:** la base `CasinoErp` de Azure tiene el esquema del Sprint 1, así que al publicar el código actual la app fallaría igual al arrancar. D-006 prevé `RecrearAlIniciar=true` una vez (variable `recrear_base_al_iniciar` de Terraform), pero en SQL Server `EnsureDeleted` ejecuta `DROP DATABASE`: o falla por permisos de la identidad, o borra la base de la oferta gratuita (main.tf: "NO se debe recrear").
+**Propuesta (pendiente de aprobación de Felipe y de Jorge):** dejar `recrear_base_al_iniciar = false` y, justo antes de publicar, borrar las **tablas** (no la base) de `CasinoErp` como administrador de Entra. Al arrancar, `EnsureCreated` crea el esquema completo en la base vacía y las semillas cargan los datos de demo. Se pierden solo los datos de demo del Sprint 1 (aceptado en D-006).
+**Decisiones:** ninguna todavía.
+**Pendientes:** aprobación de la propuesta; J6.1, E5 y E5.4 (Jorge); E1 (Camilo).
+**Bloqueos / necesito de otros:** los mismos.
+**Siguiente paso:** N1.2 en adelante cuando Jorge avise de J6.1.
+**Commits/PR:** ver el commit `HU-09: Bitacora de Felipe con N1.1 local y el riesgo del esquema de Azure SQL`.
+
 ## 2026-11-25 23:42 · N0.4 · Terminada
 **Hecho:** cuenta de Vercel (Hobby) creada con el GitHub de Felipe y `vercel login` hecho. La CLI queda en el `PATH` (`~/.npm-global/bin` en `~/.zshrc`).
 **Evidencia:** `vercel whoami` → `flashtwiice`; `vercel teams ls` → equipo `erp` (`erp-c7d3`), plan hobby; `vercel project ls` → sin proyectos (el proyecto `pitboss-erp` se crea en N4.2).
