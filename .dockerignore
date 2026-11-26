@@ -1,0 +1,19 @@
+# Solo src/ entra al contexto de construcción que importa; el resto sobra o puede tener secretos
+**/bin
+**/obj
+**/*.db
+**/*.db-shm
+**/*.db-wal
+.git
+.github
+.vs
+.vercel
+pruebas/
+tests/
+docs/
+desarrollo/
+infra/
+k8s/
+deploy/
+publish/
+TestResults/

@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://pitboss-erp-8szxa.azurewebsites.net/api/:path*" },
+    { "source": "/swagger/:path*", "destination": "https://pitboss-erp-8szxa.azurewebsites.net/swagger/:path*" }
+  ]
+}

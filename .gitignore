@@ -32,3 +32,6 @@ backend.hcl
 
 # Valores locales de Terraform (pueden llevar ids de la suscripcion)
 *.tfvars
+
+# Vercel CLI (vercel link)
+.vercel/

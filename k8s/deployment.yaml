@@ -1,0 +1,60 @@
+# PitBoss ERP en Kubernetes (HU-10). Imagen construida con el Dockerfile de la raíz: pitboss-erp:1.0
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pitboss-erp
+  labels:
+    app: pitboss-erp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pitboss-erp
+  template:
+    metadata:
+      labels:
+        app: pitboss-erp
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        fsGroup: 1654
+      containers:
+        - name: api
+          image: pitboss-erp:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Production
+          # Jwt__Clave y Seguridad__CodigoTotpDemo vienen del Secret (no se sube al repo; ver k8s/README.md)
+          envFrom:
+            - secretRef:
+                name: pitboss-erp-secretos
+          # /api/salud es anónima: las sondas no necesitan token
+          readinessProbe:
+            httpGet:
+              path: /api/salud
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/salud
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              memory: 512Mi
+          volumeMounts:
+            - name: datos
+              mountPath: /app/datos
+      volumes:
+        # SQLite en un volumen temporal: cada pod tiene sus propios datos (ver k8s/README.md)
+        - name: datos
+          emptyDir: {}
